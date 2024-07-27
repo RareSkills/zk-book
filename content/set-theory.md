@@ -91,7 +91,7 @@ Because “integers as a set” and “real numbers as a set” are used so freq
 
 Sometimes people write ℝ² as a vector of two real numbers, so a ∈ ℝ² means “a” is a 2d vector. I recommend writing it the second way because it is more concise, and also makes you look smarter.
 
-![Math meme about 2D vectors of real numbers](https://hackmd.io/_uploads/SJKeBF1t0.jpg)
+![Math meme about 2D vectors of real numbers](https://static.wixstatic.com/media/935a00_9815078a1a9d44b0ae354484a71d8052~mv2.png/v1/fill/w_829,h_600,al_c,lg_1,q_90,enc_auto/935a00_9815078a1a9d44b0ae354484a71d8052~mv2.png)
 
 ## Ordered pairs
 Although sets do not respect order, a new type of data structure can emerge from sets called the ordered pair. For example, $(a, b)$ is an ordered pair while $\{a, b
