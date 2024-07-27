@@ -185,6 +185,7 @@ Let’s define a mapping between non-negative real numbers (zero or greater) and
 
 When we do $\mathbb{R}\times\mathbb{Z}$ and take a subset, we simply pick the ordered pairs that correspond to taking the floor of the element from the real numbers. The ordered pairs we do not show in the table are ordered pairs that are not in our subset that defines the mapping. For example, 2 is not the floor of 500.3 so that ordered pair (500.3, 2) is not included.
 
+$$
 \begin{array}{c|ccccc}
 & 1 & 2 & \dots & 499 & 500 \\
 \hline
@@ -193,6 +194,7 @@ When we do $\mathbb{R}\times\mathbb{Z}$ and take a subset, we simply pick the or
 \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
 500.3 & (500.3, 1) & (500.3, 2) & \dots & (500.3, 499) & \color{red}{\mathbf{(500.3, 500)}} \\
 \end{array}
+$$
 
 **Exercise:** Define a mapping (function) from integers $\{1,2,3,4,5,6\}$ to the set $\{\text{even}, \text{odd}\}$.
 
@@ -220,6 +222,7 @@ This is is the first step of a more abstract form of what we traditionally think
 
 For example, $y=x^2$ (over positive integers) can be visualized in set theoretic terms as the subset of $\mathbb{Z}\times\mathbb{Z}$:
 
+$$
 \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 &...\\
@@ -233,6 +236,7 @@ For example, $y=x^2$ (over positive integers) can be visualized in set theoretic
 ...\\
 \hline
 \end{array}
+$$
 
 ## Set relations
 The phrase “taking a subset of the Cartesian product” is so common that we have a word for it. It is a *relation*.
@@ -249,6 +253,7 @@ A binary operator is a function from $A \times A \rightarrow A$. Basically, we t
 
 Let’s use an example of the set ${0,1,2}$ with binary operator addition modulo 3. First we take the set’s Cartesian product with itself (i.e. $A \times A$):
 
+$$
 \begin{array}{c|ccc}
 & 0 & 1 & 2 \\
 \hline
@@ -256,9 +261,11 @@ Let’s use an example of the set ${0,1,2}$ with binary operator addition modulo
 1 & (1,0) & (1,1) & (1,2) \\
 2 & (2,0) & (2,1) & (2,2) \\
 \end{array}
+$$
 
 Then we take the Cartesian product of this new set of pairs with the original set
 
+$$
 \begin{array}{c|ccc}
 & 0 & 1 & 2 \\
 \hline
@@ -272,9 +279,11 @@ Then we take the Cartesian product of this new set of pairs with the original se
 (2,1) & ((2,1),0) & ((2,1),1) & ((2,1),2) \\
 (2,2) & ((2,2),0) & ((2,2),1) & ((2,2),2) \\
 \end{array}
+$$
 
 And then take the subset of that which defines our binary operator addition modulo 3:
 
+$$
 \begin{array}{c|ccc}
 & 0 & 1 & 2 \\
 \hline
@@ -288,7 +297,7 @@ And then take the subset of that which defines our binary operator addition modu
 (2,1) & \color{red}{\mathbf{((2,1),0)}} & ((2,1),1) & ((2,1),2) \\
 (2,2) & ((2,2),0) & \color{red}{\mathbf{((2,2),1)}} & ((2,2),2) \\
 \end{array}
-
+$$
 
 
 ## Functions generally "exist" -- but computability is a different story
@@ -331,4 +340,4 @@ You can reason about operations without understanding how they work! This is *ex
 When it comes to binary operators, we are not allowed to take a subset of $A \times A$ before mapping that to $A$. Binary operators must accept *all* members of set $A$ as its inputs. We of course must take a subset of the ordered pairs between $A \times A$ and $A$ because each pair from $A \times A$ must map to exactly one A.
 
 ## Learn more with RareSkills
-The usefulness of the vocabulary from abstract algebra is why our zero knowledge course does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
+The usefulness of the vocabulary from abstract algebra is why our [zero knowledge course](https://www.rareskills.io/zk-bootcamp) does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
