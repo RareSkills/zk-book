@@ -341,3 +341,5 @@ When it comes to binary operators, we are not allowed to take a subset of $A \ti
 
 ## Learn more with RareSkills
 The usefulness of the vocabulary from abstract algebra is why our [zero knowledge course](https://www.rareskills.io/zk-bootcamp) does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
+
+*Originally Published July 25, 2023*
