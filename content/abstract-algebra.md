@@ -87,7 +87,7 @@ $$
 ### Sets of sets over union and intersection
 Something bizarrely absent from our discussion of sets earlier was the discussion of union and intersection of sets. These are binary operators, and now is a good time to introduce them.
 
-If you take the union of two sets $\{1,2,3,4\}$ and $\{3,4,5,6\}$, you get $\{1,2,3,4,5,6\}$. If you take the intersection of $\{1,2,3,4\}$ and $\{3,4,5,6\}$ you get $\{3, 4\}$.
+If you take the union of two sets $\set{1,2,3,4}$ and $\{3,4,5,6\}$, you get $\{1,2,3,4,5,6\}$. If you take the intersection of $\{1,2,3,4\}$ and $\{3,4,5,6\}$ you get $\{3, 4\}$.
 
 It should be clear that both of these operators are associative.
 
@@ -126,7 +126,7 @@ Or to be explicit, it is a set with four properties
 That is, for any element $a$ in the set $A$, there exists an $a'$ such that $a \square a' = i$ where $i$ is the identity element and $\square$ is the binary operator. Spoken more mathematically, that would be:
 
 $$
-\forall a \in A \space\space \exists a' : a\square a' = i
+\forall a \in A \space\space \exists a' \in A: a\square a' = i
 $$
 
 Here, $\square$ is the binary operator of the set.
