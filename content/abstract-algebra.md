@@ -6,6 +6,12 @@ If we have sets and a binary operator on that set, we can categorize those sets 
 
 Mathematicians have a word for every possible kind of behavior of the binary operator on the set. As applied programmers, we care about the Group (from Group Theory) in particular, but let’s work our way there incrementally. The group is just one type of animal in this large zoo. So rather than study the group in isolation, let’s study the group in its larger context of related algebraic structures (i.e. sets with a binary operator).
 
+Abstract algebra is a massive field, but our objective here is to clearly understand what a *Group* is because that is used everwhere in Zero Knowledge Proofs. We could just give a definition right now:
+
+*A Group is a set with a binary operator that is closed, associative, has an identity element, and where each element has an inverse.*
+
+But that would not be very enlightening. It's more helpful to understand Groups as they relate to the larger field of Abstract Algebra.
+
 ## Magma
 A Magma is a set with a closed binary operator. That’s it.
 
