@@ -87,13 +87,13 @@ $$
 ### Sets of sets over union and intersection
 Something bizarrely absent from our discussion of sets earlier was the discussion of union and intersection of sets. These are binary operators, and now is a good time to introduce them.
 
-If you take the union of two sets $\set{1,2,3,4}$ and $\{3,4,5,6\}$, you get $\{1,2,3,4,5,6\}$. If you take the intersection of $\{1,2,3,4\}$ and $\{3,4,5,6\}$ you get $\{3, 4\}$.
+If you take the union of two sets $\set{1,2,3,4}$ and $\set{3,4,5,6}$, you get $\set{1,2,3,4,5,6}$. If you take the intersection of $\set{1,2,3,4}$ and $\set{3,4,5,6}$ you get $\set{3, 4}$.
 
 It should be clear that both of these operators are associative.
 
 If we define our domain to be the set of all finite sets of integers, then the binary operators union and intersection are closed because their result is a set of integers.
 
-Set union has an identity element in this domain: the empty set $\{\}$. Take the union of a set with the empty set and you get the original set, i.e. $A \cup \{\} = A$.
+Set union has an identity element in this domain: the empty set $\set{}$. Take the union of a set with the empty set and you get the original set, i.e. $A \cup \set{} = A$.
 
 Hence, the set of all *finite* sets of integers over union is a Monoid.
 
@@ -105,7 +105,7 @@ We’ll see later that elliptic curves use a trick like this and include a speci
 
 As another example, we could say our set is all positive integers under addition, with the additional element $\text{mug}$. We define $\text{mug} + x = x$ and $x + \text{mug} = x$. As the architects of the systems, we are allow to make our set consist of whatever we like, and the binary operator behave however we like. However, the binary operator must be closed, associative, and the set must have an identity element for that algebraic data structure to be a Monoid.
 
-If we restrict the domain to be all subsets of $\{0,1,2,3,4,5\}$, then intersection clearly becomes a Monoid because the identity element would be $\{0,1,2,3,4,5\}$, as any set of integers you intersect with it will produce the other set, i.e. $A ∩ \{0,1,2,3,4,5\} = A$. For example, $\{1,3,4\} ∩ \{0,1,2,3,4,5\} = \{1,3,4\}$.
+If we restrict the domain to be all subsets of $\set{0,1,2,3,4,5}$, then intersection clearly becomes a Monoid because the identity element would be $\set{0,1,2,3,4,5}$, as any set of integers you intersect with it will produce the other set, i.e. $A ∩ \set{0,1,2,3,4,5} = A$. For example, $\set{1,3,4} ∩ \set{0,1,2,3,4,5} = \set{1,3,4}$.
 
 At this point it should be clear that the category of an algebraic structure for a given binary operator is very sensitive to the domain of the set.
 
