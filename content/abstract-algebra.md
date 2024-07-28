@@ -1,6 +1,6 @@
 # Abstract Algebra
 
-Abstract Algebra is the study of sets that have an operator [...]
+Abstract Algebra is the study of sets that have one or more operators on that set. For our purposes, we only care about binary operators.
 
 If we have sets and a binary operator on that set, we can categorize those sets based on how the binary operator behaves, and what elements are allowed (or expected) to be in the set.
 
