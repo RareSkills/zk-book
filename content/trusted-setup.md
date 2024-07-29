@@ -8,9 +8,7 @@ $$
 f(x)=\langle[3,2,5,10],[x^3,x^2,x, 1]\rangle
 $$
 
-<aside>
-💡 An *inner product* of two vectors $[a_1,a_2,...,a_n]$ and $[b_1, b_2,...,b_n]$ is the sum $a_1b_1+a_2b_2+...+a_nb_n.$
-</aside>
+>[!NOTE]💡 An *inner product* of two vectors $[a_1,a_2,...,a_n]$ and $[b_1, b_2,...,b_n]$ is the sum $a_1b_1+a_2b_2+...+a_nb_n.$
 
 In other words, we typically think of evaluating $f(2)$ for the polynomial above as
 
