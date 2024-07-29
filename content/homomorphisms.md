@@ -49,6 +49,17 @@ $$
 \end{align*}
 $$
 
+Here, we have
+
+$$
+\begin{align*}
+\phi(\text{Rare})&=4\\
+\phi(\text{Skills})&=6\\
+\phi(\text{RareSkills})&=10\\
+\phi(\mathsf{concat}(\text{Rare},\text{Skills}))&=\phi(\text{Rare})+\phi(\text{Skills})\\
+\end{align*}
+$$
+
 ### All real numbers under addition to all $n\times m$ matrices of real number under addition
 
 Some homomorphisms seem rather trivial once you get the hang of them. This is one example. Here, our function $\phi$ simply repeats the real number $n\times m$ times. For example, if $n=3$ and $m=2$, then $\phi(8.8)$ is
@@ -154,7 +165,7 @@ Or in Python:
 ```python
 p = 11
 def phi(num, den):
-		return num * pow(den, -1, p) % p
+    return num * pow(den, -1, p) % p
 ```
 
 For example: 
@@ -245,7 +256,7 @@ Imagine trying to discuss tree data structures without a word for “roots” or
 
 ## Summary
 
-A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns and element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ ****is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **The existence of $\phi$ is sufficient for the homomorphism to exist.**
+A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns and element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **The existence of $\phi$ is sufficient for the homomorphism to exist.**
 
 Homomorphisms are not necessarily bi-directional. They are only required to work in one direction, from $A$ to $B$.
 
