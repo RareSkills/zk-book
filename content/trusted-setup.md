@@ -112,3 +112,14 @@ If either Alice or Bob delete their $\tau$ or $\gamma$, then the discrete logs o
 Of course, we don’t need to limit the participants to two, we could have as many participants as we like.
 
 This multiparty computation is often informally referred to as the *powers of tau ceremony*.
+
+## The use of a trusted setup in ZK-SNARKs
+ZK-SNARKs use the trusted setup described here, in combination with the *Schwart-Zippel lemma*, to efficiently test the equality of two polynomials.
+
+The Schwartz-Zippel Lemma states that two unequal polynomials almost never intersect except at a number of points constrained by the maximum degree of the two polynomials. In a big prime finite field (i.e. a prime number with a couple hundred bits), the degree is going to be vanishingly small compared to the order of the field. So if we evaluate two different polynomials at a random point $\tau$ and they evaluate to the same value, then we can be almost perfectly certain the two polynomials are the same even if we don’t know the polynomials.
+
+In other words, if $f(\tau)=g(\tau) \rightarrow f(x) = g(x)$ with extremely high probability.
+
+The fact that $\tau$ is random and unknown is critical. Suppose a malicious prover wants to prove $f(x)=g(x)$ although they are unequal. If the prover knows $\tau$, they can construct $f(x)$ and $g(x)$ to intersect at $\tau$ and fool the verifier.
+
+Additionally, $\tau$ being unknown prevents the verifier from learning anything about the prover's polynomial.
