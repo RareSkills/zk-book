@@ -1,15 +1,13 @@
 # Trusted Setup
+A trusted setup is a mechanism ZK-SNARKs use to evaluate a polynomial at a secret value.
 
-To understand a trusted setup, observe that a polynomial $f(x)$ can be evaluated by computing the inner product of the coefficients with successive powers of $x$:
+Observe that a polynomial $f(x)$ can be evaluated by computing the inner product of the coefficients with successive powers of $x$:
 
 For example, if $f(x)=3x^3+2x^2+5x+10$, then the coefficients are $[3,2,5,10]$ and we can compute the polynomial as
 
 $$
 f(x)=\langle[3,2,5,10],[x^3,x^2,x, 1]\rangle
 $$
-
->[!NOTE]
->An *inner product* of two vectors $[a_1,a_2,...,a_n]$ and $[b_1, b_2,...,b_n]$ is the sum $a_1b_1+a_2b_2+...+a_nb_n.$
 
 In other words, we typically think of evaluating $f(2)$ for the polynomial above as
 
@@ -20,7 +18,8 @@ $$
 but we could also evaluate it as
 
 $$
-f(2)=\langle[3,2,5,10],[8,4,2,1]\rangle
+f(2)=\langle[3,2,5,10],[8,4,2,1]\rangle = 3\cdot8+2\cdot4+5
+\cdot2+10\cdot1
 $$
 
 Now suppose that someone picks a secret scalar $\tau$ and computes
@@ -60,14 +59,14 @@ def inner_product(points, coeffs):
 tau = 88
 degree = 3
 
-# 1, tau, tau^2, tau^3, ...
-srs = [multiply(G1, tau**i) for i in range(0, degree + 1)]
+# tau^3, tau^2, tau, 1
+srs = [multiply(G1, tau**i) for i in range(degree,-1,-1)]
 
 ## Evaluate
 # p(x) = 4x^2 + 7x + 8
-coeffs = [8, 7, 4, 0]
+coeffs = [0, 4, 7, 8]
 
-poly_at_tau = inner_product(points, coeffs)
+poly_at_tau = inner_product(srs, coeffs)
 ```
 
 ## Verifying a Trusted Setup was Generated Properly
@@ -77,10 +76,10 @@ Given a structured reference string, how do we even know that they follow the st
 If the person doing the trusted setup also provides $\Psi=\tau G_2$, we can validate the structured reference string is indeed successive powers of  $\tau$.
 
 $$
-e(\Psi, \Omega_i)\stackrel{?}=e(G_2,\Omega_{i+1})
+e(G_2, \Omega_i)\stackrel{?}=e(\Psi,\Omega_{i+1})
 $$
 
-where $e$ is a bilinear pairing. Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$.
+where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$.
 
 To validate that $\Psi$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$, we can check that
 
@@ -94,18 +93,18 @@ It’s not a good trust assumption the person generating the structured referenc
 
 We now describe the algorithm for multiple parties to collaboratively create the structured reference string, and as long as one of them is honest (i.e. deletes $\tau$), then the discrete logs of the structured reference string will be unknown.
 
-Alice generates the structure reference string $([G_1,\Omega_1,...,\Omega_n],\Psi)$ and passes it to Bob.
+Alice generates the structure reference string $([\Omega_n,...,\Omega_2,\Omega_1, G_1],\Psi)$ and passes it to Bob.
 
 Bob verifies the srs is “correct” by using the checks from the earlier section. Then Bob picks his own secret parameter $\gamma$ and computes
 
 $$
-([G_1, \gamma\Omega_1,\gamma^2\Omega_2,...,\gamma^n\Omega_n],\gamma\Psi)
+([\gamma^n\Omega_n,...,\gamma^2\Omega_2,\gamma\Omega_1,G_1],\gamma\Psi)
 $$
 
 Note that the discrete logs of the srs are now
 
 $$
-([1,\tau\gamma,(\tau\gamma)^2,(\tau\gamma)^3,...,(\tau\gamma)^n],\tau\gamma)
+([(\tau\gamma)^n,...,(\tau\gamma)^2,(\tau\gamma),1],\tau\gamma)
 $$
 
 If either Alice or Bob delete their $\tau$ or $\gamma$, then the discrete logs of the final srs are not recoverable.
