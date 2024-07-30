@@ -188,7 +188,7 @@ $$
 
 Here, $a_iu_i(\tau)$ does not mean the prover knows $\tau$. The prover is using the structure reference string $[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1]$ to compute $u_i(\tau)$ for $i=1,2,\dots,m$ and the $G_2$ srs for for $[B]_2$.
 
-However, it isn't currently possible to compute $[C]_1$ without knowing $\alpha$ and $\beta$. The prover cannot pair $[\alpha]_1$ and $[\beta]_2$ because that would create a $\mathbb{G}_{12}$ point, whereas the prover needs a $\mathbb{G}_1$ point for $[C]_1$.
+However, it isn't currently possible to compute $[C]_1$ without knowing $\alpha$ and $\beta$. The prover cannot pair $[\alpha]_1$ with $\sum a_iu_i(\tau)$ and $[\beta]_2$ with $\sum a_iv_i(\tau)$ because that would create a $\mathbb{G}_{12}$ point, whereas the prover needs a $\mathbb{G}_1$ point for $[C]_1$.
 
 Instead, the trusted setup needs to precompute $m$ polynomials for the problematic $C$ term of the expanded QAP.
 
@@ -207,8 +207,8 @@ The trusted setup can create $m$ polynomials evaluated at $\tau$ from the boxed 
 Concretely, the trusted setup computes the following:
 $$\begin{align*}
 \alpha,\beta,\tau &\leftarrow \text{random scalars}\\
-[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for G1}\\
-[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for G2}\\
+[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
+[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
 [\tau^{n-2}t(\tau),\tau^{n-3}t(\tau),\dots,\tau t(\tau),t(\tau)] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 [\Psi_1]_1 &= (\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau))G_1\\
 [\Psi_2]_1 &= (\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau))G_1\\
@@ -269,8 +269,8 @@ To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ 
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
-[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for G1}\\
-[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for G2}\\
+[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
+[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
 [\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
 \frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
@@ -395,8 +395,8 @@ We are know ready to show the Groth16 algorithm end-to-end.
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
-[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for G1}\\
-[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for G2}\\
+[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
+[\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
 [\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
 \frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
