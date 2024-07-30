@@ -122,4 +122,4 @@ In other words, if $f(\tau)=g(\tau) \rightarrow f(x) = g(x)$ with extremely high
 
 The fact that $\tau$ is random and unknown is critical. Suppose a malicious prover wants to prove $f(x)=g(x)$ although they are unequal. If the prover knows $\tau$, they can construct $f(x)$ and $g(x)$ to intersect at $\tau$ and fool the verifier.
 
-Additionally, $\tau$ being unknown prevents the verifier from learning anything about the prover's polynomial.
+Furthermore, from a zero knowledge perspective, $\tau$ being unknown prevents the verifier from learning anything about the prover's polynomial.

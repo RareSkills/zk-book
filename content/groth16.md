@@ -6,15 +6,15 @@ The Groth16 algorithm enables a quadratic arithmetic program to be computed by a
 This article is a chapter in the [RareSkills Book of Zero Knowledge Proofs](https://www.rareskills.io/zk-book). It assumes you are familiar with the prior chapters.
 
 ## Notation
-We refer to an elliptic curve point belonging to the $\mathbb{G}_1$ group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ group as $[x]_2$. A pairing between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arthmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
+We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arthmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
 
-Given an [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$, we can convert it to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values [1,2,...,n]. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
+Given an [Arithmetic Circuit (ZK Circuit)](https://www.rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$, we can convert it to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
 
 $$
 \begin{array}{}
-u_1(x),...,u_m(x) & \text{m polynomials interpolated on the m columns of } \mathbf{L}\\
-v_1(x),...,v_m(x)& \text{m polynomials interpolated on the m columns of } \mathbf{R}\\
-w_1(x),...,w_m(x)& \text{m polynomials interpolated on the m columns of } \mathbf{O}\\
+u_1(x),...,u_m(x) & m \text{ polynomials interpolated on the }m \text{ columns of } \mathbf{L}\\
+v_1(x),...,v_m(x)& m \text{ polynomials interpolated on the }m \text{ columns of } \mathbf{R}\\
+w_1(x),...,w_m(x)& m \text{ polynomials interpolated on the }m \text{ columns of } \mathbf{O}\\
 \end{array}
 $$
 
@@ -24,6 +24,10 @@ $$
 \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^n a_iw_i(x) + h(x)t(x)
 $$
 where
+$$
+t(x) = (x - 1)(x - 2)\dots(x - n)
+$$
+and
 $$
 h(x) = \frac{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) - \sum_{i=1}^n a_iw_i(x)}{t(x)}
 $$
@@ -84,11 +88,11 @@ Thus, the verifier has no idea if $([A]_1, [B]_2, [C]_1)$ were the result of a s
 
 We need to force the prover to be honest without introducing too much computational overhead. The first algorithm to accomplish this was "[Pinocchio: Nearly Practical Verifiable Computation](https://eprint.iacr.org/2013/279.pdf)." This was usable enough for ZCash to base the first version of their blockchain on it.
 
-However, Groth16 was able to accomplish the same thing in much fewer steps, and the algorithm is still widely in use today, as no algorithm since has produced as efficient a verifier step (though other algorithms have eliminated the trusted setup or significantly reduced the amount of work for the prover).
+However, Groth16 was able to accomplish the same thing in much fewer steps, and the algorithm is still widely in use today, as no algorithm since has produced as efficient an algorithm for the verification step (though other algorithms have eliminated the trusted setup or significantly reduced the amount of work for the prover).
 
-**Update for 2024:** A paper rather triumphantly titled "[Polymath: Groth16 is not the limit](https://eprint.iacr.org/2024/916)" published in the Cryptology Journal demonstrates an algorithm that requires fewer verifier steps than Groth16. However, there are no known implementations of the algorithm at this time of writing.
+**Update for 2024:** A paper rather triumphantly titled "[Polymath: Groth16 is not the limit](https://eprint.iacr.org/2024/916)" published in Cryptology demonstrates an algorithm that requires fewer verifier steps than Groth16. However, there are no known implementations of the algorithm at this time of writing.
 
-## Preventing forgery part 1: introducing $\alpha$ and $\beta$
+## Preventing forgery Part 1: Introducing $\alpha$ and $\beta$
 
 ### An "unsolveable" verification formula
 Suppose we update our verification formula to the following:
@@ -106,7 +110,7 @@ Suppose the prover randomly selects $a’$ and $b’$ to produce $[A]₁$ and $[
 
 $$[A]_1 \bullet [B]_2 \stackrel{?}= [D]_{12} + [C]_1\bullet G_2$$
 
-Knowing the discrete logarithms of $[A]₁$ and $[B]₂$ the malicious prover tries to solve for $[C’]$ by doing
+Knowing the discrete logarithms of $[A]₁$ and $[B]₂$, the malicious prover tries to solve for $[C’]$ by doing
 
 $$\begin{align*}\underbrace{[A]_1\bullet [B]_2 - [D]_{12}}_{\chi_{12}}=[C']_1\bullet G_2\\
 [\chi]_{12}=[C']_1\bullet G_2
@@ -124,7 +128,7 @@ $$\begin{align*}[A]_1 \bullet [B]_2 &\stackrel{?}= \underbrace{[D]_{12} + [C]_1\
 
 This requires the prover, given $[\zeta]_{12}$, to come up with an $[A]₁$ and $[B]₂$ that pair to produce $[\zeta]_{12}$.
 
-Similar to the discrete log problem, we rely on unproven cryptographic assumptions that this computation is infeasible. In this case, the assumption that we cannot decompose $[\zeta]_{12}$ into $[A]₁$ and $[B]₂$ is called the *Bilinear Diffie-Hellman Assumption*.
+Similar to the discrete log problem, we rely on unproven cryptographic assumptions that this computation (decomposing an element in $\mathbb{G}_{12}$ into a $\mathbb{G}_1$ and $\mathbb{G}_2$ element) is infeasible. In this case, the assumption that we cannot decompose $[\zeta]_{12}$ into $[A]₁$ and $[B]₂$ is called the *Bilinear Diffie-Hellman Assumption*. The interested reader can see a related discussion on the [Decisional Diffie-Hellman Assumption](https://en.wikipedia.org/wiki/Decisional_Diffie–Hellman_assumption).
 
 (Unproven does not mean unreliable. If you can find a way to prove or disprove this assumption, fame and fortune awaits you! In practice, there is no known way to decompose $[\zeta]_{12}$ into $[A]₁$ and $[B]₂$ and it is believed to be computationally infeasible.)
 
@@ -138,8 +142,10 @@ $$
 \end{align*}
 $$
 
+What we referred to as $[D]_{12}$ is simply $[\alpha]_1 \bullet [\beta]_2$.
+
 ### Re-deriving the proving and verification formulas
-We start with the QAP formula:
+To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solveable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
 
 $$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^n a_iw_i(x) + h(x)t(x)$$
 
@@ -149,6 +155,8 @@ $$(\boxed{\theta}+\sum_{i=1}^m a_iu_i(x))(\boxed{\eta} +\sum_{i=1}^m a_iv_i(x)) 
 $$=\boxed{\theta\eta} + \boxed{\theta}\sum_{i=1}^m a_iv_i(x) + \boxed{\eta}\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)$$
 
 We can substitute the rightmost terms using the original QAP definition:
+$$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}$$
+
 $$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^n a_iw_i(x) + h(x)t(x)}$$
 
 Now we can introduce an "expanded" QAP with the following definition:
@@ -163,7 +171,7 @@ where
 
 $$\underbrace{(\alpha+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{(\beta +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^n a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
 
-The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$ or $\alpha$ and $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
+The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
 $$
 \begin{align*}
@@ -174,19 +182,19 @@ $$
 
 Here, $a_iu_i(\tau)$ does not mean the prover knows $\tau$. The prover is using the structure reference string $[\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1]$ to compute $u_i(\tau)$ for $i=1,2,\dots,m$ and the $G_2$ srs for for $[B]_2$.
 
-However, it isn't currently possible to compute $[C]_1$ without knowing $\alpha$ and $\beta$. The prover cannot pair $[\alpha]_1$ and $[\beta]_2$ because that would create a $G_{12}$ point, whereas the prover needs a $G_1$ point for $[C]_1$.
+However, it isn't currently possible to compute $[C]_1$ without knowing $\alpha$ and $\beta$. The prover cannot pair $[\alpha]_1$ and $[\beta]_2$ because that would create a $\mathbb{G}_{12}$ point, whereas the prover needs a $\mathbb{G}_1$ point for $[C]_1$.
 
-Instead, the trusted setup needs to precompute $m$ polynomials for the $C$ term of the expanded QAP.
+Instead, the trusted setup needs to precompute $m$ polynomials for the problematic $C$ term of the expanded QAP.
 
 $$\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^n a_iw_i(\tau)$$
 
 With some algebraic manipulation, we get the following:
 
-$$\sum_{i=1}^m (\alpha a_iv_i(\tau)+\beta a_iu_i(\tau) + a_iw_i(\tau))$$
+$$=\sum_{i=1}^m (\alpha a_iv_i(\tau)+\beta a_iu_i(\tau) + a_iw_i(\tau))$$
 
-$$\sum_{i=1}^m a_i\boxed{(\alpha v_i(\tau)+\beta u_i(\tau) + w_i(\tau))}$$
+$$=\sum_{i=1}^m a_i\boxed{(\alpha v_i(\tau)+\beta u_i(\tau) + w_i(\tau))}$$
 
-The trusted setup can create m polynomials evaluated at $\tau$ from the boxed term above, and the prover can use that to compute the sum.
+The trusted setup can create $m$ polynomials evaluated at $\tau$ from the boxed term above, and the prover can use that to compute the sum.
 
 ### Summary of the algorithm so far
 #### Trusted setup steps
@@ -196,10 +204,10 @@ $$\begin{align*}
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for G1}\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for G2}\\
 [\tau^{n-2}t(\tau),\tau^{n-3}t(\tau),\dots,\tau t(\tau),t(\tau)] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
-[\Psi_1]_1 &= \alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)\\
-[\Psi_2]_1 &= \alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)\\
+[\Psi_1]_1 &= (\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau))G_1\\
+[\Psi_2]_1 &= (\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau))G_1\\
 &\vdots\\
-[\Psi_m]_1 &= \alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)\\
+[\Psi_m]_1 &= (\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau))G_1\\
 \end{align*}$$
 
 The trusted setup publishes
@@ -239,19 +247,19 @@ $$\begin{align*}
 [C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
 \end{align*}$$
 
-Note that only the computation of $[C]_1$ changed -- the prover only uses the term $\ell + 1$ to $m$.
+Note that only the computation of $[C]_1$ changed -- the prover only uses the $a_i$ and $\Psi_i$ terms $\ell + 1$ to $m$.
 
 The verifier computes:
 $$[X]_1=\sum_{i=1}^\ell a_i\Psi_i$$
 
-And the final verification equation is:
+And the verification equation is:
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet G_2 + [C]_1\bullet G_2$$
 
 ## Part 2: Separating the public inputs from the private inputs with $\gamma$ and $\delta$
 The assumption in the equation above is that the prover is only using $\Psi_{\ell+1}$ to $\Psi_m$ to compute $[C]_1$, but nothing stops a dishonest prover from using $\Psi_1$ to $\Psi_{\ell}$ to compute $[C]_1$, possibly leading to a forged proof.
 
-To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms need to be divided (in modular arithmetic) by $\delta$.
+To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$) by $\gamma$. Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$.
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
@@ -261,16 +269,16 @@ $$\begin{align*}
 \frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
-[\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}\\
-[\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}\\
+[\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
+[\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}\\
+[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
-[\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}\\
-[\Psi_{\ell+2}]_1 &= \frac{\alpha v_{\ell+2}(\tau) + \beta u_{\ell+2}(\tau) + w_{\ell+2}(\tau)}{\delta}\\
+[\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\
+[\Psi_{\ell+2}]_1 &= \frac{\alpha v_{\ell+2}(\tau) + \beta u_{\ell+2}(\tau) + w_{\ell+2}(\tau)}{\delta}G_1\\
 &\vdots\\
-[\Psi_{m}]_1 &= \frac{\alpha v_{m}(\tau) + \beta u_{m}(\tau) + w_{m}(\tau)}{\delta}\\
+[\Psi_{m}]_1 &= \frac{\alpha v_{m}(\tau) + \beta u_{m}(\tau) + w_{m}(\tau)}{\delta}G_1\\
 \end{align*}$$
 
 The trusted setup publishes
@@ -291,6 +299,17 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\
 ## Part 3: Enforcing true zero knowledge: r and s
 Our scheme is not yet truly zero knowledge. If an attacker is able to guess our witness vector (which is possible if there is only a small range of valid inputs, e.g. secret voting from privileged addresses), then they can verify their guess is correct by comparing their constructed proof to the original proof.
 
+As a trivial example, suppose our claim is $x_1$ and $x_2$ are both either $0$ or $1$. The corresponding arithmetic circuit would be
+
+$$
+\begin{align*}
+x_1 (x_1 - 1) = 0\\
+x_2 (x_2 - 1) = 0
+\end{align*}
+$$
+
+An attacker only needs to guess four combinations to figure out what the witness is. That is, they guess a witness, generate a proof, and see if their answer matches the original proof.
+
 To prevent guessing, the prover needs to "salt" their proof, and the verification equation needs to be modified to accommodate the salt.
 
 The prover samples two random field elements $r$ and $s$ and shifts their values accordingly:
@@ -304,9 +323,9 @@ $$
 \end{align*}
 $$
 
-To derive the final verification formula, let's temporarily ignore that we don't know the discrete logs of the Greek letter terms and compute:
+To derive the final verification formula, let's temporarily ignore that we don't know the discrete logs of the Greek letter terms and compute the left-hand-side of the verification equation $AB$:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)$$
+$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_A \underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_B$$
 
 $$
 \alpha\beta+\alpha\sum_{i=1}^m a_iv_i(x)+\alpha s\delta + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)+\sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta
@@ -319,26 +338,28 @@ $$
 $$
 
 $$
-\alpha\beta + \alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta + \boxed{\alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}
+\alpha\beta + \boxed{\alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}+ \underline{\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta}
 $$
 
-We further rearrange the terms on the left to write them in terms of $As\delta$ and $Br\delta$ as follows:
+We further rearrange the underlined terms to write them in terms of $As\delta$ and $Br\delta$ as follows:
 
 $$
-\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2 + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2 - rs\delta^2
+=\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2 + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2 - rs\delta^2
 $$
 
+Group the $s$ and $r$ terms together:
 $$
-(\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2) + (r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2) - rs\delta^2
-$$
-
-$$
-(\alpha+ \sum_{i=1}^m a_iu_i(x) + r\delta)s\delta + (\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)r\delta - rs\delta^2
+=(\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2) + (r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2) - rs\delta^2
 $$
 
-
+Factor out $s\delta$ and $r\delta$:
 $$
-As\delta + Bs\delta - rs\delta
+=\underbrace{(\alpha+ \sum_{i=1}^m a_iu_i(x) + r\delta)s\delta}_{As\delta} + \underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)r\delta}_{Br\delta} - rs\delta^2
+$$
+
+Substitute $A$ and $B$:
+$$
+=As\delta + Bs\delta - rs\delta
 $$
 
 So our final equation is
@@ -353,13 +374,17 @@ We want the public portion and the private portion to be separated by $\gamma$ a
 
 $$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta}{\delta}$$
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs$$
+$\delta$ cancels for some of the terms:
+
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta$$
 
 We now separate this equation in to the verifier and prover portions. The boxed terms are the verifier portion, the underbrace terms are the terms that the prover provides:
 
-$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs}_{[C]_1}$$
+$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta}_{[C]_1}$$
 
 ## Groth16 Proof Algorithm
+We are know ready to show the Groth16 algorithm end-to-end.
+
 ### Trusted Setup
 
 $$\begin{align*}
@@ -370,16 +395,16 @@ $$\begin{align*}
 \frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
-[\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}\\
-[\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}\\
+[\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
+[\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}\\
+[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
-[\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}\\
-[\Psi_{\ell+2}]_1 &= \frac{\alpha v_{\ell+2}(\tau) + \beta u_{\ell+2}(\tau) + w_{\ell+2}(\tau)}{\delta}\\
+[\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\
+[\Psi_{\ell+2}]_1 &= \frac{\alpha v_{\ell+2}(\tau) + \beta u_{\ell+2}(\tau) + w_{\ell+2}(\tau)}{\delta}G_1\\
 &\vdots\\
-[\Psi_{m}]_1 &= \frac{\alpha v_{m}(\tau) + \beta u_{m}(\tau) + w_{m}(\tau)}{\delta}\\
+[\Psi_{m}]_1 &= \frac{\alpha v_{m}(\tau) + \beta u_{m}(\tau) + w_{m}(\tau)}{\delta}G_1\\
 \end{align*}$$
 
 The trusted setup publishes
@@ -406,15 +431,47 @@ $$
 \end{align*}
 $$
 
-Verifying Groth16 in Solidity
-At this point, you have sufficient knowledge to understand the proof verification code in Solidity.
-
-
-We link here to [Tornado Cash’s proof verification code](https://github.com/tornadocash/tornado-core/blob/master/contracts/Verifier.sol#L192). The reader is encouraged to read the source code closely. If the reader is comfortable with Solidity assembly programming, then understanding this source code will not be difficult as the variable names are consistent with the ones in this article.
+## Verifying Groth16 in Solidity
+At this point, you have sufficient knowledge to understand the proof verification code in Solidity. Here is [Tornado Cash’s proof verification code](https://github.com/tornadocash/tornado-core/blob/master/contracts/Verifier.sol#L192). The reader is encouraged to read the source code closely. If the reader is comfortable with Solidity assembly programming, then understanding this source code will not be difficult as the variable names are consistent with the ones in this article.
 
 
 There is also library support for [Groth16 on Solana](https://lib.rs/crates/groth16-solana).
 
+## Security Issues to Be Aware Of
+### Groth16 is Malleable
+Groth16 proofs are malleable. Given a valid proof
+
+$([A]_1, [B]_2, [C]_1)$, an attacker can compute the point negation of $[A]_1$ and $[B]_2$ and present a new proof as $([A']_1, [B']_2, [C]_1)$ where $[A']_1 = \mathsf{neg}([A]_1)$ and $[B']_2 = \mathsf{neg}([B]_2)$.
+
+To see that $[A]_1\bullet[B]_2 = [A']_1\bullet[B']_2$, consider the following code:
+```python
+from py_ecc.bn128 import G1, G2, multiply, neg, eq, pairing
+
+# chosen arbitrarily
+x = 10
+y = 100
+A = multiply(G1, x)
+B = multiply(G2, y)
+
+A_p = neg(A)
+B_p = neg(B)
+
+assert eq(pairing(B, A), pairing(B_p, A_p))
+```
+
+Intuitively, the attacker is multiplying $A$ and $B$ by $-1$, and $(-1)\times(-1)$ cancels itself out in the pairing.
+
+Hence, if the verification formula accepts
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
+
+then it will also accept
+
+$$\mathsf{neg}([A]_1)\bullet\mathsf{neg}([B]_2) \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
+
+You can see a proof of concept of this attack in this [article](https://medium.com/@cryptofairy/exploring-vulnerabilities-the-zksnark-malleability-attack-on-the-groth16-protocol-8c80d13751c5).
+
+### The prover can create an unlimited number of proofs for the same witness
+This isn't a "security issue" per se -- it is necessary to achieve Zero Knowledge. However, the application needs a mechanism to track which facts have already been proven and cannot rely on the uniqueness of the proof to achieve that.
 
 ## Learn more with RareSkills
 Our ability to publish material like this free of charge depends on the continued support of our students. Consider signing up for our [Zero Knowledge Bootcamp](https://www.rareskills.io/zk-bootcamp), [Web3 Bootcamps](https://www.rareskills.io/web3-blockchain-bootcamps), or getting a job on [RareTalent](https://www.raretalent.xyz).
