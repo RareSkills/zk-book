@@ -468,6 +468,8 @@ then it will also accept
 
 $$\mathsf{neg}([A]_1)\bullet\mathsf{neg}([B]_2) \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
 
+The defense against this attack is described in the following section.
+
 You can see a proof of concept of this attack in this [article](https://medium.com/@cryptofairy/exploring-vulnerabilities-the-zksnark-malleability-attack-on-the-groth16-protocol-8c80d13751c5).
 
 ### The prover can create an unlimited number of proofs for the same witness
