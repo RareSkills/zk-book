@@ -483,3 +483,5 @@ This isn't a "security issue" per se -- it is necessary to achieve Zero Knowledg
 
 ## Learn more with RareSkills
 Our ability to publish material like this free of charge depends on the continued support of our students. Consider signing up for our [Zero Knowledge Bootcamp](https://www.rareskills.io/zk-bootcamp), [Web3 Bootcamps](https://www.rareskills.io/web3-blockchain-bootcamps), or getting a job on [RareTalent](https://www.raretalent.xyz).
+
+*Originally Published August 31, 2023*
