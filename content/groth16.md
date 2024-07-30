@@ -194,13 +194,15 @@ Instead, the trusted setup needs to precompute $m$ polynomials for the problemat
 
 $$\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^n a_iw_i(\tau)$$
 
-With some algebraic manipulation, we get the following:
+With some algebraic manipulation, we combine the sum terms into a single sum:
 
 $$=\sum_{i=1}^m (\alpha a_iv_i(\tau)+\beta a_iu_i(\tau) + a_iw_i(\tau))$$
 
+and factor out $a_i$:
+
 $$=\sum_{i=1}^m a_i\boxed{(\alpha v_i(\tau)+\beta u_i(\tau) + w_i(\tau))}$$
 
-The trusted setup can create $m$ polynomials evaluated at $\tau$ from the boxed term above, and the prover can use that to compute the sum.
+The trusted setup can create $m$ polynomials evaluated at $\tau$ from the boxed term above, and the prover can use that to compute the sum. The exact details are shown in the next section.
 
 ### Summary of the algorithm so far
 #### Trusted setup steps
@@ -347,7 +349,7 @@ $$
 \alpha\beta + \boxed{\alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}+ \underline{\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta}
 $$
 
-We further rearrange the underlined terms to write them in terms of $As\delta$ and $Br\delta$ as follows:
+We further rearrange the underlined terms to write them in terms of $As\delta$ and $Br\delta$ as follows. We also split $r\delta s\delta$ into $rs\delta^2 + rs\delta^2 - rs\delta^2$:
 
 $$
 =\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2 + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2 - rs\delta^2
