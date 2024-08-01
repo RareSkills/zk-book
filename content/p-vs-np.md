@@ -171,3 +171,165 @@ Currently, it remains uncertain whether P and NP are the same set. Although nume
 Similarly, whether efficient solutions or verification mechanisms exist for PSPACE problems remains open. While researchers widely speculate that P ≠ NP and NP ≠ PSPACE, no formal mathematical proof exists for these conclusions. Therefore, despite extensive efforts, efficient solutions for NP problems and efficient verification methods for PSPACE problems remain undiscovered.
 
 For practical purposes, we can assume P ≠ NP and NP ≠ PSPACE. In fact, we implicitly make that assumption when we trust important data to modern cryptography algorithms.
+
+## Part 2: Expressing problems and solutions as Boolean formulas
+What ties P and NP problems together is that their solution can be quickly verified. It would be extremely useful if we could describe all those (P and NP) problems and their solutions in a common language. That is, we want an encoding of the problem that works for problems as diverse as proving a list is sorted, to proving a Sudoku puzzle is solved, to proving we have a three coloring.
+
+**Verifying a solution to a problem in NP or P can be accomplished by verifying a solution to a Boolean formula that models the problem.**
+
+What we mean by "a Boolean formula that models the problem" will become clear as describe what we mean by "a solution to a Boolean formula" and looking at some examples modeling problems with Boolean formulas.
+
+### Solutions to a Boolean formula
+To express a Boolean formula, we use the operator ¬ to be the Boolean NOT, ∧ to be the Boolean AND, and ∨ to be the Boolean OR. For example, a ∧ b evaluates to true if and only if a and b are both true. a ∧ ¬b evaluates to true if and only if a is true and b is false.
+
+Suppose we have a bunch of Boolean variables $x₁$, $x₂$, $x₃$, $x₄$ and a Boolean formula:
+
+$$
+out = (x₁ ∨ ¬x₂ ∨ ¬ x₃) ∧ (¬x₂ ∨ x₃ ∨ x₄) ∧ (x₁ ∨ x₃ ∨ ¬x₄) ∧ (¬x₂ ∨ ¬x₃∨ ¬x₄)
+$$
+
+The question is: can we find values for $x₁, x₂, x₃, x₄$ such that $out$ is true? For the above formula, we can. Writing $T$ for true and $F$ for false, we can write our solution as:
+
+$$
+\begin{align*}
+x₁ = T \\
+x₂ = F \\
+x₃ = T \\
+x₄ = F
+\end{align*}
+$$
+
+Plugging the solution into the formula yields:
+
+$$
+\begin{align*}
+x₁ &= T \\
+x₂ &= F \\
+x₃ &= T \\
+x₄ &= F \\
+out &= (x₁ ∨ ¬x₂ ∨ ¬ x₃) ∧ (¬x₂ ∨ x₃ ∨ x₄) ∧ 
+      (x₁ ∨ x₃ ∨ ¬x₄)∧ (¬x₂ ∨ ¬x₃∨ ¬x₄) \\
+out &= (T ∨ ¬ F ∨ ¬ T) ∧ (¬ F ∨ T ∨ F) ∧
+      (T ∨ T ∨ ¬ F) ∧ (¬ F ∨ ¬ T ∨ ¬ F) \\
+
+&= (T) ∧ (T) ∧ (T) ∧ (T) \\
+
+&= T \\
+\end{align*}
+$$
+
+That was easy to verify, but discovering the solution for a very large Boolean formula could take exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may take exponential resources to find the solution, but it only takes polynomial time to verify the solution.
+
+But we must emphasize: our use of Boolean formulas is not to solve them — but to verify proposed solutions for them.
+
+### All problems in P and NP can be verified by transforming them into boolean formulas and showing a solution to the formula
+In the following examples, the input is a P or NP problem and the output is a Boolean formula. If we know the solution to the original problem, then we will also know the solution to the Boolean formula.
+
+Our intent is to show we know the witness for the original problem — but in Boolean form.
+
+#### Example 1: checking if a list is sorted using a Boolean formula
+Consider one-bit binary numbers A and B. The following truth table returns true when A > B:
+
+| A | B | A > B |
+| --- | --- | --- |
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+The column $A > B$ can be modeled with the expression $A ∧ ¬B$, which returns true in the only row where $A > B$ is one.
+
+Now consider a table that expresses A = B:
+
+| A | B | A = B |
+| --- | --- | --- |
+| 0 | 0 | 1 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+The column $A = B$ can be modeled with the expression $(A ∧ B) ∨ ¬(A ∨ B)$. $(A ∧ B)$ returns true when $A = 1$ and $B = 1$ and $¬(A ∨ B)$ returns true when $A$ and $B$ are both zero.
+
+The expressions for one bit numbers:
+
+$$
+\begin{align*}
+A > B &\rightarrow A ∧ ¬B \\
+A = B &\rightarrow (A ∧ B) ∨ ¬(A ∨ B)
+\end{align*}
+$$
+
+will come in hand shortly.
+
+Now how do we compare binary numbers of more than one bit?
+
+##### Binary comparison by most significant different bit
+Suppose you start from both numbers' leftmost Most Significant Bit (MSB) and move towards the right Least Significant Bit (LSB). At the first bit, where the two numbers differ,
+
+If $P$ has a value of $1$ at that bit and $Q$ has a value of $0$, then $P ≥ Q$.
+The following animation illustrates the algorithm detecting that $P ≥ Q$:
+
+![Algorithm to test if P is greater or equal to Q](https://static.wixstatic.com/media/935a00_4dc4955706b54e778847f861f651e486~mv2.gif)
+
+If $P = Q$, then all of the bits are equal. $P = Q$ means $P ≥ Q$ is also true:
+![Algorithm to test P = Q](https://static.wixstatic.com/media/935a00_186a696a8b14493a8d6cd17d7f7bfe0d~mv2.gif)
+
+If P < Q, then we will detect that on the first bit where Q is 1 and P is 0:
+
+![Detecting if P < Q](https://static.wixstatic.com/media/935a00_bba4e16f05d34184945faf33fd9a8c53~mv2.gif)
+
+Suppose, without loss of generality, that we number the bits in $P$ as $p₄, p₃, p₂, p₁$ and the bits in $Q$ as $q₄, q₃, q₂, q₁$.
+
+If $P ≥ Q$ then one of the following must be true:
+- $p₄ > q₄$
+- $p₄ = q₄$ and $p₃ > q₃$
+- $p₄ = q₄$ and $p₃ = q₃$ and $p₂ > q₂$
+- $p₄ = q₄$ and $p₃ = q₃$ and $p₂ = q₂$ and $(p₁ > q₁ \text{ or } p₁ = q₁)$
+
+We can combine the bullet points into a single equation.
+
+$$
+\begin{align*}
+&((p₄ > q₄)) ∨ \\
+&((p₄ = q₄) ∧ (p₃ > q₃)) ∨ \\
+&((p₄ = q₄) ∧ (p₃ = q₃) ∧ (p₂ > q₂)) ∨ \\
+&((p₄ = q₄) ∧ (p₃ = q₃) ∧ (p₂ = q₂) ∧ ((p₁ > q₁) ∨ (p₁ = q₁)))
+\end{align*}
+$$
+
+Recall our Boolean expressions that modeled one bit equality and comparison:
+
+$$
+\begin{align*}
+A > B &== A ∧ ¬B\\
+A = B &== (A ∧ B) ∨ ¬(A ∨ B)
+\end{align*}
+$$
+
+We can substitute the expressions for $A > B$ and $A = B$ formula in to the equation above. To avoid a wall of math, we show the operations in video form below:
+
+![Video](https://video.wixstatic.com/video/935a00_655f627a117f46ecb0a48deb2640b9a1/1080p/mp4/file.mp4)
+
+The final Boolean formula that expresses P ≥ Q is:
+
+$$
+\begin{align*}
+&(p₄ ∧ ¬q₄) ∨ \\
+&(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ (p₃ ∧ ¬q₃)) ∨ \\
+&(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ ((p₃ ∧ q₃) ∨ ¬(p₃ ∨ q₃)) ∧ (p₂ ∧ ¬q₂)) ∨ \\
+&(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ ((p₃ ∧ q₃) ∨ ¬(p₃ ∨ q₃)) ∧ ((p₂ ∧ q₂) ∨ ¬(p₂ ∨ q₂)) ∧ ((p₁ ∧ ¬q₁) ∨ ((p₁ ∧ q₁) ∨ ¬(p₁ ∨ q₁))))
+\end{align*}
+$$
+
+Let’s call a Boolean expression that compares two binary numbers in the manner described above a 
+"comparison expression."
+
+##### Checking if a list is sorted
+Given a Boolean formula to compare numbers of a fixed size, we would simply repeat the comparison expression for each pair of elements in the list and AND them together. The list is sorted if and only if the AND of all the comparison expressions are true.
+
+Thus, we see that a witness that proves a list is sorted does not have to be the sorted list. It can also be the input to Boolean formula that we created above.
+
+#### Example 2: A 3-coloring as a Boolean formula
+Let’s look at our map of Australia again:
+
+![A 3 Coloring of Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
