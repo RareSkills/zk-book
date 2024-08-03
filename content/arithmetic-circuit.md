@@ -659,3 +659,5 @@ Learn more about [Zero Knowledge Proofs](https://www.rareskills.io/zk-book) in o
      On the other hand, if we had been given $S = \set{1,2,3,4,5}$ and the subsets $\set{1}, \set{1,2}, \set{3, 4}, \set{1, 4, 5}$ and asked can it be covered with $k = 2$ subsets, then there would be no solution. However, if $k = 3$ then a valid solution would be $\set{1, 2}, \set{3, 4}, \set{1, 4, 5}$.
 
      Our goal is to prove for a given set $S$ and a defined list of subsets of $S$, if we can pick a set of subsets such that their union is $S$. Specifically, the question is if we can do it with $k$ or fewer subsets. We wish to prove we know which $k$ (or fewer) subsets to use by encoding the problem as an arithmetic circuit.
+
+*Originally Published April 23, 2024*

@@ -527,3 +527,5 @@ Some concepts have been simplified in this article to make them as understandabl
 - Some NP problems can be solved in *sub exponential time*, but for practical purposes, they take exponential time to solve. For example $\mathcal{O}(2^{\sqrt{n}})$ is technically sub-exponential, but it is still exponentially difficult.
 
 - Very powerful heuristics for finding solutions to some NP problems exist. Although three coloring takes exponential time to solve, many instances of the problem of reasonable size can be solved quickly. For example, [here are benchmark problems of maps with 200 territories and valid 3 colorings](https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html). Clever algorithms are able to find the solution without exploring an exponentially large search space. However, for any heuristics designed to speed up solving an NP problem, it is possible to create a pathological instance of problem that is designed to exploit the heuristic and make it worthless. Nevertheless, the heuristics work well for the typical instance of a realistic example of the problem.
+
+*Originally Published April 10, 2024*
