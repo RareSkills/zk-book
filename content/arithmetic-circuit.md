@@ -1,5 +1,7 @@
 # Arithmetic Circuits for ZK Take 6
 
+An arithmetic circuit (in the context of zero knowledge proofs) is a system of equations whose solution models a problem in NP.
+
 One key point from our article on [P vs NP](https://www.rareskills.io/post/p-vs-np) was that any solution to a problem in P or NP can be verified by modeling the problem as a Boolean circuit. Then, we convert our solution for the original problem to a set of values for the Boolean variables (called the witness) that results in the Boolean circuit returning true.
 
 This article continues the one linked above, so please read that first.
@@ -8,7 +10,7 @@ This article continues the one linked above, so please read that first.
 
 One disadvantage of using a Boolean circuit to represent a solution to a problem is that it can be verbose when representing arithmetic operations such as addition or multiplication.
 
-For example, if we want to express "a + b = c where a = 16, b = 8, c = 24," we must transform a, b, and c into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode a, b, and c, where a₀ represents the Least Significant Bit (LSB), and a₃ represents the Most Significant Bit (MSB) of number a, as shown below:  
+For example, if we want to express $a + b = c$ where $a = 16, b = 8, c = 24$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number a, as shown below:  
 
 - `a₃, a₂, a₁, a₀`
 - a = 1000
@@ -17,7 +19,9 @@ For example, if we want to express "a + b = c where a = 16, b = 8, c = 24," we m
 - `c₃, c₂, c₁, c₀`
 - c = 1100
 
-(The method to convert a number to binary is explained later in this article). Once we have a, b, c written in binary, we can write a Boolean circuit whose inputs are all the binary digits (a₀, a₁, …, c₂, c₃). Our goal is to write such a Boolean circuit, such that the circuit outputs true if and only if a + b = c. This turns out to be more complicated than we might expect, as you can see in the large circuit below, which models a + b = c in binary. For the sake of brevity, we do not show the derivation. We only show the formula to illustrate how verbose such a circuit can be:
+(The method to convert a number to binary is explained later in this article). Once we have $a$, $b$, $c$ written in binary, we can write a Boolean circuit whose inputs are all the binary digits $(a₀, a₁, …, c₂, c₃)$. Our goal is to write such a Boolean circuit, such that the circuit outputs true if and only if $a + b = c$.
+
+This turns out to be more complicated than we might expect, as you can see in the large circuit below, which models $a + b = c$ in binary. For the sake of brevity, we do not show the derivation. We only show the formula to illustrate how verbose such a circuit can be:
 
 ```rust
 ((a₄ ∧ b₄ ∧ c₄) ∨ (¬a₄ ∧ ¬b₄ ∧ c₄) ∨ (¬a₄ ∧ b₄ ∧ ¬c₄) ∨ (a₄ ∧ ¬b₄ ∧ ¬c₄)) ∧
@@ -60,7 +64,7 @@ The following is our first example of an arithmetic circuit:
 
 We say a Boolean circuit is *satisfied* if we have an assignment to the input variables that results in an output of true. Similarly, an arithmetic circuit is satisfied if there is an assignment to the variables such that all the equations hold true. For example, the circuit above is satisfied by `x₁ = 3, x₂ = 3` because both equations of the circuit hold true, and the circuit is *not* satisfied by `x₁ = 1, x₂ = 6` because the equation `9 = x₁x₂` fails to be true
 
-So, we can think of an arithmetic circuit interchangeably with the set of equations in the circuit. A set of inputs “satisfies the circuit” if and only if those inputs make *all* the equations true.
+So, we can think of an arithmetic circuit interchangeably with the set of equations in the circuit. A set of inputs "satisfies the circuit" if and only if those inputs make *all* the equations true.
 
 ## Notation and Terminology
 
@@ -96,7 +100,9 @@ A useful mental model for the arithmetic circuit is that all signals are treated
 
 To drive the point home, we supply a visualization in the following video. All of the signals are inputs, and `===` is used to check instead of assign.
 
-[ArithmeticCircuit.mp4](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/ArithmeticCircuit.mp4)
+<video>
+<source="https://video.wixstatic.com/video/706568_f4fb9d3d127c4735a718deffbd9fed70/1080p/mp4/file.mp4" type="video/mp4">
+</video>
 
 The circuit in the video could have been written as:
 
@@ -107,7 +113,7 @@ x + y === u
 
 with no change in meaning.
 
-The arithmetic circuit `x === x + 1` does not mean increment x. It is an arithmetic circuit with no solution because x cannot be equal to x + 1. Thus, it is impossible to satisfy the constraint.
+The arithmetic circuit `x === x + 1` does not mean increment `x`. It is an arithmetic circuit with no solution because x cannot be equal to `x + 1`. Thus, it is impossible to satisfy the constraint.
 
 ### Interpreting Arithmetic Circuits
 
@@ -127,10 +133,10 @@ In the second constraint `x₁x₂ === x₁` we have two possible scenarios:
 
 The following assignments to (x₁, x₂) are all valid witnesses:
 
-- (x₁, x₂) = (1, 1)
-- (x₁, x₂) = (0, 2)
-- (x₁, x₂) = (0, 1337)
-- (x₁, x₂) = (0, 404)
+- $(x₁, x₂) = (1, 1)$
+- $(x₁, x₂) = (0, 2)$
+- $(x₁, x₂) = (0, 1337)$
+- $(x₁, x₂) = (0, 404)$
 
 Remember, a system of equation can have many solutions. Similarly, an arithmetic circuit can also have many solutions. Usually though, we’re only interested in verifying a given solution. We don’t need to find all solutions for an arithmetic circuit.
 
@@ -155,7 +161,7 @@ Let’s revisit our example above: writing a *Boolean* circuit to represent the 
 
 Boolean circuits always have one expression that returns true or false if the witness is satisfied.
 
-For example, if we have a set of signals x, y, and z, and we wish to constrain the sum of x and y to be 5, then we need a separate equation for that. Any way we wish to constrain z would have its own separate equation.
+For example, if we have a set of signals $x$, $y$, and $z$, and we wish to constrain the sum of $x$ and $y$ to be $5$, then we need a separate equation for that. Any way we wish to constrain z would have its own separate equation.
 
 To demonstrate arithmetic circuits and Boolean circuits are equivalent, we will later show that any Boolean circuit can be transformed into an arithmetic circuit. This shows they can be used interchangeably for the purpose of demonstrating an agent has a witness to a problem in P or NP. 
 
@@ -175,7 +181,7 @@ In our first example, we redo our 3-coloring problem for Australia. In the secon
 
 When we used a Boolean circuit to model a 3-coloring, each territory had 3 Boolean variables - one for each color - indicating whether the country had been assigned that color. We then added constraints to force each territory to have exactly one color (color constraints) and constraints to enforce that adjacent territories did not get the same color (boundary constraints).
 
-It’s easier to model this problem using arithmetic circuits because we can assign a single signal to each territory with the possible values {1, 2, 3} to model their colors, instead of three Boolean variables. We can arbitrarily assign colors to the numbers, such as blue = 1, red = 2, and green = 3.
+It’s easier to model this problem using arithmetic circuits because we can assign a single signal to each territory with the possible values $\set{1, 2, 3}$ to model their colors, instead of three Boolean variables. We can arbitrarily assign colors to the numbers, such as `blue = 1`, `red = 2`, and `green = 3`.
 
 For each territory, we write the single color constraint as:
 
@@ -187,7 +193,7 @@ to enforce that each territory has exactly one color. The constraint above can o
 
 **3-Coloring Australia**
 
-![580px-Australia_map,_States.svg.jpg](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/580px-Australia_map_States.svg.jpg)
+![3 coloring of Australia](https://static.wixstatic.com/media/706568_b649d43396ef43cd954f4beb61dc1bc6~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/706568_b649d43396ef43cd954f4beb61dc1bc6~mv2.jpg)
 
 Recall that Australia has six territories:
 
@@ -211,21 +217,21 @@ Our color constraint (constraining each territory to be blue, red or green) for 
 6) 0 === (1 - V) * (2 - V) * (3 - V)
 ```
 
-We now want to enforce that neighboring territories do not have the same color. One way to accomplish this is to multiply the signals of the neighboring territory and ensure that the product is an “acceptable” one. Consider the following table for neighboring territories `x` and `y`:
+We now want to enforce that neighboring territories do not have the same color. One way to accomplish this is to multiply the signals of the neighboring territory and ensure that the product is an "acceptable" one. Consider the following table for neighboring territories `x` and `y`:
 
 | x | y | product |
 | --- | --- | --- |
-| 1 | 1 | 1 |
-| 1 | 2 | 2 |
-| 1 | 3 | 3 |
-| 2 | 1 | 2 |
-| 2 | 2 | 4 |
-| 2 | 3 | 6 |
-| 3 | 1 | 3 |
-| 3 | 2 | 6 |
-| 3 | 3 | 9 |
+| 1 | 1 | <span style="color:red">1</span> |
+| 1 | 2 | <span style="color:green">2</span> |
+| 1 | 3 | <span style="color:green">3</span> |
+| 2 | 1 | <span style="color:green">2</span> |
+| 2 | 2 | <span style="color:red">4</span> |
+| 2 | 3 | <span style="color:green">6</span> |
+| 3 | 1 | <span style="color:green">3</span> |
+| 3 | 2 | <span style="color:green">6</span> |
+| 3 | 3 | <span style="color:red">9</span> |
 
-If two signals (neighboring territories) have the same number (color), then their product will be one of {1, 4, 9}, the orange numbers above. If `x` and `y` are constrained to be 1, 2, or 3, and `x` and `y` are not equal to each other, then the product `xy` will be one of {2, 3, 6}. Therefore, if `xy = 2` or `xy = 3` or `xy = 6`, we accept the assignment because it means the two neighbors have different colors.
+If two signals (neighboring territories) have the same number (color), then their product will be one of $\set{1,4,9}$, the <span style="color:red">red</span> numbers above. If `x` and `y` are constrained to be 1, 2, or 3, and `x` and `y` are not equal to each other, then the product `xy` will be one of $\set{2, 3, 6}$. Therefore, if `xy = 2` or `xy = 3` or `xy = 6`, we accept the assignment because it means the two neighbors have different colors.
 
 For each neighboring territory `x` and `y`, we can use the following constraint to enforce that they are not equal to each other:
 
@@ -237,7 +243,9 @@ The above equation is satisfied if and only if the product `xy` is equal to 2, 3
 
 The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neigboring territories as the video below illustrates:
 
-[AustraliaNP (2).mp4](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/AustraliaNP_(2).mp4)
+<video>
+<source="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
+</video>
 
 We now show the boundary constraints:
 
@@ -303,19 +311,21 @@ Our goal is to write an arithmetic circuit that verifies the list is sorted.
 
 To do this, we need an arithmetic circuit that expresses `a ≥ b` for two signals. This turns out to be more complicated than it would seem at first glance because arithmetic circuits only allow for equality, addition, and multiplication, not comparison.
 
-But let’s say we had such a “greater than or equal to” circuit - call it `GTE(a,b)`. Then we would construct the circuits for comparing each pair of consecutive list elements: `GTE(aₙ, aₙ₋₁), ...,  GTE(a₃, a₂), GTE(a₂, a₁)`, and if all of them are satisfied, then the list is sorted.
+But let’s say we had such a "greater than or equal to" circuit - call it `GTE(a,b)`. Then we would construct the circuits for comparing each pair of consecutive list elements: `GTE(aₙ, aₙ₋₁), ...,  GTE(a₃, a₂), GTE(a₂, a₁)`, and if all of them are satisfied, then the list is sorted.
 
-To compare two decimal numbers without the ≥ operator, we first need an arithmetic circuit that validates a proposed binary representation for the number, so we first go on a small detour about binary numbers.
+To compare two decimal numbers without the $≥$ operator, we first need an arithmetic circuit that validates a proposed binary representation for the number, so we first go on a small detour about binary numbers.
 
 ### Prerequisite: Binary encoding
 
 We write binary numbers with the subscript 2. For example, 11₂ is 3 and 101₂ is 5. Each of the 1s and 0s is called a bit. We say the left-most bit is the most significant bit (MSB) and the right-most bit is the least significant bit (LSB).
 
-As we will show shortly, during conversion to decimal, the most significant bit is multiplied by the largest coefficient and the least significant bit is multiplied by the smallest coefficient. So if we write a four bit binary number as `b₃b₂b₁b₀`, `b₃` ****is the MSB and `b₀` is the LSB.
+As we will show shortly, during conversion to decimal, the most significant bit is multiplied by the largest coefficient and the least significant bit is multiplied by the smallest coefficient. So if we write a four bit binary number as `b₃b₂b₁b₀`, `b₃` is the MSB and `b₀` is the LSB.
 
 The video below illustrate the conversion of 1101₂ to 13:
 
-[BinaryToDecimal (1).mov](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/BinaryToDecimal_(1).mov)
+<video>
+<source="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
+</video>
 
 As shown in the video, a four bit binary number can be converted to a decimal number `v` with the following formula:
 
@@ -344,9 +354,9 @@ We omit a discussion of how to convert a decimal number to binary. For now, if t
 '0b110010100'
 ```
 
-We can create an arithmetic circuit that asserts “`v` is a decimal number with a four bit binary representation `b₃`, `b₂`, `b₁`, `b₀`” by using the following circuit:
+We can create an arithmetic circuit that asserts "`v` is a decimal number with a four bit binary representation `b₃`, `b₂`, `b₁`, `b₀`" by using the following circuit:
 
-```solidity
+```rust
 8b₃ + 4b₂ + 2b₁ + b₀ === v
 
 // force the "bits" to be zero or one
@@ -358,7 +368,7 @@ b₃(b₃ - 1) === 0
 
 The signals `b₃, b₂, b₁, b₀` are constrained to be the binary representation of `v`. If `b₃, b₂, b₁, b₀` aren’t binary, or aren’t the binary representation of `v`, then the circuit cannot be satisfied.
 
-Observe that **there is no satisfying assignment to the signals `(v, b₃, b₂, b₁, b₀)`** where `v > 15`. That is, if we set `b₃, b₂, b₁, b₀` to all 1, the highest the constraints allow, then the sum will be 15. It is not possible to add to anything higher. In ZK, this is sometimes called a *range check* on `v`. Not only does the circuit above demonstrate the binary representation of `v`, it also forces `v < 16`.
+Observe that **there is no satisfying assignment to the signals `(v, b₃, b₂, b₁, b₀)` where `v > 15`.** That is, if we set `b₃, b₂, b₁, b₀` to all 1, the highest the constraints allow, then the sum will be 15. It is not possible to add to anything higher. In ZK, this is sometimes called a *range check* on `v`. Not only does the circuit above demonstrate the binary representation of `v`, it also forces `v < 16`.
 
 We can generalize this to the following circuit which constrains `v < 2ⁿ` and also gives us the binary representation of `v`:
 
@@ -385,11 +395,11 @@ Note that the number `2ⁿ` in binary requires 1 more bit to store than the valu
 
 It’s helpful to remember the relationship between powers of 2 and the number of bits required to store them.
 
-- 2ⁿ requires n + 1 bits to store. For example, 2⁰=1₂, 2¹ = 10₂, 2²=100₂, 2³=1000₂ and so forth.
-- 2ⁿ⁻¹ is half of 2ⁿ and requires n bits to store
-- 2ⁿ − 1 requires n bits to store. It is the maximum value we can store with n bits, when all the bits are set to 1.
+- $2ⁿ$ requires $n + 1$ bits to store. For example, $2⁰=1₂$, $2¹ = 10₂$, $2²=100₂$, $2³=1000₂$ and so forth.
+- $2ⁿ⁻¹$ is half of $2ⁿ$ and requires $n$ bits to store
+- $2ⁿ − 1$ requires $n$ bits to store. It is the maximum value we can store with $n$ bits, when all the bits are set to 1.
 
-If we take a number *n* and compute 2ⁿ, we get an n + 1 bit number with the most significant bit being 1, and the rest zero. `n = 3` in the examples below:
+If we take a number $n$ and compute $2ⁿ$, we get an $n + 1$ bit number with the most significant bit being 1, and the rest zero. $n = 3$ in the examples below:
 
 $$
 2^n=\underbrace{1000}_{n+1\space bits}
