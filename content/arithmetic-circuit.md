@@ -382,7 +382,7 @@ bₙ₋₁(bₙ₋₁ - 1) === 0
 
 **Saying a number `v` is encoded with at most `n` bits is equivalent to saying `v < 2ⁿ`.**
 
-To get a sense for how `2ⁿ` changes as a function of n, consider the following table:
+To get a sense for how $2ⁿ$ changes as a function of $n$, consider the following table:
 
 | n bits | max value (binary) | max value (decimal) | 2ⁿ (decimal) | 2ⁿ (binary) |
 | --- | --- | --- | --- | --- |
@@ -391,13 +391,13 @@ To get a sense for how `2ⁿ` changes as a function of n, consider the following
 | 4 | 1111₂ | 15 | 16 | 10000 |
 | 5 | 11111₂ | 31 | 32 | 100000 |
 
-Note that the number `2ⁿ` in binary requires 1 more bit to store than the value `2ⁿ - 1`. By constraining the number of bits a number is encoded with to `n` bits, it forces that number to be less than `2ⁿ`.
+Note that the number $2ⁿ$ in binary requires 1 more bit to store than the value $2ⁿ - 1$. By constraining the number of bits a number is encoded with to $n$ bits, it forces that number to be less than $2ⁿ$.
 
 It’s helpful to remember the relationship between powers of 2 and the number of bits required to store them.
 
 - $2ⁿ$ requires $n + 1$ bits to store. For example, $2⁰=1₂$, $2¹ = 10₂$, $2²=100₂$, $2³=1000₂$ and so forth.
 - $2ⁿ⁻¹$ is half of $2ⁿ$ and requires $n$ bits to store
-- $2ⁿ − 1$ requires $n$ bits to store. It is the maximum value we can store with $n$ bits, when all the bits are set to 1.
+- $2ⁿ − 1$ requires $n$ bits to store. It is the maximum value we can store with $n$ bits, when all the bits are set to $1$.
 
 If we take a number $n$ and compute $2ⁿ$, we get an $n + 1$ bit number with the most significant bit being 1, and the rest zero. $n = 3$ in the examples below:
 
@@ -405,13 +405,13 @@ $$
 2^n=\underbrace{1000}_{n+1\space bits}
 $$
 
-2ⁿ⁻¹ is the same as 2ⁿ / 2. Since it is written as 2 to some power, it still has the same “shape” of a binary number with an MSB of 1 and the rest zero, but it will require n bits to encode it instead of n + 1 bits.
+$2ⁿ⁻¹$ is the same as $2ⁿ / 2$. Since it is written as 2 to some power, it still has the same "shape" of a binary number with an MSB of 1 and the rest zero, but it will require $n$ bits to encode it instead of $n + 1$ bits.
 
 $$
 2^{n-1}=\underbrace{100}_{n\space bits}
 $$
 
-2ⁿ −1 is an n bit number with all the bits set to one. 
+$2ⁿ −1$ is an $n$ bit number with all the bits set to one. 
 
 $$
 2^n-1=\underbrace{111}_{n\space bits}
@@ -419,41 +419,46 @@ $$
 
 ### Compute ≥ in binary
 
-If we are working with binary numbers of a fixed size, `n` bits, the number 2ⁿ⁻¹ is special because we can easily assert an `n` bit binary number is greater or equal to 2ⁿ⁻¹ — or less than it. We call 2ⁿ⁻¹ the “midpoint.” The video below illustrates how to compare the size of an `n` bit number to 2ⁿ⁻¹:
+If we are working with binary numbers of a fixed size, $n$ bits, the number $2ⁿ⁻¹$ is special because we can easily assert an $n$ bit binary number is greater or equal to $2ⁿ⁻¹$ — or less than it. We call $2ⁿ⁻¹$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2ⁿ⁻¹$:
 
-[Scene6.mp4](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/Scene6.mp4)
+<video>
+<source="https://video.wixstatic.com/video/706568_adae25cac0e6414ab0643a5792a2ed52/1080p/mp4/file.mp4" type="video/mp4">
+</video>
 
-By checking the most significant bit of an `n` bit number, we can tell if that number is greater than or equal to 2ⁿ⁻¹ or less than 2ⁿ⁻¹.
+By checking the most significant bit of an $n$ bit number, we can tell if that number is greater than or equal to $2ⁿ⁻¹$ or less than $2ⁿ⁻¹$.
 
-If we compute `2ⁿ⁻¹ + Δ` and look at the most significant bit of that sum, we can quickly tell if `Δ` is positive or negative. If `Δ` is negative, then `2ⁿ⁻¹ + Δ` must be less than `2ⁿ⁻¹`.
+If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum, we can quickly tell if $Δ$ is positive or negative. If $Δ$ is negative, then $2ⁿ⁻¹ + Δ$ must be less than $2ⁿ⁻¹$.
 
-[msb-delta.mp4](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/msb-delta.mp4)
+<video>
+<source="https://video.wixstatic.com/video/706568_6b61fecfedb64a888f6538bc91707f40/1080p/mp4/file.mp4" type="video/mp4">
+</video>
 
 ### Detecting if u ≥ v
 
-If we replace `Δ` with `u - v` then the most significant bit of `2ⁿ⁻¹ + (u - v)` tells us if u ≥ v or u < v.
+If we replace $Δ$ with $u - v$ then the most significant bit of $2ⁿ⁻¹ + (u - v)$ tells us if $u ≥ v$ or $u < v$.
 
-[u-v.mp4](Arithmetic%20Circuits%20for%20ZK%20Take%206%20f95263458ad34576acc6595d6aa156a4/u-v.mp4)
+<video>
+<source="https://video.wixstatic.com/video/706568_ea57bc6fb8c5493686c3dc4cf9123c72/1080p/mp4/file.mp4" type="video/mp4">
+</video>
 
-**Preventing overflow in 2ⁿ⁻¹ + (u - v)**
+#### Preventing overflow in 2ⁿ⁻¹ + (u - v)
 
-In the scheme above to compare `u` to `v`, we must ensure that `|u - v| < 2ⁿ⁻¹`, otherwise there might be an arithmetic overflow or underflow when computing `2ⁿ⁻¹ + (u - v)`. *Overflow* happens when we add two numbers together and the sum exceeds what the bits can hold. *Underflow* happens when we subtract `a - b` and `b > a` causing the result to go below zero.
+If we restrict $u$ and $v$ to be represented with at most $n - 1$ bits, while $2^{n-1}$ is represented with $n$ bits, then underflow and overflow cannot occur. When both $u$ and $v$ are represented with at most $n - 1$ bits, the maximum absolute value of $|u - v|$ is an $n - 1$ bit number.
 
-If we restrict `u` and `v` to be represented with at most `n - 1` bits, while `2ⁿ⁻¹` is represented with `n` bits, then underflow and overflow cannot occur. When both `u` and `v` are represented with at most `n - 1` bits, the maximum absolute value of `|u - v|` is a `n - 1` bit number.
+We see that $2^{n-1} + (u - v)$ cannot underflow in this case, because $2^{n-1}$ is at least 1 bit larger than $|u - v|$.
 
-We see that `2ⁿ⁻¹ + (u - v)` cannot underflow in this case, because `2ⁿ⁻¹` is at least 1 bit larger than `|u - v|`.
-
-Now consider the overflow case. Without loss of generality, for n = 4 , i.e. four bit numbers, the midpoint is 2ⁿ⁻¹ =  2⁴⁻¹ = 8 or 1000₂. The maximum value `|u - v|` can hold in this case, as a 3 bit number, is 111₂. Adding 1000₂ + 111₂ results in 1111₂, which is not an overflow.
+Now consider the overflow case. Without loss of generality, for $n = 4$, i.e. four bit numbers, the midpoint is $2^{n-1} = 2^{4-1} = 8$ or $1000_2$. The maximum value $|u - v|$ can hold in this case, as a 3-bit number, is $111_2$. Adding $1000_2 + 111_2$ results in $1111_2$, which is not an overflow.
 
 ### Summary of the arithmetic circuit for u ≥ v, when u and v are n - 1 bit numbers
 
-- We constrain `u` and `v` to be at most `n - 1` bit numbers.
-- We create an arithmetic circuit that encodes the binary representation of `2ⁿ⁻¹ + (u - v)` using `n` bits.
-- If the most significant bit of `2ⁿ⁻¹ + (u - v)` is 1, then u ≥ v and vice versa.
+- We constrain $u$ and $v$ to be at most $n - 1$ bit numbers.
+- We create an arithmetic circuit that encodes the binary representation of $2^{n-1} + (u - v)$ using $n$ bits.
+- If the most significant bit of $2^{n-1} + (u - v)$ is 1, then $u \geq v$ and vice versa.
 
-Final arithmetic circuit to check if u ≥ v is as follows. We fix `n = 4` which means `u` and `v` must be constrained to be 3-bit numbers. The interest reader can generalize this to other values of `n`:
+The final arithmetic circuit to check if $u \geq v$ is as follows. We fix $n = 4$ which means $u$ and $v$ must be constrained to be 3-bit numbers. The interested reader can generalize this to other values of $n$:
 
-```jsx
+
+```rust
 // u and v are represented with at most 3 bits:
 2²a₂ + 2¹a₁ + a₀ === u
 2²b₂ + 2¹b₁ + b₀ === v
@@ -497,7 +502,7 @@ Suppose we have the following Boolean formula: `out = (x ∧ ¬ y) ∨ z`. This 
 
 We encode `x`, `y`, and `z` as arithmetic circuit signals and constrain them to have values 0 or 1.
 
-The following arithmetic circuit can only be satisfied if x, y, z are each 0 or 1.
+The following arithmetic circuit can only be satisfied if `x`, `y`, and `z` are each 0 or 1.
 
 ```rust
 x(x - 1) === 0
@@ -567,19 +572,19 @@ z(z - 1) === 0
 
 ### Replace `¬ y` with the the arithmetic circuit for NOT
 
-out = (x ∧ ¬ y) ∨ z
+out = (x ∧ <span style="color:red">¬ y</span>) ∨ z
 
 out = (x ∧ (1 - y)) ∨ z
 
 ### Replace `∧` with the arithmetic circuit for AND
 
-out = (x ∧ (1 - y)) ∨ z
+out = (x <span style="color:red">∧</span> (1 - y)) ∨ z
 
 out = (x(1 - y)) ∨ z
 
 ### Replace `∨` with the arithmetic circuit for OR
 
-out = (x(1 - y)) ∨ z
+out = (x(1 - y)) <span style="color:red">∨</span> z
 
 out = (x(1 - y)) + z - (x(1 - y))z 
 
@@ -626,7 +631,7 @@ We have glossed over two very important details in this article. Some other chal
 - We didn’t discuss what datatype we used to store signals for the arithmetic circuit and how we handle overflow during addition or multiplication.
 - We have no way of expressing the value 2/3 without losing precision. Any fixed point or floating point representation we chose will have rounding issues
 
-To handle these problems, arithmetic circuits are calculated over *finite fields:* a branch of mathematics where all addition and multiplication is done modulo a prime number.
+To handle these problems, arithmetic circuits are calculated over *[finite fields](rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
 
 Finite field arithmetic has some surprising differences from regular arithmetic introduced by the modulo operator, so the next chapter will explore them in detail.
 
@@ -642,8 +647,15 @@ Learn more about [Zero Knowledge Proofs](https://www.rareskills.io/zk-book) in o
 4. Devise an arithmetic circuit that constrains `k` to be the maximum of `x`, `y`, or `z`. That is, `k` should be equal to `x` if `x` is the maximum value, and same for `y` and `z`.
 5. Create an arithmetic circuit that takes signals `x₁`, `x₂`, ..., `xₙ`, constrains them to be binary, and outputs 1 if *at least* one of the signals is 1. Hint: this is tricker than it looks. Consider combining what you learned in the first two problems and using the NOT gate.
 6. Devise an arithmetic circuit to determine if a signal `v` is a power of two (1, 2, 4, 8, etc). Hint: create an arithmetic circuit that constrains another set of signals to encode the binary representation of `v`, then place additional restrictions on those signals.
-7. The covering set problem starts with a set S = {1, 2, …, 10} and several well-defined subsets of S, for example: {1, 2, 3}, {3, 5, 7, 9}, {8, 10}, {5, 6, 7, 8}, {2, 4, 6, 8}, and asks if we can take at most `k` subsets of S such that their union is S. In the example problem above, the answer for `k = 4` is true because we can use {1, 2, 3}, {3, 5, 7, 9}, {8, 10}, {2, 4, 6, 8}. Note that for each problems, the subsets we can work with are determined at the beginning. We cannot construct the subsets ourselves. If we had been given the subsets {1,2,3}, {4,5} {7,8,9,10} then there would be no solution because the number 6 is not in the subsets.
+7. Devise an arithmetic circuit that models the [Subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem). Given a set of integers (assume they are all non-negative), determine if there is a subset that sums to a given value $k$. For example, given the set $\set{3,5,17,21}$ and $k = 22$, there is a subset $\set{5, 17}$ that sums to $22$. Of course, a subset sum problem does not necessarily have a solution.
+     <details>
+     <summary>Hint</summary>
+     <br>
+     Use a "switch" that is 0 or 1 if a number is part of the subset or not.
+     </details>
 
-On the other hand, if we had been given S = {1,2,3,4,5} and the subsets {1}, {1,2}, {3, 4}, {1, 4, 5} and asked can it be covered with `k = 2` subsets, then there would be no solution. However, if `k = 3` then a valid solution would be {1, 2}, {3, 4}, {1, 4, 5}.
+8. The covering set problem starts with a set $S = \set{1, 2, …, 10}$ and several well-defined subsets of $S$, for example: $\set{1, 2, 3}$, $\set{3, 5, 7, 9}$, $\set{8, 10}$, $\set{5, 6, 7, 8}$, $\set{2, 4, 6, 8}$, and asks if we can take at most $k$ subsets of $S$ such that their union is $S$. In the example problem above, the answer for $k = 4$ is true because we can use $\set{1, 2, 3}$, $\set{3, 5, 7, 9}$, $\set{8, 10}$, $\set{2, 4, 6, 8}$. Note that for each problems, the subsets we can work with are determined at the beginning. We cannot construct the subsets ourselves. If we had been given the subsets $\set{1,2,3}$, $\set{4,5}$ $\set{7,8,9,10}$ then there would be no solution because the number $6$ is not in the subsets.
 
-Our goal is to prove for a given set S and a defined list of subsets of S, if we can pick a set of subsets such that their union is S. Specifically, the question is if we can do it with `k` or fewer subsets. We wish to prove we know which `k` (or fewer) subsets to use by encoding the problem as an arithmetic circuit.
+     On the other hand, if we had been given $S = \set{1,2,3,4,5}$ and the subsets $\set{1}, \set{1,2}, \set{3, 4}, \set{1, 4, 5}$ and asked can it be covered with $k = 2$ subsets, then there would be no solution. However, if $k = 3$ then a valid solution would be $\set{1, 2}, \set{3, 4}, \set{1, 4, 5}$.
+
+     Our goal is to prove for a given set $S$ and a defined list of subsets of $S$, if we can pick a set of subsets such that their union is $S$. Specifically, the question is if we can do it with $k$ or fewer subsets. We wish to prove we know which $k$ (or fewer) subsets to use by encoding the problem as an arithmetic circuit.
