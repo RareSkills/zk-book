@@ -750,3 +750,5 @@ In the problems below, use a finite field `p` of `218882428718392752222464057452
 
 1. A dev creates an arithmetic circuit `x * y * z === 0` and `x + y + z === 0` with the intent of constraining all the signals to be zero. Find a counter example to this where the constraints are satisfied, but not all of `x`, `y`, and `z` are 0.
 2. A dev creates a circuit with the polynomial `x² + 2x + 3 === 11` and proves that 2 is a solution. What is the other solution? Hint: write the circuit as `x² + 2x - 8 === 0` then factor the polynomial by hand to find the roots. Finally, compute the congruent element of the roots in the finite field to find the other solution.
+
+*Originally Published April 29, 2024*
