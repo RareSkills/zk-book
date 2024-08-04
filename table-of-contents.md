@@ -1,7 +1,10 @@
 # Table of Contents
 
 ## Foundational Math
-1. P vs NP and it's application to Zero Knowledge Proofs
+
+"Everything should be made as simple as possible, but not simpler" -- *Attributed to Albert Einstein*
+
+1. P vs NP and its application to Zero Knowledge Proofs
 2. Arithmetic Circuits
 3. Finite Fields and Modular Arithmetic
 4. Set Theory
