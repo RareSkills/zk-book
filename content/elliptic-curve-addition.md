@@ -236,7 +236,7 @@ Rational numbers under addition are a group. Integers modulo a prime are a group
 
 You do the binary operator, and you get another item in the set. The group has an identity element, and each element has an inverse. Associative law holds. With all that in mind, you shouldn’t care what the operator ⊕ is doing behind the scenes.
 
-In my opinion, if you try to understand elliptic curves math in isolation from first principles, you’re doing it the hard way. It’s far easier to understand it in the context of its relatives.
+In my opinion, if you try to understand elliptic curves math in isolation from first principles of group theory, you’re doing it the hard way. It’s far easier to understand it in the context of its relatives.
 
 That makes for a smoother learning experience.
 
@@ -274,3 +274,5 @@ But we lose none of the intuition we’ve gained above by doing this.
 
 ## Learn more with RareSkills
 This material is from our zero knowledge course, see there to learn more.
+
+*Originally Published September 1, 2023*

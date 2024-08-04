@@ -1,9 +1,8 @@
 # Table of Contents
 
-## Foundational Math
-
 "Everything should be made as simple as possible, but not simpler" -- *Attributed to Albert Einstein*
 
+## Foundational Math
 1. P vs NP and its application to Zero Knowledge Proofs
 2. Arithmetic Circuits
 3. Finite Fields and Modular Arithmetic
