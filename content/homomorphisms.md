@@ -1,14 +1,18 @@
 # Homomorphisms
 
-A homomorphism between two groups means a *structure preserving map* between two algebraic data structures exists.
+A homomorphism between two groups means a *structure preserving map* between the two groups exists.
 
-Suppose we have two algebraic data structures $(A,\square)$ and $(B, \blacksquare)$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. A homomorphism exists from $A$ to $B$ if and only if there exists a function $\phi: A\rightarrow B$ such that
+Suppose we have two algebraic data structures $(A,\square)$ and $(B, \blacksquare)$, where the binary operator of $A$ is $\square$ and the binary operator of $B$ is $\blacksquare$.
+
+A homomorphism exists from $A$ to $B$ if and only if there exists a function $\phi: A\rightarrow B$ such that
 
 $$
 \phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)\space\space\forall a_i,a_j\in A
 $$
 
-In other words, $\phi$ takes any element two elements $a_i, a_j$ in $A$ and maps it to an element in $B$ (note that we allow $a_i = a_j$). However, the map preserves the relationships of the binary operators.
+In other words, if $a_i \square a_j = a_k$, then $\phi(a_i) \blacksquare \phi(a_j) = \phi(a_k)$.
+
+Note that a homomorphism is one-directional. $\phi$ takes elements in $A$ and maps them to elements in $B$. We have no requirements about "going backwards."
 
 We’ll look at some simple examples, provide some clarification, and then provide more complex examples.
 
@@ -197,10 +201,11 @@ Find a homomorphism for the following pairs of algebraic data structures. If you
 
 ## Homomorphic Encryption
 
-If $\phi$ is computationally difficult to invert, then $\phi$ *homomrophically encrypts* the elements of $A$.
+If $\phi$ is computationally difficult to invert, then $\phi$ *homomorphically encrypts* the elements of $A$.
 
 Let $A$ be all integers under addition, and $B$ be the target group and $\blacksquare$ be binary operator of $B$.
 
+### Zero Knowledge Addition, example 1
 Suppose we wish to prove to a verifier that we computed $2 + 3=5$. We would give the verifier $(x, y, 5)$ where $x=\phi(2), y= \phi(3)$ and the verifier check that:
 
 $$
@@ -209,7 +214,14 @@ $$
 
 Note that homomorphic encryption implies that the verifier knows the function $\phi$.
 
-Also note that we didn’t say anything about what elements of $B$ are or what $\blacksquare$ is. $B$ can be scary mathematical objects and $\blacksquare$ can be a scary mathematical operator, but *that doesn’t matter*.
+### Zero Knowledge Addition, example 2
+A prover makes the claim "I have two numbers $a$ and $b$, and $b$ is five times $a$." The prover sends $\phi(a)$ and $\phi(b)$ to the verifier, and the verifier checks that
+
+$$\phi(a) + \phi(a) + \phi(a) + \phi(a) + \phi(a) = \phi(b)$$
+
+Remember, "multiplication" here is not the binary operator, it's simply shorthand for repeated addition.
+
+In these examples, note that we didn’t say anything about what elements of $B$ are or what $\blacksquare$ is. $B$ can be scary mathematical objects and $\blacksquare$ can be a scary mathematical operator, but *that doesn’t matter*.
 
 This is the beauty of abstract algebra. *We don’t need to know*. As long as it has the properties we care about, we can reason about its behavior even if we know nothing about the implementation.
 
@@ -233,6 +245,8 @@ You probably don’t know what elliptic curve points are, or what adding them ev
 
 Even though you don’t know what elliptic curve points are, you already know nine things about them!
 
+Now here's a really useful property:
+
 So whatever this bizarre object is, you know it behaves like, and has the same properties as the groups we discussed above.
 
 Believe it or not, you are already 90% of the way there to comprehending elliptic curves. It’s far easier to make sense of elliptic curves by understanding their similarity to other familiar structures than to try to understand their funky math from the ground up.
@@ -248,11 +262,11 @@ So when I tell you elliptic curve points under addition are a group, you should 
 
 Again, groups don’t need to be mysterious moon math. You’ve worked with groups intuitively as a programmer. Now you have a concrete word to describe this recurring phenomena.
 
-It’s far more efficient to say “group” than it is to say “this is a set with a way to combine elements associatively and the elements all have blah blah blah.”
+It’s far more efficient to say "group" than it is to say "this is a set with a way to combine elements associatively and the elements all have blah blah blah."
 
 I know this seems like a huge tangent, but trust me, this allows us to pack a lot of information as we go!
 
-Imagine trying to discuss tree data structures without a word for “roots” or “leaves.” That would be immensely annoying.
+Imagine trying to discuss tree data structures without a word for "roots" or "leaves." That would be immensely annoying.
 
 ## Summary
 
@@ -260,4 +274,6 @@ A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exist
 
 Homomorphisms are not necessarily bi-directional. They are only required to work in one direction, from $A$ to $B$.
 
-The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to elliptic curves.
+If $\phi: A \rightarrow B$ is computationally difficult to invert, then $\phi$ homomorphically encrypts the elements of $A$. That is we can validate claims about computation in $A$ using elements in $B$.
+
+The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](rareskills.io/post/elliptic-curve-addition).
