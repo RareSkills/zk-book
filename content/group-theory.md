@@ -2,7 +2,7 @@
 
 ![Group Theory Hero Image](https://static.wixstatic.com/media/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png/v1/fill/w_1000,h_1000,al_c,q_90,enc_auto/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png)
 
-This article provides several examples of groups so that you can build an intuition for them.
+This article provides several examples of algebraic groups so that you can build an intuition for them.
 
 A group is a set with:
 - a closed binary operator
@@ -14,9 +14,9 @@ We also discussed abelian groups. An abelian group has the additional requiremen
 
 Now it’s time to discuss groups as a mathematical structure.
 
-One confusing aspect about using integers under addition as an example of a group is students commonly respond with “but can’t you also multiply integers?”
+One confusing aspect about using integers under addition as an example of a group is students commonly respond with "but can’t you also multiply integers?"
 
-Admittedly, this is confusing. There are other algebraic structures later that expect two binary operators (rings and fields), but for now think of a group under one fixed and unchanging binary operator and from the group’s perspective, any other possible binary operator does not exist or isn’t a concern.
+Admittedly, this is confusing. There are other algebraic structures that expect two binary operators (rings and fields), but for now think of a group under one fixed and unchanging binary operator and from the group’s perspective, any other possible binary operator does not exist or isn’t a concern.
 
 Here’s where it gets even more confusing. Sometimes binary operators are other binary operators in disguise.
 
@@ -26,7 +26,7 @@ For example, when dealing with groups that only have addition, sometimes writers
 The best way to get a feel for a group is to see a lot of them. Let’s do that.
 
 ### 1. The trivial group
-Let our group be a set consisting of the number 0 with the binary operator of addition. It is clear that the binary operator is closed and associative
+Let our group be a set consisting of the number $\set{0}$ with the binary operator of addition. It is clear that the binary operator is closed and associative
 
 $$
 (0 + 0) + 0 = (0 + 0) + 0
@@ -38,27 +38,31 @@ This is not an interesting group, but it is the smallest valid you can create.
 
 Note that a group cannot be empty because by definition it must contain an identity element.
 
+As an exercise for the reader, show that the set $\set{1}$ with the binary operator $\times$ is a group.
+
 ### 2. Real numbers are not a group under multiplication
 Although reals ($\mathbb{R}$) under multiplication has an identity (the number 1) and is closed and associative, they do not all have an inverse.
 
-Real numbers are invertible by taking the inverse (1 / n), but zero is a real number and it cannot be inverted because $1/0$ is not a real number. In general, you cannot multiply zero by something and get the identity element of 1.
+Real numbers are invertible by taking the inverse $(1 / n)$, but zero is a real number and it cannot be inverted because $1/0$ is not a real number. 
+
+Strictly speaking, the inverse of $a$, is $b$ such that $ab = 1$. Here we are saying that if $a = 0$ there is no element in the set $b$ such that $ab = 1$.
 
 Positive real numbers excluding zero are a group under multiplication however. Every element has an inverse ($1/n$), and the identity element is 1.
 
-Exercise:  Integers (positive and negative) are not a group under multiplication. Explain why.
+Exercise:  Integers (positive and negative) are not a group under multiplication. Show which of the four requirements (closed, associative, existence of identity, all elements having an inverse) are not satisfied.
 
 ### 3. $n \times m$ matrices of real numbers are a group under addition
 
 Let’s work it out:
 
 Matrix addition is closed and associative. If you add an $n × m$ matrix of real numbers with another $n × m$ matrix of real numbers, you get an $n × m$ matrix of real numbers.
-the identity matrix is an $n × m$ matrix of all zeros
+The identity matrix is an $n × m$ matrix of all zeros
 the inverse of a matrix is that matrix multiplied by -1.
 Hey wait, we aren’t allowed to multiply by -1 right?
 
-A group doesn’t require the inverse to be “computable by group laws” only to exist. The group of $n × m$ matrices of real numbers contains inverses for every element, and that’s what matters.
+A group doesn’t require the inverse to be "computable using the group binary operator" only to exist. The group of $n × m$ matrices of real numbers contains inverses for every element, and that’s what matters.
 
-If we define our operator to be the Hadamard product, that is, element-wise multiplication, this cannot be a group for the same reason discussed above.
+If we define our operator to be the Hadamard product (element-wise multiplication), this cannot be a group for the same reason discussed above.
 
 If we define our operator to be traditional matrix multiplication over square matrices, this may or may not be a group depending on the set definition, as we will see in section example 5.
 
@@ -66,7 +70,7 @@ If we define our operator to be traditional matrix multiplication over square ma
 
 This is actually a special case of the above example, but let’s look at it through a different angle.
 
-Consider our set to be the set of all real-valued $(x, y)$ points on a typical plot.
+Consider our set to be the set of all real-valued $(x, y)$ points on a typical 2D plane.
 
 Our binary operator is adding points together, for example $(1,1) + (2,2) = (3,3)$.
 
@@ -88,12 +92,12 @@ Remember, a matrix with zero determinant cannot be inverted, so this set cannot 
 
 ### 7. The set of all polynomials of a fixed upper-bounded degree is a group under addition
 
-If we say “all polynomials of degree at most 7 under addition” this is a valid group.
+If we say "all polynomials with real coefficients of degree at most 7 under addition" this is a valid group.
 
 - Polynomial addition is closed and associative
-- The identity is the polynomial 0 (or 0x^0 to be precise)
+- The identity is the polynomial 0 (or $0x^0$ to be precise)
 - The inverse is the coefficients multiplied by -1
-- We cannot say degree “exactly 7” because the identity element has degree 0, and wouldn’t be part of the group.
+- We cannot say degree "exactly 7" because the identity element has degree 0, and wouldn’t be part of the group.
 
 Polynomials of a fixed upper-bounded degree under multiplication are not a group, because generally the degree gets larger when you multiply polynomials, hence the operator would not be closed.
 
@@ -107,9 +111,7 @@ In this situation, what would the inverse of 5 be?
 It would just be 2, because 7 - 5 = 2, or 5 + 2 mod 7 is zero (the identity).
 
 ### 9. Multiplication modulo a prime number is not a group
-The problem is we can’t define an identity and inverse that works for everything.
-
-If we define our identity to be 1, then it isn’t possible to invert zero, because zero cannot be multiplied with anything to obtain 1. If we set our identity to be zero, then it won’t behave like an identity because any number multiplied by zero is not itself, but zero.
+Zero doesn't have an inverse for this example.
 
 If we omit the number 0, then we have a group. The identity element is 1, and the inverse of an element $a$ is its modular inverse $a^{-1}$.
 
@@ -121,12 +123,12 @@ $$
 b^x \times b^y = b^{x + y}
 $$
 
-The identity element is $b^0$, which is 1, and the inverse of $b^x$ is $b^{-x}$.
+The identity element is $b^0$, which is $1$, and the inverse of $b^x$ is $b^{-x}$.
 
 ## Finite groups
 As the name suggests, a finite group has a finite number of elements in it. The set of all integers under addition is not finite, but addition of integers modulo a prime number is a finite group.
 
-In Zero Knowledge Proofs, we only use finite groups.
+In zero knowledge proofs, we only use finite groups.
 
 ## Order of a group
 The order of a group is the number of elements in it.
@@ -198,18 +200,18 @@ This one is a bit more subtle, but consider this:
 In a cyclic group, every element in the group can be generated as $(g + g + … + g)$. Let’s arbitrarily pick an element R. Let’s partition this set of additions like so
 
 $$
-R = \underbrace{g + g + \dots + g}_\text{m times} + \underbrace{g + g + \dots + g}_\text{n times}
+r = \underbrace{g + g + \dots + g}_\text{m times} + \underbrace{g + g + \dots + g}_\text{n times}
 $$
 
 Because of associativity, we can add parenthesis 
 
 $$
-R = \underbrace{(g + g + \dots + g)}_\text{m times} + \underbrace{(g + g + \dots + g)}_\text{n times}
+r = \underbrace{(g + g + \dots + g)}_\text{m times} + \underbrace{(g + g + \dots + g)}_\text{n times}
 $$
 
-Let $g$ added to itself $m$ times be $P$ and $g$ added to itself $n$ times be $Q$. Therefore,
+Let $g$ added to itself $m$ times be $p$ and $g$ added to itself $n$ times be $q$. Therefore,
 
-$$R = P + Q$$
+$$r = p + q$$
 
 By associativity, we can repartition the original equation as follows (note that the $m$ and $n$ switched places!)
 
@@ -219,16 +221,18 @@ $$
 
 And we get back:
 
-$$R = Q + P$$
+$$r = q + p$$
 
 Hence, if the group is cyclic, then the group is abelian.
 
 Note that the converse of this statement isn’t true. Real numbers under addition are an abelian group, but they are not cyclic.
 
-## The identity element of a group is unique
-A group cannot have two identity elements. Don’t overthink this one, it’s derived by simple contradiction. Let’s say ▢ is our binary operator and e is our identity element.
+Cyclic groups don't have to be arithmetic modulo some prime number, but these are the only cyclic groups we will be using in our discussion of zero knowledge proofs.
 
-Let’s say we have an alternative identity element e'. This means the following:
+## The identity element of a group is unique
+A group cannot have two identity elements. Don’t overthink this one, it’s derived by simple contradiction. Let’s say ▢ is our binary operator and $e$ is our identity element.
+
+Let’s say we have an alternative identity element $e'$. This means the following:
 
 $$a \square a^{-1} = e \text{ and } a \square a^{-1} = e'$$
 
@@ -238,6 +242,12 @@ $$a \square a^{-1} \neq a \square a^{-1}$$
 
 But that is obviously a contradiction, hence identity elements must be unique.
 
-Going back to how we defined binary operators in set theoretic terms, we know the mapping from the sets $S × S$ back to $S$ cannot have the same ordered pair mapping to different elements, so by this definition we know identities are unique.
+## The use of groups in zero knowledge proofs
+Understanding group theory for the purpose of zero knowledge proofs is more of an exercise in vocabulary. When we say "inverse" or "identity" we want to you to immediately grasp what those mean.
+
+Additionally, groups help us reason about very complex mathematical objects without understanding how they work. We've used familiar examples in this article, but later on we will deal with very unfamiliar objects such as *elliptic curves over field extensions*. Even though you don't know what exactly that is, if we tell you it is a group, you already know a lot about what it is.
+
+## Learn more with RareSkills
+This article is part of a series on ZK proofs. See our [ZK Book](https://www.rareskills.io/zk-book) for the full series.
 
 *Originally Published August 1, 2023*
