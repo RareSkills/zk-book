@@ -6,7 +6,7 @@ The focus of this resource is implementation: we cover a lot more corner cases o
 
 ## Prerequisites
 - We assume the reader understands how to use [arithmetic circuits (zk circuits)](https://www.rareskills.io/post/arithmetic-circuit) to represent the validity of a computation.
-- The reader is familiar with [modular arithmetic](https://www.rareskills.io/post/finite-fields). All operations here happen in a finite field, so "-5" really means the additive inverse of 5 modulo $p$ and "2/3" means the multiplicative inverse of 3 modulo $p$ times 2.
+- The reader is familiar with [modular arithmetic](https://www.rareskills.io/post/finite-fields). All operations here happen in a finite field, so $-5$ really means the additive inverse of $5$ modulo $p$ and $2/3$ means the multiplicative inverse of $3$ modulo $p$ times $2$.
 
 ## Rank 1 Constraint System overview
 A Rank 1 Constraint System (R1CS) is an arithmetic circuit with the requirement that each equality constraint has one multiplication (and no restriction on the number of additions).
@@ -16,10 +16,7 @@ This makes the representation of the arithmetic circuit compatible with the use 
 ## The witness vector
 In an arithmetic circuit, the witness is an assignment to all the signals that satisfies the constraints of the equation.
 
-In a Rank 1 Constraint System
-
-The witness vector is a 1 x n vector that contains the value of all the input variables, the output variable, and the intermediate values. It shows you have executed the circuit from start to finish, knowing both the input, output, and all the intermediate values.
-
+In a Rank 1 Constraint System the witness vector is a $1 \times n$ vector that contains the value of all the input variables, the output variable, and the intermediate values. It shows you have executed the circuit from start to finish, knowing both the input, output, and all the intermediate values.
 
 By convention, the first element is always 1 to make some calculations easier, which we will demonstrate later.
 
@@ -40,7 +37,7 @@ A witness means we don’t just know $x$, $y$, and $z$, we must know every inter
 
 $$[1, z, x, y, v₁]$$
 
-where each term satisfies the constraints above.
+where each term has a value that satisfies the constraints above.
 
 For example, 
 
@@ -60,11 +57,11 @@ $$
 
 The extra 1 term is not used in this example and is a convenience we will explain later.
 
-## Example 1: Transforming $z = x \cdot y$
+## Example 1: Transforming $z = x \cdot y$ into a Rank 1 Constraint System
 
-In the circuit $z = xy$, there are no intermediate variables. For our example, we will say we are proving $41 x 103 = 4223$.
+For our example, we will say we are proving $41 \times 103 = 4223$.
 
-Therefore, our witness vector is `[1, 4223, 41, 103]` as an assignment to `[1, z, x, y]`.
+Therefore, our witness vector is $[1, 4223, 41, 103]$ as an assignment to $[1, z, x, y]$.
 
 Before we can create an R1CS, our constraints need to be of the form
 
@@ -91,7 +88,7 @@ $$
 
 Where $O$, $L$, and $R$ are matrices of size $n$ x $m$ ($n$ rows and $m$ columns).
 
-Matrix $\mathbf{L}$ encodes the `left_hand_side` variables $\mathbf{R}$ encodes the `right_hand_side` variables. $\mathbf{O}$ encodes the result variables. The vector $\mathbf{a}$ is the witness vector.
+Matrix $\mathbf{L}$ encodes the the variable on the left side of the multiplication and $\mathbf{R}$ encodes the variables on the right side of the multiplication. $\mathbf{O}$ encodes the result variables. The vector $\mathbf{a}$ is the witness vector.
 
 Specifically, $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ are matrices with the same number of columns as the witness vector $\mathbf{a}$, and each column represents the same variable the index is using.
 
@@ -146,13 +143,13 @@ $$
 
 In this example, each item in the matrix serves as an indicator variable for whether or not the variable the column corresponds to is present. (Technically, it’s the coefficient of the variable, but we’ll get to that later).
 
-For the left hand terms, $x$ is present, so if the columns represent `[1, z, x, y]`, then…
+For the left hand terms, $x$ is the only variable present on the left side of the multiplication, so if the columns represent $[1, z, x, y]$, then…
 
-$\mathbf{L}$ is `[0, 0, 1, 0]`, because $x$ is present, and none of the other variables are.
+$\mathbf{L}$ is $[0, 0, 1, 0]$, because $x$ is present, and none of the other variables are.
 
-$\mathbf{R}$ is `[0, 0, 0, 1]` because the variables in the right hand side are just $y$, and
+$\mathbf{R}$ is $[0, 0, 0, 1]$ because the only variable in the right side of the multiplication is $y$, and
 
-$\mathbf{O}$ is `[0, 1, 0, 0]` because we only have the $z$ variable.
+$\mathbf{O}$ is $[0, 1, 0, 0]$ because we only have the $z$ variable in the "output" of the multiplication.
 
 We don’t have any constants anywhere so the 1 column is zero everywhere (We’ll discuss when it is non-zero later).
 
@@ -177,13 +174,13 @@ result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a)
 assert result.all(), "result contains an inequality"
 ```
 
-You may be wondering what the point of this is, aren’t we just saying that 41 x 103 = 4223 is a much less compact way?
+You may be wondering what the point of this is, aren’t we just saying that $41 \times 103 = 4223$ is a much less compact way?
 
 You would be correct.
 
 An R1CS can be quite verbose, but they map nicely to [Quadratic Arithmetic Programs (QAPs)](https://www.rareskills.io/post/quadratic-arithmetic-program), which can be made succinct. But we will not concern ourselves with QAPs here.
 
-But this is an important point of R1CS. A R1cs communicates exactly the same information as the original arithmetic constraints, but with a lot of extra zeros. In this example, we have only one constraint, but we’ll add more in the next example.
+But this is an important point of R1CS. A R1CS communicates exactly the same information as the original arithmetic constraints, but with only one multiplication per equality constraint. In this example, we have only one constraint, but we’ll add more in the next example.
 
 ## Example 2: Transforming r = x * y * z * u
 In this slightly more complicated example, we need to deal with intermediate variables now. Each row of our computation can only have one multiplication, so we must break up our equation as follows:
@@ -209,12 +206,12 @@ $$
 We will use the first transformation for this example.
 
 ### Size of $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$
-Because we are dealing with 7 variables $(r, x, y, z, u, v_1, v_2)$, our witness vector will have 8 elements (the first being the constant 1) and our matrices will have 8 columns.
+Because we are dealing with 7 variables $(r, x, y, z, u, v_1, v_2)$, our witness vector will have eight elements (the first being the constant 1) and our matrices will have eight columns.
 
 Because we have three constraints, the matrices will have three rows.
 
 ### Left hand terms and right hand terms
-This example will strongly enforce the idea of a “left hand term” and a “right hand term.” Specifically, $x$, $z$, and $v_1$ are left hand terms, and $y$, $u$, and $v_2$ are right hand terms.
+This example will strongly enforce the idea of a "left hand term" and a "right hand term." Specifically, $x$, $z$, and $v_1$ are left hand terms, and $y$, $u$, and $v_2$ are right hand terms.
 
 $$
 \underbrace{
@@ -251,7 +248,7 @@ $$
 $$
 
 ### Constructing matrix $\mathbf{L}$ from left hand terms
-Let’s construct the matrix A. We know it will have three rows and eight columns
+Let’s construct the matrix A. We know it will have three rows (since there are three constraints) and eight columns (since there are eight variables).
 
 $$
 \begin{bmatrix}
@@ -265,7 +262,7 @@ Our witness vector will be multiplied by this, so let’s define our witness vec
 
 $$
 \begin{bmatrix}
-1 & x & y & z & u & v_1 & v_2 & r \\
+1 & r &x & y & z & u & v_1 & v_2
 \end{bmatrix}
 $$
 
@@ -279,6 +276,7 @@ l_{2, 1} & l_{2, r} & l_{2, x} & l_{2, y} & l_{2, z} & l_{2, u} & l_{2, v_1} & l
 l_{3, 1} & l_{3, r} & l_{3, x} & l_{3, y} & l_{3, z} & l_{3, u} & l_{3, v_1} & l_{3, v_2} \\
 \end{bmatrix}
 $$
+
 
 #### First row of  $\mathbf{L}$
 In the first row, for the first left variable, we have $v₁ = xy$:
@@ -323,6 +321,16 @@ l_{2, 1} & l_{2, r} & l_{2, x} & l_{2, y} & l_{2, z} & l_{2, u} & l_{2, v_1} & l
 l_{3, 1} & l_{3, r} & l_{3, x} & l_{3, y} & l_{3, z} & l_{3, u} & l_{3, v_1} & l_{3, v_2} \\
 \end{bmatrix}
 $$
+
+Recall that the columns of $\mathbf{L}$ are labelled as follows:
+
+$$
+\begin{bmatrix}
+1 & r &x & y & z & u & v_1 & v_2\\
+\end{bmatrix}
+$$
+
+and we see that the $1$ is in the $x$ column.
 
 #### Second row of $\mathbf{L}$
 Working our way down, we see that only $z$ is present for the left-hand side of our systems of equations.
@@ -570,7 +578,7 @@ $$
     \end{matrix}}}
 $$
 
-Matrix $\mathbf{R}$ must have 1s representing $y$, $u$, and $v_2$. The row in the matrix corresponds to the row of the arithmetic constraint, i.e. we can number the polynomial constraints (rows) as follows:
+Matrix $\mathbf{R}$ must have 1s representing $y$, $u$, and $v_2$. The row in the matrix corresponds to the row of the arithmetic constraint, i.e. we can number the constraints (rows) as follows:
 
 $$
     \begin{matrix}
@@ -855,7 +863,7 @@ assert result.all(), "result contains an inequality"
 ```
 
 ## Example 4: Multiplication with a constant
-In all of the examples above, we never multiplied variables by constants. That’s why the entries in the r1cs was always 1. As you may have guessed from the above example, the entry in the matrices is the same value of the constant the variable is multiplied by as the following example will show.
+In all of the examples above, we never multiplied variables by constants. That’s why the entries in the R1CS was always 1. As you may have guessed from the above example, the entry in the matrices is the same value of the constant the variable is multiplied by as the following example will show.
 
 Let’s work out the solution for
 
@@ -935,7 +943,8 @@ $$
 
 so we know we set up $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ correctly.
 
-Here we have one row (constraints) and one “true” multiplication. As a general rule:
+Here we have one row (constraints) and one 
+"true" multiplication. As a general rule:
 
 The number of constraints in a Rank One Constraint system should be equal the number of non-constant multiplications.
 
@@ -984,3 +993,411 @@ $$
 
 We've marked the output $\mathbf{O}$ in <span style="color:red">red</span>, the left hand side $\mathbf{L}$ in <span style="color:green">green</span>, and the right hand side $\mathbf{R}$ in <span style="color:violet">violet</span>.  This produces the following matrices:
 
+$$
+A = \begin{bmatrix}
+0 & 0 & \textcolor{violet}{3} & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & \textcolor{violet}{1} \\
+0 & 0 & \textcolor{violet}{5} & 0 & 0 & 0 \\
+\end{bmatrix}
+$$
+
+$$
+B = \begin{bmatrix}
+0 & 0 & \textcolor{blue}{1} & 0 & 0 & 0 \\
+0 & 0 & 0 & \textcolor{blue}{1} & 0 & 0 \\
+0 & 0 & 0 & 0 & \textcolor{blue}{1} & 0 \\
+\end{bmatrix}
+$$
+
+$$
+C = \begin{bmatrix}
+
+0 & 0 & 0 & 0 & \textcolor{red}{1} & 0 \\
+0 & 0 & 0 & 0 & 0 & \textcolor{red}{1} \\
+\textcolor{red}{-3} & 1 & 1 & 2 & 0 & \textcolor{red}{-1} \\
+\end{bmatrix}
+$$
+
+with column labels
+
+$$\begin{bmatrix}1 & \text{out} & x & y & v_1 & v_2\end{bmatrix}$$
+
+Let's check our work as usual.
+
+```python
+import numpy as np
+import random
+
+# Define the matrices
+A = np.array([[0,0,3,0,0,0],
+               [0,0,0,0,1,0],
+               [0,0,1,0,0,0]])
+
+B = np.array([[0,0,1,0,0,0],
+               [0,0,0,1,0,0],
+               [0,0,0,5,0,0]])
+
+C = np.array([[0,0,0,0,1,0],
+               [0,0,0,0,0,1],
+               [-3,1,1,2,0,-1]])
+
+# pick random values for x and y
+x = random.randint(1,1000)
+y = random.randint(1,1000)
+
+# this is our orignal formula
+out = 3 * x * x * y + 5 * x * y - x- 2*y + 3# the witness vector with the intermediate variables inside
+v1 = 3*x*x
+v2 = v1 * y
+w = np.array([1, out, x, y, v1, v2])
+
+result = C.dot(w) == np.multiply(A.dot(w),B.dot(w))
+assert result.all(), "result contains an inequality"
+```
+
+## Rank 1 Constraint Systems do not require starting with a single polynomial
+To keep things simple, we've been using examples of the form $z = xy + ...$ but most realistic arithmetic constraints are going to be set of arithmetic constraints, not a single one.
+
+For example, suppose we are proving that an array $[x₁, x₂, x₃, x₄]$ is binary and $v$ is less than 16. The set of constraints will be
+
+$$
+\begin{align*}
+x₁² &= x₁\\
+x₂² &= x₂\\
+x₃² &= x₃\\
+x₄² &= x₄ \\
+v &= 8x₄ + 4x₃ + 2x₂ + x₁
+\end{align*}
+$$
+
+To get the into a rank one constraint system, we notice that the final row doesn't have any multiplication, so we can substitute $x_1$ into the first constraint:
+
+$$
+\begin{align*}
+x₁² &= v - 8x₄ - 4x₃ - 2x₂\\
+x₂² &= x₂\\
+x₃² &= x₃\\
+x₄² &= x₄ \\
+\end{align*}
+$$
+
+Assuming our witness vector is $[1, v, x_1, x_2, x_3, x_4]$, we can create the R1CS as follows:
+
+$$
+\begin{align*}
+\mathbf{L} &= \begin{bmatrix}
+0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} \\
+\mathbf{R} &= \begin{bmatrix}
+0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} \\
+\mathbf{O} &= \begin{bmatrix}
+0 & 1 & 0 & -2 & -4 & -8 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} \\
+\end{align*}
+$$
+
+Doing the substitution is not strictly necessary, but it saves a row in the R1CS. In a later section, we will show a valid R1CS where we do not do the substitution.
+
+## Everything is done modulo prime in r1cs
+In the above examples, we used traditional arithmetic for the sake of simplicity, but real world implementations use modular arithmetic instead.
+
+The reason is simple: encoding numbers like 2/3 leads to ill-behaved floats which are computationally intensive and error prone.
+
+If we do all our math modulo a prime number, let’s say 23, then encoding $2/3$ is straightforward. It’s the same as $2 \cdot 3^{-1}$, and multiplying by two and raising to the power of negative 1 are straightforward in modular arithmetic
+
+## Circom implementation.
+In Circom, a language for constructing Rank 1 Constraint Systems, the finite field uses the prime number $21888242871839275222246405745257275088548364400416034343698204186575808495617$ (this is equal to the order of the BN128 curve we discussed in [Elliptic Curves over Finite Fields](https://www.rareskills.io/post/elliptic-curves-finite-fields)).
+
+This means $-1$ in that representation is
+
+```python
+p = 21888242871839275222246405745257275088548364400416034343698204186575808495617
+
+# 1 - 2 = -1
+(1 - 2) % p
+
+# 21888242871839275222246405745257275088548364400416034343698204186575808495616
+```
+
+### Circom for out = x * y
+If we write `out = x * y` in Circom, it would look like the following:
+
+```javascript
+pragma circom 2.0.0;
+
+template Multiply2() {
+    signal input x;
+    signal input y;
+    signal output out;
+
+    out <== x * y;
+ }
+
+component main = Multiply2();
+```
+
+Let’s turn this into an R1CS file and print the R1CS file
+
+```bash
+circom multiply2.circom --r1cs --sym
+snarkjs r1cs print multiply2.r1cs
+```
+
+We get the following output:
+
+![console result of Circom compilation](https://static.wixstatic.com/media/935a00_ce8574af090e4b4d8465fd45d7dda8ff~mv2.png/v1/fill/w_1480,h_496,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/935a00_ce8574af090e4b4d8465fd45d7dda8ff~mv2.png)
+
+This looks quite a bit different from our R1CS solution, but it is actually encoding the same information.
+
+Here are the differences in Circom’s implementation:
+- Columns with zero value are not printed
+- Circom writes $\mathbf{O}\mathbf{a} = \mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}$ as $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}  - \mathbf{O}\mathbf{a} = \mathbf{0}$
+
+What about the 21888242871839275222246405745257275088548364400416034343698204186575808495616 which is really -1?
+
+Circom's solution is
+
+$$
+\begin{align*}
+A &= \begin{bmatrix}
+0 & 0 & -1 & 0 
+\end{bmatrix}\\
+
+B &= \begin{bmatrix}
+0 & 0 & 0 & 1 
+\end{bmatrix}\\
+
+C &= \begin{bmatrix}
+0 & -1 & 0 & 0 
+\end{bmatrix}
+\end{align*}
+$$
+
+Even though the negative ones might be unexpected, with the witness vector `[1 out x y]`, this is actually consistent with the form $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a} - \mathbf{O}\mathbf{a} = \mathbf{0}$. (We will see in a second that Circom did indeed use this column assignment).
+
+You can plug in values for $x$, $y$, and out and see that the equation $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a} - \mathbf{O}\mathbf{a} = \mathbf{0}$ holds.
+
+Let’s see Circom’s variable to column assignment. Let’s recompile our circuit with a wasm solver:
+
+```bash
+circom multiply2.circom --r1cs --wasm --sym
+
+cd multiply2_js/
+```
+
+We create the `input.json` file
+
+```bash
+echo '{"x": "11", "y": "9"}' > input.json
+```
+
+And compute the witness
+
+```bash
+node generate_witness.js multiply2.wasm input.json witness.wtns
+
+snarkjs wtns export json witness.wtns witness.json
+
+cat witness.json
+```
+
+We get the following result:
+
+![terminal output after computing the witness](https://static.wixstatic.com/media/935a00_6ffb172a2e7649cab8cc6db8cace8de8~mv2.png/v1/fill/w_1428,h_316,al_c,lg_1,q_90,enc_auto/935a00_6ffb172a2e7649cab8cc6db8cace8de8~mv2.png)
+
+It is clear that Circom is using the same column layout we have been using: `[1, out, x, y]`, as $x$ was set to $11$ and $y$ to $9$ in our `input.json`.
+
+If we use Circom’s generated witness (replacing the massive number with -1 for readability), then we see Circom's R1CS is correct
+
+$$
+\begin{align*}
+\mathbf{a} &= \begin{bmatrix}
+1 & 99 & 11 & 9
+\end{bmatrix}\\
+\mathbf{L} &= \begin{bmatrix}
+0 & 0 & -1 & 0
+\end{bmatrix} \rightarrow \mathbf{L}\mathbf{a} = -11\\
+\mathbf{R} &= \begin{bmatrix}
+0 & 0 & 0 & 1
+\end{bmatrix} \rightarrow \mathbf{R}\mathbf{a} = 9\\
+\mathbf{O} &= \begin{bmatrix}
+0 & -1 & 0 & 0
+\end{bmatrix} \rightarrow \mathbf{O}\mathbf{a} = -99
+\end{align*}
+$$
+
+$$
+\begin{align*}
+Aw \cdot Bw - Cw &= 0\\
+(-11)(9) - (-99) &= 0 \\
+-99 + 99 &= 0
+\end{align*}
+$$
+
+$\mathbf{L}$ has one coefficient of $-1$ for $x$, $\mathbf{R}$ has one coefficient of $+1$ for $y$, and $\mathbf{O}$ has $-1$ for $\text{out}$. In modular form, this is identical to what the terminal outputted above:
+
+![terminal output of the R1CS](https://static.wixstatic.com/media/935a00_36651c70d5aa49d89059cbae553be7e9~mv2.png/v1/fill/w_1480,h_114,al_c,lg_1,q_85,enc_auto/935a00_36651c70d5aa49d89059cbae553be7e9~mv2.png)
+
+### Checking the rest of our work
+By way of review, the formulas we explored were
+
+$$
+\begin{align}
+z &= x * y \\
+z &= x * y * z * u \\
+z &= x * y + 2 \\
+z &= 3x^2 y + 5xy - x - 2y + 3
+\end{align}
+$$
+
+We just did (1) in the section above, for this section we will illustrate the principle that the number of non-constant multiplications is the number of constraints.
+
+The circuit for (2) is:
+```javascript
+pragma circom 2.0.8;
+
+template Multiply4() {
+    signal input x;
+    signal input y;
+    signal input z;
+    signal input u;
+    
+    signal v1;
+    signal v2;
+    
+    signal out;
+    
+    v1 <== x * y;
+    v2 <== z * u;
+    
+    out <== v1 * v2;
+}
+
+template main = Multiply4();
+```
+
+With everything we’ve discussed so far, the Circom output and the annotations should be self-explanatory.
+
+![annotation of constraint generation for Multiply4()](https://static.wixstatic.com/media/935a00_21b46f6f9ffd4a80b1a2a374be0de279~mv2.png/v1/fill/w_990,h_420,al_c,q_90,enc_auto/935a00_21b46f6f9ffd4a80b1a2a374be0de279~mv2.png)
+
+With that in mind, our other formulas should have constraints as follows:
+
+$$
+\begin{align}
+z &= x * y && \text{1 constraint} \\
+z &= x * y * z * u && \text{3 constraints} \\
+z &= x * y + 2 && \text{1 constraint} \\
+z &= 3x^2 y + 5xy - x - 2y + 3 && \text{3 constraints}
+\end{align}
+$$
+
+It is an exercise for the reader to write the Circom circuits and verify the above.
+
+### You do not need a witness to calculate the R1CS
+Note that in the Circom code we never supplied the witness before calculating the R1CS. We supplied the witness earlier to make the example less abstract and to make it easy to check our work, but it isn’t necessary. This is important, because if a verifier needed a witness to construct an R1CS, then the prover would have to give the hidden solution away!
+
+When we say "witness" we mean a vector with populated values. The verifier knows the "structure" of the witness, i.e. the variable to column assignments, but doesn’t know the values.
+
+## An R1CS is valid even if it is not optimized
+A valid transformation from a polynomial to an R1CS is not unique. You can encode the same problem with more constraints, which is less efficient. Here is an example.
+
+In some R1CS tutorials, the constraints for a formula like
+
+$$z = x² + y$$
+
+is transformed to
+
+$$
+\begin{align*}
+v₁ &= x  x \\
+z &= v₁ + y
+\end{align*}
+$$
+
+As we’ve noted, this is not efficient. However, you create a valid R1CS for this using the methodology in this article. We simply add a dummy multiplication like so:
+
+$$
+\begin{align*}
+v₁ &= x  x \\
+z &= (v₁ + y) * 1
+\end{align*}
+$$
+
+Our witness vector is of the form $[1, z, x, y, v1]$ and $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ are defined as follows:
+
+$$
+\mathbf{L} = \begin{bmatrix}
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 1 
+\end{bmatrix}
+$$
+
+$$
+\mathbf{R} = \begin{bmatrix}
+0 & 0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 
+\end{bmatrix}
+$$
+
+$$
+\mathbf{O} = \begin{bmatrix}
+0 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 & 0 
+\end{bmatrix}
+$$
+
+The second row of $\mathbf{L}$ accomplishes the addition, and the multiply by one is accomplished by using the first element of the second row of $\mathbf{R}$.
+
+This is perfectly valid, but the solution has one more row and and one more column than it needs.
+
+## What if there are no multiplications?
+What if we want to encode the following circuit?
+
+$$
+z = x + y
+$$
+
+This is pretty useless in practice, but for the sake of completeness, there can be solved with a dummy multiplication by one.
+
+$$
+out = (x + y)*1
+$$
+
+With our typical witness vector layout of $[1, z, x, y]$, we have the following matrices:
+
+$$
+\begin{align*}
+\mathbf{L} &= \begin{bmatrix}
+0 & 0 & 1 & 1 \\
+\end{bmatrix} \\
+\mathbf{R} &= \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+\end{bmatrix} \\
+\mathbf{O} &= \begin{bmatrix}
+0 & 1 & 0 & 0 \\
+\end{bmatrix} 
+\end{align*}
+$$
+
+## Rank One Constraint Systems are for convenience
+The original [paper for Groth16](https://eprint.iacr.org/2016/260.pdf) don’t have any reference to the term Rank One Constraint System. A R1CS is handy from an implementation perspective, but from a pure math perspective, it is simply explicitly labeling and grouping the coefficients of different variables. So when you read academic papers on the subject, it is usually missing because it is an implementation detail of a more abstract concept.
+
+## Handy Resources
+- This [web tool calculates R1CS](https://asecuritysite.com/zero/go_r1cs) for a set of constraints (but it only works with one input and output variable).
+
+- [Vitalik’s famous example of x**3 + x + 5 == 35](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649)
+
+- [Zero knowledge blog’s R1CS tutorial](https://www.zeroknowledgeblog.com/index.php/the-pinocchio-protocol/r1cs)
+
+## Learn more with RareSkills
+This blog post is taken from learning materials in our [zero knowledge course](https://www.rareskills.io/zk-bootcamp).

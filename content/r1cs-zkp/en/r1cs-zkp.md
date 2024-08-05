@@ -1,8 +1,8 @@
 # Building a Zero Knowledge Proof from an R1CS
 
-Given an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit) encoded as a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system), it is possible to create a zk-proof of having a witness, albeit not a succinct one. This article describes how to accomplish that.
+Given an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit) encoded as a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system), it is possible to create a ZK-proof of having a witness, albeit not a succinct one. This article describes how to accomplish that.
 
-This is done by converting the witness vector into [finite field elliptic curve points](https://www.rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing) for each row.
+A zero knowledge proof for a R1CS is accomplished by converting the witness vector into [finite field elliptic curve points](https://www.rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing) for each row.
 
 Given a Rank1 1 Constraint System where each matrix has $n$ rows and $m$ columns, we write it as
 
@@ -97,7 +97,7 @@ $$
 \left[ \begin{array}{ccc}
 \sum_{i=1}^m a_i l_{1,i}  \sum_{i=1}^m a_i r_{1,i} = \sum_{i=1}^m a_i o_{1,i} \\
 \sum_{i=1}^m a_i l_{2,i}  \sum_{i=1}^m a_i r_{2,i} = \sum_{i=1}^m a_i o_{2,i} \\
-\vdots & \vdots \\
+\vdots \\
 \sum_{i=1}^m a_i l_{n,i}  \sum_{i=1}^m a_i r_{n,i} = \sum_{i=1}^m a_i o_{n,i}
 \end{array} \right]
 $$
@@ -224,7 +224,12 @@ $$
 \vdots \\
 \sum_{i=1}^m l_{i,1}[a_i G_1]_1
 \end{array} \right]
+\begin{matrix}
+\bullet \\
+\bullet \\
+\vdots \\
 \bullet
+\end{matrix}
 \left[ \begin{array}{c}
 \sum_{i=1}^m r_{i,1}[a_i G_2]_2 \\
 \sum_{i=1}^m r_{i,1}[a_i G_2]_2 \\
@@ -239,7 +244,12 @@ $$
 \vdots \\
 \sum_{i=1}^m o_{i,1}[a_i G_1]_1
 \end{array} \right]
+\begin{matrix}
+\bullet \\
+\bullet \\
+\vdots \\
 \bullet
+\end{matrix}
 \left[ \begin{array}{c}
 G_2 \\
 G_2 \\
@@ -282,12 +292,53 @@ where $v = x^2$. In this case, we need $[1, y]$ to be public. To accomplish that
 ### Dealing with a malicious prover.
 Because the vectors are encrypted, the verifier cannot immediately know if the vector of $\mathbb{G}₁$ points encrypts the same values as the vector of $\mathbb{G}₂$ points.
 
-However, the verifier can check for their equality with some extra steps.
+That is, the prover is supplying $\mathbf{a}G_1$ and $\mathbf{a}G_2$. Since the verifier doesn't know the discrete logs of the vector of points, how does the verifier know that the vector of $\mathbb{G}₁$ points has the same discrete logs as the vector of $\mathbb{G}₂$ points?
 
-This is left as an exercise for the reader.
+The verifier can check for the equality of the discrete logs (without knowing them) by pairing both vectors of points with a vector of the *opposite* generator and seeing that the resulting $\mathbb{G}_{12}$ points are equal. Specifically,
+
+$$
+\begin{bmatrix}
+a_1G_1 \\
+a_2G_1 \\
+\vdots \\
+a_mG_1
+\end{bmatrix}
+\begin{matrix}
+\bullet \\
+\bullet \\
+\vdots \\
+\bullet
+\end{matrix}
+\begin{bmatrix}
+G_2 \\
+G_2 \\
+\vdots \\
+G_2
+\end{bmatrix}
+\stackrel{?}{=}
+\begin{bmatrix}
+a_1G_2 \\
+a_2G_2 \\
+\vdots \\
+a_mG_2
+\end{bmatrix}
+\begin{matrix}
+\bullet \\
+\bullet \\
+\vdots \\
+\bullet
+\end{matrix}
+\begin{bmatrix}
+G_1 \\
+G_1 \\
+\vdots \\
+G_1
+\end{bmatrix}
+$$
+
 
 ## This algorithm is mostly academic
-Before you get too nerdsniped by the problem above, note that this algorithm is very inefficient for the verifier. If the matrices in the R1CS are large (and for interesting algorithms, they will be), then the verifier has a lot of pairings and elliptic curve additions to do. Elliptic curve addition is rather fast, but elliptic curve pairings are slow (and cost a lot of gas on Ethereum).
+This algorithm is very inefficient for the verifier. If the matrices in the R1CS are large (and for interesting algorithms, they will be), then the verifier has a lot of pairings and elliptic curve additions to do. Elliptic curve addition is rather fast, but elliptic curve pairings are slow (and cost a lot of gas on Ethereum).
 
 However, it is nice to see that at this stage, zero knowledge proofs are possible, and if you have a good grasp of elliptic curve operations (and haven’t forgotten your matrix arithmetic), they aren’t hard to understand.
 

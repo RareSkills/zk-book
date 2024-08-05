@@ -73,18 +73,18 @@ poly_at_tau = inner_product(srs, coeffs)
 
 Given a structured reference string, how do we even know that they follow the structure $[x^d, x^{d-1},\dots,x,1]$ and weren’t chosen by the roll of the dice?
 
-If the person doing the trusted setup also provides $\Psi=\tau G_2$, we can validate the structured reference string is indeed successive powers of  $\tau$.
+If the person doing the trusted setup also provides $\Theta=\tau G_2$, we can validate the structured reference string is indeed successive powers of  $\tau$.
 
 $$
-e(G_2, \Omega_i)\stackrel{?}=e(\Psi,\Omega_{i+1})
+e(G_2, \Omega_i)\stackrel{?}=e(\Theta,\Omega_{i+1})
 $$
 
 where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$.
 
-To validate that $\Psi$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$, we can check that
+To validate that $\Theta$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$, we can check that
 
 $$
-e(\Psi,G_1)\stackrel{?}=e(G_2,\Omega_1)
+e(\Theta,G_1)\stackrel{?}=e(G_2,\Omega_1)
 $$
 
 ## Generating a structured reference string as part of a multiparty computation
@@ -93,12 +93,12 @@ It’s not a good trust assumption the person generating the structured referenc
 
 We now describe the algorithm for multiple parties to collaboratively create the structured reference string, and as long as one of them is honest (i.e. deletes $\tau$), then the discrete logs of the structured reference string will be unknown.
 
-Alice generates the structure reference string $([\Omega_n,...,\Omega_2,\Omega_1, G_1],\Psi)$ and passes it to Bob.
+Alice generates the structure reference string $([\Omega_n,...,\Omega_2,\Omega_1, G_1],\Theta)$ and passes it to Bob.
 
 Bob verifies the srs is “correct” by using the checks from the earlier section. Then Bob picks his own secret parameter $\gamma$ and computes
 
 $$
-([\gamma^n\Omega_n,...,\gamma^2\Omega_2,\gamma\Omega_1,G_1],\gamma\Psi)
+([\gamma^n\Omega_n,...,\gamma^2\Omega_2,\gamma\Omega_1,G_1],\gamma\Theta)
 $$
 
 Note that the discrete logs of the srs are now
@@ -114,12 +114,4 @@ Of course, we don’t need to limit the participants to two, we could have as ma
 This multiparty computation is often informally referred to as the *powers of tau ceremony*.
 
 ## The use of a trusted setup in ZK-SNARKs
-ZK-SNARKs use the trusted setup described here, in combination with the *Schwart-Zippel lemma*, to efficiently test the equality of two polynomials.
-
-The Schwartz-Zippel Lemma states that two unequal polynomials almost never intersect except at a number of points constrained by the maximum degree of the two polynomials. In a big prime finite field (i.e. a prime number with a couple hundred bits), the degree is going to be vanishingly small compared to the order of the field. So if we evaluate two different polynomials at a random point $\tau$ and they evaluate to the same value, then we can be almost perfectly certain the two polynomials are the same even if we don’t know the polynomials.
-
-In other words, if $f(\tau)=g(\tau) \rightarrow f(x) = g(x)$ with extremely high probability.
-
-The fact that $\tau$ is random and unknown is critical. Suppose a malicious prover wants to prove $f(x)=g(x)$ although they are unequal. If the prover knows $\tau$, they can construct $f(x)$ and $g(x)$ to intersect at $\tau$ and fool the verifier.
-
-Furthermore, from a zero knowledge perspective, $\tau$ being unknown prevents the verifier from learning anything about the prover's polynomial.
+Evaluating a polynomial on a structured reference string doesn't reveal information about the polynomial to the verifier, and the prover doesn't know what point they are evaluating on. We will see later that this scheme helps prevent the prover from cheating and helps keep their witness zero knowledge.

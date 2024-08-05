@@ -53,12 +53,12 @@ To verify we constructed the R1CS correctly (it’s very easy to mess up when do
 x = 4
 y = -2
 v1 = x * x
-v2 = v1 * v1         # x^4
+v2 = v1 * v1        # x^4
 v3 = -5*y * y
-out = v3*v1 + v2    # -5y^2 * x^2
+z = v3*v1 + v2    # -5y^2 * x^2
 
 # witness
-a = np.array([1, out, x, y, v1, v2, v3])
+a = np.array([1, z, x, y, v1, v2, v3])
 
 assert all(np.equal(np.matmul(L, a) * np.matmul(R, a), np.matmul(O, a))), "not equal"
 ```
@@ -77,30 +77,39 @@ print(a + b)
 # prints 1
 ```
 
-We cannot give it negative values such as GF(-1) or it will throw an exception. For our purposes, it is okay to re-write the values manually, but we leave it as an exercise for the reader to come up with a solution that is more general.
+We cannot give it negative values such as GF(-1) or it will throw an exception. To convert negative numbers to their congruent representation in the field, we can add the curve order to them. To avoid "overflowing" positive values, we take the modulus with the curve order. 
+
+```python
+L = (L + 79) % 79
+R = (R + 79) % 79
+O = (O + 79) % 79
+```
 
 Our new matrices are
 ```python
-L = np.array([
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 74, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1],
-])
+## New values of L, R, O
+'''
+L
 
-R = np.array([
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0],
-])
+[[ 0  0  1  0  0  0  0]
+ [ 0  0  0  0  1  0  0]
+ [ 0  0  0 74  0  0  0]
+ [ 0  0  0  0  0  0  1]]
 
-O = np.array([
-    [0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 1, 0, 0, 0, 78, 0],
-])
+R
+
+[[ 0  0  1  0  0  0  0]
+ [ 0  0  0  0  1  0  0]
+ [ 0  0  0  1  0  0  0]
+ [ 0  0  0  0  1  0  0]]
+
+O
+
+[[ 0  0  0  0  1  0  0]
+ [ 0  0  0  0  0  1  0]
+ [ 0  0  0  0  0  0  1]
+ [ 0  1  0  0  0 78  0]]
+'''
 ```
 
 We can convert them to field arrays simply by wrapping them with GF now. We will also need to recompute our witness, because it contains negative values.
@@ -111,10 +120,10 @@ R_galois = GF(R)
 O_galois = GF(O)
 
 x = GF(4)
-y = GF(79-2) # we are using 79 as the field size, so 79 - 2 is -2
+y = GF(-2 + 79) # we are using 79 as the field size, so 79 - 2 is -2
 v1 = x * x
 v2 = v1 * v1         # x^4
-v3 = GF(79-5)*y * y
+v3 = GF(-5 + 79)*y * y
 out = v3*v1 + v2    # -5y^2 * x^2
 
 witness = GF(np.array([1, out, x, y, v1, v2, v3]))
@@ -192,7 +201,12 @@ Unlike [poly1d from numpy](https://numpy.org/doc/stable/reference/generated/nump
 assert term_1 * term_2 == term_3 + h * t, "division has a remainder"
 ```
 
+The check executed above is very similar to what the verifier will check for.
+
 The scheme above will not work when we evaluate the polynomials on a hidden point from a trusted setup. However, the computer doing the trusted setup will still have to execute many of the computations above.
+
+## Summary
+In this article, we present the Python code for converting a R1CS to a QAP.
 
 ## Learn more with RareSkills
 This material is from our [Zero Knowledge Course](https://www.rareskills.io/zk-bootcamp).

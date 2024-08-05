@@ -6,9 +6,9 @@ The Groth16 algorithm enables a quadratic arithmetic program to be computed by a
 This article is a chapter in the [RareSkills Book of Zero Knowledge Proofs](https://www.rareskills.io/zk-book). It assumes you are familiar with the prior chapters.
 
 ## Notation
-We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arthmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
+We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ elliptic curve group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ elliptic curve group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arthmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
 
-Given an [Arithmetic Circuit (ZK Circuit)](https://www.rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$, we can convert it to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
+Given an [Arithmetic Circuit (ZK Circuit)](https://www.rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$. Then, we can convert the R1CS to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
 
 $$
 \begin{array}{}
@@ -32,7 +32,7 @@ $$
 h(x) = \frac{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) - \sum_{i=1}^n a_iw_i(x)}{t(x)}
 $$
 
-If a third party creates a structured reference string (srs) via a powers of tau ceremony, then the prover can evaluate sum terms in the QAP at a hidden point $\tau$. Let the structured reference strings be computed as follows:
+If a third party creates a structured reference string (srs) via a powers of tau ceremony, then the prover can evaluate sum terms (the $\sum a_if_i(x)$ terms) in the QAP at a hidden point $\tau$. Let the structured reference strings be computed as follows:
 
 $$
 \begin{align*}
@@ -231,6 +231,14 @@ $$\begin{align*}
 [C]_1 &= \sum_{i=1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
 \end{align*}$$
 
+Note that we replaced the "problematic" polynomial
+
+$$=\sum_{i=1}^m a_i\boxed{(\alpha v_i(\tau)+\beta u_i(\tau) + w_i(\tau))}$$
+
+(the one that contained $\alpha$ and $\beta$) with 
+
+$$\sum_{i=1}^m a_i[\Psi_i]_1$$
+
 #### Verifier steps
 
 The verifier computes:
@@ -257,7 +265,7 @@ $$\begin{align*}
 
 Note that only the computation of $[C]_1$ changed -- the prover only uses the $a_i$ and $\Psi_i$ terms $\ell + 1$ to $m$.
 
-The verifier computes:
+The verifier computes the first $\ell$ terms of the sum:
 $$[X]_1=\sum_{i=1}^\ell a_i\Psi_i$$
 
 And the verification equation is:
@@ -267,7 +275,9 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet G_
 ## Part 2: Separating the public inputs from the private inputs with $\gamma$ and $\delta$
 The assumption in the equation above is that the prover is only using $\Psi_{\ell+1}$ to $\Psi_m$ to compute $[C]_1$, but nothing stops a dishonest prover from using $\Psi_1$ to $\Psi_{\ell}$ to compute $[C]_1$, possibly leading to a forged proof.
 
-To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$) by $\gamma$. Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$.
+To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
+
+Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$.
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
@@ -320,7 +330,7 @@ An attacker only needs to guess four combinations to figure out what the witness
 
 To prevent guessing, the prover needs to "salt" their proof, and the verification equation needs to be modified to accommodate the salt.
 
-The prover samples two random field elements $r$ and $s$ and shifts their values accordingly:
+The prover samples two random field elements $r$ and $s$ and adds them to $A$ and $B$ to make the witness unguessable -- an attacker would have to guess both the witness and the salts $r$ and $s$:
 
 $$
 \begin{align*}
@@ -335,6 +345,8 @@ To derive the final verification formula, let's temporarily ignore that we don't
 
 $$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_A \underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_B$$
 
+Expanding the terms we get:
+
 $$
 \alpha\beta+\alpha\sum_{i=1}^m a_iv_i(x)+\alpha s\delta + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)+\sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta
 $$
@@ -344,6 +356,8 @@ We can select out the original terms for $C$
 $$
 \alpha\beta+\boxed{\alpha\sum_{i=1}^m a_iv_i(x)}+\alpha s\delta + \boxed{\beta\sum_{i=1}^m a_iu_i(x)} + \boxed{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}+\sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta
 $$
+
+And combine them on the left, leaving the new terms on the right:
 
 $$
 \alpha\beta + \boxed{\alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}+ \underline{\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + r\delta s\delta}
@@ -376,7 +390,7 @@ $$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s
 
 We now break it into the public and private portions:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + \sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta}_\text{private}$$
 
 We want the public portion and the private portion to be separated by $\gamma$ and $\delta$ respectively:
 
