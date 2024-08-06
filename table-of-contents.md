@@ -19,13 +19,15 @@ Optional Chapter: How the ECDSA Malleability Attack Works
 10. [x] Bilinear Pairings
 11. [x] Rank 1 Constraint Systems
 12. [x] A Zero Knowledge Proof with an R1CS
-13. [ ] Quadratic Arithmetic Programs
-14. [x] R1CS to QAP in Python
-15. [x] Trusted Setup
-16. [ ] Evaluating a QAP on a Trusted Setup
-17. [x] Groth16 Explained
+13. [x] Lagrange Interpolation with Python
+14. [x] The Schwartz-Zippel Lemma
+15. [ ] Quadratic Arithmetic Programs
+16. [x] R1CS to QAP in Python
+17. [x] Trusted Setup
+18. [x] Evaluating a QAP on a Trusted Setup
+19. [x] Groth16 Explained
 
 ## Inner Product Arguments (Bulletproofs)
-18. [ ] Pedersen Commitments
+20. [x] Pedersen Commitments
 
 TBA

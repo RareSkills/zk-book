@@ -1,100 +1,21 @@
-# Vectors as Polynomials
+# Quadratic Arithmetic Programs
 
-Nearly all ZK-Proof algorithms rely on the Schwartz-Zippel Lemma to achieve succintness.
+A quadratic arithmetic program is an arithmetic circuit represented as a set of polynomials. It is derived using Lagrange interpolation on a Rank 1 Constraint System (R1CS). Unlike a Rank 1 Constraint System, a Quadratic Arithmetic Program (QAP) can be tested for equality in $\mathcal{O}(1)$ time via the Schwartz-Zippel Lemma.
 
-The Schwartz-Zippel Lemma states that if we are given two polynomials $p(x)$ and $q(x)$ with degree $d_p$ and $d_q$ respectively, then if $p(x) \neq q(x)$, the number of points where $p(x)$ and $q(x)$ intersect is less than or equal to $\mathsf{max}(d_p, d_q)$.
+## Key ideas
+In the chapter on the Schwartz-Zippel Lemma, we saw that we can test if two vectors are equal in $\mathcal{O}(1)$ time by converting them to polynomials, then running the Schwartz-Zippel Lemma test on the polynomials.
 
-Let's consider a few examples.
+Because a Rank 1 Constraint System is entirely composed of vector operations, we aim to test if
 
-## Example polynomials and the Schwartz-Zippel Lemma
-### A straight line crossing a parabola
+$$\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}\stackrel{?}{=}\mathbf{O}\mathbf{a}$$
 
-Consider the polynomial $p(x) = x$ and $q(x) = x^2$. They intersect at $x = 0$ and $x = 1$.
+holds in $\mathcal{O}(1)$ time instead of $\mathcal{O}(n)$ time (where $n$ is the number of rows in $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$).
 
-### A degree three polynomial and a degree one polynomial
+But before we do that, we need to understand some key properties of the relationship between vectors and polynomials that represent them.
 
-Consider the polynomials $p(x) = x^3$ and $q(x) = x$. The polynomials intersect at $x = -1$, $x = 0$, and $x = 1$ and nowhere else. The number of intersections is bounded by the maximum degree of the polynomials, which in this case is 3.
+For all math here, we assume we are working in a [finite field](https://www.rareskills.io/post/finite-fields), but we skip the $\mod p$ notation for succinctness.
 
-## Polynomials in finite fields and the Schwartz-Zippel Lemma
-The Schwartz-Zippel Lemma holds for polynomials in [finite fields](https://www.rareskills.io/post/finite-fields) (i.e. all computations are done modulo a prime $p$).
-
-## Polynomial equality testing
-We can test that two polynomials are equal by checking if all their coefficients are equal, but this takes $\mathcal{O}(d)$ time.
-
-If instead we could evaluate the polynomials at a random point $u$ we could compare them in $\mathcal{O}(1)$ time.
-
-That is, in a finite field $\mathbb{F}_{p}$, we pick a random value $u$ from $[0,p)$. Then we evaluate $y_f=f(u)$ and $y_g=g(u)$. If $y_f = y_g$, then one of two things msut be true:
-
-1. $f(x) = g(x)$
-2. $f(x) \neq g(x)$ and we picked one of the $d$ points where they intersect where $d = \mathsf{max}(\deg(f), \deg(g))$
-
-If $d << p$, then situation 2 is unlikely to the point of being negligible.
-
-For example, if the field $\mathbb{F}_{p}$ has $p \approx 2^{254}$ (a little smaller than a [uint256](https://www.rareskills.io/post/uint-max-value-solidity)), and if the polynomials are not more than one million degree large, then the probability of picking a point where they intersect is
-
-$$
-\frac{1\times 10^6}{2^{254}} \approx \frac{2^{20}}{2^{254}} \approx \frac{1}{2^{234}} \approx \frac{1}{10^{70}}
-$$
-
-To put a sense of scale on that, the number of atoms in the universe is about $10^{78}$ to $10^{82}$, so it is extremely unlikely that we will pick a point where the polynomials intersect, if the polynomials are not equal.
-
-## Using the Schwartz-Zippel Lemma to test if two vectors are equal
-
-### Interpolating a vector as a polynomial
-Consider that if we have two points, they can be interpolated with a line. For example, given $(1, 1)$ and $(2, 2)$, we can draw a line that intersects both points, it would be a degree 1 polynomial $y = x$.
-
-Now consider that if we have one point, we can draw a line through that point with a degree 0 polynomial. For example, if the point is $(10, 5)$ we can draw a line through it $y = 5$ (which is a degree 0 polynomial).
-
-The pattern that we can "draw a polynomial through" $n$ points with a (at most) degree $n - 1$ polynomial holds for any number of points. For example, the points $(0, 0), (1, 1), (2, 4)$ can be interpolated with $y = x^2$. If those points happened to be a straight line, e.g. $(0, 0), (1, 1), (2, 2)$, then we could draw a line through $(1, 1)$ and $(2, 2)$ with a degree 1 polynomial $y = x$, but in general, three points won't be collinear, so we'll need a degree 2 polynomial to cross all the points.
-
-It isn't important to understand how to compute this polynomial, as there are math libraries that will do it for us. The most common algorithm is *Lagrange interpolation* and we show how to do that in Python.
-
-#### Float example
-We can compute a polynomial $p(x)$ that crosses through the points $(1,4), (2,8), (3,2), (4,1)$ using Lagrange interpolation.
-
-```python
-from scipy.interpolate import lagrange
-x_values = [1, 2, 3, 4]
-y_values = [4, 8, 2, 1]
-
-print(lagrange(x_values, y_values))
-#      3      2
-# 2.5 x - 20 x + 46.5 x - 25
-```
-
-#### Finite field example
-Let's use the same polynomial as before, but this time we'll use a finite field $\mathbb{F}_{17}$ instead of floating point numbers.
-
-```python
-import galois
-import numpy as np
-GF17 = galois.GF(17)
-
-xs = GF17(np.array([1,2,3,4]))
-ys = GF17(np.array([4,8,2,1]))
-
-p = galois.lagrange_poly(xs, ys)
-
-assert p(1) == GF17(4)
-assert p(2) == GF17(8)
-assert p(3) == GF17(2)
-assert p(4) == GF17(1)
-```
-
-### Uniqueness of the interpolating polynomial
-Going back to our example of the points $(1, 1), (2, 2)$, the lowest degree polynomial that interpolates, them, $y = x$. In general,
-
-**For a set of $n$ points, there is a unique lowest-degree polynomial of at most degree $n - 1$ that interpolates them.**
-
-The consequence of this is that
-
-**If we use the points $(1,2,...,n)$ as the $x$ values to convert a length $n$ vector to a polynomial via Lagrange interpolation, then the resulting polynomial is unique.**
-
-Informally, every $n$ degree vector has a unique $n - 1$ degree polynomial that "represents" it. The degree could be less if, for example, the points are collinear, but the vector will be unique.
-
-The "lowest degree" part is important. Given two points, there are an extremely large number of polynomials that cross those two points -- but the lowest degree polynomial is unique.
-
-## The addition of vectors of vectors is homomorphic to the addition of polynomials
+## Homomorphisms between vector addition and polynomial addition
 ### Vector addition is homomorphic to polynomial addition
 
 If we take two vectors, interpolate them with polynomials, then add the polynomials together, we get the same polynomial as if we added the vectors together and then interpolated the sum vector.
@@ -204,16 +125,6 @@ Therefore, whereas testing R1CS equality took $\mathcal{O}(n)$ time, we can leve
 
 This is what a *Quadratic Arithmetic Program* is.
 
-## Using Lagrange interpolation and the Schwartz-Zippel Lemma in ZK-SNARKs
-Now here's the killer idea that allows us to make ZK-SNARKs succinct.
-
-**We can test if two vectors are equal in $\mathcal{O}(1)$ time by converting them to polynomials, then testing if the polynomials are equal using the Schwartz-Zippel Lemma.**
-
-### A vector can be uniquely summarized by a single point
-When we say "two vectors" are equal to each other in the context of polynomial equality, we are saying the vector $\mathcal{L}(\mathbf{v})$ tested at a random point TODO
-
-Since a Rank 1 Constraint Systems have a lot of vectors in them, this gives us hope that we can test if a witness satisfies an R1CS in $\mathcal{O}(1)$ by converting the vectors to polynomials then running the Scwartz-Zippel Lemma test.
-
 ## A Rank 1 Constraint System in Polynomials
 
 Consider that matrix multiplication between a rectangular matrix and a vector can be written in terms of vector addition and scalar multiplication.
@@ -303,8 +214,7 @@ $$
 
 We have expressed matrix multiplication between $A$ and $v$ purely in terms of vector addition and scalar multiplication.
 
-Because we established earlier that the group of vectors under addition in a finite field is homomorphic to the group of polynomials under addition in a finite field, can
-
+Because we established earlier that the group of vectors under addition in a finite field is homomorphic to the group of polynomials under addition in a finite field, can express the computation above in terms of polynomials that represent the vectors.
 
 ## Succintly testing that $\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_2$
 
@@ -341,14 +251,14 @@ $$
 We want to test if
 
 $$
-\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_1
+\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_2
 $$
 
 is true. Without loss of generality, let's assume we are in the finite field $\mathbb{F}_{17}$, i.e. everything is done modulo 17.
 
 Obviously we can carry out the matrix arithmetic, but the final check will require $n$ comparisons, where $n$ is the number of rows in $\mathbf{A}$ and $\mathbf{B}$. We want to do it in $\mathcal{O}(1)$ time.
 
-First, we convert the matrix multiplication $\mathbf{A}\mathbf{v}_1$ and $\mathbf{B}\mathbf{v}_1$ to the group of vectors under addition in $\mathbb{F}_{17}$:
+First, we convert the matrix multiplication $\mathbf{A}\mathbf{v}_1$ and $\mathbf{B}\mathbf{v}_2$ to the group of vectors under addition in $\mathbb{F}_{17}$:
 
 $$
 \begin{align*}
@@ -455,7 +365,9 @@ $$p_1(x) \cdot 2+ p_2(x) \cdot 4 \stackrel{?}= q_1(x) \cdot 2 + q_2(x) \cdot 2$$
 is true by invoking the Schwartz-Zippel Lemma:
 
 ```python
-tau = GF(14) # a random point
+import random
+u = random.randint(0, 17)
+tau = GF(u) # a random point
 
 left_hand_side = p1(tau) * GF(2) + p2(tau) * GF(4)
 right_hand_side = q1(tau) * GF(2) + q2(tau) * GF(2)
@@ -464,20 +376,176 @@ assert left_hand_side == right_hand_side
 ```
 
 ## R1CS to QAP: Succinctly testing that $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}=\mathbf{O}\mathbf{a}$
-[Todo]
+Since we know how to test of $\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_2$ succinctly, can we also test if $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}=\mathbf{O}\mathbf{a}$ succinctly?
 
-### Dealing with imbalance due to the 
-Suppose $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $n$ rows. The degree of polynomials that comes from their column vectors will be $n - 1$. Since we add the column vectors together, the degree of the sum of the polynomials will also be $n - 1$.
+The matrices have $m$ columns, so let's break each of the matrices into $m$ column vectors and interpolate them on $(1, 2, ..., n)$ to produce $m$ polynomials each.
 
+Let $u_1(x), u_2(x), ..., u_m(x)$ be the polynomials that interpolate the column vectors of $\mathbf{L}$.
 
-...
+Let $v_1(x), v_2(x), ..., v_m(x)$ be the polynomials that interpolate the column vectors of $\mathbf{R}$.
 
-Consider that the following equality
+Let $w_1(x), w_2(x), ..., w_m(x)$ be the polynomials that interpolate the column vectors of $\mathbf{O}$.
+
+Without loss of generality, let's say we have 4 columns ($m = 4$) and three rows ($n = 3$).
+
+Visually, this can be represented as
+$$
+\begin{array}{c}
+\mathbf{L} = \begin{bmatrix}
+\quad l_{11} \quad& l_{12} \quad& l_{13} \quad& l_{14} \quad\\
+\quad l_{21} \quad& l_{22} \quad& l_{23} \quad& l_{24} \quad\\
+\quad l_{31} \quad& l_{32} \quad& l_{33} \quad& l_{34} \quad
+\end{bmatrix} \\
+\\
+\qquad u_1(x) \quad u_2(x) \quad u_3(x) \quad u_4(x)
+\end{array}
+\begin{array}{c}
+\mathbf{R} = \begin{bmatrix}
+\quad r_{11} \quad& r_{12} \quad& r_{13} \quad& r_{14} \quad\\
+\quad r_{21} \quad& r_{22} \quad& r_{23} \quad& r_{24} \quad\\
+\quad r_{31} \quad& r_{32} \quad& r_{33} \quad& r_{34} \quad
+\end{bmatrix} \\
+\\
+\qquad v_1(x) \quad v_2(x) \quad v_3(x) \quad v_4(x)
+\end{array}
+$$
 
 $$
-\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}=\mathbf{O}\mathbf{a} + \mathbf{0}
+\begin{array}{c}
+\mathbf{O} = \begin{bmatrix}
+\quad o_{11} \quad& o_{12} \quad& o_{13} \quad& o_{14} \quad\\
+\quad o_{21} \quad& o_{22} \quad& o_{23} \quad& o_{24} \quad\\
+\quad o_{31} \quad& o_{32} \quad& o_{33} \quad& o_{34} \quad
+\end{bmatrix} \\
+\\
+\qquad w_1(x) \quad w_2(x) \quad w_3(x) \quad w_4(x)
+\end{array}
 $$
 
-where $\mathbf{0}$ is a vector of all zeros. The key insight here is that *we do not have to interpolate the $\mathbf{0}$ vector with $f(x) = 0$. There are an infinite number of polynomials that interpolate the zero vector. Consider the following degree four polynomial that interpolates $[(1,0), (2,0), (3,0), (4,0)]$:
+Since multiplying a column vector by a scalar is homomorphic to multiplying a polynomial by a scalar, each the polynomials can be multiplied by the respective element in the witness.
+
+For example, 
+
+$$
+\mathbf{L}\mathbf{a} = \begin{bmatrix}
+\quad l_{11} \quad& l_{12} \quad& l_{13} \quad& l_{14} \quad\\
+\quad l_{21} \quad& l_{22} \quad& l_{23} \quad& l_{24} \quad\\
+\quad l_{31} \quad& l_{32} \quad& l_{33} \quad& l_{34} \quad
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+a_3 \\
+a_4
+\end{bmatrix}
+$$
+
+becomes
+
+$$
+\begin{align*}
+&=\begin{bmatrix}
+u_1(x) & u_2(x) & u_3(x) & u_4(x)
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+a_3 \\
+a_4
+\end{bmatrix}\\
+&=a_1u_1(x) + a_2u_2(x) + a_3u_3(x) + a_4u_4(x)\\
+&=\sum_{i=1}^4 a_iu_i(x)
+\end{align*}
+$$
+
+Observe that the final result is a single polynomial with degree at most $n - 1$ (since there are $n$ rows in $\mathbf{L}$, $u_1(x), ..., u_n(x)$ have degree at most $n - 1$).
+
+In the general case, $\mathbf{L}\mathbf{a}$ can be written as
+
+$$
+\sum_{i=1}^m a_iu_i(x)
+$$
+
+after converting each of the $m$ columns to polynomials.
+
+Using the same steps above, each matrix-witness product in the R1CS $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ can be transformed as
+
+$$
+\begin{align*}
+\mathbf{L}\mathbf{a} \rightarrow \sum_{i=1}^m a_iu_i(x) \\
+\mathbf{R}\mathbf{a} \rightarrow \sum_{i=1}^m a_iv_i(x) \\
+\mathbf{O}\mathbf{a} \rightarrow \sum_{i=1}^m a_iw_i(x)
+\end{align*}
+$$
+
+Since each of the sum terms produces a single polynomial, we can write them as:
+
+$$
+\begin{align*}
+\mathbf{L}\mathbf{a} &\rightarrow \sum_{i=1}^m a_iu_i(x) = u(x)\\
+\mathbf{R}\mathbf{a} &\rightarrow \sum_{i=1}^m a_iv_i(x) = v(x)\\
+\mathbf{O}\mathbf{a} &\rightarrow \sum_{i=1}^m a_iw_i(x) = w(x)
+\end{align*}
+$$
+
+However, we can't simply express the final result as
+
+$$u(x)v(x) = w(x)$$
+
+because the degrees won't match.
+
+Multiplying two polynomials together results in a product polynomial whose degree is the sum of the degrees of the two polynomials.
+
+Because each of $u(x)$, $v(x)$, and $w(x)$ will have degree $n - 1$, $u(x)v(x)$ will generally have degree $2n - 2$ and $w(x)$ will have degree $n - 1$, so they won't be equal even though the underlying vectors they multiplied are equal.
+
+This is because the homorphisms we established earlier only make claims about vector addition, not Hadamard product.
+
+However, there is a straightfoward way to fix this.
+
+### Interpolating the $\mathbf{0}$ vector
+We established that if $\mathbf{v_1} + \mathbf{v_2} = \mathbf{v_3}$, then $\mathcal{L}(\mathbf{v_1}) + \mathcal{L}(\mathbf{v_2}) = \mathcal{L}(\mathbf{v_3})$.
+
+We got stuck on the fact that although $\mathbf{v_1}\circ \mathbf{v_2} = \mathbf{v_3}$, it is not the case that $\mathcal{L}(\mathbf{v_1})\mathcal{L}(\mathbf{v_2}) = \mathcal{L}(\mathbf{v_3})$ due to the mismatch in degrees.
+
+Now consider that if $\mathbf{v_1} \circ \mathbf{v_2} = \mathbf{v_3}$, then $\mathbf{v_1} \circ \mathbf{v_2} = \mathbf{v_3} + \mathbf{0}$.
+
+Instead of interpolating $\mathbf{0}$ with lagrange interpolation and getting $f(x) = 0$, we can use a higher degree polynomial that will balance out the mismatch in degrees.
+
+For example, the following degree four polynomial that interpolates $[(1,0), (2,0), (3,0), (4,0)]$:
 
 ![alt text](https://static.wixstatic.com/media/935a00_9e7c088301a441e986d0c54473d938e1~mv2.png/v1/fill/w_1480,h_762,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/935a00_9e7c088301a441e986d0c54473d938e1~mv2.png)
+
+The polynomial that interpolates $\mathbf{0}$ does not need to be zero everywhere, it only needs to be zero at the points $x=1,2,...,n$.
+
+Let's call the polynomial that interpolates $\mathbf{0}$ the *balancing polynomial* b(x). It can be computed as
+
+$$
+b(x) = \mathcal{L}(\mathbf{v_3}) - \mathcal{L}(\mathbf{v_1})\mathcal{L}(\mathbf{v_2}) 
+$$
+
+
+### The union of roots of the polynomial product
+**Theorem**: If $h(x) = f(x)g(x)$ and $f(x)$ has set of roots $\set{r_f}$ and $g(x)$ has set of roots $\set{r_g}$, then $h(x)$ has roots $\set{r_f} \cup \set{r_g}$.
+
+#### Example
+Let $f(x) = (x - 3)(x - 4)$ and $g(x) = (x - 5)(x - 6)$. Then $h(x) = f(x)g(x)$ has roots $\set{3,4,5,6}$.
+
+We can use the theorem above to enforce that $b(x)$ has roots at $x = 1,2,\dots,n$.
+
+We decompose $b(x)$ into $b(x) = h(x)t(x)$ where $t(x)$ is the polynomial
+
+$$
+t(x) = (x-1)(x-2)\dots(x-n)
+$$
+
+Thus, our equality will become
+
+$$
+u(x)v(x) = v(x) + h(x)t(x)
+$$
+
+We can solve for $h(x)$ using basic algebra:
+
+$$
+h(x) = \frac{u(x)v(x) - v(x)}{t(x)}
+$$
