@@ -486,12 +486,12 @@ The "knowledge" in Zero Knowledge Proofs refers to knowledge of the witness.
 
 ZK proofs are concerned with the verification aspect of computation. That is, given that you have found a Sudoku solution or a 3-coloring of a map, can you give someone evidence (witness) that would allow them to efficiently verify that your solution is correct?
 
-ZK proofs seek to demonstrate you know the witness without revealing it.
+ZK proofs seek to demonstrate that you know the witness without revealing it.
 
 ### ZKPs only work with P or NP problems. They are not usable for problems which we can’t verify efficiently.
-If we don’t have a mechanism to efficiently prove regexes are equivalent or that a certain move in chess is optimal, then ZK proofs cannot magically enable us to produce such an efficient proof.
+If we don’t have a mechanism to efficiently prove regexes are equivalent, or that a certain move in chess is optimal, then ZK proofs cannot magically enable us to produce such an efficient proof.
 
-For both P and NP problems, the verification of the solution can be done efficiently. ZK enables verifying the solution is valid while concealing the details of the computation. Furthermore, ZK cannot help you discover a solution to a Sudoku puzzle or discover a 3-coloring of a map. However, it can help you prove to another party you have a solution, if you already computed it.
+For both P and NP problems, the verification of the solution can be done efficiently. ZK enables verifying the solution is valid while concealing the details of the computation. Furthermore, ZK cannot help you discover a solution to a Sudoku puzzle or discover a 3-coloring of a map. However, it can help you prove to another party that you have a solution, if you already computed it.
 
 ### The connection between P vs NP and Zero Knowledge Proofs
 
@@ -510,7 +510,7 @@ Creating a zero knowledge proof for a problem boils down to translating the prob
 The ability to efficiently verify a solution to a problem is a prerequisite for creating a zero knowledge proof that you have a solution. One must be able to construct a Boolean circuit to model the solution efficiently. However, for problems like determining optimal Chess moves, which belong to PSPACE, this approach results in exponentially large circuits, making them impractical.
 
 
-In conclusion, zero knowledge proofs are feasible only for problems within P and NP, where efficient solution verification is possible. Without efficient verification, creating a zero knowledge proof for a problem becomes unuseable.
+In conclusion, zero knowledge proofs are feasible only for problems within P and NP, where efficient solution verification is possible. Without efficient verification, creating a zero knowledge proof for a problem becomes infeasible.
 
 ## Learn more
 Please see the [RareSkills ZK Book](https://www.rareskills.io/zk-book) for more topics in zero knowledge proofs.
@@ -518,7 +518,7 @@ Please see the [RareSkills ZK Book](https://www.rareskills.io/zk-book) for more 
 ## Technicalities
 Some concepts have been simplified in this article to make them as understandable as possible to someone seeing them for the first time. The information presented here is sufficient to explain what ZK proofs can and cannot do. For those interested in pursuing the subject further, here are some clarifications:
 
-- A chess board of a fixed size $(8 \times 8)$ cannot be assigned a difficulty level because the difficulty of the problem cannot be expressed as $\mathcal{O}(f(n))$. Technically, we say chess of an arbitrary size is PSPACE. It might be confusing to think of a #10\times10# chess board, but one can simply specify that the extra spaces don’t have any pieces in them at the starting position.
+- A chess board of a fixed size $(8 \times 8)$ cannot be assigned a difficulty level because the difficulty of the problem cannot be expressed as $\mathcal{O}(f(n))$. Technically, we say chess of an arbitrary size is PSPACE. It might be confusing to think of a $10 \times 10$ chess board, but one can simply specify that the extra spaces don’t have any pieces in them at the starting position.
 
 - Chess has a lesser known rule that if no capture move has taken place and no pawn has moved for the last 50 moves, then a player can call a draw. This places a bound on the search space that puts it in PSPACE. If this rule is removed, then this version of chess is in EXPSPACE — a category of problems that requires exponential time and exponential memory size to compute.
 
