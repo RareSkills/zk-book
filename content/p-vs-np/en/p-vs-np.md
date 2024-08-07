@@ -158,11 +158,9 @@ P is the class of problems that can be solved and verified efficiently, while NP
 
 If P = NP, it would mean that whenever we can find an efficient method for verifying a solution, we can also find an efficient method for finding that solution. Remember that finding a solution is always at least as hard as verifying it. (By definition, solving means finding the correct answer, so an algorithm that solves the problem is also effectively verifying its answer at the same time).
 
-If P = NP is true, that means an efficient algorithm for computing Sudoku puzzles (of arbitrary size) and finding if a three coloring exists. It also means there is an efficient algorithm to break most modern cryptography algorithms.
+If P = NP is true, that means there is an efficient algorithm for computing Sudoku puzzles (of arbitrary size) and finding if a three coloring exists. It also means there is an efficient algorithm to break most modern cryptographic algorithms.
 
-
-Currently, it remains uproven whether P and NP are the same set. Although numerous attempts have been made to find efficient solution algorithms for NP problems, all evidence points to such algorithms not existing.
-
+Currently, it remains unproven whether P and NP are the same set. Although numerous attempts have been made to find efficient algorithms for NP problems, all evidence suggests that such algorithms do not exist.
 
 Similarly, whether efficient solutions or verification mechanisms exist for PSPACE problems remains open. While researchers widely speculate that P ≠ NP and NP ≠ PSPACE, no formal mathematical proof exists for these conclusions. Therefore, despite extensive efforts, efficient solutions for NP problems and efficient verification methods for PSPACE problems remain undiscovered.
 
@@ -173,10 +171,10 @@ What ties P and NP problems together is that their solution can be quickly verif
 
 **Verifying a solution to a problem in NP or P can be accomplished by verifying a solution to a Boolean formula that models the problem.**
 
-What we mean by "a Boolean formula that models the problem" will become clear as describe what we mean by "a solution to a Boolean formula" and looking at some examples modeling problems with Boolean formulas.
+What we mean by "a Boolean formula that models the problem" will become clear as we describe what we mean by "a solution to a Boolean formula" and looking at some example modeling problems with Boolean formulas.
 
 ### Solutions to a Boolean formula
-To express a Boolean formula, we use the operator ¬ to be the Boolean NOT, ∧ to be the Boolean AND, and ∨ to be the Boolean OR. For example, a ∧ b evaluates to true if and only if a and b are both true. a ∧ ¬b evaluates to true if and only if a is true and b is false.
+To express a Boolean formula, we use the operator $¬$ to be the Boolean NOT, $∧$ to be the Boolean AND, and $∨$ to be the Boolean OR. For example, $a ∧ b$ evaluates to true if and only if $a$ and $b$ are both true. $a ∧ ¬b$ evaluates to true if and only if $a$ is true and $b$ is false.
 
 Suppose we have a bunch of Boolean variables $x₁$, $x₂$, $x₃$, $x₄$ and a Boolean formula:
 
@@ -216,7 +214,7 @@ $$
 
 That was easy to verify, but discovering the solution for a very large Boolean formula could take exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may take exponential resources to find the solution, but it only takes polynomial time to verify the solution.
 
-But we must emphasize: our use of Boolean formulas is not to solve them — but to verify proposed solutions for them.
+But we must emphasize: our use of Boolean formulas is not to solve them — only to verify proposed solutions for them.
 
 ### All problems in P and NP can be verified by transforming them into boolean formulas and showing a solution to the formula
 In the following examples, the input is a P or NP problem and the output is a Boolean formula. If we know the solution to the original problem, then we will also know the solution to the Boolean formula.
@@ -224,7 +222,7 @@ In the following examples, the input is a P or NP problem and the output is a Bo
 Our intent is to show we know the witness for the original problem — but in Boolean form.
 
 #### Example 1: checking if a list is sorted using a Boolean formula
-Consider one-bit binary numbers A and B. The following truth table returns true when A > B:
+Consider one-bit binary numbers $A$ and $B$. The following truth table returns true when $A > B$:
 
 | A | B | A > B |
 | --- | --- | --- |
@@ -235,7 +233,7 @@ Consider one-bit binary numbers A and B. The following truth table returns true 
 
 The column $A > B$ can be modeled with the expression $A ∧ ¬B$, which returns true in the only row where $A > B$ is one.
 
-Now consider a table that expresses A = B:
+Now consider a table that expresses $A = B$:
 
 | A | B | A = B |
 | --- | --- | --- |
@@ -255,12 +253,12 @@ A = B &\rightarrow (A ∧ B) ∨ ¬(A ∨ B)
 \end{align*}
 $$
 
-will come in hand shortly.
+will come in handy shortly.
 
 Now how do we compare binary numbers of more than one bit?
 
 ##### Binary comparison by most significant different bit
-Suppose you start from both numbers' leftmost Most Significant Bit (MSB) and move towards the right Least Significant Bit (LSB). At the first bit, where the two numbers differ,
+Suppose you start from both numbers' leftmost Most Significant Bit (MSB) and move towards the right Least Significant Bit (LSB). At the first bit, where the two numbers differ:
 
 If $P$ has a value of $1$ at that bit and $Q$ has a value of $0$, then $P ≥ Q$.
 The following animation illustrates the algorithm detecting that $P ≥ Q$:
@@ -308,7 +306,7 @@ We can substitute the expressions for $A > B$ and $A = B$ formula in to the equa
 <source src="https://video.wixstatic.com/video/935a00_655f627a117f46ecb0a48deb2640b9a1/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-The final Boolean formula that expresses P ≥ Q is:
+The final Boolean formula that expresses P ≥ Q, for 4 bits, is:
 
 $$
 \begin{align*}
@@ -425,43 +423,42 @@ First, we assign each territory a variable name:
 Next, we iterate through the boundaries and compute a boundary constraint for those neighbors. The video below shows the algorithm in action. We show the final set of formulas for the boundary conditions after the video:
 
 <video>
-<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4>
-
+<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4>">
 </video>
 
-7. Western Australia and South Australia
+7. Western Australia and South Australia:
 
 ¬(<span style="color:Green">WA_G ∧ SA_G</span>) ∧ ¬(<span style="color:#008aff">WA_B ∧ SA_B</span>) ∧ ¬(<span style="color:Red">WA_R ∧ SA_R</span>)
 
-8. Western Australia and Northern Territory
+8. Western Australia and Northern Territory:
 
 ¬(<span style="color:Green">WA_G ∧ NT_G</span>) ∧ ¬(<span style="color:#008aff">WA_B ∧ NT_B</span>) ∧ ¬(<span style="color:Red">WA_R ∧ NT_R</span>)
 
-9. Northern Territory and South Australia
+9. Northern Territory and South Australia:
 
 ¬(<span style="color:Green">NT_G ∧ SA_G</span>) ∧ ¬(<span style="color:#008aff">NT_B ∧ SA_B</span>) ∧ ¬(<span style="color:Red">NT_R ∧ SA_R</span>)
 
-10. Northern Territory and Queensland
+10. Northern Territory and Queensland:
 
 ¬(<span style="color:Green">NT_G ∧ Q_G</span>) ∧ ¬(<span style="color:#008aff">NT_B ∧ Q_B</span>) ∧ ¬(<span style="color:Red">NT_R ∧ Q_R</span>)
 
-11. South Australia and Queensland
+11. South Australia and Queensland:
 
 ¬(<span style="color:Green">SA_G ∧ Q_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ Q_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ Q_R</span>)
 
-12. South Australia and New South Wales
+12. South Australia and New South Wales:
 
 ¬(<span style="color:Green">SA_G ∧ NSW_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ NSW_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ NSW_R</span>)
 
-13. South Australia and Victoria
+13. South Australia and Victoria:
 
 ¬(<span style="color:Green">SA_G ∧ V_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ V_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ V_R</span>)
 
-14. Queensland and New South Wales
+14. Queensland and New South Wales:
 
 ¬(<span style="color:Green">Q_G ∧ NSW_G</span>) ∧ ¬(<span style="color:#008aff">Q_B ∧ NSW_B</span>) ∧ ¬(<span style="color:Red">Q_R ∧ NSW_R</span>)
 
-15. New South Wales and Victoria
+15. New South Wales and Victoria:
 
 ¬(<span style="color:Green">NSW_G ∧ V_G</span>) ∧ ¬(<span style="color:#008aff">NSW_B ∧ V_B</span>) ∧ ¬(<span style="color:Red">NSW_R ∧ V_R</span>)
 
