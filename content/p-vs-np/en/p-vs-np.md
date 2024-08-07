@@ -58,7 +58,7 @@ We will see later that a witness does not necessarily have to be the solution to
 ### Problems in PSPACE: Not all problems have solutions that can be efficiently verified
 Problems that require exponential resources to solve and verify are called problems in PSPACE. The reason they are called PSPACE is that although they might take exponential time to solve, they don’t necessarily require exponential memory space to run the search.
 
-This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems was discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
+This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems could be discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
 
 Despite significant incentives for finding efficient solutions to these problems, evidence suggests such solutions likely do not exist. These problems are so challenging you cannot provide easily verifiable proof (witness) even if you solve them correctly.
 
@@ -89,7 +89,7 @@ There are problems that are so difficult that they require exponential time and 
 An example of such a problem is Checkers with a rule that pieces can never move into a position that recreates an earlier board state. In order to ensure we don’t repeat a board state for a game as we explore the space of possible moves, we have to keep track of all the board states that have already been visited. Since the length of the game can be exponential in the board size, the memory requirements are also exponential.
 
 ### Problems in NP: Some problems can be quickly verified but not quickly computed
-If we can quickly verify the solution to a problem, then the problem is in NP. Finding the solution might require exponential resources, but that's not relevant here.
+If we can quickly verify the solution to a problem, then the problem is in NP. However, finding the solution might require exponential resources.
 
 Any problem whose proposed solution (witness) can be quickly verified as correct is an NP problem. If the problem also has an algorithm for finding the solution in polynomial time, then it is a P problem. All P problems are NP problems, but it is extremely unlikely that all NP problems are also P problems.
     
