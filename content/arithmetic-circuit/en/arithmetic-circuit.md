@@ -1,4 +1,4 @@
-# Arithmetic Circuits for ZK Take 6
+# Arithmetic Circuits for ZK
 
 An arithmetic circuit (in the context of zero knowledge proofs) is a system of equations whose solution models a problem in NP.
 
@@ -8,18 +8,20 @@ This article continues the one linked above, so please read that first.
 
 ## Arithmetic circuits as an alternative to Boolean circuits
 
-One disadvantage of using a Boolean circuit to represent a solution to a problem is that it can be verbose when representing arithmetic operations such as addition or multiplication.
+One disadvantage of using a Boolean circuit to represent a solution to a problem is that it can be verbose when representing arithmetic operations, such as addition or multiplication.
 
 For example, if we want to express $a + b = c$ where $a = 16, b = 8, c = 24$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number a, as shown below:  
 
 - `a₃, a₂, a₁, a₀`
-- a = 1000
+  - a = 1000
 - `b₃, b₂, b₁, b₀`
-- b = 0100
+  - b = 0100
 - `c₃, c₂, c₁, c₀`
-- c = 1100
+  - c = 1100
 
-(The method to convert a number to binary is explained later in this article). Once we have $a$, $b$, $c$ written in binary, we can write a Boolean circuit whose inputs are all the binary digits $(a₀, a₁, …, c₂, c₃)$. Our goal is to write such a Boolean circuit, such that the circuit outputs true if and only if $a + b = c$.
+(The method to convert a number to binary is explained later in this article). 
+
+Once we have $a$, $b$ and $c$ written in binary, we can write a Boolean circuit whose inputs are all the binary digits $(a₀, a₁, …, c₂, c₃)$. Our goal is to write such a Boolean circuit, such that the circuit outputs true if and only if $a + b = c$.
 
 This turns out to be more complicated than we might expect, as you can see in the large circuit below, which models $a + b = c$ in binary. For the sake of brevity, we do not show the derivation. We only show the formula to illustrate how verbose such a circuit can be:
 
@@ -45,7 +47,7 @@ This turns out to be more complicated than we might expect, as you can see in th
      (a₃ ∧ (a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) 
 ```
 
-The point is, if we are restricted to Boolean inputs and basic Boolean operations (AND, OR, NOT), constructing circuits can quickly become complicated and tedious for basic problems, especially when those problems involve arithmetic.
+The point is, if we are restricted to Boolean inputs and basic Boolean operations (AND, OR, NOT), constructing circuits can quickly become complicated and tedious for basic problems, especially when they involve arithmetic.
 
 In contrast, it would be simpler to directly represent numbers inside a circuit. Instead of modeling addition with a Boolean formula, we directly use addition and multiplication on those numbers.
 
@@ -68,9 +70,9 @@ So, we can think of an arithmetic circuit interchangeably with the set of equati
 
 ## Notation and Terminology
 
-Variables in an arithmetic circuit are referred to as **signals**. We will call variables signals because [Zero Knowledge (ZK) Programming Languages](https://www.rareskills.io/post/zero-knowledge-programming-language) refer to them as such.
+Variables in an arithmetic circuit are referred to as **signals**. We will call variables signals because [Circom](https://docs.circom.io), the programming language we will use to write ZK Proofs, refers to them as such.
 
-When we write equality, we will use the `===` operator. We use this notation because [Circom](https://docs.circom.io) (the programming language we will use to write ZK Proofs) uses it to state two signals hold equal value, so we may as well get accustomed to seeing it.
+When we write equality, we will use the `===` operator. We use this notation because Circom uses it to state that two signals hold equal value, so we may as well get accustomed to seeing it.
 
 We emphasize that the `===` is asserting the left-hand side and right-hand side are equal. For example, in the following circuit:
 
