@@ -423,7 +423,7 @@ First, we assign each territory a variable name:
 Next, we iterate through the boundaries and compute a boundary constraint for those neighbors. The video below shows the algorithm in action. We show the final set of formulas for the boundary conditions after the video:
 
 <video>
-<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4>">
+<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 7. Western Australia and South Australia:
