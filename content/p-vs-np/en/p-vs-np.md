@@ -16,12 +16,12 @@ We assume the reader is familiar with time complexity and big $\mathcal{O}$ nota
 
 We say an algorithm takes polynomial time if it runs in $\mathcal{O}(nᶜ)$ time or better, where $n$ is the size of the input and $c$ is a non-negative constant. We may refer to algorithms that run in polynomial time or faster as *efficient algorithms* because their running time doesn't grow too quickly with the input size.
 
-We say an algorithm takes *exponential time* or is *expensive* if it runs in $\mathcal{O}(cⁿ)$ where $c$ is a constant greater than 1 and $n$ is the size of the problem because the algorithm becomes exponentially slow as the problem size increases.
+We say an algorithm takes *exponential time* or is *expensive* if it runs in $\mathcal{O}(cⁿ)$ where $c$ is a constant greater than 1 and $n$ is the size of the input because the algorithm becomes exponentially slow as the size of the input increases.
 
 ## Part 1: Explaining the P vs NP problem
 ### Problems in P are problems that are easy to solve and easy to verify solutions for
 
-Problems that can be solved in polynomial time and whose solutions can verified in polynomial time are called problems in P.
+Problems that can be solved in polynomial time and whose solutions can be verified in polynomial time are called problems in P.
 
 Here are some example problems that are easy to compute and verify solutions for. These tasks might be performed by different parties, one doing the computation and another checking the results are valid:
 
@@ -36,7 +36,7 @@ We can efficiently search to see if a number is in a list and then even more eff
 
 - **Solving:** For example, given the list `[8, 2, 1, 6, 7, 3]`, we need $\mathcal{O}(n)$ time to determine if the number `7` is in the list.
 
-- **Verifying:** But if we give you the list and say 7 is in index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify the item is, in fact, in the list at that location.
+- **Verifying:** But if we give you the list and say 7 is in index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify that the item is, in fact, in the list at that location.
 
 #### P Example 3: Determining if two nodes in a graph are connected
 We can efficiently determine if two nodes in a graph are connected by using breadth-first search — start at a node, then visit all of its neighbors except nodes we’ve already visited, then search the neighbors of the neighbors, and so forth.
@@ -56,7 +56,7 @@ A *witness* in computer science is proof that you solved the problem correctly. 
 We will see later that a witness does not necessarily have to be the solution to the original problem. It could also be a solution for an alternative representation of the same problem.
 
 ### Problems in PSPACE: Not all problems have solutions that can be efficiently verified
-Problems that require exponential resources to solve and verify are called problems in PSPACE. The reason they are called PSPACE is because although they might take exponential time to solve, they don’t require exponential memory space to run the search.
+Problems that require exponential resources to solve and verify are called problems in PSPACE. The reason they are called PSPACE is that although they might take exponential time to solve, they don’t necessarily require exponential memory space to run the search.
 
 This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems could be discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
 
@@ -72,7 +72,7 @@ The computer responds with "move the black pawn on f4 to f3."
 
 How can you trust the computer is giving you the correct answer?
 
-There is no efficient way to check—you must do the same work the computer did. This involves doing a full search through all possible future board states. There’s no witness the computer could provide us that would allow us to confirm that "move the pawn on e3 to e4" is actually the next best move. In this way, the nature of this problem is very different from the examples in the previously discussed: we cannot efficiently verify that the claimed optimal move is the true optimal move.
+There is no efficient way to check—you must do the same work the computer did. This involves doing a full search through all possible future board states. There’s no witness the computer could provide us that would allow us to confirm that "move the black pawn on f4 to f3" is actually the next best move. In this way, the nature of this problem is very different from the examples in the previously discussed: we cannot efficiently verify that the claimed optimal move is the true optimal move.
 
 In this example, the "witness" presented by the computer consists of all potential future game states. However, the massive volume of this data makes it practically impossible to verify the accuracy of the solution efficiently.
 
@@ -93,7 +93,7 @@ If we can quickly verify the solution to a problem, then the problem is in NP. H
 
 Any problem whose proposed solution (witness) can be quickly verified as correct is an NP problem. If the problem also has an algorithm for finding the solution in polynomial time, then it is a P problem. All P problems are NP problems, but it is extremely unlikely that all NP problems are also P problems.
     
-Examples of problems in NP:
+Examples of problems in NP. These are explained in more detail below:
 - Computing the solution to a Sudoku puzzle — verifying the proposed solution to a Sudoku puzzle.
 - Computing the 3-coloring of a map (if it exists) — verifying a proposed 3-coloring of a map.
 - Finding an assignment to Boolean formula that results in true — verifying the proposed assignment causes the formula to result in true.
@@ -128,9 +128,10 @@ The reasons a particular map cannot be 3 colored vary, but in the case of the Un
 Here is a [quick and interesting video about 3-coloring maps](https://www.youtube.com/watch?v=WlcXoz6tn4g) if you want to learn more about this problem.
 
 However, it is possible to 3-color Australia:
+
 ![A 3 Coloring of Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
 
-Not all maps can be three-colored. Computing a three-coloring for an arbitrary 2D map, if it exists, cannot be done efficiently—a brute-force search that may take exponential time is required.
+Not all maps can be three-colored. Computing a three-coloring for an arbitrary 2D map, if it exists, cannot be done efficiently — it typically requires a brute-force search that may take exponential time.
 
 However, if someone solves a three-coloring, it is easy to verify their solution.
 
@@ -139,7 +140,7 @@ However, if someone solves a three-coloring, it is easy to verify their solution
 The table below summarizes the computational resources required for each class of problem:
 
 
-| Category | Compute Time | Polynomial Verification Time |
+| Category | Compute Time | Verification Time |
 | --- | --- | --- |
 | P | Must be polynomial or better | Must be polynomial or better
 | NP | No Requirement | Must be polynomial or better |
@@ -148,7 +149,7 @@ The table below summarizes the computational resources required for each class o
 #### Hierarchy of Difficulty between P, NP, and PSPACE
 Any problem that requires exponential resources to verify the witness for is a PSPACE (or harder problem). If one has exponential resources to verify witnesses for PSPACE problems, they can trivially compute solutions for any P or NP problem. Therefore, all P and NP problems are a subset of PSPACE problems, as illustrated in the figure below.
 
-That is, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify subset of it:
+That is, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify a subset of it:
 
 ![Hierarchy of computation complexity classes](https://static.wixstatic.com/media/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg/v1/fill/w_1022,h_766,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg)
 
@@ -157,11 +158,9 @@ P is the class of problems that can be solved and verified efficiently, while NP
 
 If P = NP, it would mean that whenever we can find an efficient method for verifying a solution, we can also find an efficient method for finding that solution. Remember that finding a solution is always at least as hard as verifying it. (By definition, solving means finding the correct answer, so an algorithm that solves the problem is also effectively verifying its answer at the same time).
 
-If P = NP is true, that means an efficient algorithm for computing Sudoku puzzles (of arbitrary size) and finding if a three coloring exists. It also means there is an efficient algorithm to break most modern cryptography algorithms.
+If P = NP is true, that means there is an efficient algorithm for computing Sudoku puzzles (of arbitrary size) and finding if a three coloring exists. It also means there is an efficient algorithm to break most modern cryptographic algorithms.
 
-
-Currently, it remains uproven whether P and NP are the same set. Although numerous attempts have been made to find efficient solution algorithms for NP problems, all evidence points to such algorithms not existing.
-
+Currently, it remains unproven whether P and NP are the same set. Although numerous attempts have been made to find efficient algorithms for NP problems, all evidence suggests that such algorithms do not exist.
 
 Similarly, whether efficient solutions or verification mechanisms exist for PSPACE problems remains open. While researchers widely speculate that P ≠ NP and NP ≠ PSPACE, no formal mathematical proof exists for these conclusions. Therefore, despite extensive efforts, efficient solutions for NP problems and efficient verification methods for PSPACE problems remain undiscovered.
 
@@ -172,10 +171,10 @@ What ties P and NP problems together is that their solution can be quickly verif
 
 **Verifying a solution to a problem in NP or P can be accomplished by verifying a solution to a Boolean formula that models the problem.**
 
-What we mean by "a Boolean formula that models the problem" will become clear as describe what we mean by "a solution to a Boolean formula" and looking at some examples modeling problems with Boolean formulas.
+What we mean by "a Boolean formula that models the problem" will become clear as we describe what we mean by "a solution to a Boolean formula" and looking at some example modeling problems with Boolean formulas.
 
 ### Solutions to a Boolean formula
-To express a Boolean formula, we use the operator ¬ to be the Boolean NOT, ∧ to be the Boolean AND, and ∨ to be the Boolean OR. For example, a ∧ b evaluates to true if and only if a and b are both true. a ∧ ¬b evaluates to true if and only if a is true and b is false.
+To express a Boolean formula, we use the operator $¬$ to be the Boolean NOT, $∧$ to be the Boolean AND, and $∨$ to be the Boolean OR. For example, $a ∧ b$ evaluates to true if and only if $a$ and $b$ are both true. $a ∧ ¬b$ evaluates to true if and only if $a$ is true and $b$ is false.
 
 Suppose we have a bunch of Boolean variables $x₁$, $x₂$, $x₃$, $x₄$ and a Boolean formula:
 
@@ -215,7 +214,7 @@ $$
 
 That was easy to verify, but discovering the solution for a very large Boolean formula could take exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may take exponential resources to find the solution, but it only takes polynomial time to verify the solution.
 
-But we must emphasize: our use of Boolean formulas is not to solve them — but to verify proposed solutions for them.
+But we must emphasize: our use of Boolean formulas is not to solve them — only to verify proposed solutions for them.
 
 ### All problems in P and NP can be verified by transforming them into boolean formulas and showing a solution to the formula
 In the following examples, the input is a P or NP problem and the output is a Boolean formula. If we know the solution to the original problem, then we will also know the solution to the Boolean formula.
@@ -223,7 +222,7 @@ In the following examples, the input is a P or NP problem and the output is a Bo
 Our intent is to show we know the witness for the original problem — but in Boolean form.
 
 #### Example 1: checking if a list is sorted using a Boolean formula
-Consider one-bit binary numbers A and B. The following truth table returns true when A > B:
+Consider one-bit binary numbers $A$ and $B$. The following truth table returns true when $A > B$:
 
 | A | B | A > B |
 | --- | --- | --- |
@@ -234,7 +233,7 @@ Consider one-bit binary numbers A and B. The following truth table returns true 
 
 The column $A > B$ can be modeled with the expression $A ∧ ¬B$, which returns true in the only row where $A > B$ is one.
 
-Now consider a table that expresses A = B:
+Now consider a table that expresses $A = B$:
 
 | A | B | A = B |
 | --- | --- | --- |
@@ -254,12 +253,12 @@ A = B &\rightarrow (A ∧ B) ∨ ¬(A ∨ B)
 \end{align*}
 $$
 
-will come in hand shortly.
+will come in handy shortly.
 
 Now how do we compare binary numbers of more than one bit?
 
 ##### Binary comparison by most significant different bit
-Suppose you start from both numbers' leftmost Most Significant Bit (MSB) and move towards the right Least Significant Bit (LSB). At the first bit, where the two numbers differ,
+Suppose you start from both numbers' leftmost Most Significant Bit (MSB) and move towards the right Least Significant Bit (LSB). At the first bit, where the two numbers differ:
 
 If $P$ has a value of $1$ at that bit and $Q$ has a value of $0$, then $P ≥ Q$.
 The following animation illustrates the algorithm detecting that $P ≥ Q$:
@@ -307,7 +306,7 @@ We can substitute the expressions for $A > B$ and $A = B$ formula in to the equa
 <source src="https://video.wixstatic.com/video/935a00_655f627a117f46ecb0a48deb2640b9a1/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-The final Boolean formula that expresses P ≥ Q is:
+The final Boolean formula that expresses $P ≥ Q$, for 4 bits, is:
 
 $$
 \begin{align*}
@@ -424,43 +423,42 @@ First, we assign each territory a variable name:
 Next, we iterate through the boundaries and compute a boundary constraint for those neighbors. The video below shows the algorithm in action. We show the final set of formulas for the boundary conditions after the video:
 
 <video>
-<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4>
-
+<source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-7. Western Australia and South Australia
+7. Western Australia and South Australia:
 
 ¬(<span style="color:Green">WA_G ∧ SA_G</span>) ∧ ¬(<span style="color:#008aff">WA_B ∧ SA_B</span>) ∧ ¬(<span style="color:Red">WA_R ∧ SA_R</span>)
 
-8. Western Australia and Northern Territory
+8. Western Australia and Northern Territory:
 
 ¬(<span style="color:Green">WA_G ∧ NT_G</span>) ∧ ¬(<span style="color:#008aff">WA_B ∧ NT_B</span>) ∧ ¬(<span style="color:Red">WA_R ∧ NT_R</span>)
 
-9. Northern Territory and South Australia
+9. Northern Territory and South Australia:
 
 ¬(<span style="color:Green">NT_G ∧ SA_G</span>) ∧ ¬(<span style="color:#008aff">NT_B ∧ SA_B</span>) ∧ ¬(<span style="color:Red">NT_R ∧ SA_R</span>)
 
-10. Northern Territory and Queensland
+10. Northern Territory and Queensland:
 
 ¬(<span style="color:Green">NT_G ∧ Q_G</span>) ∧ ¬(<span style="color:#008aff">NT_B ∧ Q_B</span>) ∧ ¬(<span style="color:Red">NT_R ∧ Q_R</span>)
 
-11. South Australia and Queensland
+11. South Australia and Queensland:
 
 ¬(<span style="color:Green">SA_G ∧ Q_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ Q_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ Q_R</span>)
 
-12. South Australia and New South Wales
+12. South Australia and New South Wales:
 
 ¬(<span style="color:Green">SA_G ∧ NSW_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ NSW_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ NSW_R</span>)
 
-13. South Australia and Victoria
+13. South Australia and Victoria:
 
 ¬(<span style="color:Green">SA_G ∧ V_G</span>) ∧ ¬(<span style="color:#008aff">SA_B ∧ V_B</span>) ∧ ¬(<span style="color:Red">SA_R ∧ V_R</span>)
 
-14. Queensland and New South Wales
+14. Queensland and New South Wales:
 
 ¬(<span style="color:Green">Q_G ∧ NSW_G</span>) ∧ ¬(<span style="color:#008aff">Q_B ∧ NSW_B</span>) ∧ ¬(<span style="color:Red">Q_R ∧ NSW_R</span>)
 
-15. New South Wales and Victoria
+15. New South Wales and Victoria:
 
 ¬(<span style="color:Green">NSW_G ∧ V_G</span>) ∧ ¬(<span style="color:#008aff">NSW_B ∧ V_B</span>) ∧ ¬(<span style="color:Red">NSW_R ∧ V_R</span>)
 
@@ -488,12 +486,12 @@ The "knowledge" in Zero Knowledge Proofs refers to knowledge of the witness.
 
 ZK proofs are concerned with the verification aspect of computation. That is, given that you have found a Sudoku solution or a 3-coloring of a map, can you give someone evidence (witness) that would allow them to efficiently verify that your solution is correct?
 
-ZK proofs seek to demonstrate you know the witness without revealing it.
+ZK proofs seek to demonstrate that you know the witness without revealing it.
 
 ### ZKPs only work with P or NP problems. They are not usable for problems which we can’t verify efficiently.
-If we don’t have a mechanism to efficiently prove regexes are equivalent or that a certain move in chess is optimal, then ZK proofs cannot magically enable us to produce such an efficient proof.
+If we don’t have a mechanism to efficiently prove regexes are equivalent, or that a certain move in chess is optimal, then ZK proofs cannot magically enable us to produce such an efficient proof.
 
-For both P and NP problems, the verification of the solution can be done efficiently. ZK enables verifying the solution is valid while concealing the details of the computation. Furthermore, ZK cannot help you discover a solution to a Sudoku puzzle or discover a 3-coloring of a map. However, it can help you prove to another party you have a solution, if you already computed it.
+For both P and NP problems, the verification of the solution can be done efficiently. ZK enables verifying the solution is valid while concealing the details of the computation. Furthermore, ZK cannot help you discover a solution to a Sudoku puzzle or discover a 3-coloring of a map. However, it can help you prove to another party that you have a solution, if you already computed it.
 
 ### The connection between P vs NP and Zero Knowledge Proofs
 
@@ -512,7 +510,7 @@ Creating a zero knowledge proof for a problem boils down to translating the prob
 The ability to efficiently verify a solution to a problem is a prerequisite for creating a zero knowledge proof that you have a solution. One must be able to construct a Boolean circuit to model the solution efficiently. However, for problems like determining optimal Chess moves, which belong to PSPACE, this approach results in exponentially large circuits, making them impractical.
 
 
-In conclusion, zero knowledge proofs are feasible only for problems within P and NP, where efficient solution verification is possible. Without efficient verification, creating a zero knowledge proof for a problem becomes unuseable.
+In conclusion, zero knowledge proofs are feasible only for problems within P and NP, where efficient solution verification is possible. Without efficient verification, creating a zero knowledge proof for a problem becomes infeasible.
 
 ## Learn more
 Please see the [RareSkills ZK Book](https://www.rareskills.io/zk-book) for more topics in zero knowledge proofs.
@@ -520,7 +518,7 @@ Please see the [RareSkills ZK Book](https://www.rareskills.io/zk-book) for more 
 ## Technicalities
 Some concepts have been simplified in this article to make them as understandable as possible to someone seeing them for the first time. The information presented here is sufficient to explain what ZK proofs can and cannot do. For those interested in pursuing the subject further, here are some clarifications:
 
-- A chess board of a fixed size $(8 \times 8)$ cannot be assigned a difficulty level because the difficulty of the problem cannot be expressed as $\mathcal{O}(f(n))$. Technically, we say chess of an arbitrary size is PSPACE. It might be confusing to think of a #10\times10# chess board, but one can simply specify that the extra spaces don’t have any pieces in them at the starting position.
+- A chess board of a fixed size $(8 \times 8)$ cannot be assigned a difficulty level because the difficulty of the problem cannot be expressed as $\mathcal{O}(f(n))$. Technically, we say chess of an arbitrary size is PSPACE. It might be confusing to think of a $10 \times 10$ chess board, but one can simply specify that the extra spaces don’t have any pieces in them at the starting position.
 
 - Chess has a lesser known rule that if no capture move has taken place and no pawn has moved for the last 50 moves, then a player can call a draw. This places a bound on the search space that puts it in PSPACE. If this rule is removed, then this version of chess is in EXPSPACE — a category of problems that requires exponential time and exponential memory size to compute.
 
