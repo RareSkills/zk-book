@@ -21,7 +21,7 @@ Optional Chapter: How the ECDSA Malleability Attack Works
 12. [x] A Zero Knowledge Proof with an R1CS
 13. [x] Lagrange Interpolation with Python
 14. [x] The Schwartz-Zippel Lemma
-15. [ ] Quadratic Arithmetic Programs
+15. [x] Quadratic Arithmetic Programs
 16. [x] R1CS to QAP in Python
 17. [x] Trusted Setup
 18. [x] Evaluating a QAP on a Trusted Setup
