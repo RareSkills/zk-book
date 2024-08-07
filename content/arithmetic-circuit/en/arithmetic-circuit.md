@@ -70,7 +70,7 @@ So, we can think of an arithmetic circuit interchangeably with the set of equati
 
 ## Notation and Terminology
 
-Variables in an arithmetic circuit are referred to as **signals**. We will call variables signals because [Circom](https://docs.circom.io), the programming language we will use to write ZK Proofs, refers to them as such.
+Variables in an arithmetic circuit are referred to as **signals** because [Circom](https://docs.circom.io), the programming language we will use to write ZK Proofs, refers to them as such.
 
 When we write equality, we will use the `===` operator. We use this notation because Circom uses it to state that two signals hold equal value, so we may as well get accustomed to seeing it.
 
@@ -103,7 +103,7 @@ A useful mental model for the arithmetic circuit is that all signals are treated
 To drive the point home, we supply a visualization in the following video. All of the signals are inputs, and `===` is used to check instead of assign.
 
 <video>
-<source="https://video.wixstatic.com/video/706568_f4fb9d3d127c4735a718deffbd9fed70/1080p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_f4fb9d3d127c4735a718deffbd9fed70/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 The circuit in the video could have been written as:
@@ -130,7 +130,7 @@ The first constraint `x₁(x₁ - 1) === 0` restricts the possible values x₁ t
 
 In the second constraint `x₁x₂ === x₁` we have two possible scenarios:
 
-- If `x₁ = 1`, then `x₂` must also be 1, or the second constraint cannot be satisfied. If `x₁ = 1` and `x₂ ≠ 1`, then the second equation becomes `1 * x₂ === 1` which can only be satisfied by `x₂ = 1`.
+- If `x₁ = 1`, then `x₂` must also be 1, or the second constraint cannot be satisfied. If `x₁ = 1` and `x₂ ≠ 1`, then the second equation becomes `1 * x₂ === 1` which can only be satisfied by `x₂ = 1`, which creates a conflict.
 - If `x₁ = 0`, then `x₂` can have any value because `0x₂ === 0` is trivial to satisfy.
 
 The following assignments to (x₁, x₂) are all valid witnesses:
@@ -157,7 +157,7 @@ Aside from the convenience of using fewer variables in some circumstances, arith
 
 ### a + b = c
 
-Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 24`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each. In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. This reduction in the number of inputs, and also in the size of the circuit, is the reason we opt to use arithmetic circuits for ZK applications.
+Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 24`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each (in this example). In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. This reduction in the number of inputs, and also in the size of the circuit, is the reason we opt to use arithmetic circuits for ZK applications.
 
 ### Similarities between systems of equations and arithmetic circuits
 
@@ -246,7 +246,7 @@ The above equation is satisfied if and only if the product `xy` is equal to 2, 3
 The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neigboring territories as the video below illustrates:
 
 <video>
-<source="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 We now show the boundary constraints:
@@ -305,7 +305,7 @@ By combining the two, we see the complete arithmetic circuit for proving we have
 
 We have 15 constraints just like the Boolean circuit, **but 1/3rd as many variables (signals).** Instead of 3 Boolean variables for each territory, we have one signal for each territory. For larger circuits, this reduction in complexity and space can be substantial.
 
-### Example 2 Proving a List is Sorted
+### Example 2: Proving a List is Sorted
 
 Given a list of numbers `[a₁, a₂, ..., aₙ]`, we say the list is “sorted” if `aₙ ≥ aₙ₋₁ ≥ … a₃ ≥ a₂ ≥ a₁`. In other words, going from the end to the beginning, the numbers are non-increasing.
 
@@ -326,7 +326,7 @@ As we will show shortly, during conversion to decimal, the most significant bit 
 The video below illustrate the conversion of 1101₂ to 13:
 
 <video>
-<source="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
 </video>
 
 As shown in the video, a four bit binary number can be converted to a decimal number `v` with the following formula:
@@ -341,7 +341,7 @@ For example, 1001₂ = 9, 1010₂ = 10, and so forth. For a general `n` bit bina
 
 `v = 2ⁿ⁻¹b₃ + ... + 2¹b₁ + 2⁰b₀`
 
-We omit a discussion of how to convert a decimal number to binary. For now, if the reader wishes to convert to binary, they can use the built-in `bin` function from Python:
+We omit the discussion on how to convert a decimal number to binary. For now, if the reader wishes to convert to binary, they can use the built-in `bin` function from Python:
 
 ```python
 >>> bin(3)
@@ -421,10 +421,10 @@ $$
 
 ### Compute ≥ in binary
 
-If we are working with binary numbers of a fixed size, $n$ bits, the number $2ⁿ⁻¹$ is special because we can easily assert an $n$ bit binary number is greater or equal to $2ⁿ⁻¹$ — or less than it. We call $2ⁿ⁻¹$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2ⁿ⁻¹$:
+If we are working with binary numbers of a fixed size, $n$ bits, the number $2ⁿ⁻¹$ is special because we can easily assert an $n$ bit binary number is greater than or equal to $2ⁿ⁻¹$ — or less than it. We call $2ⁿ⁻¹$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2ⁿ⁻¹$:
 
 <video>
-<source="https://video.wixstatic.com/video/706568_adae25cac0e6414ab0643a5792a2ed52/1080p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_adae25cac0e6414ab0643a5792a2ed52/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 By checking the most significant bit of an $n$ bit number, we can tell if that number is greater than or equal to $2ⁿ⁻¹$ or less than $2ⁿ⁻¹$.
@@ -432,7 +432,7 @@ By checking the most significant bit of an $n$ bit number, we can tell if that n
 If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum, we can quickly tell if $Δ$ is positive or negative. If $Δ$ is negative, then $2ⁿ⁻¹ + Δ$ must be less than $2ⁿ⁻¹$.
 
 <video>
-<source="https://video.wixstatic.com/video/706568_6b61fecfedb64a888f6538bc91707f40/1080p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_6b61fecfedb64a888f6538bc91707f40/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 ### Detecting if u ≥ v
@@ -440,7 +440,7 @@ If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum,
 If we replace $Δ$ with $u - v$ then the most significant bit of $2ⁿ⁻¹ + (u - v)$ tells us if $u ≥ v$ or $u < v$.
 
 <video>
-<source="https://video.wixstatic.com/video/706568_ea57bc6fb8c5493686c3dc4cf9123c72/1080p/mp4/file.mp4" type="video/mp4">
+<source src="https://video.wixstatic.com/video/706568_ea57bc6fb8c5493686c3dc4cf9123c72/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 #### Preventing overflow in 2ⁿ⁻¹ + (u - v)
@@ -558,7 +558,7 @@ To see why it models the OR gate, consider the following table:
 
 If `u` or `v` are 1, then `t` will be at least 1. To prevent `t` from equaling 2 (which is an invalid output from a Boolean operator), we subtract `uv`, which will be 1 when both `u` and `v` are 1.
 
-Observe that with all the gates above, we do not need to apply a constraint `t(t - 1) === 0`. The output `t` is implicitly constrained to be 0 or 1 because there is no assignment to the inputs that could result in a value for `t` being 2 or greater.
+Observe that with all the gates above, we do not need to apply a constraint `t(t - 1) === 0`. The output `t` is implicitly constrained to be 0 or 1 because there is no assignment to the inputs that could result in a value 2 or greater for `t`.
 
 ### Transforming `out = (x ∧ ¬ y) ∨ z` into an arithmetic circuit
 
@@ -631,7 +631,7 @@ There is no need to calculate a Boolean circuit and then transform it into an ar
 We have glossed over two very important details in this article. Some other challenges exist that need to be addressed. For example:
 
 - We didn’t discuss what datatype we used to store signals for the arithmetic circuit and how we handle overflow during addition or multiplication.
-- We have no way of expressing the value 2/3 without losing precision. Any fixed point or floating point representation we chose will have rounding issues
+- We have no way of expressing the value 2/3 without losing precision. Any fixed point or floating point representation we choose will have rounding issues
 
 To handle these problems, arithmetic circuits are calculated over *[finite fields](rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
 
@@ -644,12 +644,12 @@ Learn more about [Zero Knowledge Proofs](https://www.rareskills.io/zk-book) in o
 ## Practice Problems
 
 1. Create an arithmetic circuit that takes signals `x₁`, `x₂`, ..., `xₙ` and is satisfied if *at least* one signal is 0.
-2. Create an arithmetic circuit that takes signals `x₁`, `x₂`, ..., `xₙ` and is satsified if all are 1.
+2. Create an arithmetic circuit that takes signals `x₁`, `x₂`, ..., `xₙ` and is satsified if all signals are 1.
 3. A bipartite graph is a graph that can be colored with two colors such that no two neighboring nodes share the same color. Devise an arithmetic circuit scheme to show you have a valid witness of a 2-coloring of a graph. Hint: the scheme in this tutorial needs to be adjusted before it will work with a 2-coloring.
-4. Devise an arithmetic circuit that constrains `k` to be the maximum of `x`, `y`, or `z`. That is, `k` should be equal to `x` if `x` is the maximum value, and same for `y` and `z`.
+4. Create an arithmetic circuit that constrains `k` to be the maximum of `x`, `y`, or `z`. That is, `k` should be equal to `x` if `x` is the maximum value, and same for `y` and `z`.
 5. Create an arithmetic circuit that takes signals `x₁`, `x₂`, ..., `xₙ`, constrains them to be binary, and outputs 1 if *at least* one of the signals is 1. Hint: this is tricker than it looks. Consider combining what you learned in the first two problems and using the NOT gate.
-6. Devise an arithmetic circuit to determine if a signal `v` is a power of two (1, 2, 4, 8, etc). Hint: create an arithmetic circuit that constrains another set of signals to encode the binary representation of `v`, then place additional restrictions on those signals.
-7. Devise an arithmetic circuit that models the [Subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem). Given a set of integers (assume they are all non-negative), determine if there is a subset that sums to a given value $k$. For example, given the set $\set{3,5,17,21}$ and $k = 22$, there is a subset $\set{5, 17}$ that sums to $22$. Of course, a subset sum problem does not necessarily have a solution.
+6. Create an arithmetic circuit to determine if a signal `v` is a power of two (1, 2, 4, 8, etc). Hint: create an arithmetic circuit that constrains another set of signals to encode the binary representation of `v`, then place additional restrictions on those signals.
+7. Create an arithmetic circuit that models the [Subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem). Given a set of integers (assume they are all non-negative), determine if there is a subset that sums to a given value $k$. For example, given the set $\set{3,5,17,21}$ and $k = 22$, there is a subset $\set{5, 17}$ that sums to $22$. Of course, a subset sum problem does not necessarily have a solution.
      <details>
      <summary>Hint</summary>
      <br>
