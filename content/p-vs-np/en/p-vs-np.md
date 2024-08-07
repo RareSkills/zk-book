@@ -306,7 +306,7 @@ We can substitute the expressions for $A > B$ and $A = B$ formula in to the equa
 <source src="https://video.wixstatic.com/video/935a00_655f627a117f46ecb0a48deb2640b9a1/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-The final Boolean formula that expresses P ≥ Q, for 4 bits, is:
+The final Boolean formula that expresses $P ≥ Q$, for 4 bits, is:
 
 $$
 \begin{align*}
