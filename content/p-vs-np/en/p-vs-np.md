@@ -16,12 +16,12 @@ We assume the reader is familiar with time complexity and big $\mathcal{O}$ nota
 
 We say an algorithm takes polynomial time if it runs in $\mathcal{O}(nᶜ)$ time or better, where $n$ is the size of the input and $c$ is a non-negative constant. We may refer to algorithms that run in polynomial time or faster as *efficient algorithms* because their running time doesn't grow too quickly with the input size.
 
-We say an algorithm takes *exponential time* or is *expensive* if it runs in $\mathcal{O}(cⁿ)$ where $c$ is a constant greater than 1 and $n$ is the size of the problem because the algorithm becomes exponentially slow as the problem size increases.
+We say an algorithm takes *exponential time* or is *expensive* if it runs in $\mathcal{O}(cⁿ)$ where $c$ is a constant greater than 1 and $n$ is the size of the input because the algorithm becomes exponentially slow as the size of the input increases.
 
 ## Part 1: Explaining the P vs NP problem
 ### Problems in P are problems that are easy to solve and easy to verify solutions for
 
-Problems that can be solved in polynomial time and whose solutions can verified in polynomial time are called problems in P.
+Problems that can be solved in polynomial time and whose solutions can be verified in polynomial time are called problems in P.
 
 Here are some example problems that are easy to compute and verify solutions for. These tasks might be performed by different parties, one doing the computation and another checking the results are valid:
 
@@ -36,7 +36,7 @@ We can efficiently search to see if a number is in a list and then even more eff
 
 - **Solving:** For example, given the list `[8, 2, 1, 6, 7, 3]`, we need $\mathcal{O}(n)$ time to determine if the number `7` is in the list.
 
-- **Verifying:** But if we give you the list and say 7 is in index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify the item is, in fact, in the list at that location.
+- **Verifying:** But if we give you the list and say 7 is in index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify that the item is, in fact, in the list at that location.
 
 #### P Example 3: Determining if two nodes in a graph are connected
 We can efficiently determine if two nodes in a graph are connected by using breadth-first search — start at a node, then visit all of its neighbors except nodes we’ve already visited, then search the neighbors of the neighbors, and so forth.
@@ -56,9 +56,9 @@ A *witness* in computer science is proof that you solved the problem correctly. 
 We will see later that a witness does not necessarily have to be the solution to the original problem. It could also be a solution for an alternative representation of the same problem.
 
 ### Problems in PSPACE: Not all problems have solutions that can be efficiently verified
-Problems that require exponential resources to solve and verify are called problems in PSPACE. The reason they are called PSPACE is because although they might take exponential time to solve, they don’t require exponential memory space to run the search.
+Problems that require exponential resources to solve and verify are called problems in PSPACE. The reason they are called PSPACE is that although they might take exponential time to solve, they don’t necessarily require exponential memory space to run the search.
 
-This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems could be discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
+This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems was discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
 
 Despite significant incentives for finding efficient solutions to these problems, evidence suggests such solutions likely do not exist. These problems are so challenging you cannot provide easily verifiable proof (witness) even if you solve them correctly.
 
@@ -72,7 +72,7 @@ The computer responds with "move the black pawn on f4 to f3."
 
 How can you trust the computer is giving you the correct answer?
 
-There is no efficient way to check—you must do the same work the computer did. This involves doing a full search through all possible future board states. There’s no witness the computer could provide us that would allow us to confirm that "move the pawn on e3 to e4" is actually the next best move. In this way, the nature of this problem is very different from the examples in the previously discussed: we cannot efficiently verify that the claimed optimal move is the true optimal move.
+There is no efficient way to check—you must do the same work the computer did. This involves doing a full search through all possible future board states. There’s no witness the computer could provide us that would allow us to confirm that "move the black pawn on f4 to f3" is actually the next best move. In this way, the nature of this problem is very different from the examples in the previously discussed: we cannot efficiently verify that the claimed optimal move is the true optimal move.
 
 In this example, the "witness" presented by the computer consists of all potential future game states. However, the massive volume of this data makes it practically impossible to verify the accuracy of the solution efficiently.
 
@@ -89,11 +89,11 @@ There are problems that are so difficult that they require exponential time and 
 An example of such a problem is Checkers with a rule that pieces can never move into a position that recreates an earlier board state. In order to ensure we don’t repeat a board state for a game as we explore the space of possible moves, we have to keep track of all the board states that have already been visited. Since the length of the game can be exponential in the board size, the memory requirements are also exponential.
 
 ### Problems in NP: Some problems can be quickly verified but not quickly computed
-If we can quickly verify the solution to a problem, then the problem is in NP. However, finding the solution might require exponential resources.
+If we can quickly verify the solution to a problem, then the problem is in NP. Finding the solution might require exponential resources, but that's not relevant here.
 
 Any problem whose proposed solution (witness) can be quickly verified as correct is an NP problem. If the problem also has an algorithm for finding the solution in polynomial time, then it is a P problem. All P problems are NP problems, but it is extremely unlikely that all NP problems are also P problems.
     
-Examples of problems in NP:
+Examples of problems in NP. These are explained in more detail below:
 - Computing the solution to a Sudoku puzzle — verifying the proposed solution to a Sudoku puzzle.
 - Computing the 3-coloring of a map (if it exists) — verifying a proposed 3-coloring of a map.
 - Finding an assignment to Boolean formula that results in true — verifying the proposed assignment causes the formula to result in true.
@@ -128,9 +128,10 @@ The reasons a particular map cannot be 3 colored vary, but in the case of the Un
 Here is a [quick and interesting video about 3-coloring maps](https://www.youtube.com/watch?v=WlcXoz6tn4g) if you want to learn more about this problem.
 
 However, it is possible to 3-color Australia:
+
 ![A 3 Coloring of Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
 
-Not all maps can be three-colored. Computing a three-coloring for an arbitrary 2D map, if it exists, cannot be done efficiently—a brute-force search that may take exponential time is required.
+Not all maps can be three-colored. Computing a three-coloring for an arbitrary 2D map, if it exists, cannot be done efficiently — it typically requires a brute-force search that may take exponential time.
 
 However, if someone solves a three-coloring, it is easy to verify their solution.
 
@@ -139,7 +140,7 @@ However, if someone solves a three-coloring, it is easy to verify their solution
 The table below summarizes the computational resources required for each class of problem:
 
 
-| Category | Compute Time | Polynomial Verification Time |
+| Category | Compute Time | Verification Time |
 | --- | --- | --- |
 | P | Must be polynomial or better | Must be polynomial or better
 | NP | No Requirement | Must be polynomial or better |
@@ -148,7 +149,7 @@ The table below summarizes the computational resources required for each class o
 #### Hierarchy of Difficulty between P, NP, and PSPACE
 Any problem that requires exponential resources to verify the witness for is a PSPACE (or harder problem). If one has exponential resources to verify witnesses for PSPACE problems, they can trivially compute solutions for any P or NP problem. Therefore, all P and NP problems are a subset of PSPACE problems, as illustrated in the figure below.
 
-That is, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify subset of it:
+That is, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify a subset of it:
 
 ![Hierarchy of computation complexity classes](https://static.wixstatic.com/media/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg/v1/fill/w_1022,h_766,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg)
 
