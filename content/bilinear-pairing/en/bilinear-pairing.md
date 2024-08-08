@@ -1,6 +1,6 @@
 # Bilinear Pairings in Python, Solidity, and the EVM
 
-Sometimes also called bilinear mappings, bilinear parings allow us to take three numbers, $a$, $b$, and $c$, where $ab = c$, encrypt them to become $E(a)$, $E(b)$, $E(c)$, where $E$ is an encryption function, then send the two encrypted values to a verifier who can verify $E(a)E(b) = E(c)$ but not know the original values. We can use bilinear pairings to prove that a 3rd number is the product of the first two without knowing the first two original numbers.
+Sometimes also called bilinear mappings, bilinear pairings allow us to take three numbers, $a$, $b$, and $c$, where $ab = c$, encrypt them to become $E(a)$, $E(b)$, $E(c)$, where $E$ is an encryption function, then send the two encrypted values to a verifier who can verify $E(a)E(b) = E(c)$ but not know the original values. We can use bilinear pairings to prove that a 3rd number is the product of the first two without knowing the first two original numbers.
 
 We will explain bilinear pairings at a high level and provide some examples in Python.
 
@@ -78,7 +78,7 @@ However, despite it being a black box, we still know a lot about the properties 
 - Because the group is cyclic, it has a generator.
 - Because the group is cyclic and finite, then finite cyclic groups are homomorphic to $G_T$. That is, we have some way to homomorphically map elements in a finite field to elements in $G_T$.
 
-Because the group is cyclic, we have a notion of $G_T$, $2G_T$, $3G_T$, and so fourth. The binary operator of $G_T$ is roughly what we would call "multiplication" so $8G_T = 2G_T * 4G_T$.
+Because the group is cyclic, we have a notion of $G_T$, $2G_T$, $3G_T$, and so forth. The binary operator of $G_T$ is roughly what we would call "multiplication" so $8G_T = 2G_T * 4G_T$.
 
 If you really want to know what $G_T$ "looks like", it's a 12-Dimensional object. The identity element isn't so scary looking however:
 
@@ -333,7 +333,7 @@ and zero otherwise.
 This might be a bit of a head-scratcher at first! This seems to imply that the precompile is taking the discrete log of each of the points, which is accepted to be infeasible in general. Furthermore, why doesn’t it behave like pairing from the earlier Python examples? The earlier examples returned an element in $G_T$, but this precompile returns a boolean.
 
 #### Justification for EIP 197 design decision
-The first problem is that elements in $G_T$ are large, specically, they 12-dimensional objects. 
+The first problem is that elements in $G_T$ are large, specifically, they 12-dimensional objects. 
 
 This will take up a lot of space in memory leading to larger gas costs. Also, because of how most ZK verification algorithms work (this is outside the scope of this article), we generally don’t check the value of the output of a pairing, but only that it is equal to other pairings. Specifically, the final step in [Groth16](https://www.rareskills.io/post/groth16) (the zero knowledge algorithm used by tornado cash) looks like the following
 
