@@ -8,7 +8,7 @@ Both of these issues can be handled seamlessly with a variant of arithmetic, whi
 
 ## Finite fields
 
-Given a prime number `p`, we can make a finite field with `p` elements by taking the set of integers $\set{0, 1, 2, …, p-1}$ and define addition and multiplication to be done modulo $p$. We’ll start by limiting ourselves to fields where the number of elements is a [prime](https://en.wikipedia.org/wiki/Prime_number).
+Given a prime number `p`, we can make a finite field with `p` elements by taking the set of integers $\set{0, 1, 2, …, p-1}$ and define addition and multiplication to be done modulo $p$. We’ll start by limiting ourselves to fields where the number of elements is a prime.
 
 For example, if the prime number $p$ is $7$, then the elements in the finite field are $\set{0, 1, 2, 3, 4, 5, 6}$. Any number outside this range ($≥ p$ or $< 0$) is always mapped to an "equivalent" number in this range using modulo. The technical word for "equivalent" is *congruent*.
 
@@ -178,7 +178,7 @@ Some examples:
 
 The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
 
-In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, or if you want to calculate the inverse yourself in a small finite field, Fermat’s Little Theorem can be used.
+In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
 
 ## Computing the multiplicative inverse with Python
 
