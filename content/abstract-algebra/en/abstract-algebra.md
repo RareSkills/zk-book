@@ -6,7 +6,7 @@ If we have sets and a binary operator on that set, we can categorize those sets 
 
 Mathematicians have a word for every possible kind of behavior of the binary operator on the set. As applied programmers, we care about the Group (from Group Theory) in particular, but let’s work our way there incrementally. The group is just one type of animal in this large zoo. So rather than study the group in isolation, let’s study the group in its larger context of related algebraic structures (i.e. sets with a binary operator).
 
-Abstract algebra is a massive field, but our objective here is to clearly understand what a *Group* is because that is used everwhere in Zero Knowledge Proofs. We could just give a definition right now:
+Abstract algebra is a massive field, but our objective here is to clearly understand what a *Group* is because that is used everywhere in Zero Knowledge Proofs. We could just give a definition right now:
 
 *A Group is a set with a binary operator that is closed, associative, has an identity element, and where each element has an inverse.*
 
@@ -109,7 +109,7 @@ If it feels like we "hacked" the identity element in, we did.
 
 We’ll see later that elliptic curves use a trick like this and include a special point called the “point at infinity” to stay consistent with the algebraic laws. The point is we need to be very clear what our identity element is if we say a set is a Monoid over some binary operator.
 
-As another example, we could say our set is all positive integers under addition, with the additional element $\text{mug}$. We define $\text{mug} + x = x$ and $x + \text{mug} = x$. As the architects of the systems, we are allow to make our set consist of whatever we like, and the binary operator behave however we like. However, the binary operator must be closed, associative, and the set must have an identity element for that algebraic data structure to be a Monoid.
+As another example, we could say our set is all positive integers under addition, with the additional element $\text{mug}$. We define $\text{mug} + x = x$ and $x + \text{mug} = x$. As the architects of the systems, we are allowed to make our set consist of whatever we like, and the binary operator behave however we like. However, the binary operator must be closed, associative, and the set must have an identity element for that algebraic data structure to be a Monoid.
 
 If we restrict the domain to be all subsets of $\set{0,1,2,3,4,5}$, then intersection clearly becomes a Monoid because the identity element would be $\set{0,1,2,3,4,5}$, as any set of integers you intersect with it will produce the other set, i.e. $A ∩ \set{0,1,2,3,4,5} = A$. For example, $\set{1,3,4} ∩ \set{0,1,2,3,4,5} = \set{1,3,4}$.
 
@@ -175,7 +175,7 @@ The technicality is we don't normally say "addition is abelian" but "the group i
 Let’s tie this all back to what we learned at the beginning. Magmas, Semigroups, Monoids, and Groups are all sets that have a closed binary operator. A binary operator is just a map from all the ordered pairs of the set’s Cartesian product with itself back to itself.
 
 
-Groups are a subset of Monois, Monoids are a subset of Semigroups, Semigroups are a subset of Magmas, and Magmas are a subset of sets in general. Every Group is also a Magma or a set, but a Magma is not necessarily a Group.
+Groups are a subset of Monoids, Monoids are a subset of Semigroups, Semigroups are a subset of Magmas, and Magmas are a subset of sets in general. Every Group is also a Magma or a set, but a Magma is not necessarily a Group.
 
 “Sets” are easy to conceptualize, but when we start talking about groups and other algebraic structures, it’s easy to start getting lost. Groups are very important in our study of cryptography. Just remember:
 
