@@ -118,7 +118,7 @@ Although we do not have fractional numbers in finite fields, we can still find p
 
 For example, the multiplicative inverse of $4$ in the finite field $p = 7$ is $2$, because $4 * 2 = 8$, and $8 \pmod 7 = 1$. Thus, $2$ "behaves" like $1/4$ in the finite field, or to be precise, $1/4$ is congruent to $2 \pmod 7$.
 
-### General rules of multiplicative inverses in finite field arithmetics:
+### General rules of multiplicative inverses in finite field arithmetic:
 
 - 0 does not have a multiplicative inverse
 - 1 is its own multiplicative inverse
