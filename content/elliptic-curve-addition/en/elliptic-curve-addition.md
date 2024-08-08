@@ -198,7 +198,7 @@ Let’s see that elliptic curves meet the group property.
 A binary operator must accept every possible pair from the set. What if the pair is the same element, i.e. A ⊕ A?
 
 ## Point multiplication: adding a point with itself
-Let’s think of this in limit terms. Adding a point to itself is like bringing two points infintesimally close to each other until they become the same point. When this convergence happens, the slope of the line will lie tangent to the curve.
+Let’s think of this in limit terms. Adding a point to itself is like bringing two points infinitesimally close to each other until they become the same point. When this convergence happens, the slope of the line will lie tangent to the curve.
 
 So adding a point to itself is simply taking the derivative at that point, getting the intersection, then flipping the $y$ axis.
 
