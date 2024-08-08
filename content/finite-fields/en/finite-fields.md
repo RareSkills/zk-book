@@ -10,7 +10,7 @@ Both of these issues can be handled seamlessly with a variant of arithmetic, whi
 
 Given a prime number `p`, we can make a finite field with `p` elements by taking the set of integers $\set{0, 1, 2, …, p-1}$ and define addition and multiplication to be done modulo $p$. We’ll start by limiting ourselves to fields where the number of elements is a prime.
 
-For example, if the prime number $p$ is $7$, then the elements in the finite field are $\set{0, 1, 2, 3, 4, 5, 6}$. Any number outside this range $(≥ p)$ is always mapped to an "equivalent" number in this range using modulo. The technical word for "equivalent" is *congruent*.
+For example, if the prime number $p$ is $7$, then the elements in the finite field are $\set{0, 1, 2, 3, 4, 5, 6}$. Any number outside this range ($≥ p$ or $< 0$) is always mapped to an "equivalent" number in this range using modulo. The technical word for "equivalent" is *congruent*.
 
 Modulo calculates the remainder when dividing the number by the prime number. For example, if our modulo is 7, the number 12 is *congruent* to 5 i.e. $12 \pmod 7 = 5$, and the number 14 is congruent to 0. Similarly, when we add two numbers, say 3 + 5, the resulting sum of 8 is congruent to 1 (8 mod 7 = 1). The animation below illustrates this:
 
@@ -28,6 +28,8 @@ In this chapter, whenever we perform calculations, we’ll express our result as
 
 Note how 3 + 5 "overflowed" the limit of 6. **In finite fields, overflow is not a bad thing, we define the overflowing behavior to be part of the calculation.** In a finite field modulo 7, 5 + 3 is defined to be 1.
 
+Underflows are handled also similarly. For example, $3 - 5 = - 2$, but in modulo 7 we get $5$ because $7 - 2 = 5$.
+
 ## How modular arithmetic works
 
 In a typical programming language, we write addition in a finite field as `(6 + 1) % 7 == 0`, but in mathematical notation, we typically say
@@ -38,7 +40,7 @@ Or more generally,
 
 $$c = a + b \pmod p$$
 
-where $a$ and $b$ are numbers in the finite field, $c$ is the remainder that maps any number $≥ p$ back in the set $\set{0, 1, …, p - 1}$.
+where $a$ and $b$ are numbers in the finite field, $c$ is the remainder that maps any number $≥ p$ and $< 0 $ back in the set $\set{0, 1, …, p - 1}$.
 
 The notation $\pmod p$ means *all* arithmetic is done modulo $p$. For example,
 
@@ -66,7 +68,7 @@ We refer to a number in a finite field as an "element."
 
 ## $p$ and the order of the field
 
-The number we take the modulus with we will call $p$. In all our examples it is a prime number. In the broader field of mathematics, $p$ might not necessarily be prime, but we will only concern ourselves with cases where $p$ is prime.
+The number we take the modulus with, we will call $p$. In all our examples it is a prime number. In the broader field of mathematics, $p$ might not necessarily be prime, but we will only concern ourselves with cases where $p$ is prime.
 
 Because of this restriction, the *order* of the field is always equal to $p$. The *order* is the number of elements in the field. The general term for the number we take the modulus with is the *characteristic* of the field.
 
@@ -91,11 +93,11 @@ In mathematics, the additive inverse of $a$ is a number $b$ such at $a + b = 0$.
 
 These additive inverse rules apply to finite fields also. Although we don’t have elements with negative signs like $-5$, some elements can “behave” like negative numbers with respect to each other using the modulo operator.
 
-In regular arithmetic, $-5$ is the number that, when added to $5$, results in $0$. If our finite field is $p = 7$, then $2$ can be considered $-5$ because $(5 + 2) \pmod 7 = 0$. Similarly, $5$ can be considered to be $-2$ because they are each other’s additive inverse. To be precise, $-2$ is congruent to $5$ or $-2 \equiv 5 \pmod 7$.
+In regular arithmetic, $-5$ is the number that, when added to $5$, results in $0$. If our finite field is $p = 7$, then $2$ can be considered to be $-5$ because $(5 + 2) \pmod 7 = 0$. Similarly, $5$ can be considered to be $-2$ because they are each other’s additive inverse. To be precise, $-2$ is congruent to $5$ or $-2 \equiv 5 \pmod 7$.
 
 To compute the additive inverse of an element, simply compute $p - a$ where $a$ is the element we are trying to find the additive inverse of. For example, to find the additive inverse of 14 modulo 23, we compute $23 - 14 = 9$. We can see $14 + 9 \pmod {23} = 0$. $p$ is congruent to zero, so this is equivalent to computing $-5$ as $0 - 5$.
 
-Just like real numbers:
+Just like with real numbers:
 
 - every element in a finite field has exactly one additive inverse
 - zero is its own additive inverse.
@@ -116,20 +118,21 @@ Although we do not have fractional numbers in finite fields, we can still find p
 
 For example, the multiplicative inverse of $4$ in the finite field $p = 7$ is $2$, because $4 * 2 = 8$, and $8 \pmod 7 = 1$. Thus, $2$ "behaves" like $1/4$ in the finite field, or to be precise, $1/4$ is congruent to $2 \pmod 7$.
 
-### General rules of multiplicative inverses:
+### General rules of multiplicative inverses in finite field arithmetic:
 
 - 0 does not have a multiplicative inverse
 - 1 is its own multiplicative inverse
 - Every number (except 0) has exactly one multiplicative inverse (which could be itself)
-- the element of value $(p - 1)$ is its own multiplicative inverse. For example in a finite field of $p = 103$, $1$ and $102$ are their own multiplicative inverses. In a finite field of $p = 23$, $1$ and $22$ are their own multiplicative inverses (the reason why is explained in the upcoming section). Another example: in the finite field modulo 5, 1 is it’s own inverse, and 4 is its own inverse. $4 \times 4 = 16$, and $16 \pmod 5 = 1$.
+- the element of value $(p - 1)$ is its own multiplicative inverse. For example in a finite field of $p = 103$, $1$ and $102$ are their own multiplicative inverses. In a finite field of $p = 23$, $1$ and $22$ are their own multiplicative inverses (the reason why is explained in the upcoming section). Another example: in the finite field modulo 5, 1 is its own inverse, and 4 is its own inverse. $4 \times 4 = 16$, and $16 \pmod 5 = 1$.
 
 ### Why element of value $p - 1$ is its own multiplicative inverse
 
-When we multiply $-1$ by itself, we get $1$. Therefore, $-1$ is its own multiplicative inverse for real numbers. The element of value $(p - 1)$ is congruent to $-1$. Therefore, we expect $(p - 1)$ to be its own multiplicative inverse, and indeed that it is the case.
+When we multiply $-1$ by itself, we get $1$. Therefore, $-1$ is its own multiplicative inverse for real numbers. The element of value $(p - 1)$ is congruent to $-1$. Therefore, we expect $(p - 1)$ to be its own multiplicative inverse, and indeed that is the case.
 
 As another way of seeing why $p - 1$ is its own multiplicative inverse, consider that $(p - 1)(p - 1) = p² - 2p + 1$. Since $p$ is congruent to $0$, then $p² - 2p + 1$ simplifies to $0^2 - 2*0 + 1 = 1$.
 
-**Solutions for arithmetic circuits over finite fields**
+#### Solutions for arithmetic circuits over finite fields
+
 If we consider the following arithmetic circuit over regular numbers, we expect `x = -1` to be only satisfying assignment.
 
 ```python
@@ -141,7 +144,7 @@ In a finite field, the satisfying assignment is the element congruent to $-1$, o
 
 ### Computing the multiplicative inverse with Fermat’s Little Theorem
 
-Fermat’s Little Theorem states that
+[Fermat’s Little Theorem](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem) states that
 
 $$
 a^{p}=a\pmod p, a\neq0
@@ -175,7 +178,7 @@ Some examples:
 
 The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
 
-In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, Fermat’s Little Theorem can be used.
+In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
 
 ## Computing the multiplicative inverse with Python
 
@@ -198,9 +201,9 @@ assert (5 * 7) % p == 1
 
 ## The addition of multiplicative inverses is consistent with "regular" addition of fractions
 
- In a finite field of `p = 7`, the numbers 2 and 4 are multiplicative inverses of each other because $(2 \times 4) \pmod 7 = 1$. This means that in the finite field $p = 7$, $4$ is congruent to $1/2$ and $2$ is congruent to $1/4$.
+In a finite field of `p = 7`, the numbers 2 and 4 are multiplicative inverses of each other because $(2 \times 4) \pmod 7 = 1$. This means that in the finite field $p = 7$, $4$ is congruent to $1/2$ and $2$ is congruent to $1/4$.
 
-We say $4$ congruent to $1/2$ in the finite field of $p = 7$ because $2 \times \mathsf{mul\_inv}(2) = 1$. The multiplicative inverse of $2$ is $4$ in this finite field, so we can treat $4$ like $1/2$.
+We say $4$ is congruent to $1/2$ in the finite field of $p = 7$ because $2 \times \mathsf{mul\_inv}(2) = 1$. The multiplicative inverse of $2$ is $4$ in this finite field, so we can treat $4$ like $1/2$.
 
 With real numbers, if we add $1/2 + 1/2$, we expect to get $1$. The same thing happens in a finite field. Since $4$ "behaves like" $1/2$, we expect $4 + 4 \pmod 7 = 1$, and indeed it does.
 
@@ -228,9 +231,7 @@ def compute_field_element_from_fraction(num, den, p):
 
 It is not possible to do this when the denominator is a multiple of the `p`. For example, $1/7$ cannot be represented in the finite field $p = 7$ because `pow(7, -1, 7)` has no solution. The modulo is taking the remainder after division, and the remainder of $7/7$ is zero, or more generally, $7/d$ is zero when $d$ is a multiple of $7$. The multiplicative inverse means we can multiply a number and its inverse together to get $1$, but if one of the numbers is zero, there is nothing we can multiply by zero to get 1.
 
-**Exercise:** run `pow(7, -1, 7)` in Python. You should see an exception get thrown, `ValueError: base is not invertible for the given modulus`.
-
-7 mod 7 equals zero. There is nothing we can multiply by zero to get 1.
+**Exercise:** run `pow(7, -1, 7)` in Python. You should see an exception get thrown, `ValueError: base is not invertible for the given modulus`. $7$ mod $7$ equals zero. There is nothing we can multiply by zero to get $1$.
 
 ### Finite field "division" does not suffer from precision loss
 
@@ -275,7 +276,7 @@ However, if we have a binary representation of the field element, then we can ch
 
 ## Finite field library in Python
 
-Because it can be a bit tedious to keep writing `pow` and `% p` in Python, the reader may wish to use the [galois library](https://pypi.org/project/galois/) instead (inite fields are sometimes called Galois fields, pronounced “Gal-wah”). It can be installed with `python3 -m pip install galois`.
+Because it can be a bit tedious to keep writing `pow` and `% p` in Python, the reader may wish to use the [galois library](https://pypi.org/project/galois/) instead (finite fields are sometimes called Galois fields, pronounced “Gal-wah”). It can be installed with `python3 -m pip install galois`.
 
 Below, we translate the addition of fractions code from the above section $(1/2 + 1/3 = 1/6)$ to use the `galois` library instead. The library overwrites the math operators to work in a finite field:
 
@@ -301,7 +302,7 @@ assert negative_two + GF(2) == 0
 
 ## The multiplication of fractions is also consistent
 
-Let’s use finite field `p = 11` for this example.
+Let’s use a finite field `p = 11` for this example.
 
 With regular numbers we know that $1/3 * 1/2 = 1/6$.
 
@@ -429,7 +430,7 @@ list(sqrtmod_prime_power(5, 11, 1)) # [4, 7]
 # square roots generally have two solutions. 4 and 7 are the square roots of 5 (mod 11)
 ```
 
-When `p` can be written as `4k + 3` where `*k*` is an integer, then the modular square root can be computed as follows:
+When `p` can be written as `4k + 3` where `k` is an integer, then the modular square root can be computed as follows:
 
 ```python
 def mod_sqrt(x, p):
@@ -438,7 +439,7 @@ def mod_sqrt(x, p):
 	return pow(x, exponent, p) # x ^ e % p
 ```
 
-The function above returns one of the square roots of of x modulo p. The other square root can be computed by calculating the additive inverse of the value returned. If the prime number is not of the form `4k + 3` then the [Tonelli-Shanks algorithm](https://en.wikipedia.org/wiki/Tonelli–Shanks_algorithm) must be used to compute the modular square root (which the libnum library above implements).
+The function above returns one of the square roots of x modulo p. The other square root can be computed by calculating the additive inverse of the value returned. If the prime number is not of the form `4k + 3` then the [Tonelli-Shanks algorithm](https://en.wikipedia.org/wiki/Tonelli–Shanks_algorithm) must be used to compute the modular square root (which the libnum library above implements).
 
 **The implication for this is that the arithmetic circuit `x * x === y` may have two solutions.** For example, in a finite field `p = 11`, it might seem that the arithmetic circuit `x * x === 4` only admits the value 2 because -2 is not a finite field element. However, that assumption is very wrong! The assignment `x = 9`, which is congruent to -2, also satisfies the circuit.
 
@@ -446,7 +447,7 @@ The function above returns one of the square roots of of x modulo p. The other s
 
 ## Linear systems of equations in finite fields
 
-As noted in the previous chapter, an arithmetic circuit is essentially a system of equations. Linear systems of equations in a finite field share a lot of properties as a linear system of equation over regular numbers. However, there are some differences which may initially be unexpected. Since arithmetic circuits are computed over finite fields, we must understand where these surprising deviations may be.
+As noted in the previous chapter, an arithmetic circuit is essentially a system of equations. Linear systems of equations in a finite field share a lot of properties with a linear system of equations over regular numbers. However, there are some differences which may initially be unexpected. Since arithmetic circuits are computed over finite fields, we must understand where these surprising deviations may be.
 
 A [linear system of equations](https://math.libretexts.org/Bookshelves/Algebra/Algebra_and_Trigonometry_1e_(OpenStax)/11%3A_Systems_of_Equations_and_Inequalities/11.01%3A_Systems_of_Linear_Equations_-_Two_Variables) is a collection of straight-line equations with a set of unknowns (variables) that we try to solve together. To find the unique solution to a system of linear equations, we must find a numerical value for each variable that will satisfy all equations in the system simultaneously.
 
@@ -466,11 +467,11 @@ Linear systems of equations with real numbers either have:
 
 Finite field systems of equations also have
 
-1. no solution
+1. no solution or
 
-2. one solution
+2. one solution or
 
-3. or $p$ many solutions, i.e. as many solutions as the order of the field
+3. $p$ many solutions, i.e. as many solutions as the order of the field
 
 **However, just because a linear system of equations over real numbers has zero, one, or infinite solutions it *does not imply* that the same linear system of equations over a finite field will also have zero, one or, `p` many solutions.**
 
@@ -549,7 +550,7 @@ Recall that dividing by a number is equivalent to multiplying by its multiplicat
 
 The multiplicative inverse of `a` is the value `b` such that `a * b = 1`. However, if `a = 0` (or any value congruent to it) then there is no solution for `b`. So, the expressions we wrote for the solutions in the real numbers can’t be translated into elements of our finite field.
 
-Therefore the solutions (x, y) above are not part of the finite field. Hence, in a finite field `p = 11`, `x + 2x = 1` and `7x + 3y = 2` are parallel lines.
+Therefore the solutions (x, y) above are not part of the finite field. Hence, in a finite field `p = 11`, `x + 2y = 1` and `7x + 3y = 2` are parallel lines.
 
 To see this from another angle, we could solve the equations for y and get:
 
@@ -559,7 +560,7 @@ $$
 
 We saw in the previous section that 6 is the multiplicative inverse of 2, so the first equation has a "slope" of 6 in the the finite field. In the second equation, we compute the slope by computing 7 times the multiplicative inverse of 3: `(7 * pow(3, -1, 11)) % 11 = 6` . We now show that their slopes are the same in a finite field.
 
-The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an elemeny in the finite field of `p = 11`, we get the same value of 5:
+The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of 5:
 
 ```python
 import galois
@@ -616,7 +617,7 @@ For the finite field we are using, our constraints are redundant even though the
 
 In the chapter on Arithmetic circuits, we used the polynomial `x(x - 1) === 0` to enforce that `x` can only be 0 or 1. This could be written as a polynomial equation. To do so, we fully expand our expression until it’s expressed as separate powers of x, each multiplied by a coefficient. In this case: `x² - x === 0`.
 
-That assumption that the polynomial `x² - x === 0` only has solutions 0 or 1 in a finite field (as well as with real numbers) is sound in this case. However, in general, one should not assume that the roots of a polynomial over real numbers has the same roots in a finite field. We will show some counterexamples later.
+The assumption that the polynomial `x² - x === 0` only has solutions 0 or 1 in a finite field (as well as with real numbers) is sound in this case. However, in general, one should not assume that the roots of a polynomial over real numbers has the same roots in a finite field. We will show some counterexamples later.
 
 Nevertheless, polynomials in finite fields share a lot of properties with polynomials over real numbers:
 
@@ -643,7 +644,7 @@ Below, we plot $y = x² + 1$ in the finite field $p = 17$. In real numbers, $y =
 
 ![Plot of y = x^2 + 1 mod 17](https://static.wixstatic.com/media/706568_c1a9510ce859456d8a20fb705c35c604~mv2.png/v1/fill/w_1436,h_871,al_c,q_90,enc_auto/706568_c1a9510ce859456d8a20fb705c35c604~mv2.png)
 
-Let’s now explain why $y = x² + 1$ does not have roots in real numbers but does have roots in the finite field $p = 17$. In the finite field $p = 17$, 17 is congruent zero. So if we plug a value into $x$ such that $x² + 1$ becomes $17$, then the polynomial will output zero, not $17$. We can solve $x² + 1 = 17$ for $x² = 17 - 1 = 16$. In a finite field of $p = 17$, $x² = 16$ has solutions $4$ and $13$. Therefore, $y = x² + 1$ has roots $4$ and $13$ in the finite field $p = 17$.
+Let’s now explain why $y = x² + 1$ does not have roots in real numbers but does have roots in the finite field $p = 17$. In the finite field $p = 17$, 17 is congruent to zero. So if we plug a value into $x$ such that $x² + 1$ becomes $17$, then the polynomial will output zero, not $17$. We can solve $x² + 1 = 17$ for $x² = 17 - 1 = 16$. In a finite field of $p = 17$, $x² = 16$ has solutions $4$ and $13$. Therefore, $y = x² + 1$ has roots $4$ and $13$ in the finite field $p = 17$.
 
 ### Polynomials with real roots may have no roots in a finite field
 
@@ -709,7 +710,7 @@ print(p3 * p4)
 # x^2 + 100x + 2
 ```
 
-Note that `p3` and `p4` are degree 1 polynomials and there product is a degree 2 polynomial.
+Note that `p3` and `p4` are degree 1 polynomials and their product is a degree 2 polynomial.
 
 ### Finding the roots of a polynomials in a finite field
 
