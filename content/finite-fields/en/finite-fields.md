@@ -447,7 +447,7 @@ The function above returns one of the square roots of x modulo p. The other squa
 
 ## Linear systems of equations in finite fields
 
-As noted in the previous chapter, an arithmetic circuit is essentially a system of equations. Linear systems of equations in a finite field share a lot of properties as a linear system of equation over regular numbers. However, there are some differences which may initially be unexpected. Since arithmetic circuits are computed over finite fields, we must understand where these surprising deviations may be.
+As noted in the previous chapter, an arithmetic circuit is essentially a system of equations. Linear systems of equations in a finite field share a lot of properties with a linear system of equations over regular numbers. However, there are some differences which may initially be unexpected. Since arithmetic circuits are computed over finite fields, we must understand where these surprising deviations may be.
 
 A [linear system of equations](https://math.libretexts.org/Bookshelves/Algebra/Algebra_and_Trigonometry_1e_(OpenStax)/11%3A_Systems_of_Equations_and_Inequalities/11.01%3A_Systems_of_Linear_Equations_-_Two_Variables) is a collection of straight-line equations with a set of unknowns (variables) that we try to solve together. To find the unique solution to a system of linear equations, we must find a numerical value for each variable that will satisfy all equations in the system simultaneously.
 
@@ -467,11 +467,11 @@ Linear systems of equations with real numbers either have:
 
 Finite field systems of equations also have
 
-1. no solution
+1. no solution or
 
-2. one solution
+2. one solution or
 
-3. or $p$ many solutions, i.e. as many solutions as the order of the field
+3. $p$ many solutions, i.e. as many solutions as the order of the field
 
 **However, just because a linear system of equations over real numbers has zero, one, or infinite solutions it *does not imply* that the same linear system of equations over a finite field will also have zero, one or, `p` many solutions.**
 
@@ -550,7 +550,7 @@ Recall that dividing by a number is equivalent to multiplying by its multiplicat
 
 The multiplicative inverse of `a` is the value `b` such that `a * b = 1`. However, if `a = 0` (or any value congruent to it) then there is no solution for `b`. So, the expressions we wrote for the solutions in the real numbers can’t be translated into elements of our finite field.
 
-Therefore the solutions (x, y) above are not part of the finite field. Hence, in a finite field `p = 11`, `x + 2x = 1` and `7x + 3y = 2` are parallel lines.
+Therefore the solutions (x, y) above are not part of the finite field. Hence, in a finite field `p = 11`, `x + 2y = 1` and `7x + 3y = 2` are parallel lines.
 
 To see this from another angle, we could solve the equations for y and get:
 
@@ -560,7 +560,7 @@ $$
 
 We saw in the previous section that 6 is the multiplicative inverse of 2, so the first equation has a "slope" of 6 in the the finite field. In the second equation, we compute the slope by computing 7 times the multiplicative inverse of 3: `(7 * pow(3, -1, 11)) % 11 = 6` . We now show that their slopes are the same in a finite field.
 
-The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an elemeny in the finite field of `p = 11`, we get the same value of 5:
+The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of 5:
 
 ```python
 import galois
@@ -617,7 +617,7 @@ For the finite field we are using, our constraints are redundant even though the
 
 In the chapter on Arithmetic circuits, we used the polynomial `x(x - 1) === 0` to enforce that `x` can only be 0 or 1. This could be written as a polynomial equation. To do so, we fully expand our expression until it’s expressed as separate powers of x, each multiplied by a coefficient. In this case: `x² - x === 0`.
 
-That assumption that the polynomial `x² - x === 0` only has solutions 0 or 1 in a finite field (as well as with real numbers) is sound in this case. However, in general, one should not assume that the roots of a polynomial over real numbers has the same roots in a finite field. We will show some counterexamples later.
+The assumption that the polynomial `x² - x === 0` only has solutions 0 or 1 in a finite field (as well as with real numbers) is sound in this case. However, in general, one should not assume that the roots of a polynomial over real numbers has the same roots in a finite field. We will show some counterexamples later.
 
 Nevertheless, polynomials in finite fields share a lot of properties with polynomials over real numbers:
 
@@ -644,7 +644,7 @@ Below, we plot $y = x² + 1$ in the finite field $p = 17$. In real numbers, $y =
 
 ![Plot of y = x^2 + 1 mod 17](https://static.wixstatic.com/media/706568_c1a9510ce859456d8a20fb705c35c604~mv2.png/v1/fill/w_1436,h_871,al_c,q_90,enc_auto/706568_c1a9510ce859456d8a20fb705c35c604~mv2.png)
 
-Let’s now explain why $y = x² + 1$ does not have roots in real numbers but does have roots in the finite field $p = 17$. In the finite field $p = 17$, 17 is congruent zero. So if we plug a value into $x$ such that $x² + 1$ becomes $17$, then the polynomial will output zero, not $17$. We can solve $x² + 1 = 17$ for $x² = 17 - 1 = 16$. In a finite field of $p = 17$, $x² = 16$ has solutions $4$ and $13$. Therefore, $y = x² + 1$ has roots $4$ and $13$ in the finite field $p = 17$.
+Let’s now explain why $y = x² + 1$ does not have roots in real numbers but does have roots in the finite field $p = 17$. In the finite field $p = 17$, 17 is congruent to zero. So if we plug a value into $x$ such that $x² + 1$ becomes $17$, then the polynomial will output zero, not $17$. We can solve $x² + 1 = 17$ for $x² = 17 - 1 = 16$. In a finite field of $p = 17$, $x² = 16$ has solutions $4$ and $13$. Therefore, $y = x² + 1$ has roots $4$ and $13$ in the finite field $p = 17$.
 
 ### Polynomials with real roots may have no roots in a finite field
 
@@ -710,7 +710,7 @@ print(p3 * p4)
 # x^2 + 100x + 2
 ```
 
-Note that `p3` and `p4` are degree 1 polynomials and there product is a degree 2 polynomial.
+Note that `p3` and `p4` are degree 1 polynomials and their product is a degree 2 polynomial.
 
 ### Finding the roots of a polynomials in a finite field
 
