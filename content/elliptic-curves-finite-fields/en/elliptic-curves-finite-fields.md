@@ -81,13 +81,13 @@ To solve the equation above, and determine which $(x, y)$ points are on the curv
 ### Modular square roots
 We use the [Tonelli Shanks Algorithm](https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm) to compute modular square roots. You can read up on how the algorithm works if you are curious, but for now you can treat it as a black box that computes the mathematical square root of a field element over a modulus, or lets you know if the square root does not exist.
 
-For example, the square root of 5 modulo 11 is 4 $(4 \times 4 \mod 11 = 5)$, but there is no square root of 6 modulo 11. (The reader is encourage to discover this is true via brute force).
+For example, the square root of 5 modulo 11 is 4 $(4 \times 4 \mod 11 = 5)$, but there is no square root of 6 modulo 11. (The reader is encouraged to discover this is true via brute force).
 
 Square roots often have two solutions, a positive and a negative one. Although we don’t have numbers with a negative sign in a finite field, we still have a notion of "negative numbers" in the sense of having an inverse.
 
 You can find code online to implement the algorithm described above, but to avoid putting large chunks of code in this tutorial, we will install a Python library instead.
 
-For example, the square root of 5 modulo 11 is 4 (4 × 4 mod 11 = 5), but there is no square root of 6 modulo 11. (The reader is encourage to discover this is true via brute force).
+For example, the square root of 5 modulo 11 is 4 (4 × 4 mod 11 = 5), but there is no square root of 6 modulo 11. (The reader is encouraged to discover this is true via brute force).
 
 Square roots have two solutions, a positive and a negative one. Although we don’t have numbers with a negative sign in a finite field, we still have a notion of “negative numbers” in the sense of having an inverse.
 
