@@ -11,7 +11,7 @@ will be balanced if the vector $\mathbf{a}$ satisfies the equation, and unbalanc
 The scheme shown here is not a secure ZK Proof, but it is a stepping stone towards showing how Groth16 works.
 
 ## A Concrete Example
-To make this a little less abstract, let’s say that matrices of the Rank 1 Constraint System (R1CS) $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have 3 rows and 4 columns.
+To make this a little less abstract, let’s say that matrices of the [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have 3 rows and 4 columns.
 
 $$\mathbf{L}\mathbf{a} \circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$$
 
@@ -72,7 +72,17 @@ $$
 h(x)=\frac{\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x) - \sum_{i=1}^4a_iw_i(x)}{t(x)}
 $$
 
-Note that $h(x)$ can have at most degree 1 in our example. The highest degree $\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x)$ can have is 4 (degree 2 times degree 2), the lowest degree $\sum_{i=1}^4a_iw_i(x)$ can have is zero (a constant). Since $t(x)$ has degree 3, the highest degree the ratio can have is 1. In general, the highest degree $h(x)$ can have is $n - 2$, where $n$ is the number of rows in the R1CS.
+### The degrees of the polynomials in the QAP with respect to the size of the R1CS
+A couple observations about the degrees of the polynomials in the general case:
+- The degree of $u(x)$ and $v(x)$ could be as as high as $n - 1$ because they interpolates $n$ points, where $n$ is the number of rows in the R1CS.
+- The degree of $w(x)$ could be as low as 0 if the sum of the polynomials $\sum_{i=0}^m a_iw_i(x)$ adds up to the zero polynomial, that is, the coefficients additively cancel each other out.
+- $t(x)$ is degree $n$ by definition.
+- Multiplying polynomials adds their degrees together, and dividing polynomails subtracts their degrees.
+
+Therefore, h(x) will be at most $n - 2$ because 
+
+$$\underbrace{n - 1}_{
+\deg{u(x)}} + \underbrace{n - 1}_{\deg{v(x)}} - \underbrace{n}_{\deg{t(x)}} = n - 2$$
 
 ## Expanding the terms
 
