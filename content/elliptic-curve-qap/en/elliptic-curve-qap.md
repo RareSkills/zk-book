@@ -72,7 +72,7 @@ $$
 h(x)=\frac{\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x) - \sum_{i=1}^4a_iw_i(x)}{t(x)}
 $$
 
-Note that $h(x)$ can have at most degree 1 in our example. The highest degree $\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x)$ can have is 4 (degree 2 times degree 2), the lowest degree $\sum_{i=1}^4a_iw_i(x)$ can have is zero (a constant). Since $t(x)$ has degree 3, the highest degree the ratio can have is 1. In general, the highest degree $h(x)$ can have is $n - 2$, where $n$ is the number of rows in the R1CS. This is due to the fact that if we have $n$ rows i.e. $n$ number of **arithmetic constraints** then we would be having $u_i(x)$ to be of degree = $n - 1$ and similarly for $v_i(x)$ to be of degree = $n - 1$. On the other hand $t(x)$ is of degree = $n$ as per the definition and lowest degree of $w_i(x)$ is $0$. In that case, $deg(h(x))_{max}$ would be
+Note that $h(x)$ can have at most degree 1 in our example. The highest degree $\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x)$ can have is 4 (degree 2 times degree 2), the lowest degree $\sum_{i=1}^4a_iw_i(x)$ can have is zero (a constant). Since $t(x)$ has degree 3, the highest degree the ratio can have is 1. In general, the highest degree $h(x)$ can have is $n - 2$, where $n$ is the number of rows in the R1CS. This is due to the fact that if we have $n$ rows i.e. $n$ number of arithmetic constraints then we would be having $u_i(x)$ to be of degree = $n - 1$ and similarly for $v_i(x)$ to be of degree = $n - 1$. On the other hand $t(x)$ is of degree = $n$ as per the definition and lowest degree of $w_i(x)$ is $0$. In that case, $deg(h(x))_{max}$ would be
 
 $$\underbrace{n - 1}_{
 \deg{u(x)}} + \underbrace{n - 1}_{\deg{v(x)}} - \underbrace{n}_{\deg{t(x)}} = \underbrace{n-2}_{deg(h(x))_{max}}$$
