@@ -24,7 +24,7 @@ $$\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x) = \sum_{i=1}^4a_iw_i(x) + h(x)t(x)$
 ## Notation and Preliminaries
 We refer to the generators elliptic curve points in the groups $\mathbb{G}_1$ and $\mathbb{G}_2$ as $G_1$ and $G_2$ respectively. An element in $\mathbb{G}_1$ is denoted as $[X]_1$. An element in $\mathbb{G}_2$ is denoted as $[X]_2$. Where there might be ambiguity with the subscripts referring to indices in a list, we say $X \in \mathbb{G}_1$ or $X \in \mathbb{G}_2$. An [elliptic curve pairing](https://www.rareskills.io/post/bilinear-pairing) between two points is denoted as $[X]_1 \bullet [Y]_2$.
 
-Let $\mathbf{L}_{(*,j)}$ be the $j$-th column of $\mathbf{L}$. In our example, the rows will be $(1,2,3)$ and the columns $(1,2,3,4)$. Let $\mathcal{L}(\mathbf{L}_{(*,j)})$ be the polynomial obtained from running Lagrange interpolation on the $j$-th column of $\mathbf{L}$ using the $x$ values $(1,2,3,4)$ and the $y$ values being the values of the $j$-th column.
+Let $\mathbf{L}_{(*,j)}$ be the $j$-th column of $\mathbf{L}$. In our example, the rows will be $(1,2,3)$ and the columns $(1,2,3,4)$. Let $\mathcal{L}(\mathbf{L}_{(*,j)})$ be the polynomial obtained from running Lagrange interpolation on the $j$-th column of $\mathbf{L}$ using the $x$ values $(1,2,3)$ and the $y$ values being the values of the $j$-th column.
 
 Since we have 4 columns, we obtain four polynomials from $\mathbf{L}$
 
