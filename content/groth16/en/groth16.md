@@ -29,7 +29,7 @@ t(x) = (x - 1)(x - 2)\dots(x - n)
 $$
 and
 $$
-h(x) = \frac{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) - \sum_{i=1}^n a_iw_i(x)}{t(x)}
+h(x) = \frac{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) - \sum_{i=1}^m a_iw_i(x)}{t(x)}
 $$
 
 If a third party creates a structured reference string (srs) via a powers of tau ceremony, then the prover can evaluate sum terms (the $\sum a_if_i(x)$ terms) in the QAP at a hidden point $\tau$. Let the structured reference strings be computed as follows:
@@ -61,8 +61,8 @@ The prover can evaluate their QAP on the trusted setup by computing:
 $$
 \begin{align*}
 [A]_1 &= \sum_{i=1}^m a_iu_i(\tau)\\
-[B]_2 &= \sum_{i=1}^ma_iv_i(\tau)\\
-[C]_1 &= \sum_{i=1}^n a_iw_i(\tau) + h(\tau)t(\tau)
+[B]_2 &= \sum_{i=1}^m a_iv_i(\tau)\\
+[C]_1 &= \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)
 \end{align*}
 $$
 
@@ -153,7 +153,7 @@ What we referred to as $[D]_{12}$ is simply $[\alpha]_1 \bullet [\beta]_2$.
 ### Re-deriving the proving and verification formulas
 To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solveable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
 
-$$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^n a_iw_i(x) + h(x)t(x)$$
+$$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
 Now consider what happens if we introduce terms $\theta$ and $\eta$ to the left hand side of the equation:
 
@@ -163,11 +163,11 @@ $$=\boxed{\theta\eta} + \boxed{\theta}\sum_{i=1}^m a_iv_i(x) + \boxed{\eta}\sum_
 We can substitute the rightmost terms using the original QAP definition:
 $$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}$$
 
-$$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^n a_iw_i(x) + h(x)t(x)}$$
+$$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iw_i(x) + h(x)t(x)}$$
 
 Now we can introduce an "expanded" QAP with the following definition:
 
-$$(\theta+\sum_{i=1}^m u_i(x))(\eta +\sum_{i=1}^m v_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^n a_iw_i(x) + h(x)t(x)$$
+$$(\theta+\sum_{i=1}^m u_i(x))(\eta +\sum_{i=1}^m v_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
 As a sneak peak to where we are going, if we replace $\theta$ with $[\alpha]_1$ and $\eta$ with $[\beta]_2$, we get updated verification formula from earlier:
 
@@ -175,7 +175,7 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [C]_1\bullet G_
 
 where
 
-$$\underbrace{(\alpha+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{(\beta +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^n a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
+$$\underbrace{(\alpha+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{(\beta +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
 
 The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
@@ -192,7 +192,7 @@ However, it isn't currently possible to compute $[C]_1$ without knowing $\alpha$
 
 Instead, the trusted setup needs to precompute $m$ polynomials for the problematic $C$ term of the expanded QAP.
 
-$$\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^n a_iw_i(\tau)$$
+$$\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau)$$
 
 With some algebraic manipulation, we combine the sum terms into a single sum:
 
