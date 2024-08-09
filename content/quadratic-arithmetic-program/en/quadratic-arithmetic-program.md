@@ -593,13 +593,13 @@ Therefore, we will replace $b(x)$ with $h(x)t(x)$ in our equation.
 Thus, our equality will become
 
 $$
-u(x)v(x) = v(x) + h(x)t(x)
+u(x)v(x) = w(x) + h(x)t(x)
 $$
 
 We can compute $h(x)$ using basic algebra:
 
 $$
-h(x) = \frac{u(x)v(x) - v(x)}{t(x)}
+h(x) = \frac{u(x)v(x) - w(x)}{t(x)}
 $$
 
 ## QAP End-to-end
@@ -717,7 +717,7 @@ $$t(x) = (x - 1)(x - 2)(x - 3)$$
 
 and $h(x)$ will be
 
-$$h(x) = \frac{u(x)v(x) - v(x)}{t(x)}$$
+$$h(x) = \frac{u(x)v(x) - w(x)}{t(x)}$$
 
 The final formula for a QAP representation of the original R1CS is
 
