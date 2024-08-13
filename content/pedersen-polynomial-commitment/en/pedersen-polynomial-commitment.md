@@ -4,7 +4,7 @@ A polynomial commitment is a mechanism by which a prover can convince a verifier
 
 1. The prover sends to the verifier a *commitment* $C$ to the polynomial, "locking in" their polynomial.
 2. The verifier responds with a value $u$ they want the polynomial evaluated at.
-3. The prover responds with $y$ and $\pi$, where $y$ is the evaluation of $p(u)$ and $\pi$ is proof that the evaluation was correct.
+3. The prover responds with $y$ and $\pi$, where $y$ is the evaluation of $f(u)$ and $\pi$ is proof that the evaluation was correct.
 4. The verifier checks $C$, $u$, $y$, $\pi$ and accepts or rejects that the evaluation of the polynomial was valid.
 
 This commitment scheme does not require a trusted setup. However, the communication overhead is $O(n)$ as the prover must send a commitment for each coefficient in their polynomial.
@@ -15,19 +15,21 @@ The prover can commit to the polynomial by creating a [Pedersen Commitment](http
 
 For example, if we have polynomial
 
-$$p = c_0+c_1x+c_2x^2$$
+$$f(x) = f_0+f_1x+f_2x^2$$
+
+Where $f_0$ is the constant term, $f_1$ is linear coefficient, and $f_2$ is the quadratic coefficient.
 
 We can create a Pedersen commitment for each coefficient. We will need three blinding terms $\gamma_0$, $\gamma_1$, $\gamma_2$. For convenience, any scalar used for blinding will use a lower-case Greek letter. We always use the elliptic curve point $B$ for the blinding term. Our commitments are produced as follows:
 
 $$
 \begin{align*}
-C_0=c_0G+\gamma_0B \\
-C_1=c_1G+\gamma_1B \\
-C_2=c_2G+\gamma_2B \\
+C_0=f_0G+\gamma_0B \\
+C_1=f_1G+\gamma_1B \\
+C_2=f_2G+\gamma_2B \\
 \end{align*}
 $$
 
-The prover sends the tuple $(C_0, C_1, C_2)$ to the verifier.
+The prover sends the tuple $(C_0, C_1, C_2)$ to the verifier. These are essentially Pedersen commitments for each of the coefficients of the polynomial $f(x)$.
 
 ### Verifier chooses $u$
 The verifier chooses their value for $u$ and sends that to the prover.
@@ -36,7 +38,7 @@ The verifier chooses their value for $u$ and sends that to the prover.
 The prover compute the original polynomial as:
 
 $$
-y = c_0 + c_1u + c_2u^2
+y = f_0 + f_1u + f_2u^2
 $$
 
 ### Prover evaluates the blinding terms
@@ -65,10 +67,10 @@ If we expand the elliptic curve points to their underlying values, we see the eq
 $$
 \begin{align*}
 C_0 + C_1u + C_2u^2 &= yG + \pi B \\
-(c_0G + \gamma_0B) + (c_1G + \gamma_1B)u + (c_2G + \gamma_2B)u^2 &= (c_0 + c_1u + c_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
-c_0G + \gamma_0B + c_1Gu + \gamma_1Bu + c_2Gu^2 + \gamma_2Bu^2 &= (c_0 + c_1u + c_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
-c_0G + c_1Gu + c_2Gu^2 + \gamma_0B + \gamma_1Bu + \gamma_2Bu^2 &= (c_0 + c_1u + c_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
-(c_0 + c_1u + c_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B &= (c_0 + c_1u + c_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
+(f_0G + \gamma_0B) + (f_1G + \gamma_1B)u + (f_2G + \gamma_2B)u^2 &= (f_0 + f_1u + f_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
+f_0G + \gamma_0B + f_1Gu + \gamma_1Bu + f_2Gu^2 + \gamma_2Bu^2 &= (f_0 + f_1u + f_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
+f_0G + f_1Gu + f_2Gu^2 + \gamma_0B + \gamma_1Bu + \gamma_2Bu^2 &= (f_0 + f_1u + f_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
+(f_0 + f_1u + f_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B &= (f_0 + f_1u + f_2u^2)G + (\gamma_0 + \gamma_1u + \gamma_2u^2)B \\
 \end{align*}
 $$
 
@@ -83,24 +85,24 @@ Without loss of generality, let's say the prover sends the correct commitments f
 
 We say without loss of generality because there is a mismatch between the coefficients sent in the commitments and the coefficients used to evaluate the polynomial.
 
-To do so, the prover sends $y'$ where $y' \neq c_0 + c_1u + c_2u^2$.
+To do so, the prover sends $y'$ where $y' \neq f_0 + f_1u + f_2u^2$.
 
 Using the final equation from the previous section, we see that the prover must satisfy:
 
 $$
-(c_0 + c_1u + c_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B=y'G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B
+(f_0 + f_1u + f_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B=y'G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B
 $$
 
 The $G$ terms of the equation are clearly unbalanced. The other "lever" the prover can pull is adjusting the $\pi$ that they send.
 
 $$
-(c_0 + c_1u + c_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B=y'G + \boxed{\pi'}B
+(f_0 + f_1u + f_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B=y'G + \boxed{\pi'}B
 $$
 
-Since $y' \neq c_0 + c_1u + c_2u^2$ the malicious prover must rebalance the equation by picking a term $\pi'$ that accounts for the mismatch in the $G$ terms. The prover can try to solve for $\pi'$ with 
+Since $y' \neq f_0 + f_1u + f_2u^2$ the malicious prover must rebalance the equation by picking a term $\pi'$ that accounts for the mismatch in the $G$ terms. The prover can try to solve for $\pi'$ with 
 
 $$
-\pi'B = (c_0 + c_1u + c_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B - y'G
+\pi'B = (f_0 + f_1u + f_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B - y'G
 $$
 
 But solving this equation requires the malicious prover to know the discrete logs of $G$ and $B$.
@@ -109,9 +111,9 @@ For example, if we know that the discrete log of $B$ is $b$ and the discrete log
 
 $$
 \begin{align*}
-\pi'b = (c_0 + c_1u + c_2u^2)g+(\gamma_0 + \gamma_1u+\gamma_2u^2)b - y'g \\
+\pi'b = (f_0 + f_1u + f_2u^2)g+(\gamma_0 + \gamma_1u+\gamma_2u^2)b - y'g \\
 \\
-\pi' = \frac{(c_0 + c_1u + c_2u^2)g+(\gamma_0 + \gamma_1u+\gamma_2u^2)b - y'g}{b}
+\pi' = \frac{(f_0 + f_1u + f_2u^2)g+(\gamma_0 + \gamma_1u+\gamma_2u^2)b - y'g}{b}
 \end{align*}
 $$
 
