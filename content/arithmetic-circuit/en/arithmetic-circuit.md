@@ -10,7 +10,7 @@ This article continues the one linked above, so please read that first.
 
 One disadvantage of using a Boolean circuit to represent a solution to a problem is that it can be verbose when representing arithmetic operations, such as addition or multiplication.
 
-For example, if we want to express $a + b = c$ where $a = 16, b = 8, c = 24$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number a, as shown below:  
+For example, if we want to express $a + b = c$ where $a = 8, b = 4, c = 12$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number a, as shown below:  
 
 - `a₃, a₂, a₁, a₀`
   - a = 1000
@@ -157,7 +157,7 @@ Aside from the convenience of using fewer variables in some circumstances, arith
 
 ### a + b = c
 
-Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 24`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each (in this example). In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. This reduction in the number of inputs, and also in the size of the circuit, is the reason we opt to use arithmetic circuits for ZK applications.
+Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 12`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each (in this example). In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. This reduction in the number of inputs, and also in the size of the circuit, is the reason we opt to use arithmetic circuits for ZK applications.
 
 ### Similarities between systems of equations and arithmetic circuits
 
