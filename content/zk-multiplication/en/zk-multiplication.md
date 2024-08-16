@@ -1,4 +1,4 @@
-# Zero Knowledge Polynomial and Constant Multiplication
+# Zero Knowledge Multiplication
 
 Using the polynomial commitment scheme from the previous chapter, a prover can show they have three polynomials $l(x)$, $r(x)$, and $t(x)$ and prove that $t(x) = l(x)r(x)$.
 

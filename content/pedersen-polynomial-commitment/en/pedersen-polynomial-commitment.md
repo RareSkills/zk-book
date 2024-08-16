@@ -78,6 +78,8 @@ In a sense, the prover is evaluating the polynomial using the coefficients to th
 
 The proof of correct evaluation is that the prover is able to separate the blinding terms from evaluation of the polynomial -- even though the prover does not know the discrete logs of $yG$ and $\pi B$.
 
+The following Python code illustrates the algorithm:
+
 ``` python
 import random
 from functools import reduce
