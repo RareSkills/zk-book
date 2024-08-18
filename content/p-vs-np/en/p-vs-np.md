@@ -14,12 +14,12 @@ This tutorial has three parts:
 ## Prerequisites
 We assume the reader is familiar with time complexity and big $\mathcal{O}$ notation.
 
-We say an algorithm takes polynomial time if it runs in $\mathcal{O}(nᶜ)$ time or better, where $n$ is the size of the input and $c$ is a non-negative constant. We may refer to algorithms that run in polynomial time or faster as *efficient algorithms* because their running time doesn't grow too quickly with the input size.
+We say an algorithm takes polynomial time if it runs in $\mathcal{O}(nᶜ)$ time or faster, where $n$ is the size of the input and $c$ is a non-negative constant. We may refer to algorithms that run in polynomial time or faster as *efficient algorithms* because their running time doesn't grow too quickly with the input size.
 
 We say an algorithm takes *exponential time* or is *expensive* if it runs in $\mathcal{O}(cⁿ)$ where $c$ is a constant greater than 1 and $n$ is the size of the input because the algorithm becomes exponentially slow as the size of the input increases.
 
 ## Part 1: Explaining the P vs NP problem
-### Problems in P are problems that are easy to solve and easy to verify solutions for
+### Problems in P are problems that are both easy to solve and easy to verify solutions for.
 
 Problems that can be solved in polynomial time and whose solutions can be verified in polynomial time are called problems in P.
 
@@ -32,16 +32,16 @@ We can efficiently sort a list, and we can efficiently verify that a list is sor
 - **Verifying:** We can verify the list is sorted by traversing the list and checking that each item is greater than its left neighbor, which would take $\mathcal{O}(n)$ time.
 
 #### P Example 2: Returning the index of a number in a list, if it occurs in the list
-We can efficiently search to see if a number is in a list and then even more efficiently verify that number is present if we know the index it is in.
+We can efficiently search to see if a number is in a list and then even more efficiently verify that the number is present if we know the index it is in.
 
 - **Solving:** For example, given the list `[8, 2, 1, 6, 7, 3]`, we need $\mathcal{O}(n)$ time to determine if the number `7` is in the list.
 
-- **Verifying:** But if we give you the list and say 7 is in index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify that the item is, in fact, in the list at that location.
+- **Verifying:** But if we give you the list and say 7 is at index 4, you can verify the number is in the list at that position in $\mathcal{O}(1)$ time. Searching for an item, if we aren't told its position, takes $\mathcal{O}(n)$ time in the general case since we have to search through the list. If we’re told the supposed location of the item, it takes $\mathcal{O}(1)$ time to verify that the item is, in fact, in the list at that location.
 
 #### P Example 3: Determining if two nodes in a graph are connected
 We can efficiently determine if two nodes in a graph are connected by using breadth-first search — start at a node, then visit all of its neighbors except nodes we’ve already visited, then search the neighbors of the neighbors, and so forth.
 
-- **Solving:** Discovering the path between nodes using breadth-first search will take $\mathcal{O}(n + e)$ time, where n is the number of nodes in the graph and e is the number of edges. The number of edges e cannot exceed $n^2$, so we can treat $\mathcal{O}(n + e)$ as $\mathcal{O}(n²)$ in the worst case.
+- **Solving:** Discovering the path between nodes using breadth-first search will take $\mathcal{O}(n + e)$ time, where $n$ is the number of nodes in the graph and $e$ is the number of edges. The number of edges $e$ cannot exceed $n^2$, so we can treat $\mathcal{O}(n + e)$ as $\mathcal{O}(n²)$ in the worst case.
 
 - **Verifying:** We can verify the proposed path is valid in $\mathcal{O}(n)$ time simply by following the proposed path to see if the two points really are connected by that path.
 
@@ -60,7 +60,7 @@ Problems that require exponential resources to solve and verify are called probl
 
 This class of problems has been researched extensively, yet no efficient algorithm to solve them has been discovered. Many researchers believe no efficient algorithm to solve these problems exists at all. If an efficient solution to these problems could be discovered, it would also be possible to reuse the algorithm to break all modern encryption and fundamentally alter computing as we know it.
 
-Despite significant incentives for finding efficient solutions to these problems, evidence suggests such solutions likely do not exist. These problems are so challenging you cannot provide easily verifiable proof (witness) even if you solve them correctly.
+Despite significant incentives for finding efficient solutions to these problems, evidence suggests such solutions likely do not exist. These problems are so challenging that you cannot provide easily verifiable proof (witness) even if you solve them correctly.
 
 #### Examples of problems in PSPACE
 ##### PSPACE Example 1: Finding the optimal Chess move
@@ -96,32 +96,32 @@ Any problem whose proposed solution (witness) can be quickly verified as correct
 Examples of problems in NP. These are explained in more detail below:
 - Computing the solution to a Sudoku puzzle — verifying the proposed solution to a Sudoku puzzle.
 - Computing the 3-coloring of a map (if it exists) — verifying a proposed 3-coloring of a map.
-- Finding an assignment to Boolean formula that results in true — verifying the proposed assignment causes the formula to result in true.
+- Finding an assignment to a Boolean formula that results in true — verifying the proposed assignment causes the formula to result in true.
 
 **Note:** NP stands for non-deterministic polynomial. We won’t get into the jargon about where that name came from; we’re just giving the name so the reader doesn’t mistakenly think it stands for "not polynomial time."
 
 #### Examples of problems in NP
 ##### NP Example 1: Sudoku
-In the game Sudoku, a player is given a 9x9 grid with some numbers filled in. The goal is for the player to fill in the rest of the grid with numbers 1-9 such that no number occurs more than once in any row, column, or 3x3 box (the ones outlined by bold lines). The following images from [Wikipedia](https://en.wikipedia.org/wiki/Sudoku) illustrate this. In the first image, we see the 9x9 grid as given to the player. In the second image, we see the player’s solution.
+In the game Sudoku, a player is given a $9 \times 9$ grid with some numbers filled in. The goal is for the player to fill in the rest of the grid with numbers 1-9 such that no number occurs more than once in any row, column, or $3 \times 3$ box (the ones outlined by bold lines). The following images from [Wikipedia](https://en.wikipedia.org/wiki/Sudoku) illustrate this. In the first image, we see the 9x9 grid as given to the player. In the second image, we see the player’s solution.
 
 ![An incomplete sudoku puzzle](https://static.wixstatic.com/media/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png)
 
 ![A completed sudoku puzzle](https://static.wixstatic.com/media/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png)
 
-Given a Sudoku puzzle *solution*, we can quickly verify the solution is correct simply by looping over the columns, rows, and 3x3 subgrids. The witness can be verified in polynomial time.
+Given a Sudoku puzzle *solution*, we can quickly verify the solution is correct simply by looping over the columns, rows, and $3\times 3$ subgrids. The witness can be verified in polynomial time.
 
-However, *computing* the solution requires significantly more resources — there are an exponential number of combinations to search. For a 9x9 grid, this is not difficult for a computer. But suppose, instead, we allowed the Sudoku puzzle to be arbitrarily large: each side has size $n$, where $n$ is a multiple of 9. In that case, the difficulty of searching for the solution grows exponentially with $n$.
+However, *computing* the solution requires significantly more resources — there are an exponential number of combinations to search. For a $9\times 9$ grid, this is not difficult for a computer. However, if we allow the Sudoku puzzle to be arbitrarily large: each side has size $n$, where $n$ is a multiple of 9. In that case, the difficulty of finding the solution grows exponentially with $n$.
 
 ##### NP Example 2: Three-coloring a map
-Any 2D map of territories can be “colored” with four colors (see the [four color theorem](https://en.wikipedia.org/wiki/Four_color_theorem)). That is, we can assign a unique color (one of four colors) to each territory such that no neighboring territories share the same color. For example, the following image (from [Wikipedia](https://en.wikipedia.org/wiki/U.S._state#/media/File:Map_of_USA_with_state_names_2.svg)) shows the United States properly colored with four colors: pink, green, yellow, and red. Take a moment to scan the map and see for yourself that no two touching states have been given the same color:
+Any 2D map of territories can be “colored” with just four colors (see the [four color theorem](https://en.wikipedia.org/wiki/Four_color_theorem)). That is, we can assign a unique color (one of four colors) to each territory such that no neighboring territories share the same color. For example, the following image (from [Wikipedia](https://en.wikipedia.org/wiki/U.S._state#/media/File:Map_of_USA_with_state_names_2.svg)) shows the United States colored with four colors: pink, green, yellow, and red. Take a moment to look at the verify that no two touching states have been given the same color:
 
 ![A map of the United States colored with four colors](https://static.wixstatic.com/media/935a00_80bcbb69d39348819f674827b8c25691~mv2.png/v1/fill/w_400,h_246,al_c,lg_1,q_85,enc_auto/935a00_80bcbb69d39348819f674827b8c25691~mv2.png)
 
-The three coloring question asks if a map can be colored with three colors instead of four. Discovering a three-coloring (if it exists) is a computationally intensive search problem. However, verifying a *proposed* 3-coloring is easy: loop through each of the regions and check that the colors of the neighbors don’t match the proposed color of the territory currently being checked.
+The three-coloring problem asks whether a map can be colored using just three colors instead of four. Discovering a three-coloring (if it exists) is a computationally intensive search problem. However, verifying a *proposed* 3-coloring is easy: loop through each of the regions and check that no neighboring regions have the same color of the territory currently being checked.
 
-It turns out it is not possible to 3-color the United States.
+It turns out that it is not possible to 3-color the United States.
 
-The reasons a particular map cannot be 3 colored vary, but in the case of the United States, Nevada (the <span style="color:red">red</span> region in the map below) is surrounded by five territories. We pick the first color for Nevada, then we must alternate the neighbors' colors around Nevada. However, when we finish circling the neighbors of Nevada, we will end up with a territory having neighbors with three colors on its boundaries, leaving no valid color for the uncolored territory.
+The reasons a particular map cannot be 3 colored vary, but in the case of the United States, Nevada (the <span style="color:red">red</span> region in the map below) is surrounded by five territories. We color Nevada with one color, then we must alternate the colors of its neighboring territories. However, when we finish circling the neighbors of Nevada, we will end up with a territory having neighbors with three colors on its boundaries, leaving no valid color for the uncolored territory.
 
 ![A map showing Nevada and the surrounding states](https://static.wixstatic.com/media/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg/v1/fill/w_898,h_674,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg)
 
@@ -147,16 +147,16 @@ The table below summarizes the computational resources required for each class o
 | PSPACE | No Requirement | No Requirement |
 
 #### Hierarchy of Difficulty between P, NP, and PSPACE
-Any problem that requires exponential resources to verify the witness for is a PSPACE (or harder problem). If one has exponential resources to verify witnesses for PSPACE problems, they can trivially compute solutions for any P or NP problem. Therefore, all P and NP problems are a subset of PSPACE problems, as illustrated in the figure below.
+Any problem that requires exponential resources to verify the witness for is a PSPACE (or harder problem). If one has exponential resources to verify witnesses for PSPACE problems, that person can trivially compute solutions for any P or NP problem. Therefore, all P and NP problems are a subset of PSPACE problems, as illustrated in the figure below.
 
-That is, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify a subset of it:
+In other words, if you have a powerful enough computer to solve or verify a class of problem in the larger circle, you can solve or verify a subset of it:
 
 ![Hierarchy of computation complexity classes](https://static.wixstatic.com/media/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg/v1/fill/w_1022,h_766,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg)
 
 ### The P vs NP problem
-P is the class of problems that can be solved and verified efficiently, while NP is the class of problems that can be verified efficiently. The "P vs NP" question asks, simply, whether these two sets are the same.
+P is the class of problems that can be solved and verified efficiently, while NP is the class of problems that can be verified efficiently. The "P vs NP" question asks, simply, whether these two classes are the same.
 
-If P = NP, it would mean that whenever we can find an efficient method for verifying a solution, we can also find an efficient method for finding that solution. Remember that finding a solution is always at least as hard as verifying it. (By definition, solving means finding the correct answer, so an algorithm that solves the problem is also effectively verifying its answer at the same time).
+If P = NP, it would mean that whenever we can find an efficient method for verifying a solution, we can also find an efficient method for finding that solution. Remember that finding a solution is always at least as hard as verifying it. (By definition, solving a problem includes finding the correct answer, which means an algorithm that solves the problem is also verifying its answer in the process).
 
 If P = NP is true, that means there is an efficient algorithm for computing Sudoku puzzles (of arbitrary size) and finding if a three coloring exists. It also means there is an efficient algorithm to break most modern cryptographic algorithms.
 
@@ -212,7 +212,7 @@ out &= (T ∨ ¬ F ∨ ¬ T) ∧ (¬ F ∨ T ∨ F) ∧
 \end{align*}
 $$
 
-That was easy to verify, but discovering the solution for a very large Boolean formula could take exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may take exponential resources to find the solution, but it only takes polynomial time to verify the solution.
+That was easy to verify, but discovering the solution for a very large Boolean formula could require exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may require exponential resources to find the solution, but verifying it can be done in polynomial time.
 
 But we must emphasize: our use of Boolean formulas is not to solve them — only to verify proposed solutions for them.
 
@@ -321,7 +321,7 @@ Let’s call a Boolean expression that compares two binary numbers in the manner
 "comparison expression."
 
 ##### Checking if a list is sorted
-Given a Boolean formula to compare numbers of a fixed size, we would simply repeat the comparison expression for each pair of elements in the list and AND them together. The list is sorted if and only if the AND of all the comparison expressions are true.
+Given a Boolean formula to compare numbers of a fixed size, we can repeatedly apply the comparison expression to each pair of adjacent elements in the list and combine the comparison expressions using the AND operation. The list is sorted if and only if the AND of all the comparison expressions is true.
 
 Thus, we see that a witness that proves a list is sorted does not have to be the sorted list. It can also be the input to Boolean formula that we created above that results in the formula returning true.
 
@@ -462,7 +462,7 @@ Next, we iterate through the boundaries and compute a boundary constraint for th
 
 ¬(<span style="color:Green">NSW_G ∧ V_G</span>) ∧ ¬(<span style="color:#008aff">NSW_B ∧ V_B</span>) ∧ ¬(<span style="color:Red">NSW_R ∧ V_R</span>)
 
-We create a Boolean formula which is the Boolean AND of the 15 formulas above. Having an assignment to the variables that results in the result of the Boolean expression being true is equivalent to having a valid 3-coloring of Australia.
+We create a Boolean formula by taking the Boolean AND of the 15 formulas mentioned above.. Having an assignment to the variables that results in the result of the Boolean expression being true is equivalent to having a valid 3-coloring of Australia.
 
 In other words, if we know a valid 3-coloring for Australia, then we also know an assignment to the Boolean formula constructed above.
 
