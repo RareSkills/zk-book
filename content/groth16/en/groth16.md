@@ -21,7 +21,7 @@ $$
 From this, we can construct a Quadratic Arithmetic Program (QAP):
 
 $$
-\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^n a_iw_i(x) + h(x)t(x)
+\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(x)
 $$
 where
 $$
