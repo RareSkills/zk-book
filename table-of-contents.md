@@ -31,5 +31,6 @@ Optional Chapter: How the ECDSA Malleability Attack Works
 20. [x] Pedersen Commitments
 21. [x] Pedersen Polynomial Commitments
 22. [x] Zero Knowledge Multiplication (Without Pairings) 
+23. [x] Zero Knowledge Inner Product Argument
 
 TBA
