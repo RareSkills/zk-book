@@ -76,7 +76,7 @@ Given a structured reference string, how do we even know that they follow the st
 If the person doing the trusted setup also provides $\Theta=\tau G_2$, we can validate the structured reference string is indeed successive powers of  $\tau$.
 
 $$
-e(G_2, \Omega_i)\stackrel{?}=e(\Theta,\Omega_{i+1})
+e(\Theta, \Omega_i)\stackrel{?}=e(G_2,\Omega_{i+1})
 $$
 
 where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$.
