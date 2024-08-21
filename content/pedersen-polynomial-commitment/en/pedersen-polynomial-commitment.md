@@ -84,7 +84,7 @@ The following Python code illustrates the algorithm:
 import random
 from functools import reduce
 from py_ecc.bn128 import G1, add, eq, field_modulus, multiply
-# WARNING: Points are generated in this manner for convenience. In practice, the point's (x, y) value must be selected randomly and the discrete logs should never be known to anyone.
+# WARNING: Points are generated in this manner for convenience. In practice, the point's (g, b) value must be selected randomly and the discrete logs should never be known to anyone.
 g, b = random.randint(1, field_modulus - 1), random.randint(1, field_modulus - 1)
 G, B = multiply(G1, g), multiply(G1, b)
 
