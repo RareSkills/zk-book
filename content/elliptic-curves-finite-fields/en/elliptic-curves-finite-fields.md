@@ -277,7 +277,7 @@ The red text can be thought of as starting with the identity element, and how ma
 Here is an interesting observation: note that points that share the same x-value add up to 12, which corresponds to the identity element $(12 \mod 12 = 0)$. If we add the point $(4, 1)$, which is point 11 in our plot to $(4, 10)$, we will get the point at in infinity, which would be the 12th element in the group.
 
 ### The order is not the modulus
-In this example, the order of the group is 12, despite the formula for the elliptic curve being modulo 11. This will be stressed several times, but you should NOT assume that the modulus in the elliptic curve is the group order!
+In this example, the order of the group is 12 (total no. of elliptic curve points in our group), despite the formula for the elliptic curve being modulo 11. This will be stressed several times, but you should NOT assume that the modulus in the elliptic curve is the group order. However, you can estimate the curve’s order range from the field modulus itself using [Hasse's Theorem](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves).
 
 ### If the number of points is prime, then the addition of points behaves like a finite field
 
