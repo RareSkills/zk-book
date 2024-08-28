@@ -102,7 +102,7 @@ A useful mental model for the arithmetic circuit is that all signals are treated
 
 To drive the point home, we supply a visualization in the following video. All of the signals are inputs, and `===` is used to check instead of assign.
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_f4fb9d3d127c4735a718deffbd9fed70/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -245,7 +245,7 @@ The above equation is satisfied if and only if the product `xy` is equal to 2, 3
 
 The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neigboring territories as the video below illustrates:
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -325,7 +325,7 @@ As we will show shortly, during conversion to decimal, the most significant bit 
 
 The video below illustrate the conversion of 1101₂ to 13:
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -423,7 +423,7 @@ $$
 
 If we are working with binary numbers of a fixed size, $n$ bits, the number $2ⁿ⁻¹$ is special because we can easily assert an $n$ bit binary number is greater than or equal to $2ⁿ⁻¹$ — or less than it. We call $2ⁿ⁻¹$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2ⁿ⁻¹$:
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_adae25cac0e6414ab0643a5792a2ed52/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -431,7 +431,7 @@ By checking the most significant bit of an $n$ bit number, we can tell if that n
 
 If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum, we can quickly tell if $Δ$ is positive or negative. If $Δ$ is negative, then $2ⁿ⁻¹ + Δ$ must be less than $2ⁿ⁻¹$.
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_6b61fecfedb64a888f6538bc91707f40/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -439,7 +439,7 @@ If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum,
 
 If we replace $Δ$ with $u - v$ then the most significant bit of $2ⁿ⁻¹ + (u - v)$ tells us if $u ≥ v$ or $u < v$.
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_ea57bc6fb8c5493686c3dc4cf9123c72/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
