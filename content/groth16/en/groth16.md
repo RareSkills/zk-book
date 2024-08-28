@@ -151,7 +151,7 @@ $$
 What we referred to as $[D]_{12}$ is simply $[\alpha]_1 \bullet [\beta]_2$.
 
 ### Re-deriving the proving and verification formulas
-To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solveable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
+To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solvable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
 
 $$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
@@ -169,13 +169,13 @@ Now we can introduce an "expanded" QAP with the following definition:
 
 $$(\alpha+\sum_{i=1}^m u_i(x))(\beta +\sum_{i=1}^m v_i(x)) =\alpha\beta + \alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
-As a sneak peak to where we are going, if we multiply $\alpha$ with $G_1$ getting $[\alpha]_1$ and $\beta$ with $G_2$ getting $[\beta]_2$, we get updated verification formula from earlier:
+As a sneak peak to where we are going, if we multiply $\alpha$ with $G_1$ getting $[\alpha]_1$ and $\beta$ with $G_2$ getting $[\beta]_2$, we get updated verification formula from earlier:
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [C]_1\bullet G_2$$
 
 where
 
-$$\underbrace{([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
+$$\underbrace{([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}\bullet G_2$$
 
 The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
