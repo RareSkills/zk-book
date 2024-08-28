@@ -143,8 +143,8 @@ In practice, Groth16 doesn't use a term $[D]_{12}$. Instead, the trusted setup g
 
 $$
 \begin{align*}
-[αG]_1 &= α G_1 \\
-[βG]_2 &= β G_2
+[α]_1 &= α G_1 \\
+[β]_2 &= β G_2
 \end{align*}
 $$
 
