@@ -155,27 +155,27 @@ To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bul
 
 $$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
-Now consider what happens if we introduce terms $\theta$ and $\eta$ to the left hand side of the equation:
+Now consider what happens if we introduce terms $\alpha$ and $\beta$ to the left hand side of the equation:
 
-$$(\boxed{\theta}+\sum_{i=1}^m a_iu_i(x))(\boxed{\eta} +\sum_{i=1}^m a_iv_i(x)) =$$
-$$=\boxed{\theta\eta} + \boxed{\theta}\sum_{i=1}^m a_iv_i(x) + \boxed{\eta}\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)$$
+$$(\boxed{\alpha}+\sum_{i=1}^m a_iu_i(x))(\boxed{\beta} +\sum_{i=1}^m a_iv_i(x)) =$$
+$$=\boxed{\alpha\beta} + \boxed{\alpha}\sum_{i=1}^m a_iv_i(x) + \boxed{\beta}\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)$$
 
 We can substitute the rightmost terms using the original QAP definition:
-$$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}$$
+$$=\alpha\beta + \alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)}$$
 
-$$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iw_i(x) + h(x)t(x)}$$
+$$=\alpha\beta + \alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \boxed{\sum_{i=1}^m a_iw_i(x) + h(x)t(x)}$$
 
 Now we can introduce an "expanded" QAP with the following definition:
 
-$$(\theta+\sum_{i=1}^m u_i(x))(\eta +\sum_{i=1}^m v_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
+$$(\alpha+\sum_{i=1}^m u_i(x))(\beta +\sum_{i=1}^m v_i(x)) =\alpha\beta + \alpha\sum_{i=1}^m a_iv_i(x) + \beta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
-As a sneak peak to where we are going, if we replace $\theta$ with $[\alpha]_1$ and $\eta$ with $[\beta]_2$, we get updated verification formula from earlier:
+As a sneak peak to where we are going, if we multiply $\alpha$ with $G_1$ getting $[\alpha]_1$ and $\beta$ with $G_2$ getting $[\beta]_2$, we get updated verification formula from earlier:
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [C]_1\bullet G_2$$
 
 where
 
-$$\underbrace{(\alpha+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{(\beta +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
+$$\underbrace{([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
 
 The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
@@ -405,7 +405,7 @@ We now separate this equation in to the verifier and prover portions. The boxed 
 $$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta}_{[C]_1}$$
 
 ## Groth16 Proof Algorithm
-We are know ready to show the Groth16 algorithm end-to-end.
+We are now ready to show the Groth16 algorithm end-to-end.
 
 ### Trusted Setup
 
