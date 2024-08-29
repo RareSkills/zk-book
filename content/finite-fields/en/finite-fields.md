@@ -54,13 +54,13 @@ $$3 = 4 × 6 \pmod 7 = 24 \pmod 7 = 3$$
 
 The multiplication operation above can be visualized in two ways:
 
-<video>
+<video autoplay loop muted controls>
   <source src="https://video.wixstatic.com/video/706568_30c0c24e6c344dd786b813c99a76bb50/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 Or alternatively:
 
-<video>
+<video autoplay loop muted controls>
   <source src="https://video.wixstatic.com/video/706568_011ac2a6b52a48c5a5ffc6221df889a3/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 

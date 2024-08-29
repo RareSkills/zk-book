@@ -302,7 +302,7 @@ $$
 
 We can substitute the expressions for $A > B$ and $A = B$ formula in to the equation above. To avoid a wall of math, we show the operations in video form below:
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/935a00_655f627a117f46ecb0a48deb2640b9a1/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -422,7 +422,7 @@ First, we assign each territory a variable name:
 
 Next, we iterate through the boundaries and compute a boundary constraint for those neighbors. The video below shows the algorithm in action. We show the final set of formulas for the boundary conditions after the video:
 
-<video>
+<video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/935a00_d942bd31ee0d4e0087a0c3fe5ec8b75a/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
