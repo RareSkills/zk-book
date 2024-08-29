@@ -143,15 +143,15 @@ In practice, Groth16 doesn't use a term $[D]_{12}$. Instead, the trusted setup g
 
 $$
 \begin{align*}
-[αG]_1 &= α G_1 \\
-[βG]_2 &= β G_2
+[α]_1 &= α G_1 \\
+[β]_2 &= β G_2
 \end{align*}
 $$
 
 What we referred to as $[D]_{12}$ is simply $[\alpha]_1 \bullet [\beta]_2$.
 
 ### Re-deriving the proving and verification formulas
-To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solveable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
+To make the verification formula $[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1\bullet[\beta]_2 + [C]_1\bullet G_2$ "solvable", we need to alter our QAP formula to incorporate $\alpha$ and $\beta$.
 
 $$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
@@ -175,7 +175,7 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [C]_1\bullet G_
 
 where
 
-$$\underbrace{(\alpha+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{(\beta +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}$$
+$$\underbrace{([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + (\underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}) \bullet G_2$$
 
 The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
@@ -405,7 +405,7 @@ We now separate this equation in to the verifier and prover portions. The boxed 
 $$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta}_{[C]_1}$$
 
 ## Groth16 Proof Algorithm
-We are know ready to show the Groth16 algorithm end-to-end.
+We are now ready to show the Groth16 algorithm end-to-end.
 
 ### Trusted Setup
 
