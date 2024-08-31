@@ -1,40 +1,42 @@
 # Arithmetic Circuits for ZK
 
-An arithmetic circuit (in the context of zero knowledge proofs) is a system of equations whose solution models a problem in NP.
+In the context of zero-knowledge proofs, an arithmetic circuit is a system of equations that models a problem in NP.
 
-One key point from our article on [P vs NP](https://www.rareskills.io/post/p-vs-np) was that any solution to a problem in P or NP can be verified by modeling the problem as a Boolean circuit. Then, we convert our solution for the original problem to a set of values for the Boolean variables (called the witness) that results in the Boolean circuit returning true.
+A key point from our article on [P vs NP](https://www.rareskills.io/post/p-vs-np) is that any solution to a problem in P or NP can be verified by modeling the problem as a Boolean circuit.
 
-This article continues the one linked above, so please read that first.
+Then, we convert our solution for the original problem to a set of values for the Boolean variables (called the witness) that results in the Boolean circuit returning true.
+
+This article builds on the one linked above, so please read that first.
 
 ## Arithmetic circuits as an alternative to Boolean circuits
 
 One disadvantage of using a Boolean circuit to represent a solution to a problem is that it can be verbose when representing arithmetic operations, such as addition or multiplication.
 
-For example, if we want to express $a + b = c$ where $a = 8, b = 4, c = 12$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number a, as shown below:  
+For example, if we want to express $a + b = c$ where $a = 8, b = 4, c = 12$ we must transform $a$, $b$, and $c$ into binary numbers. Each bit in the binary number will correspond to a distinct Boolean variable. In this example, let's assume we need 4 bits to encode $a$, $b$, and $c$, where $a₀$ represents the Least Significant Bit (LSB), and $a₃$ represents the Most Significant Bit (MSB) of number $a$, as shown below:
 
 - `a₃, a₂, a₁, a₀`
-  - a = 1000
+  - $a = 1000$
 - `b₃, b₂, b₁, b₀`
-  - b = 0100
+  - $b = 0100$
 - `c₃, c₂, c₁, c₀`
-  - c = 1100
+  - $c = 1100$
 
-(The method to convert a number to binary is explained later in this article). 
+(You don't need to know how to convert a number to binary for now, we will explain the method later in the article).
 
 Once we have $a$, $b$ and $c$ written in binary, we can write a Boolean circuit whose inputs are all the binary digits $(a₀, a₁, …, c₂, c₃)$. Our goal is to write such a Boolean circuit, such that the circuit outputs true if and only if $a + b = c$.
 
-This turns out to be more complicated than we might expect, as you can see in the large circuit below, which models $a + b = c$ in binary. For the sake of brevity, we do not show the derivation. We only show the formula to illustrate how verbose such a circuit can be:
+This turns out to be more complicated than expected, as demonstrated by the large circuit below, which models $a + b = c$ in binary. For brevity, we do not show the derivation. We only show the formula to illustrate how verbose such a circuit can be:
 
-```rust
+```javascript
 ((a₄ ∧ b₄ ∧ c₄) ∨ (¬a₄ ∧ ¬b₄ ∧ c₄) ∨ (¬a₄ ∧ b₄ ∧ ¬c₄) ∨ (a₄ ∧ ¬b₄ ∧ ¬c₄)) ∧
 
-((a₃ ∧ b₃ ∧ ((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨ 
- (¬a₃ ∧ ¬b₃ ∧ ((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨ 
+((a₃ ∧ b₃ ∧ ((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨
+ (¬a₃ ∧ ¬b₃ ∧ ((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨
  (¬a₃ ∧ b₃ ∧ ¬((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨
  (a₃ ∧ ¬b₃ ∧ ¬((a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))))) ∧
 
-((a₂ ∧ b₂ ∧ ((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨ 
- (¬a₂ ∧ ¬b₂ ∧ ((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨ 
+((a₂ ∧ b₂ ∧ ((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨
+ (¬a₂ ∧ ¬b₂ ∧ ((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨
  (¬a₂ ∧ b₂ ∧ ¬((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) ∨
  (a₂ ∧ ¬b₂ ∧ ¬((a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))))) ∧
 
@@ -42,9 +44,9 @@ This turns out to be more complicated than we might expect, as you can see in th
 
 ((a₀ ∧ b₀ ∧ c₀) ∨ (¬a₀ ∧ ¬b₀ ∧ c₀) ∨ (¬a₀ ∧ b₀ ∧ ¬c₀) ∨ (a₀ ∧ ¬b₀ ∧ ¬c₀)) ∧
 
-¬ ((a₄ ∧ b₄) ∨ 
-     (b₄ ∧ (a₃ ∧ b₃) ∨ (b₃ ∧ (a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨ 
-     (a₃ ∧ (a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀)))) 
+¬ ((a₄ ∧ b₄) ∨
+     (b₄ ∧ (a₃ ∧ b₃) ∨ (b₃ ∧ (a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))) ∨
+     (a₃ ∧ (a₂ ∧ b₂) ∨ (b₂ ∧ (a₁ ∧ b₁) ∨ (b₁ ∧ c₀) ∨ (a₁ ∧ c₀))))
 ```
 
 The point is, if we are restricted to Boolean inputs and basic Boolean operations (AND, OR, NOT), constructing circuits can quickly become complicated and tedious for basic problems, especially when they involve arithmetic.
@@ -59,12 +61,14 @@ An arithmetic circuit is a system of equations using only addition, multiplicati
 
 The following is our first example of an arithmetic circuit:
 
-```solidity
+```javascript
 6 = x₁ + x₂
 9 = x₁x₂
 ```
 
-We say a Boolean circuit is *satisfied* if we have an assignment to the input variables that results in an output of true. Similarly, an arithmetic circuit is satisfied if there is an assignment to the variables such that all the equations hold true. For example, the circuit above is satisfied by `x₁ = 3, x₂ = 3` because both equations of the circuit hold true, and the circuit is *not* satisfied by `x₁ = 1, x₂ = 6` because the equation `9 = x₁x₂` fails to be true
+We say a Boolean circuit is *satisfied* if we have an assignment to the input variables that results in an output of true. Similarly, an arithmetic circuit is satisfied if there is an assignment to the variables such that all the equations hold true.
+
+For example, the circuit above is satisfied by x₁ = 3, x₂ = 3 because both equations in the circuit hold true. Conversely, the circuit is not satisfied by `x₁ = 1, x₂ = 6` because the equation `9 = x₁x₂` is not true."
 
 So, we can think of an arithmetic circuit interchangeably with the set of equations in the circuit. A set of inputs "satisfies the circuit" if and only if those inputs make *all* the equations true.
 
@@ -72,19 +76,19 @@ So, we can think of an arithmetic circuit interchangeably with the set of equati
 
 Variables in an arithmetic circuit are referred to as **signals** because [Circom](https://docs.circom.io), the programming language we will use to write ZK Proofs, refers to them as such.
 
-When we write equality, we will use the `===` operator. We use this notation because Circom uses it to state that two signals hold equal value, so we may as well get accustomed to seeing it.
+To express equality, we will use the `===` operator. We use this notation because Circom uses it to state that two signals hold equal value, so we may as well get accustomed to seeing it.
 
 We emphasize that the `===` is asserting the left-hand side and right-hand side are equal. For example, in the following circuit:
 
 `c === a + b`
 
-**we are not adding `a` to `b` and assigning it to `c`**. **We assume that the values `a`, `b`, and `c` are provided as inputs, and we are asserting a relationship between them holds. This has the effect of *constraining* the sum of `a` and `b` to be `c`.**
+**we are not adding `a` to `b` and assigning the result to `c`**. **Instead, we assume that the values `a`, `b`, and `c` are provided as inputs, and we are asserting a relationship between them holds. This has the effect of *constraining* the sum of `a` and `b` to be `c`.**
 
 Think of the `c === a + b` as being completely equivalent to `assertEq(c, a + b)`. Similarly, the expression `a + b === c * d` is completely equivalent to `assertEq(a + b, c * d)`. In essence, verifying these equations in a circuit involves checking if certain conditions (constraints) are satisfied. The agent proving the validity of their witness can assign any values to signals. However, their proof (witness) will only be considered valid if all the constraints are met.
 
-If an agent wishes to prove:
+For example, if an agent wishes to prove:
 
-```solidity
+```javascript
 a === b + c + 3
 a * u === x * y
 ```
@@ -93,7 +97,7 @@ they must supply `(a, b, c, u, x, y)` from *outside the circuit* and assign them
 
 Remember, the code above is equivalent to:
 
-```solidity
+```javascript
 assertEq(a, b + c + 3)
 assertEq(a * u, x * y)
 ```
@@ -102,13 +106,13 @@ A useful mental model for the arithmetic circuit is that all signals are treated
 
 To drive the point home, we supply a visualization in the following video. All of the signals are inputs, and `===` is used to check instead of assign.
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_f4fb9d3d127c4735a718deffbd9fed70/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 The circuit in the video could have been written as:
 
-```solidity
+```javascript
 z + y === x
 x + y === u
 ```
@@ -121,19 +125,19 @@ The arithmetic circuit `x === x + 1` does not mean increment `x`. It is an arith
 
 Consider the following circuit:
 
-```solidity
+```javascript
 x₁(x₁ - 1) === 0
 x₁x₂ === x₁
 ```
 
-The first constraint `x₁(x₁ - 1) === 0` restricts the possible values x₁ to only 0 or 1. Any other value for x₁ would not satisfy this constraint.
+The first constraint `x₁(x₁ - 1) === 0` restricts the possible values x₁ to only 0 or 1. Any other value for `x₁` would not satisfy this constraint.
 
 In the second constraint `x₁x₂ === x₁` we have two possible scenarios:
 
 - If `x₁ = 1`, then `x₂` must also be 1, or the second constraint cannot be satisfied. If `x₁ = 1` and `x₂ ≠ 1`, then the second equation becomes `1 * x₂ === 1` which can only be satisfied by `x₂ = 1`, which creates a conflict.
 - If `x₁ = 0`, then `x₂` can have any value because `0x₂ === 0` is trivial to satisfy.
 
-The following assignments to (x₁, x₂) are all valid witnesses:
+The following assignments to `(x₁, x₂)` are all valid witnesses:
 
 - $(x₁, x₂) = (1, 1)$
 - $(x₁, x₂) = (0, 2)$
@@ -149,15 +153,15 @@ The table below shows how Boolean circuits and arithmetic circuits differ, but k
 | Boolean Circuit | Arithmetic Circuit |
 | --- | --- |
 | Variables are 0, 1 | Signals hold numbers |
-| Only operations are AND, OR, NOT | Only operations are addition and multiplication |
+| The only operations are AND, OR, NOT | The only operations are addition and multiplication |
 | Satisfied when the output is true | Satisfied when the left hand side equals the right hand side for all equations (there is no output) |
 | Witness is an assignment to the Boolean variables that satisfies the Boolean circuit | Witness is an assignment to the signals that satisfies all the equality constraints |
 
 Aside from the convenience of using fewer variables in some circumstances, arithmetic circuits and Boolean circuits are tools that accomplish the same job — proving you have a witness to a problem in NP.
 
-### a + b = c
+### Returning to the initial example a + b = c
 
-Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 12`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each (in this example). In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. This reduction in the number of inputs, and also in the size of the circuit, is the reason we opt to use arithmetic circuits for ZK applications.
+Let’s revisit our example above: writing a *Boolean* circuit to represent the equation `a + b = c`, where we’re given `c = 12`. For a Boolean circuit, we need to encode `a`, `b`, and `c` in binary, which requires 4 bits each (in this example). In total, we have 12 inputs to the circuit. By comparison, the arithmetic circuit only requires 3 inputs: `a`, `b`, and `c`. The reduction in the number of inputs and the overall circuit size is why we prefer using arithmetic circuits for ZK applications.
 
 ### Similarities between systems of equations and arithmetic circuits
 
@@ -165,11 +169,11 @@ Boolean circuits always have one expression that returns true or false if the wi
 
 For example, if we have a set of signals $x$, $y$, and $z$, and we wish to constrain the sum of $x$ and $y$ to be $5$, then we need a separate equation for that. Any way we wish to constrain z would have its own separate equation.
 
-To demonstrate arithmetic circuits and Boolean circuits are equivalent, we will later show that any Boolean circuit can be transformed into an arithmetic circuit. This shows they can be used interchangeably for the purpose of demonstrating an agent has a witness to a problem in P or NP. 
+To demonstrate arithmetic circuits and Boolean circuits are equivalent, we will later show that any Boolean circuit can be transformed into an arithmetic circuit. This shows they can be used interchangeably for the purpose of demonstrating an agent has a witness to a problem in P or NP.
 
 ### All P problems are a subset of NP problems
 
-As discussed in the previous chapter, **all P problems are a subset of NP problems** in terms of the computation requirements for validating a witness, so we will only refer to NP problems going forward, with the understanding that this includes P.
+As discussed in the previous [chapter on P vs NP](https://www.rareskills.io/post/p-vs-np), **all P problems are a subset of NP problems** in terms of the computation requirements for validating a witness, so we will only refer to NP problems going forward, with the understanding that this includes P.
 
 Our conclusion is that if any solution to a problem in NP can be modeled with a Boolean circuit, then any solution to a problem in NP (or P) can be modeled with an arithmetic circuit.
 
@@ -177,7 +181,7 @@ But before we demonstrate their equivalence, we will provide examples of modelin
 
 ## Examples of Arithmetic circuits
 
-In our first example, we redo our 3-coloring problem for Australia. In the second, we use an arithmetic circuit to prove a list is sorted.
+In our first example, we redo our 3-coloring problem for Australia. In the second, we demonstrate how to use an arithmetic circuit to prove that a list is sorted.
 
 ### Example 1: Modeling 3-coloring with an Arithmetic Circuit
 
@@ -187,11 +191,11 @@ It’s easier to model this problem using arithmetic circuits because we can ass
 
 For each territory, we write the single color constraint as:
 
-```rust
+```javascript
 0 === (1 - x) * (2 - x) * (3 - x)
 ```
 
-to enforce that each territory has exactly one color. The constraint above can only be satisfied if x is 1, 2, or 3.
+to enforce that each territory has exactly one color. The constraint above can only be satisfied if `x` is 1, 2, or 3.
 
 **3-Coloring Australia**
 
@@ -210,7 +214,7 @@ Saying `WA = 1` is equivalent to saying “Color West Australia Blue.” Similar
 
 Our color constraint (constraining each territory to be blue, red or green) for each territory becomes:
 
-```jsx
+```javascript
 1) 0 === (1 - WA) * (2 - WA) * (3 - WA)
 2) 0 === (1 - SA) * (2 - SA) * (3 - SA)
 3) 0 === (1 - NT) * (2 - NT) * (3 - NT)
@@ -237,7 +241,7 @@ If two signals (neighboring territories) have the same number (color), then thei
 
 For each neighboring territory `x` and `y`, we can use the following constraint to enforce that they are not equal to each other:
 
-```
+```javascript
 0 === (2 - xy) * (3 - xy) * (6 - xy)
 ```
 
@@ -245,13 +249,13 @@ The above equation is satisfied if and only if the product `xy` is equal to 2, 3
 
 The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neigboring territories as the video below illustrates:
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
 We now show the boundary constraints:
 
-```rust
+```javascript
 Western Australia and South Australia:
 7) 0 === (2 - WA * SA) * (3 - WA * SA) * (6 - WA * SA)
 
@@ -282,7 +286,7 @@ New South Wales and Victoria
 
 By combining the two, we see the complete arithmetic circuit for proving we have a valid 3-coloring for Australia:
 
-```rust
+```javascript
 // color constraints
 0 === (1 - WA) * (2 - WA) * (3 - WA)
 0 === (1 - SA) * (2 - SA) * (3 - SA)
@@ -325,7 +329,7 @@ As we will show shortly, during conversion to decimal, the most significant bit 
 
 The video below illustrate the conversion of 1101₂ to 13:
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
 </video>
 
@@ -343,7 +347,7 @@ For example, 1001₂ = 9, 1010₂ = 10, and so forth. For a general `n` bit bina
 
 We omit the discussion on how to convert a decimal number to binary. For now, if the reader wishes to convert to binary, they can use the built-in `bin` function from Python:
 
-```python
+```javascript
 >>> bin(3)
 '0b11'
 >>> bin(9)
@@ -358,7 +362,7 @@ We omit the discussion on how to convert a decimal number to binary. For now, if
 
 We can create an arithmetic circuit that asserts "`v` is a decimal number with a four bit binary representation `b₃`, `b₂`, `b₁`, `b₀`" by using the following circuit:
 
-```rust
+```javascript
 8b₃ + 4b₂ + 2b₁ + b₀ === v
 
 // force the "bits" to be zero or one
@@ -374,7 +378,7 @@ Observe that **there is no satisfying assignment to the signals `(v, b₃, b₂,
 
 We can generalize this to the following circuit which constrains `v < 2ⁿ` and also gives us the binary representation of `v`:
 
-```solidity
+```javascript
 2ⁿ⁻¹bₙ₋₁ +...+ 2²b₂ + 2¹b₁ + b₀ === v
 b₀(b₀ - 1) === 0
 b₁(b₁ - 1) === 0
@@ -393,27 +397,27 @@ To get a sense for how $2ⁿ$ changes as a function of $n$, consider the followi
 | 4 | 1111₂ | 15 | 16 | 10000 |
 | 5 | 11111₂ | 31 | 32 | 100000 |
 
-Note that the number $2ⁿ$ in binary requires 1 more bit to store than the value $2ⁿ - 1$. By constraining the number of bits a number is encoded with to $n$ bits, it forces that number to be less than $2ⁿ$.
+Note that the number $2^n$ in binary requires 1 more bit to store than the value $2^n - 1$. By constraining the number of bits a number is encoded with to $n$ bits, it forces that number to be less than $2^n$.
 
-It’s helpful to remember the relationship between powers of 2 and the number of bits required to store them.
+It’s helpful to remember the relationship between powers of $2$ and the number of bits required to store them.
 
-- $2ⁿ$ requires $n + 1$ bits to store. For example, $2⁰=1₂$, $2¹ = 10₂$, $2²=100₂$, $2³=1000₂$ and so forth.
-- $2ⁿ⁻¹$ is half of $2ⁿ$ and requires $n$ bits to store
-- $2ⁿ − 1$ requires $n$ bits to store. It is the maximum value we can store with $n$ bits, when all the bits are set to $1$.
+- $2^n$ requires $n + 1$ bits to store. For example, $2^0=1_2$, $2^1 = 10_2$, $2^2=100_2$, $2^3=1000_2$ and so forth.
+- $2^{n-1}$ is half of $2^n$ and requires $n$ bits to store
+- $2^n − 1$ requires $n$ bits to store. It is the maximum value we can store with $n$ bits, when all the bits are set to $1$.
 
-If we take a number $n$ and compute $2ⁿ$, we get an $n + 1$ bit number with the most significant bit being 1, and the rest zero. $n = 3$ in the examples below:
+If we take a number $n$ and compute $2^n$, we get an $n + 1$ bit number with the most significant bit being 1, and the rest zero. $n = 3$ in the examples below:
 
 $$
 2^n=\underbrace{1000}_{n+1\space bits}
 $$
 
-$2ⁿ⁻¹$ is the same as $2ⁿ / 2$. Since it is written as 2 to some power, it still has the same "shape" of a binary number with an MSB of 1 and the rest zero, but it will require $n$ bits to encode it instead of $n + 1$ bits.
+$2^{n-1}$ is the same as $2^n / 2$. Since it is written as 2 to some power, it still has the same "shape" of a binary number with an MSB of 1 and the rest zero, but it will require $n$ bits to encode it instead of $n + 1$ bits.
 
 $$
 2^{n-1}=\underbrace{100}_{n\space bits}
 $$
 
-$2ⁿ −1$ is an $n$ bit number with all the bits set to one. 
+$2^n −1$ is an $n$ bit number with all the bits set to one.
 
 $$
 2^n-1=\underbrace{111}_{n\space bits}
@@ -421,29 +425,29 @@ $$
 
 ### Compute ≥ in binary
 
-If we are working with binary numbers of a fixed size, $n$ bits, the number $2ⁿ⁻¹$ is special because we can easily assert an $n$ bit binary number is greater than or equal to $2ⁿ⁻¹$ — or less than it. We call $2ⁿ⁻¹$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2ⁿ⁻¹$:
+If we are working with binary numbers of a fixed size, $n$ bits, the number $2^{n-1}$ is special because we can easily assert an $n$ bit binary number is greater than or equal to $2^{n-1}$ — or less than it. We call $2^{n-1}$ the “midpoint.” The video below illustrates how to compare the size of an $n$ bit number to $2^{n-1}$:
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_adae25cac0e6414ab0643a5792a2ed52/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-By checking the most significant bit of an $n$ bit number, we can tell if that number is greater than or equal to $2ⁿ⁻¹$ or less than $2ⁿ⁻¹$.
+By checking the most significant bit of an $n$ bit number, we can tell if that number is greater than or equal to $2^{n-1}$ or less than $2^{n-1}$.
 
-If we compute $2ⁿ⁻¹ + Δ$ and look at the most significant bit of that sum, we can quickly tell if $Δ$ is positive or negative. If $Δ$ is negative, then $2ⁿ⁻¹ + Δ$ must be less than $2ⁿ⁻¹$.
+If we compute $2^{n-1} + \Delta$ and look at the most significant bit of that sum, we can quickly tell if $\Delta$ is positive or negative. If $\Delta$ is negative, then $2^{n-1} + \Delta$ must be less than $2^{n-1}$.
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_6b61fecfedb64a888f6538bc91707f40/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-### Detecting if u ≥ v
+### Detecting if $u \ge v$
 
-If we replace $Δ$ with $u - v$ then the most significant bit of $2ⁿ⁻¹ + (u - v)$ tells us if $u ≥ v$ or $u < v$.
+If we replace $\Delta$ with $u - v$ then the most significant bit of $2^{n-1} + (u - v)$ tells us if $u ≥ v$ or $u < v$.
 
-<video autoplay loop muted controls>
+<video>
 <source src="https://video.wixstatic.com/video/706568_ea57bc6fb8c5493686c3dc4cf9123c72/1080p/mp4/file.mp4" type="video/mp4">
 </video>
 
-#### Preventing overflow in 2ⁿ⁻¹ + (u - v)
+#### Preventing overflow in $2^{n-1} + (u - v)$
 
 If we restrict $u$ and $v$ to be represented with at most $n - 1$ bits, while $2^{n-1}$ is represented with $n$ bits, then underflow and overflow cannot occur. When both $u$ and $v$ are represented with at most $n - 1$ bits, the maximum absolute value of $|u - v|$ is an $n - 1$ bit number.
 
@@ -451,7 +455,7 @@ We see that $2^{n-1} + (u - v)$ cannot underflow in this case, because $2^{n-1}$
 
 Now consider the overflow case. Without loss of generality, for $n = 4$, i.e. four bit numbers, the midpoint is $2^{n-1} = 2^{4-1} = 8$ or $1000_2$. The maximum value $|u - v|$ can hold in this case, as a 3-bit number, is $111_2$. Adding $1000_2 + 111_2$ results in $1111_2$, which is not an overflow.
 
-### Summary of the arithmetic circuit for u ≥ v, when u and v are n - 1 bit numbers
+### Summary of the arithmetic circuit for $u ≥ v$, when $u$ and $v$ are $n - 1$ bit numbers
 
 - We constrain $u$ and $v$ to be at most $n - 1$ bit numbers.
 - We create an arithmetic circuit that encodes the binary representation of $2^{n-1} + (u - v)$ using $n$ bits.
@@ -460,7 +464,7 @@ Now consider the overflow case. Without loss of generality, for $n = 4$, i.e. fo
 The final arithmetic circuit to check if $u \geq v$ is as follows. We fix $n = 4$ which means $u$ and $v$ must be constrained to be 3-bit numbers. The interested reader can generalize this to other values of $n$:
 
 
-```rust
+```javascript
 // u and v are represented with at most 3 bits:
 2²a₂ + 2¹a₁ + a₀ === u
 2²b₂ + 2¹b₁ + b₀ === v
@@ -494,11 +498,11 @@ Now that we have an arithmetic circuits to compare pairs of signals, we repeat t
 
 We’ve shown how we can create an arithmetic circuit modeling the solution to the problems from the previous chapter.
 
-We now generalize this to say we can model any problem in NP using an arithmetic circuit.
+We can now generalize this to say we can model any problem in NP using an arithmetic circuit.
 
 ## How a Boolean circuit can be modeled with an arithmetic circuit
 
-Every Boolean circuit can be modeled with an arithmetic circuit. By this, we mean we can define a process for converting a Boolean circuit B into an arithmetic circuit A such that a set of inputs that satisfies B can be mapped to a set of signals that satisfies A. Below, we explain the key pieces of this process, and then walk through an example of converting a specific Boolean circuit into an arithmetic circuit.
+Any Boolean circuit can be modeled using an arithmetic circuit. This means we can define a process for converting a Boolean circuit B into an arithmetic circuit A, such that a set of inputs that satisfy B can be translated into a set of signals that satisfy A. Below, we outline the key components of this process and walk through an example of converting a specific Boolean circuit into an arithmetic circuit.
 
 Suppose we have the following Boolean formula: `out = (x ∧ ¬ y) ∨ z`. This formula is true if (`x` is true AND `y` is false) OR `z` is true.
 
@@ -506,7 +510,7 @@ We encode `x`, `y`, and `z` as arithmetic circuit signals and constrain them to 
 
 The following arithmetic circuit can only be satisfied if `x`, `y`, and `z` are each 0 or 1.
 
-```rust
+```javascript
 x(x - 1) === 0
 y(y - 1) === 0
 z(z - 1) === 0
@@ -518,7 +522,7 @@ Now let’s show how to map Boolean circuit operators to arithmetic circuit oper
 
 We translate the Boolean AND `t = u ∧ v` into an arithmetic circuit as follows:
 
-```solidity
+```javascript
 u(u - 1) === 0
 v(v - 1) === 0
 t === uv
@@ -530,7 +534,7 @@ t === uv
 
 We translate the Boolean NOT `t = ¬u` into an arithmetic circuit as follows:
 
-```rust
+```javascript
 u(u - 1) === 0
 t === 1 - u
 ```
@@ -541,7 +545,7 @@ t === 1 - u
 
 We translate the Boolean OR `t === u ∨ v` into an arithmetic circuit as follows:
 
-```rust
+```javascript
 u(u - 1) === 0
 v(v - 1) === 0
 t === u + v - uv
@@ -566,7 +570,7 @@ Now that we’ve seen how to translate all the allowed operations of Boolean cir
 
 ### Create the 0 1 constraints
 
-```rust
+```javascript
 x(x - 1) === 0
 y(y - 1) === 0
 z(z - 1) === 0
@@ -588,11 +592,11 @@ out = (x(1 - y)) ∨ z
 
 out = (x(1 - y)) <span style="color:red">∨</span> z
 
-out = (x(1 - y)) + z - (x(1 - y))z 
+out = (x(1 - y)) + z - (x(1 - y))z
 
 Our final arithmetic circuit for `out = (x ∧ ¬ y) ∨ z` is:
 
-```jsx
+```javascript
 x(x - 1) === 0
 y(y - 1) === 0
 z(z - 1) === 0
@@ -601,7 +605,7 @@ out === (x(1 - y)) + z - (x(1 - y))z
 
 If desired, we could simpify the last equation:
 
-```jsx
+```javascript
 out === (x(1 - y)) + z - ((x(1 - y))z)
 out === x - xy + z - ((x - xy)z)
 out === x - xy + z - (xz - xyz)
@@ -611,7 +615,7 @@ out === x - xy + z - xz + xyz
 
 We could also write the arithmetic circuit as follows with no change in meaning:
 
-```jsx
+```javascript
 x² === x
 y² === y
 z² === z
