@@ -376,7 +376,7 @@ The signals `b₃, b₂, b₁, b₀` are constrained to be the binary representa
 
 Observe that **there is no satisfying assignment to the signals `(v, b₃, b₂, b₁, b₀)` where `v > 15`.** That is, if we set `b₃, b₂, b₁, b₀` to all 1, the highest the constraints allow, then the sum will be 15. It is not possible to add to anything higher. In ZK, this is sometimes called a *range check* on `v`. Not only does the circuit above demonstrate the binary representation of `v`, it also forces `v < 16`.
 
-We can generalize this to the following circuit which constrains `v < 2ⁿ` and also gives us the binary representation of `v`:
+We can generalize this to the following circuit which constrains $v < 2^n$ and also gives us the binary representation of `v`:
 
 ```javascript
 2ⁿ⁻¹bₙ₋₁ +...+ 2²b₂ + 2¹b₁ + b₀ === v
@@ -386,9 +386,9 @@ b₁(b₁ - 1) === 0
 bₙ₋₁(bₙ₋₁ - 1) === 0
 ```
 
-**Saying a number `v` is encoded with at most `n` bits is equivalent to saying `v < 2ⁿ`.**
+**Saying a number `v` is encoded with at most `n` bits is equivalent to saying $v < 2^n$.**
 
-To get a sense for how $2ⁿ$ changes as a function of $n$, consider the following table:
+To get a sense for how $2^n$ changes as a function of $n$, consider the following table:
 
 | n bits | max value (binary) | max value (decimal) | 2ⁿ (decimal) | 2ⁿ (binary) |
 | --- | --- | --- | --- | --- |
