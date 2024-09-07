@@ -275,4 +275,4 @@ Homomorphisms are not necessarily bidirectional. They are only required to work 
 
 If $\phi: A \rightarrow B$ is computationally difficult to invert, then $\phi$ homomorphically encrypts the elements of $A$. That means we can validate claims about computations in $A$ using elements in $B$.
 
-The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](rareskills.io/post/elliptic-curve-addition).
+The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](https://www.rareskills.io/post/elliptic-curve-addition).
