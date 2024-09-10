@@ -62,7 +62,7 @@ Hey wait, we aren’t allowed to multiply by -1 right?
 
 A group doesn’t require the inverse to be "computable using the group binary operator" only to exist. That is, we compute the inverse as multiplying each element by $-1$ even though multiplication by $-1$ is not a group operation.
 
-If we define our operator for $n \times m$ matrices to be the Hadamard product (element-wise multiplication), this cannot be a group for the same reason discussed above. Specifically, the inverse is computed as the reciprocal of the element, and the reciprocal of zero is not a real number.
+If we define our operator for $n \times m$ matrices to be the Hadamard product (element-wise multiplication), this cannot be a group for the same reason discussed above. Specifically, the inverse is computed as the reciprocal of each element in the matrix, and if one of the elements is zero, then the inverse cannot be computed.
 
 If we define our operator to be traditional matrix multiplication over square matrices, this may or may not be a group depending on the set definition, as we will see in section example 5.
 
