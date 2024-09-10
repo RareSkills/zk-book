@@ -245,9 +245,14 @@ A relation can be from a Cartesian product of a set with itself or a set with an
 In the $y=x^2$ example, $2$ from $X$ is related to $4$ from $Y$, but $3$ in $X$ is not related to $6$ from $Y$.
 
 ## A “binary operator” in set theoretic terms
-A binary operator is a function from $A \times A \rightarrow A$. Basically, we take every possible pair from $A \times A$ (the Cartesian product of $A$ with itself) and map it to an element in $A$.
+A binary operator is a function from $A \times A \rightarrow A$. Basically, we take every possible pair from $A \times A$ (the Cartesian product of $A$ with itself) and map it to an element in $A$. In other words, it is a set relation between $A \times A$ and $A$.
 
+Here are some basic examples of binary operators:
+- **addition of integers** take any two elements from the set integers and add them together, you get another element from the set of integers. Here, we've mapped a pair of integers to another integer. For example, $(1, 3)$ maps to $4$.
+- **multiplication of rational numbers** take any two rational numbers, multiply them together, you get another rational number. For example, $(3.5, 2.0)$ maps to $7.0$.
+- **concatenation of strings** take any pair of strings from the set of strings, concatenate them, and the result is another string. For example, $(\text{Rare},\text{Skills})$ maps to $\text{RareSkills}$. Unlike the two examples above, the order of the strings in the pair changes the final string the pair gets mapped to. For example, $(\text{Rare},\text{Skills})$ maps to the string $\text{RareSkills}$ but $(\text{Skills},\text{Rare})$ maps to the string $\text{SkillsRare}$
 
+### Constructing a Set-Theoretic Binary Operator
 Let’s use an example of the set $\set{0,1,2}$ with binary operator addition modulo $3$. First we take the set’s Cartesian product with itself (i.e. $A \times A$):
 
 $$
@@ -335,7 +340,7 @@ Having the language to describe a binary operator as “closed” allows you to 
 You can reason about operations without understanding how they work! This is *extremely helpful* when it comes to dealing with very esoteric math such as [Elliptic curve bilinear pairings](https://www.rareskills.io/post/bilinear-pairing).
 
 ### Constructing valid binary operations
-When it comes to binary operators, we are not allowed to take a subset of $A \times A$ before mapping that to $A$. Binary operators must accept *all* members of set $A$ as its inputs. We of course must take a subset of the ordered pairs between $A \times A$ and $A$ because each pair from $A \times A$ must map to exactly one $A$.
+When it comes to binary operators, we are not allowed to take a subset of $A \times A$ before mapping that to $A$. Binary operators must accept *all* members of set $A$ as its inputs. We of course must take a subset of the ordered pairs between $A \times A$ and $A$ because each pair from $A \times A$ must map to exactly one $A$. The result of a binary operation must have one unambiguous answer.
 
 ## Learn more with RareSkills
 The usefulness of the vocabulary from abstract algebra is why our [zero knowledge course](https://www.rareskills.io/zk-bootcamp) does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
