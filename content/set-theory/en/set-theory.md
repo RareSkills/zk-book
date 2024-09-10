@@ -50,7 +50,7 @@ There is a well-defined rule that decides if something is a member of the set or
 
 Sets are allowed to be empty. We call this the *empty set*.
 
-By definition, sets do not contain duplicate items. For example, ${a, a, b}$ is really just ${a, b}$.
+By definition, sets do not contain duplicate items. For example, $\set{a, a, b}$ is really just $\set{a, b}$.
 
 **Exercise:** Assume you have a proper definition for integers. Create a well-defined set of rational numbers.
 
@@ -69,7 +69,7 @@ The precise definition for the relationship between integers and rational number
 Sets are defined to be equal if they contain the same elements, regardless of order in which those elements appear. For example, $\{4, 2, 5\}$ is the same set as $\{2, 5, 4\}$. When doing formal proofs for sets, we say that if $A$ is a subset of $B$ and $B$ is a subset of $A$, then $A = B$. Or in more mathy notation: $A = B \iff A \subseteq B$ and $B \subseteq A$. That’s read as $A = B$ if and only if $A$ is a subset of $B$ and $B$ is a subset of $A$.
 
 ## Cardinality
-In some of our above examples, there are an infinite number of integers, rational numbers, and other similar sets. However, we can also define sets in a finite way, such as the numbers $\{0,1,2,3,4,5,6,7,8,9,10\}$. The cardinality of the previous set is $11$. If $A = \{5,9,10\}$, then $|A| = 3$, where the two vertical bars around the A mean cardinality.
+In some of our above examples, there are an infinite number of integers, rational numbers, and other similar sets. However, we can also define sets in a finite way, such as the numbers $\set{0,1,2,3,4,5,6,7,8,9,10}$. The cardinality of the previous set is $11$. If $A = \set{5,9,10}$, then $|A| = 3$, where the two vertical bars around the A mean cardinality.
 
 
 There are different levels of infinity in set theory. For example, there are infinitely many more real numbers than there are integers. Specifically, we say integers are countably infinite because you can literally count them out. But there is no way to start counting real numbers which are uncountably infinite.
