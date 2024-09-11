@@ -3,7 +3,7 @@
 El contenido de este repositorio RareSkills_zk-book_Spanish (forked from RareSkills/zk-book) es una traduccion al idioma Español realizada por ARCADIO Garcia en el contexto de su contribución a la traduccion del libro ZK Book propiedad de RareSkills y que en ultima instancia será el que autorice su publicación.
 
 Nota IMPORTANTE: el propietario del contenido del libro ZK Book es RareSkills, por lo tanto tiene el copyright de esta contribución de la traduccion del libro al idioma Español.
----
+
 The content of this repository RareSkills_zk-book_Spanish (forked from RareSkills/zk-book) is a translation into Spanish made by ARCADIO Garcia in the context of his contribution to the translation of the book ZK Book owned by RareSkills and which will ultimately authorize its publication.
 
 IMPORTANT Note: the owner of the content of the book ZK Book is RareSkills, therefore it has the copyright of this contribution of the translation of the book into Spanish.
