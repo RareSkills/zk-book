@@ -243,4 +243,4 @@ La solución a este problema se describe en el siguiente capítulo sobre el [pro
 La prueba sigue teniendo un tamaño constante en Groth16, como se puede ver en el código fuente de Tornado Cash en la [estructura](https://github.com/tornadocash/tornado-core/blob/master/contracts/Verifier.sol#L167-L171)
 denominada `Prueba`.
 
-*Traducido al Español en Septiembre de 2024*
+*Traducido al Español por ARCADIO Garcia, Septiembre 2024*
