@@ -250,4 +250,4 @@ Además, los grupos nos ayudan a razonar sobre objetos matemáticos muy complejo
 ## Aprende más con RareSkills
 Este artículo es parte de una serie sobre pruebas ZK. Consulta nuestro [Libro ZK](https://www.rareskills.io/zk-book) para ver la serie completa.
 
-*Traducido al Español por ARCADIO Garcia, Septiembre 2024*
+*Traducido al Español por **ARCADIO Garcia**, Septiembre 2024*
