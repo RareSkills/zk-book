@@ -199,3 +199,5 @@ Puede que aún tengas que traducirlo en tu cabeza, como la mayoría de los que a
 ¿Podría decir esa frase sin las matemáticas? Claro que sí, pero necesitaría al menos 500 palabras para hacerlo con claridad. En realidad, merece la pena entender lo que significan esos términos. A la larga nos ahorrará muchos problemas.
 
 Lo que lo hace genial es que hay una plétora de teoremas sobre Grupos que nos permiten hacer afirmaciones sobre el grupo *sin entender cómo funciona el operador binario del grupo bajo el capó*. Esto es muy parecido al polimorfismo en la programación orientada a objetos o a los rasgos en los lenguajes funcionales. Te ocultan los detalles de implementación y te permiten centrarte en el alto nivel. Esto es muy potente.
+
+*Traducido al Español por ARCADIO Garcia, Septiembre 2024*
