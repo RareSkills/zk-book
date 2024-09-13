@@ -273,9 +273,34 @@ And the verification equation is:
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet G_2 + [C]_1\bullet G_2$$
 
 ## Part 2: Separating the public inputs from the private inputs with $\gamma$ and $\delta$
-The assumption in the equation above is that the prover is only using $\Psi_{\ell+1}$ to $\Psi_m$ to compute $[C]_1$, but nothing stops a dishonest prover from using $\Psi_1$ to $\Psi_{\ell}$ to compute $[C]_1$, possibly leading to a forged proof.
+### Forging proofs by misuing $\Psi_i$ for $i\leq\ell$
 
-To prevent this, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
+The assumption in the equation above is that the prover is only using $\Psi_{\ell+1}$ to $\Psi_m$ to compute $[C]_1$, but nothing stops a dishonest prover from using $\Psi_1$ to $\Psi_{\ell}$ to compute $[C]_1$, leading to a forged proof.
+
+For example, here is our current verification equation:
+
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i\Psi_i +  [C]_1\bullet G_2$$
+
+If we expand the C term under the hood, we get the following:
+
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i\Psi_i + \underbrace{(\sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau))}_C \bullet G_2$$
+
+Suppose for example and without loss of generality that $\mathbf{a} = [1,2,3,4,5]$ and $\ell=3$. In that case, the public part of the witness is $[1,2,3]$ and the private part is $[4,5]$.
+
+The final equation would be as follows:
+
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1\Psi_1+2\Psi_2+3\Psi_3)\bullet G2 + \underbrace{(4\Psi_4 + 5\Psi_5  + h(\tau)t(\tau))}_C \bullet G_2$$
+
+However, nothing stops the prover from creating an valid portion of the public witness as [1,2,0] and moving the zeroed out public portion to the private part of the computation as follows:
+
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1\Psi_1+2\Psi_2+\boxed{0\Psi_3})\bullet G2 + \underbrace{(\boxed{3\Psi_3}+4\Psi_4 + 5\Psi_5  + h(\tau)t(\tau))}_C \bullet G_2$$
+
+The equation above is valid, but the witness does not necessarily satisfy the original constraints.
+
+Therefore, we need to prevent the prover from using $\Psi_1$ to $\Psi_{\ell}$ as part of the computation of $[C]_1$.
+
+### Introducing $\gamma$ and $\delta$
+To avoid the problem above, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
 
 Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$.
 
