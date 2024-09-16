@@ -145,7 +145,7 @@ Una extensión de campo es un concepto muy abstracto y, francamente, la relació
 
 Piénsalo de esta manera:
 
-![Math meme about field extensions](https://static.wixstatic.com/media/935a00_19c62a78929f4cb28ee0e42a14e8ff85~mv2.png/v1/fill/w_861,h_574,al_c,lg_1,q_90,enc_auto/935a00_19c62a78929f4cb28ee0e42a14e8ff85~mv2.png)
+![Math meme about field extensions](https://static.wixstatic.com/media/935a00_19c62a78929f4cb28ee0e42a14e8ff85~mv2.png/v1/fill/w_461,h_374,al_c,lg_1,q_90,enc_auto/935a00_19c62a78929f4cb28ee0e42a14e8ff85~mv2.png)
 
 Una curva elíptica en $G_2$ es una curva elíptica donde tanto el elemento $x$ como el $y$ son objetos bidimensionales.
 
