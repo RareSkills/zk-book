@@ -1,6 +1,6 @@
 # Teoría elemental de grupos para programadores
 
-![Imagen destacada de la teoría de grupos](https://static.wixstatic.com/media/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png/v1/fill/w_1000,h_1000,al_c,q_90,enc_auto/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png)
+![Imagen destacada de la teoría de grupos](https://static.wixstatic.com/media/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png/v1/fill/w_2500,h_250,al_c,q_90,enc_auto/935a00_fd134878f9e449418c68ee94bc24cfd9~mv2.png)
 
 Este artículo proporciona varios ejemplos de grupos algebraicos para que puedas hacerte una idea de ellos.
 
