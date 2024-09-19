@@ -4,7 +4,7 @@ El algoritmo Groth16 permite que un probador calcule un programa aritmético cua
 
 ## Requisitos previos
 
-Este artículo es un capítulo del [Libro de pruebas de conocimiento cero de RareSkills](https://www.rareskills.io/zk-book). Se supone que está familiarizado con los capítulos anteriores.
+Este artículo es un capítulo del [Libro ZK Proofs de RareSkills](https://www.rareskills.io/zk-book). Se supone que está familiarizado con los capítulos anteriores.
 
 ## Notación
 
