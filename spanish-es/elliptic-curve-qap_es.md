@@ -213,8 +213,8 @@ Una configuración confiable genera un elemento de campo aleatorio $\tau$ y calc
 
 $$
 \begin{align*}
-[\Omega_{n-1},\Omega_{n-2},..., \Omega_1, G_1] &= [\tau^{n-1}G_1, \tau^{n-2}G_1,\puntos, \tau G_1, G_1]\\
-[\Theta_{n-1}, \Theta_{n-2}, ..., \Theta_1, G_2] &= [\tau^{n-1}G_2, \tau^{n-2}G_2,\puntos, \tau G_2, G_2]\\
+[\Omega_{n-1},\Omega_{n-2},..., \Omega_1, G_1] &= [\tau^{n-1}G_1, \tau^{n-2}G_1,\..., \tau G_1, G_1]\\
+[\Theta_{n-1}, \Theta_{n-2}, ..., \Theta_1, G_2] &= [\tau^{n-1}G_2, \tau^{n-2}G_2,\..., \tau G_2, G_2]\\
 [\Upsilon_{n-2}, \Upsilon_{n-3}, ..., \Upsilon_1, \Upsilon_0] &= [\tau^{n-2}t(\tau)G_1, \tau^{n-3}t(\tau)G_1, ..., \tau t(\tau)G_1, t(\tau)G_1]
 \end{align*}
 $$
@@ -231,10 +231,10 @@ $$\underbrace{\sum_{i=1}^m a_iu_i(x)}_{A}\underbrace{\sum_{i=1}^m a_iv_i(x)}_B =
 
 $$
 \begin{align*}
-[A]_1 &=\sum_{i=1}^m a_iu_i(\tau) = \langle[u_{{n-1}a}, u_{{n-2}a}, \puntos, u_{1a}, u_{0a}],[\Omega_{n-1}, \Omega_{n-2}, \..., \Omega_1, G_1]\rangle\\
-[B]_2 &=\sum_{i=1}^m a_iv_i(\tau) = \langle[v_{{n-1}a}, v_{{n-2}a}, \puntos, v_{1a}, v_{0a}],[\Theta_{n-1}, \Theta_{n-2}, \..., \Theta_1, G_2]\rangle\\
-[C]_1 &=\sum_{i=0}^m a_iw_i(\tau) + h(\tau)t(\tau) = \langle[w_{{n-1}a}, w_{{n-2}a}, \dots, w_{1a}, w_{0a}],[\Omega_{n-1}, \Omega_{n-2}, \..., \Omega_1, G_1]\rangle \\
-&+\langle[h_{n-2}, h_{n-3}, \dots, h_1, h_0], [\Upsilon_{n-2}, \Upsilon_{n-3}, \dots, \Upsilon_1, \Upsilon_0] \rangle\\
+[A]_1 &=\sum_{i=1}^m a_iu_i(\tau) = \langle[u_{{n-1}a}, u_{{n-2}a}, \..., u_{1a}, u_{0a}],[\Omega_{n-1}, \Omega_{n-2}, \..., \Omega_1, G_1]\rangle\\
+[B]_2 &=\sum_{i=1}^m a_iv_i(\tau) = \langle[v_{{n-1}a}, v_{{n-2}a}, \..., v_{1a}, v_{0a}],[\Theta_{n-1}, \Theta_{n-2}, \..., \Theta_1, G_2]\rangle\\
+[C]_1 &=\sum_{i=0}^m a_iw_i(\tau) + h(\tau)t(\tau) = \langle[w_{{n-1}a}, w_{{n-2}a}, \..., w_{1a}, w_{0a}],[\Omega_{n-1}, \Omega_{n-2}, \..., \Omega_1, G_1]\rangle \\
+&+\langle[h_{n-2}, h_{n-3}, \..., h_1, h_0], [\Upsilon_{n-2}, \Upsilon_{n-3}, \..., \Upsilon_1, \Upsilon_0] \rangle\\
 \end{align*}
 $$
 
