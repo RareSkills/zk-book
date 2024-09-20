@@ -129,11 +129,11 @@ b^{a_j}=\underbrace{b\cdot b\cdot\dots\cdot b}_{{a_j} \text{ veces}}
 $$
 
 $$
-b^{a_i +a_j}=\underbrace{b\cdot b\cdot\puntos\cdot b}_{{a_i} \text{ veces}}\cdot\underbrace{b\cdot b\cdot\puntos\cdot b}_{{a_j} \text{ veces}}
+b^{a_i +a_j}=\underbrace{b\cdot b\cdot\dots\cdot b}_{{a_i} \text{ veces}}\cdot\underbrace{b\cdot b\cdot\puntos\cdot b}_{{a_j} \text{ veces}}
 $$
 
 $$
-b^{a_i +a_j}=\underbrace{b\cdot b\cdot\puntos\cdot b\cdot b\cdot b\dots\cdot b}_{{a_i+a_j} \text{ veces}}
+b^{a_i +a_j}=\underbrace{b\cdot b\cdot\dots\cdot b\cdot b\cdot b\dots\cdot b}_{{a_i+a_j} \text{ veces}}
 $$
 
 ### Números enteros bajo la suma de potencias enteras de $b$ bajo la multiplicación módulo un número primo
