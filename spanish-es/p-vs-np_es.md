@@ -104,9 +104,9 @@ Ejemplos de problemas en NP. Estos se explican con más detalle a continuación:
 ##### Ejemplo 1 de NP: Sudoku
 En el juego Sudoku, se le da a un jugador una cuadrícula de $9 \times 9$ con algunos números completos. El objetivo es que el jugador complete el resto de la cuadrícula con los números del 1 al 9 de manera que ningún número aparezca más de una vez en cualquier fila, columna o casilla de $3 \times 3$ (las que están delineadas con líneas en negrita). Las siguientes imágenes de [Wikipedia](https://en.wikipedia.org/wiki/Sudoku) ilustran esto. En la primera imagen, vemos la cuadrícula de 9x9 tal como se le da al jugador. En la segunda imagen, vemos la solución del jugador.
 
-![Un sudoku incompleto](https://static.wixstatic.com/media/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png)
+![Un sudoku incompleto](https://static.wixstatic.com/media/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png/v1/fill/w_300,h_300,al_c,lg_1,q_85,enc_auto/935a00_697037a2589d4091a95a9123d3796b4c~mv2.png)
 
-![Un sudoku completo [rompecabezas](https://static.wixstatic.com/media/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png/v1/fill/w_600,h_600,al_c,lg_1,q_85,enc_auto/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png)
+![Un sudoku completo [rompecabezas](https://static.wixstatic.com/media/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png/v1/fill/w_300,h_300,al_c,lg_1,q_85,enc_auto/935a00_2b17812514524ee584f0d9e7c340c73f~mv2.png)
 
 Dada una *solución* de un sudoku, podemos verificar rápidamente que la solución es correcta simplemente recorriendo las columnas, filas y subcuadrículas de $3\times 3$. El testigo puede verificarse en tiempo polinomial.
 
@@ -115,7 +115,7 @@ Sin embargo, *calcular* la solución requiere significativamente más recursos: 
 ##### Ejemplo 2 de NP: Tricoloración de un mapa
 Cualquier mapa 2D de territorios puede ser “coloreado” con solo cuatro colores (ver el [teorema de los cuatro colores](https://en.wikipedia.org/wiki/Four_color_theorem)). Es decir, podemos asignar un color único (uno de los cuatro colores) a cada territorio de modo que ningún territorio vecino comparta el mismo color. Por ejemplo, la siguiente imagen (de [Wikipedia](https://en.wikipedia.org/wiki/U.S._state#/media/File:Map_of_USA_with_state_names_2.svg)) muestra los Estados Unidos coloreados con cuatro colores: rosa, verde, amarillo y rojo. Tómese un momento para observar la verificación de que no se ha asignado el mismo color a dos estados en contacto:
 
-![Un mapa de los Estados Unidos coloreado con cuatro colores](https://static.wixstatic.com/media/935a00_80bcbb69d39348819f674827b8c25691~mv2.png/v1/fill/w_400,h_246,al_c,lg_1,q_85,enc_auto/935a00_80bcbb69d39348819f674827b8c25691~mv2.png)
+![Un mapa de los Estados Unidos coloreado con cuatro colores](https://static.wixstatic.com/media/935a00_80bcbb69d39348819f674827b8c25691~mv2.png/v1/fill/w_200,h_123,al_c,lg_1,q_85,enc_auto/935a00_80bcbb69d39348819f674827b8c25691~mv2.png)
 
 El problema de los tres colores pregunta si un mapa se puede colorear usando solo tres colores en lugar de cuatro. Descubrir un tricolor (si existe) es un problema de búsqueda que requiere un uso intensivo de recursos computacionales. Sin embargo, verificar una *propuesta* de 3 colores es fácil: recorra cada una de las regiones y verifique que ninguna región vecina tenga el mismo color que el territorio que se está verificando actualmente.
 
@@ -123,13 +123,13 @@ Resulta que no es posible aplicar 3 colores a los Estados Unidos.
 
 Las razones por las que un mapa en particular no puede tener 3 colores varían, pero en el caso de los Estados Unidos, Nevada (la región <span style="color:red">roja</span> en el mapa a continuación) está rodeada por cinco territorios. Coloreamos Nevada con un color, luego debemos alternar los colores de sus territorios vecinos. Sin embargo, cuando terminemos de rodear a los vecinos de Nevada, terminaremos con un territorio que tiene vecinos con tres colores en sus límites, lo que no deja ningún color válido para el territorio sin colorear.
 
-![Un mapa que muestra Nevada y los estados circundantes](https://static.wixstatic.com/media/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg/v1/fill/w_898,h_674,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg)
+![Un mapa que muestra Nevada y los estados circundantes](https://static.wixstatic.com/media/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg/v1/fill/w_449,h_337,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_5ddfcf6c6b0f4920bdb3624fbab031d9~mv2.jpg)
 
 Aquí hay un [video rápido e interesante sobre mapas de 3 colores](https://www.youtube.com/watch?v=WlcXoz6tn4g) si desea obtener más información sobre este problema.
 
 Sin embargo, es posible aplicar tres colores a Australia:
 
-![A 3 Coloring of Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
+![A 3 Coloring of Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_348,h_314,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
 
 No todos los mapas pueden tener tres colores. Calcular un tricolor para un mapa 2D arbitrario, si existe, no se puede hacer de manera eficiente; por lo general, se requiere una búsqueda de fuerza bruta que puede llevar un tiempo exponencial.
 
@@ -150,7 +150,7 @@ Cualquier problema que requiera recursos exponenciales para verificar el testigo
 
 En otras palabras, si tienes una computadora lo suficientemente potente para resolver o verificar una clase de problema en el círculo más grande, puedes resolver o verificar un subconjunto de él:
 
-![Jerarquía de clases de complejidad computacional](https://static.wixstatic.com/media/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg/v1/fill/w_1022,h_766,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg)
+![Jerarquía de clases de complejidad computacional](https://static.wixstatic.com/media/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg/v1/fill/w_511,h_383,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_9a3130175f2945eb8ae7a4d975b36f55~mv2.jpg)
 
 ### El problema P vs. NP
 P es la clase de problemas que se pueden resolver y verificar de manera eficiente, mientras que NP es la clase de problemas que se pueden verificar de manera eficiente. La pregunta "P vs NP" pregunta, simplemente, si estas dos clases son la misma.
@@ -326,7 +326,7 @@ Por lo tanto, vemos que un testigo que demuestra que una lista está ordenada no
 #### Ejemplo 2: Un coloreado de 3 colores como una fórmula booleana
 Veamos nuestro mapa de Australia nuevamente:
 
-![Un coloreado de 3 colores de Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_696,h_628,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
+![Un coloreado de 3 colores de Australia](https://static.wixstatic.com/media/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg/v1/fill/w_348,h_314,al_c,lg_1,q_85,enc_auto/935a00_d8396ac3cd15406281b6c83deb2abc71~mv2.jpg)
 
 Para modelar la solución como una fórmula booleana, la fórmula debe codificar los siguientes hechos:
 
@@ -385,7 +385,7 @@ Necesitamos aplicar la restricción de asignación de color a cada territorio y 
 ##### Una fórmula para modelar una coloración 3 de Australia
 Ahora mostramos la fórmula booleana final que verifica una coloración 3 válida para Australia. Aquí están los territorios etiquetados:
 
-![3-coloración de Australia etiquetada con colores para los territorios](https://static.wixstatic.com/media/935a00_824140c195b64b20bb5351d8d54464d8~mv2.jpg/v1/fill/w_696,h_629,al_c,lg_1,q_85,enc_auto/935a00_824140c195b64b20bb5351d8d54464d8~mv2.jpg)
+![3-coloración de Australia etiquetada con colores para los territorios](https://static.wixstatic.com/media/935a00_824140c195b64b20bb5351d8d54464d8~mv2.jpg/v1/fill/w_348,h_314,al_c,lg_1,q_85,enc_auto/935a00_824140c195b64b20bb5351d8d54464d8~mv2.jpg)
 
 Primero, asignamos a cada territorio un nombre de variable:
 
