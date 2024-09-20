@@ -64,7 +64,7 @@ A pesar de los incentivos significativos para encontrar soluciones eficientes a 
 
 #### Ejemplos de problemas en PSPACE
 ##### Ejemplo 1 de PSPACE: Encontrar el movimiento óptimo en ajedrez
-![Imagen de un tablero de ajedrez](https://static.wixstatic.com/media/935a00_71d5fe7538a847ccaef0c82b5bea6b57~mv2.jpeg/v1/fill/w_720,h_720,al_c,q_85,enc_auto/935a00_71d5fe7538a847ccaef0c82b5bea6b57~mv2.jpeg)
+![Imagen de un tablero de ajedrez](https://static.wixstatic.com/media/935a00_71d5fe7538a847ccaef0c82b5bea6b57~mv2.jpeg/v1/fill/w_360,h_360,al_c,q_85,enc_auto/935a00_71d5fe7538a847ccaef0c82b5bea6b57~mv2.jpeg)
 
 Supongamos que le preguntamos a una computadora poderosa: "Dado este tablero de ajedrez con las piezas en esta posición, ¿cuál es el próximo movimiento óptimo?"
 
