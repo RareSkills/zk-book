@@ -198,6 +198,6 @@ Está bien comenzar con el generador (que tiene un logaritmo discreto conocido d
 **Ejercicio para el lector:** Supongamos que confirmamos un vector 2D en los puntos $G_1$ y $G_2$. Se conoce el logaritmo discreto de $G_1$, pero no se conoce el logaritmo discreto de $G_2$. Ignoraremos el término ciego por ahora. ¿Puede el confirmador abrir dos vectores diferentes? ¿Por qué sí o por qué no?
 
 Obtenga más información con RareSkills
-Consulte nuestro campamento de entrenamiento ZK si desea [aprender pruebas de conocimiento cero](https://www.rareskills.io/zk-bootcamp).
+Consulte nuestro campamento de entrenamiento ZK si desea [aprender ZK Proofs](https://www.rareskills.io/zk-bootcamp).
 
 *Traducido al Español por **ARCADIO Garcia**, Septiembre 2024*
