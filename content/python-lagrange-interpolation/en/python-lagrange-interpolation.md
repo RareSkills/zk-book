@@ -1,4 +1,4 @@
-## Langrange Interpolation with Python
+# Langrange Interpolation with Python
 
 Lagrange interpolation is a technique for computing a polynomial that passes through a set of $n$ points.
 
