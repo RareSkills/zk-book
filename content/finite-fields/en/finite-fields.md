@@ -668,7 +668,7 @@ In the code below, we define two polynomials: `p1 = xÂ² + 2x + 102` and `p2 = xÂ
 
 ```python
 import galois
-GF103 = [galois.GF](http://galois.gf/)(103) # p = 103
+GF103 = galois.GF(103) # p = 103
 
 # we define a polynomial x^2 + 2x + 102 mod 103
 p1 = galois.Poly([1,2,102], GF103)
