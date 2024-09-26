@@ -282,12 +282,11 @@ $$
 In the first row, for the first left variable, we have $v₁ = xy$:
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -305,11 +304,11 @@ $$
 \times\\
 \times
 \end{matrix}
-    \begin{matrix}
-        y \\
-        u \\
-        v_2 \\
-    \end{matrix}
+\begin{matrix}
+    y \\
+    u \\
+    v_2 \\
+\end{matrix}
 $$
 
 This means with respect to the left hand side, the variable $x$ is present, and no other variables are present. Therefore, we transform the first row as follows:
@@ -336,12 +335,11 @@ and we see that the $1$ is in the $x$ column.
 Working our way down, we see that only $z$ is present for the left-hand side of our systems of equations.
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -380,12 +378,11 @@ $$
 Finally, we have $v₁$ as the only present variable in the left hand operators in the third row
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -423,12 +420,11 @@ $$
 The following image should make the mapping more clear:
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -472,12 +468,11 @@ $$
 We could accomplish this same exercises by expanding the left hand values of
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -547,12 +542,11 @@ $$
 Matrix $\mathbf{R}$ represents the right hand terms of our equation:
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -581,18 +575,17 @@ $$
 Matrix $\mathbf{R}$ must have 1s representing $y$, $u$, and $v_2$. The row in the matrix corresponds to the row of the arithmetic constraint, i.e. we can number the constraints (rows) as follows:
 
 $$
-    \begin{matrix}
-        (1) \\
-        (2) \\
-        (3) \\
-    \end{matrix}
-    \space\space
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    (1) \\
+    (2) \\
+    (3) \\
+\end{matrix}
+\space\space
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -610,12 +603,12 @@ $$
 \times\\
 \times
 \end{matrix}
-    \underset{\mathbf{R}}{\boxed{
-    \begin{matrix}
-        y \\
-        u \\
-        v_2 \\
-    \end{matrix}}}
+\underset{\mathbf{R}}{\boxed{
+\begin{matrix}
+    y \\
+    u \\
+    v_2 \\
+\end{matrix}}}
 $$
 
 So the first row has 1 in the $y$ column, the second row has 1 in the $u$ column, and the third row has 1 in the $v_2$ column. Everything else is zero.
@@ -642,12 +635,11 @@ $$
 This diagram illustrates the transformation.
 
 $$
-    \begin{matrix}
-        v_1 \\
-        v_2 \\
-        r \\
-    \end{matrix}
-
+\begin{matrix}
+    v_1 \\
+    v_2 \\
+    r \\
+\end{matrix}
 \begin{matrix}
 =\\
 =\\
@@ -1172,11 +1164,9 @@ $$
 A &= \begin{bmatrix}
 0 & 0 & -1 & 0 
 \end{bmatrix}\\
-
 B &= \begin{bmatrix}
 0 & 0 & 0 & 1 
 \end{bmatrix}\\
-
 C &= \begin{bmatrix}
 0 & -1 & 0 & 0 
 \end{bmatrix}

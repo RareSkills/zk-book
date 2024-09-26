@@ -3,15 +3,15 @@
 Lagrange interpolation is a technique for computing a polynomial that passes through a set of $n$ points.
 
 ## Interpolating a vector as a polynomial
-## Examples
+### Examples
 
-### A straight line through two points
+#### A straight line through two points
 Consider that if we have two points, they can be interpolated with a line. For example, given $(1, 1)$ and $(2, 2)$, we can draw a line that intersects both points, it would be a degree 1 polynomial $y = x$.
 
-### A single point
+#### A single point
 Now consider that if we have one point, we can draw a line through that point with a degree 0 polynomial. For example, if the point is $(3, 5)$ we can draw a line through it $y = 5$ (which is a degree 0 polynomial).
 
-### Three points and a parabola
+#### Three points and a parabola
 The pattern that we can "draw a polynomial through" $n$ points with a (at most) degree $n - 1$ polynomial holds for any number of points. For example, the points $(0, 0), (1, 1), (2, 4)$ can be interpolated with $y = x^2$. If those points happened to be a straight line, e.g. $(0, 0), (1, 1), (2, 2)$, then we could draw a line through $(1, 1)$ and $(2, 2)$ with a degree 1 polynomial $y = x$, but in general, three points won't be collinear, so we'll need a degree 2 polynomial to cross all the points.
 
 ## Python code for Lagrange interpolation
