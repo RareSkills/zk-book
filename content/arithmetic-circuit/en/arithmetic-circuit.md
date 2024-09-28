@@ -637,7 +637,7 @@ We have glossed over two very important details in this article. Some other chal
 - We didn’t discuss what datatype we used to store signals for the arithmetic circuit and how we handle overflow during addition or multiplication.
 - We have no way of expressing the value 2/3 without losing precision. Any fixed point or floating point representation we choose will have rounding issues
 
-To handle these problems, arithmetic circuits are calculated over *[finite fields](rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
+To handle these problems, arithmetic circuits are calculated over *[finite fields](https://www.rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
 
 Finite field arithmetic has some surprising differences from regular arithmetic introduced by the modulo operator, so the next chapter will explore them in detail.
 
