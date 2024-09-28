@@ -2,9 +2,9 @@
 
 Given an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit) encoded as a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system), it is possible to create a ZK-proof of having a witness, albeit not a succinct one. This article describes how to accomplish that.
 
-A zero knowledge proof for a R1CS is accomplished by converting the witness vector into [finite field elliptic curve points](https://www.rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing) for each row.
+A zero knowledge proof for an R1CS is accomplished by converting the witness vector into [finite field elliptic curve points](https://www.rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing) for each row.
 
-Given a Rank1 1 Constraint System where each matrix has $n$ rows and $m$ columns, we write it as
+Given a Rank 1 Constraint System where each matrix has $n$ rows and $m$ columns, we write it as
 
 $$\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}=\mathbf{O}\mathbf{a}$$
 
@@ -23,16 +23,16 @@ a_1 \\
 \vdots \\
 a_m
 \end{array} \right]
-\left[ \begin{array}{ccc}
-r_{1,1} & \cdots & r_{1,m} \\
-\vdots & \ddots & \vdots \\
-r_{n,1} & \cdots & r_{n,m}
-\end{array} \right]
 \circ
 \left[ \begin{array}{ccc}
 r_{1,1} & \cdots & r_{1,m} \\
 \vdots & \ddots & \vdots \\
 r_{n,1} & \cdots & r_{n,m}
+\end{array} \right]
+\left[ \begin{array}{c}
+a_1 \\
+\vdots \\
+a_m
 \end{array} \right]
 =
 \left[ \begin{array}{ccc}
@@ -188,9 +188,9 @@ r_{1,1} & \cdots & r_{1,m} \\
 r_{n,1} & \cdots & r_{n,m}
 \end{array} \right]
 \left[ \begin{array}{c}
-[s_1 G_2]_2 \\
+[a_1 G_2]_2 \\
 \vdots \\
-[s_m G_2]_2
+[a_m G_2]_2
 \end{array} \right]
 =
 \left[ \begin{array}{ccc}
