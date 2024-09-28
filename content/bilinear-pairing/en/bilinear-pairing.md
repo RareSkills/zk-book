@@ -7,7 +7,7 @@ We will explain bilinear pairings at a high level and provide some examples in P
 ## Prerequisites
 - The reader should know what [point addition](https://www.rareskills.io/post/elliptic-curve-addition) and scalar multiplication are in the context of elliptic curves.
 - The reader should also know the discrete logarithm problem in this context: a scalar multiplied by a point will result in another point, and it is infeasible in general to calculate the scalar given the elliptic curve point.
-- The reader should know what a [finite field](rareskills.io/post/finite-fields) and cyclic group are, and what a generator is in the context of elliptic curves. We will refer to generators with the variable G.
+- The reader should know what a [finite field](https://www.rareskills.io/post/finite-fields) and cyclic group are, and what a generator is in the context of elliptic curves. We will refer to generators with the variable G.
 - The reader should know about [Ethereum Precompiles](https://www.rareskills.io/post/solidity-precompiles).
 We will use capital letters to denote EC (elliptic curve) points and lower case letters to denote elements of finite fields ("scalars"). When we say element, this could be an integer in a finite field or it could be a point on an elliptic curve. The context will make it clear.
 
