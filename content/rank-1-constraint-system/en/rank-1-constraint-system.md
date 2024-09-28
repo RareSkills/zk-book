@@ -174,7 +174,7 @@ result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a)
 assert result.all(), "result contains an inequality"
 ```
 
-You may be wondering what the point of this is, aren’t we just saying that $41 \times 103 = 4223$ is a much less compact way?
+You may be wondering what the point of this is, aren’t we just saying that $41 \times 103 = 4223$ in a much less compact way?
 
 You would be correct.
 
@@ -698,7 +698,7 @@ using the column labels consistent with earlier matrices.
 By way of reminder, $\mathbf{C}$ is derived from the result of the multiplication
 
 $$
-\underset{\mathbf{O}}{
+\underset{\mathbf{C}}{
     \boxed{\begin{matrix}
         v_1 \\
         v_2 \\
@@ -789,7 +789,7 @@ assert result.all(), "system contains an inequality"
 ```
 
 ## Example 3: Addition with a constant
-What if we want to build an rank one constraint system for the following?
+What if we want to build a rank one constraint system for the following?
 
 $$z = x * y + 2$$
 
@@ -839,9 +839,9 @@ import numpy as np
 import random
 
 # Define the matrices
-A = np.matrix([[0,0,1,0]])
-B = np.matrix([[0,0,0,1]])
-C = np.matrix([[-2,1,0,0]])
+L = np.matrix([[0,0,1,0]])
+R = np.matrix([[0,0,0,1]])
+O = np.matrix([[-2,1,0,0]])
 
 # pick random values to test the equation
 x = random.randint(1,1000)
@@ -850,7 +850,7 @@ z = x * y + 2 # witness vector
 a = np.array([1, z, x, y])
 
 # check the equality
-result = C.dot(w) == np.multiply(np.matmul(L, a), B.dot(w))
+result = O.dot(a) == np.multiply(np.matmul(L, a), R.dot(a))
 assert result.all(), "result contains an inequality"
 ```
 
@@ -883,7 +883,7 @@ The matrices will be defined as follows:
 $$
 \begin{align*}
 \mathbf{L} &= \begin{bmatrix}
-0 & 0 & 1 & 0 \\
+0 & 0 & 2 & 0 \\
 \end{bmatrix} \\
 \mathbf{R} &= \begin{bmatrix}
 0 & 0 & 1 & 0 \\
@@ -908,7 +908,7 @@ y \\
 \end{bmatrix}
 =
 \begin{bmatrix}
-0 & 0 & 1 & 0 \\
+0 & 0 & 2 & 0 \\
 \end{bmatrix}
 \begin{bmatrix}
 1 \\
@@ -946,7 +946,7 @@ Let’s do something less trivial that incorporates everything learned above
 Suppose we have the following constraint:
 
 $$
-z = 3x^2 + 5xy - x - 2y + 3
+z = 3x^2y + 5xy - x - 2y + 3
 $$
 
 We will break it up as follows:
@@ -986,27 +986,27 @@ $$
 We've marked the output $\mathbf{O}$ in <span style="color:red">red</span>, the left hand side $\mathbf{L}$ in <span style="color:green">green</span>, and the right hand side $\mathbf{R}$ in <span style="color:violet">violet</span>.  This produces the following matrices:
 
 $$
-A = \begin{bmatrix}
-0 & 0 & \textcolor{violet}{3} & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0 & \textcolor{violet}{1} \\
-0 & 0 & \textcolor{violet}{5} & 0 & 0 & 0 \\
+L = \begin{bmatrix}
+0 & 0 & \textcolor{green}{3} & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & \textcolor{green}{1} & 0 \\
+0 & 0 & \textcolor{green}{5} & 0 & 0 & 0 \\
 \end{bmatrix}
 $$
 
 $$
-B = \begin{bmatrix}
-0 & 0 & \textcolor{blue}{1} & 0 & 0 & 0 \\
-0 & 0 & 0 & \textcolor{blue}{1} & 0 & 0 \\
-0 & 0 & 0 & 0 & \textcolor{blue}{1} & 0 \\
+R = \begin{bmatrix}
+0 & 0 & \textcolor{violet}{1} & 0 & 0 & 0 \\
+0 & 0 & 0 & \textcolor{violet}{1} & 0 & 0 \\
+0 & 0 & 0 & \textcolor{violet}{1} & 0 & 0 \\
 \end{bmatrix}
 $$
 
 $$
-C = \begin{bmatrix}
+O = \begin{bmatrix}
 
 0 & 0 & 0 & 0 & \textcolor{red}{1} & 0 \\
 0 & 0 & 0 & 0 & 0 & \textcolor{red}{1} \\
-\textcolor{red}{-3} & 1 & 1 & 2 & 0 & \textcolor{red}{-1} \\
+\textcolor{red}{-3} & \textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{2} & 0 & \textcolor{red}{-1} \\
 \end{bmatrix}
 $$
 
@@ -1021,15 +1021,15 @@ import numpy as np
 import random
 
 # Define the matrices
-A = np.array([[0,0,3,0,0,0],
+L = np.array([[0,0,3,0,0,0],
                [0,0,0,0,1,0],
-               [0,0,1,0,0,0]])
+               [0,0,5,0,0,0]])
 
-B = np.array([[0,0,1,0,0,0],
+R = np.array([[0,0,1,0,0,0],
                [0,0,0,1,0,0],
-               [0,0,0,5,0,0]])
+               [0,0,0,1,0,0]])
 
-C = np.array([[0,0,0,0,1,0],
+O = np.array([[0,0,0,0,1,0],
                [0,0,0,0,0,1],
                [-3,1,1,2,0,-1]])
 
@@ -1038,17 +1038,17 @@ x = random.randint(1,1000)
 y = random.randint(1,1000)
 
 # this is our orignal formula
-out = 3 * x * x * y + 5 * x * y - x- 2*y + 3# the witness vector with the intermediate variables inside
+out = 3 * x * x * y + 5 * x * y - x - 2 * y + 3 # the witness vector with the intermediate variables inside
 v1 = 3*x*x
 v2 = v1 * y
 w = np.array([1, out, x, y, v1, v2])
 
-result = C.dot(w) == np.multiply(A.dot(w),B.dot(w))
+result = O.dot(w) == np.multiply(L.dot(w),R.dot(w))
 assert result.all(), "result contains an inequality"
 ```
 
 ## Rank 1 Constraint Systems do not require starting with a single polynomial
-To keep things simple, we've been using examples of the form $z = xy + ...$ but most realistic arithmetic constraints are going to be set of arithmetic constraints, not a single one.
+To keep things simple, we've been using examples of the form $z = xy + ...$ but most realistic arithmetic constraints are going to be a set of arithmetic constraints, not a single one.
 
 For example, suppose we are proving that an array $[x₁, x₂, x₃, x₄]$ is binary and $v$ is less than 16. The set of constraints will be
 
@@ -1062,7 +1062,7 @@ v &= 8x₄ + 4x₃ + 2x₂ + x₁
 \end{align*}
 $$
 
-To get the into a rank one constraint system, we notice that the final row doesn't have any multiplication, so we can substitute $x_1$ into the first constraint:
+To get this into a rank one constraint system, we notice that the final row doesn't have any multiplication, so we can substitute $x_1$ into the first constraint:
 
 $$
 \begin{align*}
