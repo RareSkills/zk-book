@@ -7,7 +7,7 @@ Cryptography uses elliptic curves over finite fields, but elliptic curves are ea
 ## Set theoretic definition of elliptic curves
 The [set](https://www.rareskills.io/post/set-theory) of points on an elliptic curve form a group under elliptic curve point addition.
 
-Hopefully, if you’ve been following our [group theory introduction](rareskills.io/post/group-theory-and-coding), then you actually understood most of this, aside from what “point addition” is. But that’s the beauty of abstract algebra right? You don’t need to know what that is, and you still understand the above sentence.
+Hopefully, if you’ve been following our [group theory introduction](rareskills.io/post/group-theory), then you actually understood most of this, aside from what “point addition” is. But that’s the beauty of abstract algebra right? You don’t need to know what that is, and you still understand the above sentence.
 
 Elliptic curves are a family of curves which have the formula
 
