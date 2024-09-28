@@ -98,4 +98,4 @@ Most of the time, a ZK proof is essentially a polynomial evaluated at a random p
 
 The difficulty we have to solve is that we don't know if the polynomial is evaluated *honestly* -- somehow we have to trust the prover isn't lying when they evaluate $f(u)$.
 
-But before we get to that, we need to learn how to represent and entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](rareskills.io/post/quadratic-arithmetic-program).
+But before we get to that, we need to learn how to represent and entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program).
