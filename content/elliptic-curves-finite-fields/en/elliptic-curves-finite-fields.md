@@ -36,7 +36,7 @@ Over the field of rational numbers, multiplication has the identity element of 1
 In a finite field, the inverse of an element is the number you multiply it with to get the finite field element 1. For example, in modulo 23, 6 is the inverse of 4 because when you multiply them together modulo 23, you get 1. When the order of the field is prime, every number except zero has an inverse.
 
 ### Cyclic Groups
-A cyclic [group](https://www.rareskills.io/group-theory-and-coding) is a group such that every element can be computed by starting with a generator element and repeatedly applying the group’s binary operator.
+A cyclic [group](https://www.rareskills.io/group-theory) is a group such that every element can be computed by starting with a generator element and repeatedly applying the group’s binary operator.
 
 A very simple example is integers modulo 11 under addition. If your generator is 1, and you keep adding the generator to itself, you can generate every element in the group from 0 to 10.
 
