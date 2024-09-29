@@ -17,7 +17,7 @@ We assume the reader is already familiar with [elliptic curve point addition](ht
 
 Notation-wise, capital letters are elliptic curve points, lowercase letters are finite field elements.
 
-We say $A$ is an elliptic curve (EC) point, a is a [finite field](rareskills.io/post/finite-fields) element, and $aA$ is point multiplication between finite field element $a$ and EC point $A$. The expression $A + B$ denotes elliptic curve point addition.
+We say $A$ is an elliptic curve (EC) point, a is a [finite field](https://www.rareskills.io/post/finite-fields) element, and $aA$ is point multiplication between finite field element $a$ and EC point $A$. The expression $A + B$ denotes elliptic curve point addition.
 
 ## Traditional commitments
 When we design commit reveal functions in smart contracts, they are usually of the form
