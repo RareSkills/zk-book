@@ -8,7 +8,7 @@ The following is a plot of $y² = x³ + 3 \pmod {23}$
 
 ![Plot of y² = x³ + 3 \pmod 23](https://static.wixstatic.com/media/935a00_9b8594bdeb9b4eb580847f1d5ffcd6c0~mv2.png/v1/fill/w_614,h_678,al_c,lg_1,q_90,enc_auto/935a00_9b8594bdeb9b4eb580847f1d5ffcd6c0~mv2.png)
 
-Because we only allow integer inputs (more specifically, [finite field](https://www.rareskills.io/post/finite-fields) elements), we are not going to obtain a smooth plot.
+Because we only allow integer inputs (more specifically, finite field elements), we are not going to obtain a smooth plot.
 
 Not every $x$ value will result in an integer for the $y$ value when we solve the equation, so no point will be present at that value for $x$. You can see such gaps in the plot above.
 
@@ -27,7 +27,7 @@ In the application of cryptography, $p$ needs to be large. In practice, it is ov
 
 ## Background
 ### Field element
-We’re going to say "field element" a lot in this article, and hopefully from our previous tutorials (especially on [finite fields](rareskills.io/post/finite-fields)) you are comfortable with that term already. But if not, it is a positive integer that is inside a modulo operation.
+We’re going to say "field element" a lot in this article, and hopefully from our previous tutorials (especially on [finite fields](https://www.rareskills.io/post/finite-fields)) you are comfortable with that term already. But if not, it is a positive integer that is inside a modulo operation.
 
 That is, if we do addition modulo 11, then the finite field elements from that set is $\set{0,1,…,9,10}$. It isn’t correct to say "integers" even though that’s the data type we will use in our Python examples. You cannot have a negative field element (although integers can be negative) when doing addition modulo a prime number. A "negative" number in a finite field is simply the additive inverse of another number, that is, a number that when summed together results in zero. For example, in a finite field of modulo 11, 4 can be considered "-7" because $7 + 4 \pmod {11}$ is $0$, in a comparative sense to how 7 + (-7) is zero for regular numbers.
 
