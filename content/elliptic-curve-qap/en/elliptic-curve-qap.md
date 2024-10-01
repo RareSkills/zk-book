@@ -1,6 +1,6 @@
 # Evaluating a Quadratic Arithmetic Program on a Trusted Setup
 
-Evaluating a [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-programs) on a trusted setup enables a prover to demonstrate that a QAP is satisfied without revealing the witness while using a constant sized proof.
+Evaluating a [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) on a trusted setup enables a prover to demonstrate that a QAP is satisfied without revealing the witness while using a constant sized proof.
 
 Specifically, the QAP polynomials are evaluated at an unknown point $\tau$. The QAP equation
 

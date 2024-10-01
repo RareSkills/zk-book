@@ -109,7 +109,7 @@ assert L(lambda_ * v) == lambda_ * L(v)
 ### Scalar multiplication is really vector addition
 When we say "multiply a vector by 3" we are really saying "add the vector to itself three times". Since we are only working in finite fields, we don't concern ourselves with the interpretation of scalars such as "0.5"
 
-We can think of both vectors under element-wise addition (in a finite field) and polynomials under addition (also in a finite field) as [groups](https://www.rareskills.io/post/group-theory-and-coding).
+We can think of both vectors under element-wise addition (in a finite field) and polynomials under addition (also in a finite field) as [groups](https://www.rareskills.io/post/group-theory).
 
 The most important takeaway from this chapter is
 
