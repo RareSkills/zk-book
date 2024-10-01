@@ -1,6 +1,6 @@
 # Quadratic Arithmetic Programs
 
-A quadratic arithmetic program is an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit), specifically a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system) (R1CS) represented as a set of polynomials. It is derived using Lagrange interpolation on a Rank 1 Constraint System. Unlike a R1CS, a Quadratic Arithmetic Program (QAP) can be tested for equality in $\mathcal{O}(1)$ time via the Schwartz-Zippel Lemma.
+A quadratic arithmetic program is an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit), specifically a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system) (R1CS) represented as a set of polynomials. It is derived using Lagrange interpolation on a Rank 1 Constraint System. Unlike an R1CS, a Quadratic Arithmetic Program (QAP) can be tested for equality in $\mathcal{O}(1)$ time via the Schwartz-Zippel Lemma.
 
 ## Key ideas
 In the chapter on the Schwartz-Zippel Lemma, we saw that we can test if two vectors are equal in $\mathcal{O}(1)$ time by converting them to polynomials, then running the Schwartz-Zippel Lemma test on the polynomials. (To clarify, the *test* is $\mathcal{O}(1)$ time, converting the vectors to polynomials creates overhead).
@@ -107,9 +107,9 @@ assert L(lambda_ * v) == lambda_ * L(v)
 ```
 
 ### Scalar multiplication is really vector addition
-When we say "multiply a vector by 3" we are really saying "add the vector to itself three times". Since we are only working in finite field, we don't concern ourselves with the interpretation of scalars such as "0.5."
+When we say "multiply a vector by 3" we are really saying "add the vector to itself three times". Since we are only working in finite fields, we don't concern ourselves with the interpretation of scalars such as "0.5"
 
-We can think of both vectors under element-wise addition (in a finite field) and polynmoials under addition (also in a finite field) as [groups](https://www.rareskills.io/post/group-theory-and-coding).
+We can think of both vectors under element-wise addition (in a finite field) and polynomials under addition (also in a finite field) as [groups](https://www.rareskills.io/post/group-theory-and-coding).
 
 The most important takeaway from this chapter is
 

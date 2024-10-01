@@ -42,7 +42,7 @@ $$
 \langle[0,4,7,8],[\Omega_3, \Omega_2, \Omega_1, G_1]\rangle=4\Omega_2+7\Omega_1+8G_1
 $$
 
-We have now compute $g(\tau)$ *without knowing what $\tau$ is!*
+We have now computed $g(\tau)$ *without knowing what $\tau$ is!*
 
 This is also called a *trusted setup* because although *we* don’t know what the discrete log of $g(\tau)$ is, the person who created the structured reference string does. This could lead to leaking information down the line, so we *trust* that the entity creating the trusted setup deletes $\tau$ and in no-way remembers it.
 

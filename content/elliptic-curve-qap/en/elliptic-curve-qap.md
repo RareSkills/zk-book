@@ -1,4 +1,4 @@
-# Evaluating and Quadratic Arithmetic Program on a Trusted Setup
+# Evaluating a Quadratic Arithmetic Program on a Trusted Setup
 
 Evaluating a [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-programs) on a trusted setup enables a prover to demonstrate that a QAP is satisfied without revealing the witness while using a constant sized proof.
 
@@ -74,10 +74,10 @@ $$
 
 ### The degrees of the polynomials in the QAP with respect to the size of the R1CS
 A couple observations about the degrees of the polynomials in the general case:
-- The degree of $u(x)$ and $v(x)$ could be as as high as $n - 1$ because they interpolates $n$ points, where $n$ is the number of rows in the R1CS.
+- The degree of $u(x)$ and $v(x)$ could be as high as $n - 1$ because they interpolate $n$ points, where $n$ is the number of rows in the R1CS.
 - The degree of $w(x)$ could be as low as 0 if the sum of the polynomials $\sum_{i=0}^m a_iw_i(x)$ adds up to the zero polynomial, that is, the coefficients additively cancel each other out.
 - $t(x)$ is degree $n$ by definition.
-- Multiplying polynomials adds their degrees together, and dividing polynomails subtracts their degrees.
+- Multiplying polynomials adds their degrees together, and dividing polynomials subtracts their degrees.
 
 Therefore, h(x) will be at most $n - 2$ because 
 
@@ -110,9 +110,9 @@ Here are the polynomials after reducing the polynomials in this manner:
 
 $$
 \begin{align*}
-\sum_{i=1}^4 a_iu_i(x) &= u_{2a}x^2+u_{1a}+u_{0a}\\
-\sum_{i=1}^4 a_iv_i(x) &= v_{2a}x^2+v_{1a}+v_{0a}\\
-\sum_{i=1}^4 a_iw_i(x) &= w_{2a}x^2+w_{1a}+w_{0a}\\
+\sum_{i=1}^4 a_iu_i(x) &= u_{2a}x^2+u_{1a}x+u_{0a}\\
+\sum_{i=1}^4 a_iv_i(x) &= v_{2a}x^2+v_{1a}x+v_{0a}\\
+\sum_{i=1}^4 a_iw_i(x) &= w_{2a}x^2+w_{1a}x+w_{0a}\\
 \end{align*}
 $$
 
@@ -128,7 +128,7 @@ which was computed in the trusted setup as
 $$
 \begin{align*}
 [\Omega_2, \Omega_1, G_1] &= [\tau^2G_1, \tau G_1, G_1], \space\Omega_i \in \mathbb{G}_1\\
-[\Theta_2, \Theta_1, G_1] &= [\tau^2G_2, \tau G_2, G_2], \space\Theta_i \in \mathbb{G}_2
+[\Theta_2, \Theta_1, G_2] &= [\tau^2G_2, \tau G_2, G_2], \space\Theta_i \in \mathbb{G}_2
 \end{align*}
 $$
 
