@@ -249,8 +249,8 @@ Q_1 = multiply(G1, 4)
 Q_2 = multiply(G2, 5)
 
 # 10 * 12 = 120 (6 * 20 = 120 also)
-R_1 = multiply(G1, 13)
-R_2 = multiply(G2, 2)
+R_1 = multiply(G1, 10)
+R_2 = multiply(G2, 12)
 
 assert eq(pairing(P_2, P_1) * pairing(Q_2, Q_1), pairing(R_2, R_1))
 
