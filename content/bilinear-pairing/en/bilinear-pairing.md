@@ -210,7 +210,7 @@ Q = multiply(G2, 8)
 
 R = multiply(G1, 24)
 
-assert eq(pairing(Q, R), pairing(G2, R))
+assert eq(pairing(Q, P), pairing(G2, R))
 ```
 
 Rather annoyingly, the library requires that you pass the `G2` point as the first argument to `pairing`.
