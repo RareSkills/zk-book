@@ -2,7 +2,7 @@
 
 Nearly all ZK-Proof algorithms rely on the Schwartz-Zippel Lemma to achieve succintness.
 
-The Schwartz-Zippel Lemma states that if we are given two polynomials $p(x)$ and $q(x)$ with degree $d_p$ and $d_q$ respectively, and if $p(x) \neq q(x)$, then the number of points where $p(x)$ and $q(x)$ intersect is less than or equal to $\mathsf{max}(d_p, d_q)$.
+The Schwartz-Zippel Lemma states that if we are given two polynomials $p(x)$ and $q(x)$ with degrees $d_p$ and $d_q$ respectively, and if $p(x) \neq q(x)$, then the number of points where $p(x)$ and $q(x)$ intersect is less than or equal to $\mathsf{max}(d_p, d_q)$.
 
 Let's consider a few examples.
 
@@ -22,19 +22,19 @@ Consider the polynomials $p(x) = x^3$ and $q(x) = x$. The polynomials intersect 
 
 
 ## Polynomials in finite fields and the Schwartz-Zippel Lemma
-The Schwartz-Zippel Lemma holds for polynomials in [finite fields](https://www.rareskills.io/post/finite-fields) (i.e. all computations are done modulo a prime $p$).
+The Schwartz-Zippel Lemma holds for polynomials in [finite fields](https://www.rareskills.io/post/finite-fields) (i.e., all computations are done modulo a prime $p$).
 
 ## Polynomial equality testing
 We can test that two polynomials are equal by checking if all their coefficients are equal, but this takes $\mathcal{O}(d)$ time, where $d$ is the degree of the polynomial.
 
-If instead we can evaluate the polynomials at a random point $u$ compare the evaluations in $\mathcal{O}(1)$ time.
+If instead we can evaluate the polynomials at a random point $u$ and compare the evaluations in $\mathcal{O}(1)$ time.
 
 That is, in a finite field $\mathbb{F}_{p}$, we pick a random value $u$ from $[0,p)$. Then we evaluate $y_f=f(u)$ and $y_g=g(u)$. If $y_f = y_g$, then one of two things must be true:
 
 1. $f(x) = g(x)$
 2. $f(x) \neq g(x)$ and we picked one of the $d$ points where they intersect where $d = \mathsf{max}(\deg(f), \deg(g))$
 
-If $d << p$, then situation 2 is unlikely to the point of being negligible.
+If $d \ll p$, then situation 2 is unlikely to the point of being negligible.
 
 For example, if the field $\mathbb{F}_{p}$ has $p \approx 2^{254}$ (a little smaller than a [uint256](https://www.rareskills.io/post/uint-max-value-solidity)), and if the polynomials are not more than one million degree large, then the probability of picking a point where they intersect is
 
@@ -52,10 +52,10 @@ Normally, we would test vector equality by comparing if each of the $n$ componen
 
 Instead, if we use a common set of $x$ values (say $[1,2,..,n]$) to interpolate the vectors:
 
-1. we can interpolate a polynomial for each vector $f(x)$ and $g(x)$
-2. pick a random point $u$
-3. evaluate the polynomials at $u$
-4. check if $f(u) = g(u)$
+1. We can interpolate a polynomial for each vector $f(x)$ and $g(x)$
+2. Pick a random point $u$
+3. Evaluate the polynomials at $u$
+4. Check if $f(u) = g(u)$
 
 Although computing the polynomials is more work, the final check is much cheaper.
 
@@ -98,4 +98,4 @@ Most of the time, a ZK proof is essentially a polynomial evaluated at a random p
 
 The difficulty we have to solve is that we don't know if the polynomial is evaluated *honestly* -- somehow we have to trust the prover isn't lying when they evaluate $f(u)$.
 
-But before we get to that, we need to learn how to represent and entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program).
+But before we get to that, we need to learn how to represent an entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program).
