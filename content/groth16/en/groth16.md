@@ -272,7 +272,7 @@ And the verification equation is:
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet G_2 + [C]_1\bullet G_2$$
 
-## Part 2: Separating the public inputs from the private inputs with $\gamma$ and $\delta$
+## Part 2: Separating the public inputs from the private inputs with $\gamma$ or $\delta$
 ### Forging proofs by misuing $\Psi_i$ for $i\leq\ell$
 
 The assumption in the equation above is that the prover is only using $\Psi_{\ell+1}$ to $\Psi_m$ to compute $[C]_1$, but nothing stops a dishonest prover from using $\Psi_1$ to $\Psi_{\ell}$ to compute $[C]_1$, leading to a forged proof.
@@ -299,10 +299,10 @@ The equation above is valid, but the witness does not necessarily satisfy the or
 
 Therefore, we need to prevent the prover from using $\Psi_1$ to $\Psi_{\ell}$ as part of the computation of $[C]_1$.
 
-### Introducing $\gamma$ and $\delta$
-To avoid the problem above, the trusted setup introduces new scalars $\gamma$ and $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
+### Introducing $\gamma$ and/or $\delta$
+To avoid the problem above, the trusted setup introduces a new scalar : $\gamma$ or $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and/or the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
 
-Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$.
+Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$. Having $\delta$ and $\gamma$ having an unknown discrete logarithm relation is enough to avoid any forgeries.
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
@@ -335,9 +335,9 @@ $$\begin{align*}
 [C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
 \end{align*}$$
 
-And the verifier steps now include pairing by $[\gamma]_2$ and $[\delta]_2$ to cancel out the denominators:
+And the verifier steps now include pairing by $[\gamma]_2$ and/or $[\delta]_2$ to cancel out the denominators:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$ or $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [G]_2 + [C]_1\bullet [\delta]_2$$
 
 ## Part 3: Enforcing true zero knowledge: r and s
 Our scheme is not yet truly zero knowledge. If an attacker is able to guess our witness vector (which is possible if there is only a small range of valid inputs, e.g. secret voting from privileged addresses), then they can verify their guess is correct by comparing their constructed proof to the original proof.
