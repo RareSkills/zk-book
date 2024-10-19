@@ -51,7 +51,7 @@ Pedersen commitments behave very similar to the commit-reveal scheme described e
 
 Under the discrete logarithm assumption, given elliptic curve points $V$ and $U$, we cannot compute $x$ where $V$ = $xU$. That is to say, we do not know their *discrete log relationship*, i.e. how many times $V$ needs to be added to itself to get $U$.
 
-When we say $u$ is the discrete logarithm of $U$. We still refer to $u$ as the discrete logarithm of $U$ even though we cannot compute it, because we know it exists. All (cryptographic) elliptic curve points have a discrete logarithm, even if they cannot be computed.
+We still refer to $u$ as the discrete logarithm of $U$ even though we cannot compute it, because we know it exists. All (cryptographic) elliptic curve points have a discrete logarithm, even if they cannot be computed.
 
 In this sense, elliptic curve point multiplication behaves like a hash function. They are binding as long as we only allow openings within the curve order.
 
@@ -67,7 +67,7 @@ where $v$ is the value we are committing and $s$ is the salt (or blinding factor
 
 We should emphasize that although the discrete logarithms are unknown, the points $G$ and $B$ are public and known to both the verifier and the committer.
 
-### Why the committer must not know the discrete logarithm of $Q$
+### Why the committer must not know the discrete logarithm of an EC point
 Suppose the committer knows the discrete logarithm relationship between $B$ and $G$. That is, they know $u$ such that $B = uG$.
 
 In that case, they can open the commitment 
@@ -79,20 +79,41 @@ $$
 to a different $(v', s')$ other than the value they originally committed.
 
 Here's how the committer could cheat if they know that $g$ is the discrete logarithm of $G$ and $b$ is the discrete logarithm of $B$.
+$$
+B = bG 
+$$
+$$
+G = gB 
+$$
 
-The committer picks a new value $v'$ and computes
+The committer can rewrite the commitment equation:
+$$
+\begin{align*}
+\text{commitment} &= vG + sB \\
+&= vG + s(bG) \ \text{(substituting B = bG)} \\
+&= (v + sb)G
+\end{align*}
+$$
+
+The committer picks a new value $v'$ and computes $s'$:
 
 $$
-s' = \frac{\text{commitment}- v'g}{b} 
-$$
+\begin{align*}
+v' + s'b = v + sb \\
+s' = \frac{v + sb - v'}{b} 
+\end{align*}
+$$ 
+
 
 Then, the prover presents $(v', s')$ as the forged opening.
 
 This works because
 $$
 \begin{align*}
-\text{commitment} &= v'G + \frac{\text{commitment}- v'g}{b} B \\
-\text{commitment} &= v'G + (\text{commitment}- v'gG) \\
+\text{commitment} &= v'G + \frac{v + sb - v'}{b} B \\
+\text{commitment} &= v'G + (v + sb - v')G \\
+\text{commitment} &= \cancel{v'G} + vG + s(bG) - \cancel{v'G} \\
+\text{commitment} &= vG + sB \\
 \text{commitment} &= \text{commitment} \\
 \end{align*}
 $$
@@ -139,7 +160,7 @@ Pedersen commitments allow a prover to make claims about the sums of committed v
 Our example of using $G$ and $B$ can also be thought of a 2D vector commitment without a blinding term. But we can add as many elliptic curve points as we like $[G₁, G₂, …, Gₙ]$ and commit as many scalars as we like. (Here, $G_1$, $G_2$, etc mean different points in the same group, not generators of different groups).
 
 ## Pedersen Vector Commitments
-We can take the above scheme as step further and commit a set of values rather than a value and a blinding term.
+We can take the above scheme a step further and commit a set of values rather than a value and a blinding term.
 
 ## Vector commitment scheme
 Suppose we have a set of random elliptic curve points $(G₁,…,Gₙ)$ (that we do not know the discrete logarithm of), and we do the following:
