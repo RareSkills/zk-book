@@ -290,7 +290,7 @@ P_2 = multiply(G2, 3)
 Q_1 = multiply(G1, 4)
 Q_2 = multiply(G2, 5)
 
-# 13 * 2 = 16 
+# 13 * 2 = 26
 R_1 = multiply(G1, 13)
 R_2 = multiply(G2, 2)
 
