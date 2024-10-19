@@ -80,10 +80,10 @@ to a different $(v', s')$ other than the value they originally committed.
 
 Here's how the committer could cheat if they know that $g$ is the discrete logarithm of $G$ and $b$ is the discrete logarithm of $B$.
 $$
-\text{B} = bG 
+B = bG 
 $$
 $$
-\text{G} = gB 
+G = gB 
 $$
 
 The committer can rewrite the commitment equation:
