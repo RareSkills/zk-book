@@ -50,7 +50,7 @@ For example, proving that a number $v$ is less than $2^n$ can be done by showing
 
 If we were instead to create an arithmetic circuit for the range proof, this would introduce substantial computational overhead.
 
-For readers familiar with NP-Completeness, the Subset Sum problem can also be modeled directly with an inner product argument. Any problem in NP can be reduced to a Subset Sum instance and the solution can be proven with an inner product argument. In some cases, that reduction may be more efficient than an arithmetic circuit.
+*For readers familiar with NP-Completeness, the Subset Sum problem can also be modeled directly with an inner product argument. Any problem in NP can be reduced to a Subset Sum instance and the solution can be proven with an inner product argument. In some cases, that reduction may be more efficient than an arithmetic circuit.*
 
 ## Bulletproofs in practice
 The privarcy blockchain Monero uses the range proof described above to ensure that transactions do not have negative values in the input (i.e. an overflow in the finite field). ZCash uses Bulletproofs as a replacement for the SNARK polynomial commitment using a PLONKish circuit.
