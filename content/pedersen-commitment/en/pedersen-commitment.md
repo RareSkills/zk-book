@@ -209,13 +209,42 @@ That is, they switch the first two elements leaving everything else unchanged. A
 ## Generating random points transparently
 How can we generate these random elliptic curve points? One obvious solution is to use a trusted setup, but this isn’t necessary. The committer is able to set up the points in a way they cannot know their discrete logarithm by randomly selecting the points in a transparent way.
 
-They can pick the generator point, mix in a publicly chosen random number, and hash that result (and take it modulo the field_modulus) to obtain another value. if that results in an x value that lies on the elliptic curve, use that as the next generator and hash the $(x, y)$ pair again. Otherwise, if the x-value does not land on the curve, increment $x$ until it does. Because the committer is not generating the points, they don’t know their discrete log. The implementation details of this algorithm are left as an exercise for the reader.
+They can pick the generator point, mix in a publicly chosen random number, and hash that result (and take it modulo the field_modulus) to obtain another value. if that results in an x value that lies on the elliptic curve, use that as the next generator and hash the $(x, y)$ pair again. Otherwise, if the x-value does not land on the curve, increment $x$ until it does. Because the committer is not generating the points, they don’t know their discrete log.
+
+**Exercise:** Adjust the following code to generate `n` points with unknown discrete logs:
+```python
+from py_ecc.bn128 import is_on_curve, FQ
+from py_ecc.fields import field_properties
+field_mod = field_properties["bn128"]["field_modulus"]
+from hashlib import sha256
+from libnum import has_sqrtmod_prime_power, sqrtmod_prime_power
+
+b = 3 # for bn128, y^2 = x^3 + 3
+seed = "RareSkills"
+
+x = int(sha256(seed.encode('ascii')).hexdigest(), 16) % field_mod 
+
+entropy = 0
+
+vector_basis = []
+# modify the code below to generate n points
+while not has_sqrtmod_prime_power((x**3 + b) % field_mod, field_mod, 1):
+    # increment x, so hopefully we are on the curve
+    x = (x + 1) % field_mod
+    entropy = entropy + 1
+
+# pick the upper or lower point depending on if entropy is even or odd
+y = list(sqrtmod_prime_power((x**3 + b) % field_mod, field_mod, 1))[entropy & 1 == 0]
+point = (FQ(x), FQ(y))
+assert is_on_curve(point, b), "sanity check"
+print(point)
+```
 
 At no point should you generate a point by picking a scalar and them multiplying it with the generator, as that would lead to the discrete logarithm being known. You need to select the $x$ values of the curve point pseudorandomly via a hash function and figure out if it is on the curve.
 
 It is okay to start with the generator (which has a known discrete logarithm of 1) and generate the other points.
 
-**Exercise for the reader:** Suppose we commit a 2D vector to points $G_1$ and $G_2$. The discrete logarithm for $G_1$ is known, but the discrete logarithm for $G_2$ is not known. We will ignore the blinding term for now. Can the committer open to two different vectors? Why or why not?
+**Exercise for the reader:** Suppose we commit a vector of values to the point points $G_1$ and $G_2$. The discrete logarithm for $G_1$ is known, but the discrete logarithm for $G_2$ is not known. We will ignore the blinding term for now. Can the committer open to two different vectors? Why or why not?
 
 Learn More with RareSkills
 Check out our ZK bootcamp if you are looking to [learn zero knowledge proofs](https://www.rareskills.io/zk-bootcamp).
