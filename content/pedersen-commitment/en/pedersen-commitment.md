@@ -237,7 +237,11 @@ while not has_sqrtmod_prime_power((x**3 + b) % field_mod, field_mod, 1):
 y = list(sqrtmod_prime_power((x**3 + b) % field_mod, field_mod, 1))[entropy & 1 == 0]
 point = (FQ(x), FQ(y))
 assert is_on_curve(point, b), "sanity check"
-print(point)
+vector_basis.append(point)
+
+# new x value
+x = int(sha256(str(x).encode('ascii')).hexdigest(), 16) % field_mod 
+print(vector_basis)
 ```
 
 At no point should you generate a point by picking a scalar and them multiplying it with the generator, as that would lead to the discrete logarithm being known. You need to select the $x$ values of the curve point pseudorandomly via a hash function and figure out if it is on the curve.
