@@ -302,7 +302,7 @@ Therefore, we need to prevent the prover from using $\Psi_1$ to $\Psi_{\ell}$ as
 ### Introducing $\gamma$ and/or $\delta$
 To avoid the problem above, the trusted setup introduces a new scalar : $\gamma$ or $\delta$ to force $\Psi_{\ell+1}$ to $\Psi_m$ to be separate from $\Psi_1$ to $\Psi_{\ell}$. To do this, the trusted setup divides (multiplies by the modular inverse) the private terms (that constitute $[C]_1$) by $\delta$ and/or the public terms (that constitute $[X]_1$, the sum the verifier computes) by $\gamma$.
 
-Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$. If either $\delta$ and $\gamma$ have an unknown discrete logarithm, then the forgery described earlier along possible other methods are avoided. This method is typically used in Zcash’s Sapling’s‑based trusted setups where $\gamma$ is simply $G_2$ and $\delta$ is still randomly generated.
+Since the $h(\tau)t(\tau)$ term is embedded in $[C]_1$, those terms also need to be divided by $\delta$. If either $\delta$ and $\gamma$ have an unknown discrete logarithm, then the forgery described earlier along possible other methods are avoided. This method was used in Zcash’s Sapling’s‑based [trusted setups](https://github.com/ebfull/phase2/blob/master/src/lib.rs#L808) where $\gamma$ is simply left to $G_2$ after phase1 and $\delta$ is still randomly generated in phase2.
 
 $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
