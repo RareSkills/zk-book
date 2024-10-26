@@ -243,7 +243,7 @@ That makes for a smoother learning experience.
 ### Algebraic manipulation is really just associative addition.
 Let $P$ be an elliptic curve point. What happens we do something like this?
 
-$$(a + b)P + cP = aP + (a + c)P$$
+$$(a + b)P + cP = aP + (b + c)P$$
 
 At first, it may seem weird that we can do that, because if we try to visualize what is happening with the elliptic curve, we will surely get lost.
 
