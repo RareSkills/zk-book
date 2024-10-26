@@ -12,11 +12,11 @@ This commitment scheme does not require a trusted setup. However, the communicat
 ## Committing to the Polynomial
 The prover can commit to the polynomial by creating a [Pedersen Commitment](https://www.rareskills.io/post/pedersen-commitment) of each coefficient. For a Pedersen Committment, the prover and verifier need to agree on two elliptic curve points with unknown discrete logs. We will use $G$ and $B$.
 
-For example, if we have polynomial
+For example, if we have a polynomial
 
 $$p(x) = c_0+c_1x+c_2x^2$$
 
-We can create a Pedersen commitment for each coefficient. We will need three blinding terms $\gamma_0$, $\gamma_1$, $\gamma_2$. For convenience, any scalar used for blinding will use a lower-case Greek letter. We always use the elliptic curve point $B$ for the blinding term. Our commitments are produced as follows:
+we can create a Pedersen commitment for each coefficient. We will need three blinding terms $\gamma_0$, $\gamma_1$, $\gamma_2$. For convenience, any scalar used for blinding will use a lower-case Greek letter. We always use the elliptic curve point $B$ for the blinding term. Our commitments are produced as follows:
 
 $$
 \begin{align*}
@@ -33,7 +33,7 @@ The verifier chooses their value for $x$ and sends that to the prover. We call t
 
 ## Prover computes the proof
 ### Prover evaluates the polynomial
-The prover compute the original polynomial as:
+The prover computes the original polynomial as:
 
 $$
 y = p(u) = c_0 + c_1u + c_2u^2
@@ -68,9 +68,9 @@ c_0G + c_1Gu + c_2Gu^2 + \gamma_0B + \gamma_1Bu + \gamma_2Bu^2 &= (c_0 + c_1u + 
 \end{align*}
 $$
 
-In a sense, the prover is evaluating the polynomial using the coefficients to the polynomial and their choice of $u$. This will produce the evaluation of the original polynomial plus the blinding terms of the polynomial.
+In a sense, the prover is evaluating the polynomial using the polynomial's coefficients and their choice of $u$. This will produce the evaluation of the original polynomial plus the blinding terms of the polynomial.
 
-The proof of correct evaluation is that the prover is able to separate the blinding terms from evaluation of the polynomial -- even though the prover does not know the discrete logs of $yG$ and $\pi B$.
+The proof of correct evaluation is that the prover can separate the blinding terms from the evaluation of the polynomial -- even though the prover does not know the discrete logs of $yG$ and $\pi B$.
 
 ### An alternative illustration for why the verification works
 
@@ -96,7 +96,7 @@ $$
 
 In the final step, the verifier checks:
 
-$$yG + \pi B\stackrel{?}=C_0 + C_1\color{red}{u} + C_2\color{red}{u^2}$$
+$$yG + \pi B\stackrel{?}=C_0 + C_1 {\color{red} u} + C_2 {\color{red} u^2}$$
 
 If we expand the terms vertically, we see the equation is balanced if the prover was honest:
 
@@ -181,7 +181,7 @@ else:
 ```
 
 ## Why the prover cannot cheat
-Cheating on the prover's part means they don't honestly evaluate $y = p(u)$ but still tries to pass the final evaluation step.
+Cheating on the prover's part means they don't honestly evaluate $y = p(u)$ but still try to pass the final evaluation step.
 
 Without loss of generality, let's say the prover sends the correct commitments for the coefficients $C_0, C_1, C_2$.
 
