@@ -121,7 +121,7 @@ from py_ecc.bn128 import curve_order as p
 import random
 
 def random_field_element():
-    return random.randint(0, curve_order)
+    return random.randint(0, p)
 
 # these EC points have unknown discrete logs:
 G = (FQ(6286155310766333871795042970372566906087502116590250812133967451320632869759), FQ(2167390362195738854837661032213065766665495464946848931705307210578191331138))
