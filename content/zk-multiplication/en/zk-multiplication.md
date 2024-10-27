@@ -8,7 +8,7 @@ For this algorithm to work, the verifier must believe that the polynomial evalua
 
 At a high level, the prover commits to $l(x)$, $r(x)$, and $t(x)$ and sends the commitments to the verifier. Then, the verifier chooses a random value for $x$ as $u$ and asks the prover to evaluate the polynomials at $u$. The verifier then checks that the evaluations were done correctly and that the evaluation for $l(x)$ multiplied by the evaluation for $r(x)$ equals the evaluation for $t(x)$.
 
-For example, suppose that the first polynomial is $l(x)=2x$ and the second is $r(x) = x + 1$. Then $t(x)=2x(x+1) = 2x^2+2$. The verifier can sample any random $x$ value, and the result of product of the output of $l(x)r(x)$ will be $t(x)$. The plot below shows an example of the verifier choosing $x=2$: 
+For example, suppose that the first polynomial is $l(x)=2x$ and the second is $r(x) = x + 1$. Then $t(x)=2x(x+1) = 2x^2+2$. The verifier can sample any random $x$ value, and the result of the product $l(x)r(x)$ will be $t(x)$. The plot below shows an example of the verifier choosing $x=2$: 
 
 ![random-polynomial-multiplication](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/zk-multiplication/polynomial-multiplication.png)
 
@@ -79,7 +79,7 @@ $$
 The prover sends the values $(l_u, r_u, t_u, \pi_l, \pi_r, \pi_t)$ to the verifier. Note that these are all field elements, not elliptic curve points.
 
 ### Final verification step
-The verifier checks that each of the polynomials were evaluated correctly and that the evaluation of $t(u)$ is the product of the evaluation of $l(u)$ and $r(u)$. The first three checks are proofs that the polynomial was evaluated correctly with respect to the commitment to the coefficients, and the final checks that the output of the polynomials have the product relationship as claimed.
+The verifier checks that each of the polynomials were evaluated correctly and that the evaluation of $t(u)$ is the product of the evaluation of $l(u)$ and $r(u)$. The first three checks are proofs that the polynomial was evaluated correctly with respect to the commitment to the coefficients, and the last check is proof that the output of the polynomials have the product relationship as claimed.
 
 $$
 \begin{align*}
@@ -102,7 +102,7 @@ $$
 
 
 ## Optimization: sending fewer commitments
-In the first step, the prover sends 7 elliptic curve points and in the final step, the verifier checks 4 equalities. We can improve the algorithm to only send 5 elliptic curve points and do 3 equality checks.
+In the first step, the prover sends 7 elliptic curve points, and in the final step, the verifier checks 4 equalities. We can improve the algorithm to only send 5 elliptic curve points and do 3 equality checks.
 
 This is done by putting the constant coefficients of $l(x)$ and $r(x)$ into a single commitment and the linear coefficients of those polynomials into a separate commitment. By way of reminder, we defined $l(x)$ and $r(x)$ as
 
@@ -123,7 +123,7 @@ $$
 \begin{align*}
 A &= aG + bH + \alpha B &&\text{// commit the constant terms}\\
 S &= s_LG + s_RH  + \beta B &&\text{// commit the linear terms}\\
-T_0 &= abG + \tau_0 B &&\text{// commit to the constant coefficient of } t(x) \\
+T_0 &= abG + \tau_0 B &&\text{// commit the constant coefficient of } t(x) \\
 T_1 &=(as_R + bs_L)G + \tau_1B &&\text{// linear coefficient of }t(x)\\
 T_2 &= s_Ls_RG + \tau_2B &&\text{// quadratic coefficient of }t(x)
 \end{align*}
@@ -205,7 +205,7 @@ $$
 
 We simply change the "interpretation" of $A$ from being the constant terms of the polynomials to the constants $a$ and $b$ that we are multiplying. We change $T_0$ to $V$ to reflect the change of interpretation as a commitment to $V$ in the multiplication we are trying to prove we did correctly, i.e. $v = ab$.
 
-**Exercise:** Fill in the missing Python code to implement the algorithm described above
+**Exercise:** Fill in the missing Python code to implement the algorithm described above.
 
 ```python
 from py_ecc.bn128 import G1, multiply, add, FQ, eq
