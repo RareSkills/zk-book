@@ -308,7 +308,7 @@ u = ...
 ## step 3: Prover evaluates l(u), r(u), t(u) and creates evaluation proofs
 l_u = evaluate(a, sL, 0, u)
 r_u = evaluate(b, sR, 0, u)
-t_u = evaluate(a*b, t1, t2, u)
+t_u = evaluate(np.inner(a, b), t1, t2, u)
 
 pi_lr = prove(alpha, beta, 0, u)
 pi_t = prove(gamma, tau_1, tau_2, u)
