@@ -79,7 +79,7 @@ $$
 The prover sends the values $(l_u, r_u, t_u, \pi_l, \pi_r, \pi_t)$ to the verifier. Note that these are all field elements, not elliptic curve points.
 
 ### Final verification step
-The verifier checks that each of the polynomials were evaluated correctly and that the evaluation of $t(u)$ is the product of the evaluation of $l(u)$ and $r(u)$. The first three checks are proofs that the polynomial was evaluated correctly with respect to the commitment to the coefficients, and the last check is proof that the output of the polynomials have the product relationship as claimed.
+The verifier checks that each of the polynomials were evaluated correctly and that the evaluation of $t(u)$ is the product of the evaluation of $l(u)$ and $r(u)$. The first three checks are proofs that the polynomial was evaluated correctly with respect to the commitment to the coefficients, and the last check verifies that the output of the polynomials have the product relationship as claimed.
 
 $$
 \begin{align*}
