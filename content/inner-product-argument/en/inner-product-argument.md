@@ -131,7 +131,7 @@ $$\mathbf{l}(2)\circ\mathbf{r}(2) = \begin{bmatrix}5\\8\end{bmatrix}\circ\begin{
 In other words, multiplying two vector polynomials together and then evaluating the product at some point is the same as evaluating the vector polynomials separately and then taking the Hadamard product on the resulting vectors.
 
 ## Inner product of vector polynomials
-To compute the inner product of two vector polynomials, we multiply them together as described above, but then sum up the vector coordinates so the result becomes a scalar. We denote this operation as $\langle \mathbf{l}(x), \mathbf{r}(x) \rangle$. We can accomplish the same thing by using the inner product when we multiply vector coefficients instead of using the Hadamard product.
+To compute the inner product of two vector polynomials, we multiply them together as described above, but then sum up the vector entries so the result becomes a scalar. We denote this operation as $\langle \mathbf{l}(x), \mathbf{r}(x) \rangle$. We can accomplish the same thing by using the inner product when we multiply vector coefficients instead of using the Hadamard product.
 
 For the two example polynomials above, this would be:
 
