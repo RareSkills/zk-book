@@ -1,7 +1,7 @@
 # A Zero Knowledge Proof for the Inner Product
 An inner product argument is a proof that the prover carried out the inner product computation correctly. This chapter shows how to construct a zero knowledge proof for an inner product argument.
 
-In the previous chapter, we showed how to multiply two scalars together in a zero knowledge fashion: we commit to two degree-one polynomials, and prove that we correctly computed their product, and then showed that the constant term of the degree one polynomials are the commitments to the secret factors we are multiplying.
+In the previous chapter, we showed how to multiply two scalars together in a zero knowledge fashion: we commit to two degree-one polynomials, and prove that we correctly computed their product, and then show that the constant term of the degree one polynomials are the commitments to the secret factors we are multiplying.
 
 If the coefficients of our polynomial are vectors instead of scalars, then we can prove that we computed the inner product of the vector correctly. We now introduce the *vector polynomial*.
 
@@ -80,7 +80,7 @@ $$
 \end{bmatrix}\circ
 \begin{bmatrix}
 7\\2
-\end{bmatrix}&&\text{// apply FOIL}\\
+\end{bmatrix}&&\\
 &=\begin{bmatrix}
 2\\6
 \end{bmatrix}x^2+
@@ -131,7 +131,7 @@ $$\mathbf{l}(2)\circ\mathbf{r}(2) = \begin{bmatrix}5\\8\end{bmatrix}\circ\begin{
 In other words, multiplying two vector polynomials together and then evaluating the product at some point is the same as evaluating the vector polynomials separately and then taking the Hadamard product on the resulting vectors.
 
 ## Inner product of vector polynomials
-To compute the inner product of two vector polynomials, we multiply them together as described above, but then sum up all the vectors so they become scalars. We denote this operation as $\langle \mathbf{l}(x), \mathbf{r}(x) \rangle$. We can accomplish the same thing by using the inner product when we multiply vector coefficients instead of using the Hadamard product.
+To compute the inner product of two vector polynomials, we multiply them together as described above, but then sum up the vector coordinates so the result becomes a scalar. We denote this operation as $\langle \mathbf{l}(x), \mathbf{r}(x) \rangle$. We can accomplish the same thing by using the inner product when we multiply vector coefficients instead of using the Hadamard product.
 
 For the two example polynomials above, this would be:
 
@@ -217,7 +217,7 @@ In the following chapters we will learn how to reduce the size of the proof. It 
 Specifically, we will optimize the step $t_u\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle$ and $A + Su \stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle + \pi_{lr} B$ by sending a commitment to $\mathbf{l}_u$ and $\mathbf{r}_u$ instead of the actual vectors, along with a logarithmic size proof to show that the commitment holds the vectors whose inner product is $t_u$.
 
 ## Summary
-We have described a protocol that proves that $A$ is a commitment to $\mathbf{a}$ and $\mathbf{b}$, $V$ is a commitment to $v$, and that $\langle \mathbf{a}, \mathbf{b} \rangle = v$ without revealing $\mathbf{a}$, $\mathbf{b}$, or $v$. The proof size however is linear, as $\mathbf{l}_u$ and $\mathbf{r}_u$ in $(\mathbf{l}_u, \mathbf{r}_u, t, T_1, T_2, \pi_{lr},\pi_t)$ are each of size $n$.
+We have described a protocol that proves that $A$ is a commitment to $\mathbf{a}$ and $\mathbf{b}$, $V$ is a commitment to $v$, and that $\langle \mathbf{a}, \mathbf{b} \rangle = v$ without revealing $\mathbf{a}$, $\mathbf{b}$, or $v$. The proof size, however, is linear, as $\mathbf{l}_u$ and $\mathbf{r}_u$ in $(\mathbf{l}_u, \mathbf{r}_u, t, T_1, T_2, \pi_{lr},\pi_t)$ are each of size $n$.
 
 **Exercise:** Fill in the missing code to implement the algorithm in this lecture. Prove you know the inner product for an $n=4$ vector without revealing it. Note that numpy arrays allow for element-wise addition and multiplication. For example:
 ```python
@@ -259,7 +259,7 @@ G = [(FQ(62861553107663338717950429703725669060875021165902508121339674513206328
      (FQ(15884001095869889564203381122824453959747209506336645297496580404216889561240), FQ(14397810633193722880623034635043699457129665948506123809325193598213289127838)),
      (FQ(6756792584920245352684519836070422133746350830019496743562729072905353421352), FQ(3439606165356845334365677247963536173939840949797525638557303009070611741415))]
 
-H = [(FQ(13728162449721098615672844430261112538072166300311022796820929618959450231493), FQ(12153831869428634344429877091952509453770659237731690203490954547715195222919),
+H = [(FQ(13728162449721098615672844430261112538072166300311022796820929618959450231493), FQ(12153831869428634344429877091952509453770659237731690203490954547715195222919)),
     (FQ(17471368056527239558513938898018115153923978020864896155502359766132274520000), FQ(4119036649831316606545646423655922855925839689145200049841234351186746829602)),
     (FQ(8730867317615040501447514540731627986093652356953339319572790273814347116534), FQ(14893717982647482203420298569283769907955720318948910457352917488298566832491)),
     (FQ(419294495583131907906527833396935901898733653748716080944177732964425683442), FQ(14467906227467164575975695599962977164932514254303603096093942297417329342836))]
