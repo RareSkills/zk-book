@@ -155,8 +155,8 @@ Given $v = \langle\mathbf{a},\mathbf{b}\rangle$ and commitment $P = vQ+\langle\m
 1. The prover computes and sends to the verifier $(L, R)$ which are simply the off-diagonal terms of all the vectors concatenated together (see the animation above):
 
 $$\begin{align*}
-L &= (a_1b_2 + a_3b_4 + \dots a_{n-1}b_n)Q+(a_1G_2 + a_3G_4 + \dots a_{n-1}G_n)+(b_2H_1 + b_4H_3 + \dots b_nH_{n-1})\\
-R &= (a_2b_1 + a_4b_3 + \dots a_nb_{n-1})Q+(a_2G_1 + a_4G_3 + \dots a_nG_{n-1})+(b_1G_2 + b_3G_4 + \dots b_{n-1}G_n)
+L &= (a_1b_2 + a_3b_4 + \dots a_{n-1}b_n)Q+(a_1G_2 + a_3G_4 + \dots a_{n-1}G_n)+(b_1H_2 + b_3H_4 + \dots b_{n-1}H_n)\\
+R &= (a_2b_1 + a_4b_3 + \dots a_nb_{n-1})Q+(a_2G_1 + a_4G_3 + \dots a_nG_{n-1})+(b_2H_1 + b_4H_3 + \dots b_nH_{n-1})
 \end{align*}
 $$
 
@@ -167,7 +167,7 @@ $$
 $$
 \begin{align*}
 P' &= Lu^2+P+Ru^{-2}\\
-\mathbf{G}'&=\mathsf{fold}(\mathbf{G}, u)\\
+\mathbf{G}'&=\mathsf{fold}(\mathbf{G}, u^{-1})\\
 \mathbf{H}'&=\mathsf{fold}(\mathbf{H}, u^{-1})\\\\
 \end{align*}
 $$
@@ -176,7 +176,7 @@ $$
 $$
 \begin{align*}
 \mathbf{a}'&=\mathsf{fold}(\mathbf{a},u)\\
-\mathbf{b}'&=\mathsf{fold}(\mathbf{b},u^{-1})
+\mathbf{b}'&=\mathsf{fold}(\mathbf{b},u)
 \end{align*}
 $$
 
