@@ -34,7 +34,7 @@ a_1\\a_2\\a_3
 \end{matrix}
 $$
 
-In other words, multiplying an $n \times m$ matrix by an $n$ dimensional vector is the same as computing $n$ inner products. So if we can directly prove an inner product was computed correctly, then we don't need the additional steps of creating a Quadratic Arithmetic Program.
+In other words, multiplying an $n \times m$ matrix by an $m$ dimensional vector is the same as computing $n$ inner products. So if we can directly prove an inner product was computed correctly, then we don't need the additional steps of creating a Quadratic Arithmetic Program.
 
 Furthermore, Bulletproofs do not use [pairings](https://www.rareskills.io/post/bilinear-pairing) (only basic [elliptic curve addition](https://www.rareskills.io/post/elliptic-curve-addition)) and do not require a [trusted setup](https://www.rareskills.io/post/trusted-setup).
 
