@@ -82,6 +82,7 @@ Chapter 2 introduces the Pedersen Commitment, which is the foundational building
 6. [Succinct Inner Product Arguments](https://www.rareskills.io/post/outer-product-inner-product) Normally, to prove you correctly computed an inner product with two vectors of length $n$, you would need to send $2n$ elements (i.e. both of the vectors). This chapter shows a clever trick for only sending $n$ elements.
 7. [Logarithmic-Sized Proofs of Knowledge for Inner Products](https://www.rareskills.io/post/log-n-vector-commitment-proof) This chapter uses the algorithm described in chapter 6 recursively to prove we correctly computed an inner product of two vectors of size $n$ with a proof size of only $\mathcal{O}(n)$ data.
 8. [Bulletproof ZKP: the algorithm end-to-end](https://www.rareskills.io/post/bulletproofs-zkp) We combine the zero knowledge inner product argument in chapter 5 with the succint inner product in chapter 7 to produce the Bulletproof. At this point, you have sufficient knowledge to code the algorithm yourself by combining the previous exercises.
+9. [Inner Product Algebra](https://www.rareskills.io/post/inner-product-algebra) This chapter introduces and proves various algebraic identities for adding inner products together, which will be useful when learning the Bulletproof range proof.
 
 (to be continued!)
 

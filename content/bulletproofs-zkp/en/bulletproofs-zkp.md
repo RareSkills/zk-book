@@ -6,10 +6,10 @@ In the previous chapters, we showed how to prove knowledge of an inner product w
 
 In this chapter, we combine the algorithms together to demonstrate the Bulletproof ZK algorithm.
 
-(This work if part of a series on [ZK Bulletproofs](https://www.rareskills.io/post/bulletproofs-zk))
+(This work if part of a series on [ZK Bulletproofs](https://www.rareskills.io/post/bulletproofs-zk).)
 
 ## Problem Statement
-The prover and verifier agree on two elliptic curve basis vectors $\mathbf{G}$ and $\mathbf{H}$ of length $n$ and elliptic curve points $Q$ and $B$. The discrete log relationship between all these points are unknown.
+The prover and verifier agree on two elliptic curve basis vectors $\mathbf{G}$ and $\mathbf{H}$ of length $n$ and elliptic curve points $Q$ and $B$. The discrete log relationships between all these points are unknown.
 
 The prover has vectors $\mathbf{a}$ and $\mathbf{b}$ with inner product $v$. The prover commits $\mathbf{a}$ and $\mathbf{b}$ to $A$ as $A =\langle\mathbf{a},\mathbf{G}\rangle + \langle\mathbf{b},\mathbf{H}\rangle + \alpha B$ where $\alpha$ is a blinding term. The prover commits $V = \langle\mathbf{a},\mathbf{b}\rangle Q + \gamma B$.
 
@@ -25,7 +25,7 @@ $$
 \begin{align}
 A &= \langle\mathbf{a},\mathbf{G}\rangle + \langle\mathbf{b},\mathbf{H}\rangle+\alpha B\\
 S &= \langle\mathbf{s}_L,\mathbf{G}\rangle + \langle\mathbf{s}_R,\mathbf{H}\rangle+\beta B\\
-V &= vG + \gamma B \\
+V &= vQ + \gamma B \\
 \end{align}$$
 
 The prover prepares (but does not send) vector polynomials
@@ -49,7 +49,7 @@ T_2 &= \langle\mathbf{s}_L,\mathbf{s}_R\rangle G + \tau_2B
 \end{align*}
 $$
 
-Note that $V$ is a commitment to the constant coefficient of $t(x)$, and $T_1$ and $T_2$ are commitments to the linear and quadratic coefficients of $t(x)$ respectively.
+Note that $V$ is a commitment to the constant coefficient of $t(x)$, and $T_1$ and $T_2$ are commitments to the linear and quadratic coefficients of $t(x)$, respectively.
 
 The prover sends $(A, S, V, T_1, T_2)$ to the verifier.
 
@@ -69,11 +69,13 @@ $$
 
 Previously, the prover transmits $(\mathbf{l}_u, \mathbf{r}_u, t_u, \pi_{lr}, \pi_t)$ so the verifier could check that 
 
+$$
 \begin{align*}
 t_u&\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle\\
 A + Su &\stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle + \pi_{lr} B\\
 t_u &\stackrel{?}{=} V + T_1 u + T_2 u^2 + \pi_t B\\
 \end{align*}
+$$
 
 but this would be linear in size due to the vectors $\mathbf{l}_u$ and $\mathbf{r}_u$. Instead, the prover commits $\mathbf{l}_u$ and $\mathbf{r}_u$ as
 
@@ -116,7 +118,7 @@ t_u &\stackrel{?}{=} V + T_1 u + T_2 u^2 + \pi_t B
 \end{align*}
 $$
 
-Recall that $A$ and $S$ are commitments to the constant and linear terms of the vector polynomials $\mathbf{l}(x)$ and $\mathbf{r}(x)$ respectively. The first check ensures that the vectors committed to $C$ are evaluations of those polynomials at $u$.
+Recall that $A$ and $S$ are commitments to the constant and linear terms of the vector polynomials $\mathbf{l}(x)$ and $\mathbf{r}(x)$, respectively. The first check ensures that the vectors committed to $C$ are evaluations of those polynomials at $u$.
 
 The second check is to ensure that $t(u)$ was evaluated correctly, given the commitments to the coefficients $V$, $T_1$, and $T_2$.
 
