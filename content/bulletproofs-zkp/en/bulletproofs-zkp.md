@@ -40,12 +40,12 @@ $$
 
 $A$ is a commitment to the constant terms of the vector polynomial, $S$ is a commitment to the linear terms, and $V$ is a commitment to the inner product.
 
-The prover creates commitments to the cofficients of $t(x)$ as
+The prover creates commitments to the coefficients of $t(x)$ as
 
 $$
 \begin{align*}
-T_1 &= (\langle\mathbf{a},\mathbf{s}_R\rangle + \langle\mathbf{b},\mathbf{s}_L\rangle)G + \tau_1B\\
-T_2 &= \langle\mathbf{s}_L,\mathbf{s}_R\rangle G + \tau_2B
+T_1 &= (\langle\mathbf{a},\mathbf{s}_R\rangle + \langle\mathbf{b},\mathbf{s}_L\rangle)Q + \tau_1B\\
+T_2 &= \langle\mathbf{s}_L,\mathbf{s}_R\rangle Q + \tau_2B
 \end{align*}
 $$
 
@@ -73,7 +73,7 @@ $$
 \begin{align*}
 t_u&\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle\\
 A + Su &\stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle + \pi_{lr} B\\
-t_u &\stackrel{?}{=} V + T_1 u + T_2 u^2 + \pi_t B\\
+t_u Q &\stackrel{?}{=} V + T_1 u + T_2 u^2 - \pi_t B\\
 \end{align*}
 $$
 
@@ -114,7 +114,7 @@ Finally, the verifier checks that
 $$
 \begin{align*}
 C&\stackrel{?}=A + Su-\pi_{lr}B\\
-t_u &\stackrel{?}{=} V + T_1 u + T_2 u^2 + \pi_t B
+t_u Q &\stackrel{?}{=} V + T_1 u + T_2 u^2 - \pi_t B
 \end{align*}
 $$
 
