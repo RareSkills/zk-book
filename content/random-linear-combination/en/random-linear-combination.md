@@ -78,16 +78,16 @@ Now suppose $l_1\neq r_1$ or $l_2 \neq r_2$. The prover still will not be able t
 
 ## Generalizing to $m$ checks
 
-If we have $m$ equality checks, $L_1 = L_1, L_2 = R_2, ..., R_m = R_m$, the verifier could send $m$ random elements $z_1,\dots,z_m$ and the prover could provide $\pi$ such that
+If we have $m$ equality checks, $L_1 = R_1, L_2 = R_2, ..., L_m = R_m$, the verifier could send $m$ random elements $z_1,\dots,z_m$ and the prover could provide $\pi$ such that
 
 $L_1 + L_2z_1 + L_3z_2 + ... L_mz_{m-1} \stackrel{?}{=}R_1 + R_1z_1+R_2z_2+\dots+R_mz_{m-1} + \pi B$
 
 However, this requires the verifier to send $m$ elements, leading to a linear communication overhead. The communication overhead can be reduced to constant if the verifier only sends $z$ and the prover and verifier separate the commitments by successive powers of $z$:
 
-$L_1 + L_2z_1 + L_3z^2 + ... L_mz^{m-1} \stackrel{?}{=}R_1+R_2z+R_3z^2\dots+R_mz^{m-1} + \pi B$
+$L_1 + L_2z + L_3z^2 + ... L_mz^{m-1} \stackrel{?}{=}R_1+R_2z+R_3z^2\dots+R_mz^{m-1} + \pi B$
 
 ### Security analysis
-The left-hand-side and right-hand-side are both polynomials of degree $m$. If they are unequal to each other, then they intersect in at most $m$ points by the [Schwartz Zippel Lemma](https://www.rareskills.io/post/schwartz-zippel-lemma). If $m\ll p$ where $p$ is the order of the finite field, then again the probability of $z$ being an intersection point is negligible.
+The left-hand-side and right-hand-side are both polynomials of degree $m-1$. If they are unequal to each other, then they intersect in at most $m-1$ points by the [Schwartz Zippel Lemma](https://www.rareskills.io/post/schwartz-zippel-lemma). If $m\ll p$ where $p$ is the order of the finite field, then again the probability of $z$ being an intersection point is negligible.
 
 ## Random linear combinations of inner products
 
