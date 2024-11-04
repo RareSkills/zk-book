@@ -29,7 +29,7 @@ All the blinding terms will cancel out leaving $aG \stackrel{?}{=} bG$.
 But suppose the prover wishes to establish equality for several commitments, i.e. $L_1 = L_2, L_2 = R_2, ..., L_m = R_m$. The naïve solution is to send $m$ blinding terms $\pi_1,...,\pi_m$ and the verifier will run $m$ equality checks. This will require sending $m$ field elements ($\pi_1,...,\pi_m$) and the verifier's algorithm will run in $\mathcal{O}(m)$ time.
 
 ## Why the prover cannot simply add up all the commitments
-Suppose we have commitments $L_1, L_2, R_1, R_2$ with commitments $l_1, l_2, r_1, r_2$ respectively. Suppose also the prover wants to show that $l_1 = r_1$ and $l_2 = r_2$ without revealing them.
+Suppose we have $l_1, l_2, r_1, r_2$ with commitments $L_1, L_2, R_1, R_2$ respectively. Suppose also the prover wants to show that $l_1 = r_1$ and $l_2 = r_2$ without revealing them.
 
 The following check is not secure:
 
