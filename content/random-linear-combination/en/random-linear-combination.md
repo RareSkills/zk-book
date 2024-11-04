@@ -53,10 +53,10 @@ The prover and verifier agree on elliptic curve points $G$ and $B$, where the di
 #### Prover sends commitments
 The prover generates blinding terms $\alpha_1, \alpha_2, \beta_1, \beta_2$ and creates the Pedersen commitments
 
-$L_1 = aG + \alpha_1 B$
-$R_1 = aG + \beta_1 B$
-$L_2 = bG + \alpha_2 B$
-$R_2 = bG + \beta_2 B$
+$L_1 = l_{1}G + \alpha_1 B$
+$R_1 = r_{1}G + \beta_1 B$
+$L_2 = l_{2}G + \alpha_2 B$
+$R_2 = r_{2}G + \beta_2 B$
 
 and sends $(L_1, L_2, R_1, R_2)$ to the verifier.
 
@@ -64,7 +64,7 @@ and sends $(L_1, L_2, R_1, R_2)$ to the verifier.
 The verifier chooses a random field element $z$ and sends it to the prover.
 
 #### Prover computes the difference in blinding terms
-The prover computes $\pi = \alpha_1+\beta_1\cdot z-\alpha_2-\beta_2\cdot z$ and sends $\pi$ to the verifier.
+The prover computes $\pi = \alpha_1+\alpha_2\cdot z-\beta_1-\beta_2\cdot z$ and sends $\pi$ to the verifier.
 
 #### Final verification check
 The verifier checks that
