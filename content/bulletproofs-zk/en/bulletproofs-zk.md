@@ -84,8 +84,7 @@ Chapter 2 introduces the Pedersen Commitment, which is the foundational building
 8. [Bulletproof ZKP: the algorithm end-to-end](https://www.rareskills.io/post/bulletproofs-zkp) We combine the zero knowledge inner product argument in chapter 5 with the succint inner product in chapter 7 to produce the Bulletproof. At this point, you have sufficient knowledge to code the algorithm yourself by combining the previous exercises.
 9. [Inner Product Algebra](https://www.rareskills.io/post/inner-product-algebra) This chapter introduces and proves various algebraic identities for adding inner products together, which will be useful when learning the Bulletproof range proof.
 10. [Random Linear Combinations](https://www.rareskills.io/post/random-linear-combination) Instead of creating two proofs (or more) for two (or more) inner products, we can create one proof for multiple inner products by using the random linear combination trick.
-
-(to be continued!)
+11. [Range Proofs](https://www.rareskills.io/post/range-proof) A range proof is proof that a committed value lies in a certain range. Bulletproofs can accomplish this directly, without the need to arithmetize the problem. Bulletproofs range proofs prove that a number can be encoded as the inner product of a vector of powers of 2 $[1,2,4,...,2^{n-1}]$ and a binary vector, but they don't reveal which bits are one or zero.
 
 We recommend that you fork [this Bulletproofs ZK repo](https://github.com/RareSkills/ZK-bulletproofs) and do the exercises as you read, so that you can immediately practice what you learn.
 
