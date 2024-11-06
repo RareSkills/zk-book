@@ -308,7 +308,7 @@ The verifier responds with random values $(y, z)$ which the prover will use to c
 $$\left\langle \mathbf{a_L} - z \cdot \mathbf{1}^n, \mathbf{y}^n \circ \mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n \right\rangle = z^2 \cdot v + \delta(y,z)
 $$
 
-The left part of the inner product $\mathbf{a}_L-z\cdot\mathbf{1}$ will be the constant term of $\mathbf{l}(x)$ and $\mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n$ will be the constant term of $\mathbf{r}(x)$.
+The left part of the inner product $\mathbf{a}_L-z\cdot\mathbf{1}$ will be the constant term of $\mathbf{l}(x)$ and $\mathbf{y}^n \circ\mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n$ will be the constant term of $\mathbf{r}(x)$.
 
 Thus, we construct $\mathbf{l}(x)$ as
 
