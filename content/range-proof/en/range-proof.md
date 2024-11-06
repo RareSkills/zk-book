@@ -130,8 +130,8 @@ and sends $(T_1, T_2)$ to the verifier. The verifier responds with $u$ and the p
 
 $$
 \begin{align*}
-\mathbf{l}_u&= \mathbf{a}_L\circ\mathbf{y}^n+(\mathbf{s}_L\circ\mathbf{y}^n)u\\
-\mathbf{r}_u&= \mathbf{a}_R+\mathbf{s}_Ru\\
+\mathbf{l}_u&= \mathbf{a}_L+\mathbf{s}_Lu\\
+\mathbf{r}_u&= \mathbf{a}_R\circ\mathbf{y}^n+(\mathbf{s}_R\circ\mathbf{y}^n)u\\
 t_u&=\langle\mathbf{l}_u,\mathbf{r}_u\rangle\\
 \pi_{lr}&=\alpha + \beta u\\
 \pi_t&=\tau_1u+\tau_2u^2
@@ -152,7 +152,7 @@ $$
 
 The first crucial difference is that the commitment to $\mathbf{r}_u$ is done with respect to the basis vector $\mathbf{y}^{-n}\circ\mathbf{H}$ instead of $\mathbf{H}$ for the reasons discussed earlier.
 
-Second, $t_uG\stackrel{?}{=} T_1 u + T_2 u^2 + \pi_t B$ has no constant commitment. Normally, the equation is $t_uG\stackrel{?}{=} \boxed{V}+T_1 u + T_2 u^2 + \pi_t B$, but $V$ is a commitment to $0$ in this case.
+Second, $t_uG\stackrel{?}{=} T_1 u + T_2 u^2 - \pi_t B$ has no constant commitment. Normally, the equation is $t_uG\stackrel{?}{=} \boxed{V}+T_1 u + T_2 u^2 - \pi_t B$, but $V$ is a commitment to $0$ in this case.
 
 In general, if $V$ contains values known to the verifier, the verifier can construct the commitment to $V$ as we show in the next section.
 
@@ -308,7 +308,7 @@ The verifier responds with random values $(y, z)$ which the prover will use to c
 $$\left\langle \mathbf{a_L} - z \cdot \mathbf{1}^n, \mathbf{y}^n \circ \mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n \right\rangle = z^2 \cdot v + \delta(y,z)
 $$
 
-The left part of the inner product $\mathbf{a}_L-z\cdot\mathbf{1}$ will be the constant term of $\mathbf{l}(x)$ and $\mathbf{y}^n \circ\mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n$ will be the constant term of $\mathbf{r}(x)$.
+The left part of the inner product $\mathbf{a}_L-z\cdot\mathbf{1}$ will be the constant term of $\mathbf{l}(x)$ and $\mathbf{a_R} +  \mathbf{y}^n\cdot z + z^2 \cdot 2^n$ will be the constant term of $\mathbf{r}(x)$.
 
 Thus, we construct $\mathbf{l}(x)$ as
 
