@@ -207,7 +207,7 @@ Recall that $A$ and $S$ are commitments to the constant and linear terms of $\ma
 
 Finally, the verifier checks that $t_u$ is the evaluation of the quadratic polynomial commited to $V, T_1, T_2$:
 
-$$t_uG + \pi_t\stackrel{?}{=} V + T_1 u + T_2 u^2B$$
+$$t_uG + \pi_tB \stackrel{?}{=} V + T_1 u + T_2 u^2$$
 
 ## Improving the proof size
 When the prover sends $(\mathbf{l}, \mathbf{r}, t, T_1, T_2, \pi)$, the prover sends over $2n$ elements (the length of $\mathbf{l}$ and $\mathbf{r}$) which is not succinct.
