@@ -483,9 +483,8 @@ The following three examples show how the behavior of a system of equations can 
 
 For example, we plot:
 
-$$
-x+2y=1\\6x+y=6
-$$
+$$x+2y=1$$
+$$6x+y=6$$
 
 ![Two lines with a single intersection](https://static.wixstatic.com/media/706568_26aa180e616f434ab16a76673e03b530~mv2.png/v1/fill/w_1214,h_712,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/706568_26aa180e616f434ab16a76673e03b530~mv2.png)
 
@@ -499,15 +498,13 @@ Below we plot the solutions to the systems of equation over the finite fields to
 
 This might seem extremely counterintuitive — let’s see how it happens. If we solve the original equations:
 
-$$
-x+2y=1\\6x+y=6
-$$
+$$x+2y=1$$
+$$6x+y=6$$
 
 for $y$ we get:
 
-$$
-y = 1/2 - 1/2*x\\y=6-6x
-$$
+$$y = 1/2 - 1/2*x$$
+$$y=6-6x$$
 
 $1/2$ is the multiplicative inverse of $2$. In a finite field of $p = 11$, $6$ is the mutiplicative inverse of $2$, i.e. $2 * 6 \pmod {11} = 1$. Therefore, $x + 2y = 1$ and $6x + y = 6$ are actually the same equation in finite field $p = 11$. That is, the equation $y = 1/2 - 1/2x$ when encoded in a finite field is $y = \mathsf{mul\_inv}(2) - \mathsf{mul\_inv}(2)x$ which is $y = 6 - 6x$, which is the same as the other equation in the system.
 
@@ -515,10 +512,8 @@ $1/2$ is the multiplicative inverse of $2$. In a finite field of $p = 11$, $6$ i
 
 Also counterintuitively, a system of equations with a single solution over real numbers may have no solution in a finite field:
 
-$$
-x + 2y=1\\
-7x+3y=2
-$$
+$$x + 2y=1$$
+$$7x+3y=2$$
 
 ![A different plot over real numbers showing a single intersection](https://static.wixstatic.com/media/706568_c194df52697f4010943ff4e927f206b6~mv2.png/v1/fill/w_1480,h_604,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/706568_c194df52697f4010943ff4e927f206b6~mv2.png)
 
@@ -534,9 +529,8 @@ Why does this system of equations have no solution in finite field $p = 11$?
 
 If we solve
 
-$$
-x + 2y=1\\7x+3y=2
-$$
+$$x + 2y=1$$
+$$7x+3y=2$$
 
 for real numbers, we get the solutions
 
@@ -554,9 +548,8 @@ Therefore the solutions (x, y) above are not part of the finite field. Hence, in
 
 To see this from another angle, we could solve the equations for y and get:
 
-$$
-y = 1/2 - x/2\\y=2/3-7x/3
-$$
+$$y = 1/2 - x/2$$
+$$y=2/3-7x/3$$
 
 We saw in the previous section that 6 is the multiplicative inverse of 2, so the first equation has a "slope" of 6 in the the finite field. In the second equation, we compute the slope by computing 7 times the multiplicative inverse of 3: `(7 * pow(3, -1, 11)) % 11 = 6` . We now show that their slopes are the same in a finite field.
 
