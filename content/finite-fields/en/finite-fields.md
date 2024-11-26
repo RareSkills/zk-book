@@ -581,9 +581,8 @@ is that the arithmetic circuit does not have a satisfying assignment in a finite
 
 The following two formulas plot lines that are parallel and hence have no solution over reals:
 
-$$
-x + 2y = 3\\4x + 8y = 1
-$$
+$$x + 2y = 3$$
+$$4x + 8y = 1$$
 
 ![Two parallel lines](https://static.wixstatic.com/media/706568_90da5d94046042f28be6d681d4cb8dce~mv2.png/v1/fill/w_1480,h_592,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/706568_90da5d94046042f28be6d681d4cb8dce~mv2.png)
 
@@ -595,9 +594,8 @@ However, over the finite field `p = 11`, it has 11 solutions: $\set{(0, 7), (1, 
 
 Suppose we encoded this system of equations as an arithmetic circuit:
 
-$$
-x + 2y = 3\\4x + 8y = 1
-$$
+$$x + 2y = 3$$
+$$4x + 8y = 1$$
 
 ```python
 x + 2 * y === 3
