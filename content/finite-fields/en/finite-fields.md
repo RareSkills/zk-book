@@ -678,7 +678,7 @@ The `galois` library is intelligent enough to interpret negative integers as add
 
 ```python
 import galois
-GF103 = galois.GF(103) # p = 13
+GF103 = galois.GF(103) # p = 103
 
 # We can input "-1" as a coefficient, and that will
 # automatically be calculated as `p - 1`

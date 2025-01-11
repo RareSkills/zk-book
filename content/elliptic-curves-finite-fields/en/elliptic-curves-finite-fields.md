@@ -21,7 +21,7 @@ Here are some plots of $y² = x³ + 3$ done over modulo 11, 23, 31, and 41 respe
 
 ![Plot of elliptic curves modulo 23, 31](https://static.wixstatic.com/media/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png)
 
-We established in the previous article that elliptic curve points with the "connect and flip" operation are a group. When we do this over a finite field, it remains a group, but it becomes a cyclic group, which is tremendously useful for our application. Why it is cyclic unfortunately will require some very involved math, so you’ll just have to accept that for now. But this should not be too surprising. We have a finite number of points, so generating each point by carrying out $(x + 1)G, (x + 2)G, … (x + \text{order} - 1)G$ should at least seem plausible.
+We established in the previous article that elliptic curve points with the "connect and flip" operation are a group. When we do this over a finite field, it remains a group, but it becomes a cyclic group, which is tremendously useful for our application. Why it is cyclic unfortunately will require some very involved math, so you’ll just have to accept that for now. But this should not be too surprising. We have a finite number of points, so generating each point by carrying out $G, 2G, … (\text{order} - 1)G, \text{order}G$ should at least seem plausible.
 
 In the application of cryptography, $p$ needs to be large. In practice, it is over 200 bits. We will revisit this in a later section.
 
@@ -46,7 +46,7 @@ That is,
 
 $5 + 7 \pmod p$ is homomorphic to $5G + 7G$
 
-Where G is the generator of the elliptic curve cyclic group. 
+Where G is the generator of the elliptic curve cyclic group.
 
 This is only true of elliptic curves over finite fields that have a prime number of points, which are the kinds of curves we use in practice. This is something we'll revisit later.
 
@@ -69,8 +69,8 @@ For the bn128 curve, the curve order is as follows:
 
 ```python
 from py_ecc.bn128 import curve_order
-# 21888242871839275222246405745257275088548364400416034343698204186575808495617
 print(curve_order)
+# 21888242871839275222246405745257275088548364400416034343698204186575808495617
 ```
 
 The field modulus is very large, which makes experimenting with it unwieldy. In the next section, we’ll build up an intuition for elliptic curve points in finite fields using the same formula, but with a smaller modulus.
@@ -97,7 +97,8 @@ After installing [libnum](https://pypi.org/project/libnum/), we can run the foll
 ```python
 from libnum import has_sqrtmod_prime_power, sqrtmod_prime_power
 
-# the functions take arguments# has_sqrtmod_prime_power(n, field_mod, k), where n**k,
+# the functions take 3 arguments
+# has_sqrtmod_prime_power(n, field_mod, k), checks if n has a square root modulo field_mod**k
 # but we aren't interested in powers in modular fields, so we set k = 1
 # check if sqrt(8) mod 11 exists
 print(has_sqrtmod_prime_power(8, 11, 1))
@@ -186,15 +187,15 @@ def add_points(xq, yq, xp, yp, p, a=0):
         return xp, yp
     if xp == yp == None:
         return xq, yq
-    
+
     assert (xq**3 + 3) % p == (yq ** 2) % p, "q not on curve"
     assert (xp**3 + 3) % p == (yp ** 2) % p, "p not on curve"
-    
+
     if xq == xp and yq == yp:
         return double(xq, yq, a, p)
     elif xq == xp:
         return None, None
-    
+
     lambd = ((yq - yp) * pow((xq - xp), -1, p) ) % p
     xr = (lambd**2 - xp - xq) % p
     yr = (lambd*(xp - xr) - yp) % p
@@ -214,9 +215,10 @@ Using the Python functions above, we can start with the point $(4, 10)$ and gene
 
 ```python
 # for our purposes, (4, 10) is the generator point G
-next_x, next_y = 4, 10print(1, 4, 10)
+next_x, next_y = 4, 10
+print(1, 4, 10)
 points = [(next_x, next_y)]
-for i in range(2, 12):
+for i in range(2, 14):
     # repeatedly add G to the next point to generate all the elements
     next_x, next_y = add_points(next_x, next_y, 4, 10, 11)
     print(i, next_x, next_y)
@@ -225,19 +227,19 @@ for i in range(2, 12):
 
 The output will be
 ```bash
-0 4 10
-1 7 7
-2 1 9
-3 0 6
-4 8 8
-5 2 0
-6 8 3
-7 0 5
-8 1 2
-9 7 4
-10 4 1
-11 None None
-12 4 10 # note that this is the same point as the first one
+1 4 10
+2 7 7
+3 1 9
+4 0 6
+5 8 8
+6 2 0
+7 8 3
+8 0 5
+9 1 2
+10 7 4
+11 4 1
+12 None None
+13 4 10 # note that this is the same point as the first one
 ```
 Observe that $(\text{order} + 1)G = G$. Just like modular addition, when we "overflow", the cycle starts over.
 
@@ -463,7 +465,8 @@ p = multiply(G1, x)
 # invert
 p_inv = neg(p)
 
-# every element added to its inverse produces the identity elementassert is_inf(add(p, p_inv))
+# every element added to its inverse produces the identity element
+assert is_inf(add(p, p_inv))
 
 # Z1 is just None, which is the point at infinity
 assert Z1 is None
@@ -483,10 +486,10 @@ for i in range(1, 4):
     print(point)
     print(neg(point))
     print('----')
-    
+
     # x values are the same
     assert int(point[0]) == int(neg(point)[0])
-    
+
     # y values are inverses of each other, we are adding y values
     # not ec points
     assert int(point[1]) + int(neg(point)[1]) == field_modulus
