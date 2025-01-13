@@ -38,7 +38,7 @@ However, this is typically not how we express $R$ when using bilinear pairings. 
 
 $$f(P,Q) = f(R,G)$$
 
-$G$ is the generator point, and can be thought of as $1$. In this context. For example, $pG$ means we did $(G + G + … + G)$ $p$ times. $G$ just means we took $G$ and didn’t add anything. So in a sense, this is the same as saying $P 
+$G$ is the generator point, and can be thought of as $1$. In this context. For example, $pG$ means we did $(G + G + … + G)$ $p$ times. $G$ just means we took $G$ and didn’t add anything. So in a sense, this is the same as saying $P
 \times Q = R \times 1$.
 
 So our bilinear pairing is a function that if you plug in two elliptic curve points you get an output that *corresponds* to the product of the discrete logs of those two points.
@@ -89,7 +89,7 @@ The above notation implies that we are using the same generator and elliptic cur
 
 $$e(aG, bG) = e(abG, G)$$
 
-In practice however, it turns out to be easier to create bilinear pairings when a different group (but same order) is different for both of the arguments. 
+In practice however, it turns out to be easier to create bilinear pairings when a different group (but same order) is different for both of the arguments.
 
 Specifically, we say
 
@@ -159,7 +159,7 @@ print(G1)
 print(G2)
 #((10857046999023057135944570762232829481370756359578518086990519993285655852781, 11559732032986387107991004021392285783925812861821192530917403151452391805634), (8495653923123431417604973247489272438418190587263600148770280649306958101930, 4082367875863433681332203403145435568316851327593401208105741076214120093531))
 ```
-If you look closely, you'll see the `G2`, you’ll see that `G2` is a pair of tuples. The first tuple is the two-dimensional $x$ point and the second tuple is the two-dimensional $y$ point.
+If you look closely, you’ll see that `G2` is a pair of tuples. The first tuple is the two-dimensional $x$ point and the second tuple is the two-dimensional $y$ point.
 
 `G1` and `G2` are the generator points for their respective groups.
 
@@ -333,7 +333,7 @@ and zero otherwise.
 This might be a bit of a head-scratcher at first! This seems to imply that the precompile is taking the discrete log of each of the points, which is accepted to be infeasible in general. Furthermore, why doesn’t it behave like pairing from the earlier Python examples? The earlier examples returned an element in $G_T$, but this precompile returns a boolean.
 
 #### Justification for EIP 197 design decision
-The first problem is that elements in $G_T$ are large, specifically, they 12-dimensional objects. 
+The first problem is that elements in $G_T$ are large, specifically, they are 12-dimensional objects.
 
 This will take up a lot of space in memory leading to larger gas costs. Also, because of how most ZK verification algorithms work (this is outside the scope of this article), we generally don’t check the value of the output of a pairing, but only that it is equal to other pairings. Specifically, the final step in [Groth16](https://www.rareskills.io/post/groth16) (the zero knowledge algorithm used by tornado cash) looks like the following
 
@@ -341,7 +341,7 @@ $$
 e(A₁, B₂) = e(α₁, β₂) + e(L₁, γ₂) + e(C₁, δ₂)
 $$
 
-Where each variable is an elliptic curve point of either $\mathbb{G}_1$ or $\mathbb{G}_2$ based on it's subscript notation (we would have used upper-case Greek letters to stay consistent with our notation, but those look too similar to the Latin alphabet).
+Where each variable is an elliptic curve point of either $\mathbb{G}_1$ or $\mathbb{G}_2$ based on its subscript notation (we would have used upper-case Greek letters to stay consistent with our notation, but those look too similar to the Latin alphabet).
 
 The meanings of these variables is not important at this stage. The fact that it can be written as the sum of "products" (elliptic curve pairing) is what matters. Specifically, we can write it as
 
@@ -443,7 +443,7 @@ We create a file Pairings.sol to [unit test in Foundry](https://www.rareskills.i
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 contract Pairings {
-    /** 
+    /**
      *  returns true if == 0,
      *  returns false if != 0,
      *  reverts with "Wrong pairing" if invalid pairing
