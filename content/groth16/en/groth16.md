@@ -109,7 +109,7 @@ $$[A]_1 \bullet [B]_2 \stackrel{?}= [D]_{12} + [C]_1\bullet G_2$$
 
 Here, $[D]_{12}$ is an element from $G_{12}$ and has an unknown discrete logarithm.
 
-We now show that it is impossible for a verifier to provide a solution $([A]_1, [B]_2, [C]_1)$ to this equation, without knowing the discrete logarithm of $[D]_{12}$.
+We now show that it is impossible for a prover to provide a solution $([A]_1, [B]_2, [C]_1)$ to this equation, without knowing the discrete logarithm of $[D]_{12}$.
 
 #### Attack 1: Forging A and B and deriving C
 Suppose the prover randomly selects $a’$ and $b’$ to produce $[A]₁$ and $[B]₂$ and tries to derive a value $[C’]$ that is compatible with the verifier’s formula.
