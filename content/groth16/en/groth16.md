@@ -308,8 +308,8 @@ $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
-[\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
-\frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
+\left[\frac{\tau^{n-2}t(\tau)}{\delta}G_1,\frac{\tau^{n-3}t(\tau)}{\delta}G_1,\dots,\frac{\tau t(\tau)}{\delta}G_1,
+\frac{t(\tau)}{\delta}G_1\right] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
@@ -325,7 +325,7 @@ $$\begin{align*}
 \end{align*}$$
 
 The trusted setup publishes
-$$([\alpha]_1,[\beta]_2,[\gamma]_2,[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_2,[\gamma]_2,[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 The prover steps are the same as before:
 
@@ -406,28 +406,28 @@ $$
 
 Substitute $A$ and $B$:
 $$
-=As\delta + Bs\delta - rs\delta
+=As\delta + Br\delta - rs\delta^2
 $$
 
 So our final equation is
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2$$
 
 We now break it into the public and private portions:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta}_\text{private}$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}_\text{private}$$
 
 We want the public portion and the private portion to be separated by $\gamma$ and $\delta$ respectively:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Bs\delta - rs\delta}{\delta}$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}{\delta}$$
 
 $\delta$ cancels for some of the terms:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta$$
 
 We now separate this equation in to the verifier and prover portions. The boxed terms are the verifier portion, the underbrace terms are the terms that the prover provides:
 
-$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Bs - rs\delta}_{[C]_1}$$
+$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta}_{[C]_1}$$
 
 ## Groth16 Proof Algorithm
 We are now ready to show the Groth16 algorithm end-to-end.
