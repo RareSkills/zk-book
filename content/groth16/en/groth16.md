@@ -438,8 +438,8 @@ $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
-[\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
-\frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
+[\frac{\tau^{n-2}t(\tau)}{\delta}G_1,\frac{\tau^{n-3}t(\tau)}{\delta}G_1,\dots,\frac{\tau t(\tau)}{\delta}G_1,
+\frac{t(\tau)}{\delta}G_1] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
@@ -455,7 +455,7 @@ $$\begin{align*}
 \end{align*}$$
 
 The trusted setup publishes
-$$([\alpha]_1,[\beta]_1[\beta]_2,[\gamma]_2,[\delta]_1[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_1[\beta]_2,[\gamma]_2,[\delta]_1[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 ### Prover Steps
 Prover has a witness $\mathbf{a}$ and generates random scalars $r$ and $s$.
@@ -463,7 +463,7 @@ $$\begin{align*}
 [A]_1 &= [\alpha]_1 + \sum_{i=1}^m a_iu_i(\tau)+r[\delta]_1\\
 [B]_1 &= [\beta]_1 + \sum_{i=1}^m a_iv_i(\tau)+s[\delta]_1\\
 [B]_2 &= [\beta]_2 + \sum_{i=1}^m a_iv_i(\tau)+s[\delta]_2\\
-[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)+[A]_1s+[B]_2r-rs[\delta]_1\\
+[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)+[A]_1s+[B]_1r-rs[\delta]_1\\
 \end{align*}$$
 
 The prover publishes $([A]_1, [B]_2, [C]_1, [a_1,...,a_\ell])$.
