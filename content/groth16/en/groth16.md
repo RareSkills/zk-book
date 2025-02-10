@@ -211,7 +211,7 @@ $$\begin{align*}
 \alpha,\beta,\tau &\leftarrow \text{random scalars}\\
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
-[\tau^{n-2}t(\tau),\tau^{n-3}t(\tau),\dots,\tau t(\tau),t(\tau)] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
+[\tau^{n-2}t(\tau)G_1,\tau^{n-3}t(\tau)G_1,\dots,\tau t(\tau)G_1,t(\tau)G_1] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 [\Psi_1]_1 &= (\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau))G_1\\
 [\Psi_2]_1 &= (\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau))G_1\\
 &\vdots\\
@@ -220,7 +220,7 @@ $$\begin{align*}
 
 The trusted setup publishes
 
-$$([\alpha]_1,[\beta]_2,\text{srs}_{G_1},\text{srs}_{G_2}[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 #### Prover steps
 The prover computes
