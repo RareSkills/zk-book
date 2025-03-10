@@ -153,7 +153,7 @@ $$
 \begin{align*}
 \lambda &= \frac{y₂ - y₁}{x₂ - x₁} \\
 x₃ &= \lambda² - x₁ - x₂ \\
-y₃ &= \lambda(x₃ - x₁) - y₁
+y₃ &= \lambda(x₁ - x₃) - y₁
 \end{align*}
 $$
 
