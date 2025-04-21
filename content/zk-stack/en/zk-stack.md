@@ -370,7 +370,7 @@ template ShouldCopy(j, bits) {
   signal spEqOne;
   signal spGteTwo;
   spEqOne <== IsEqual()([sp, 1]);
-  spGteTwo <== 1 - spEqOne * spEqZero;
+  spGteTwo <== 1 - spEqOne - spEqZero;
   
   // the current column is 1 or more 
   // below the stack pointer
@@ -507,7 +507,6 @@ template CopyStack(m) {
     signal input is_nop;
 
     component ShouldCopys[m];
-    signal copy[m];
     
     // loop over the columns
   for (var j = 0; j < m; j++) {
