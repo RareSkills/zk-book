@@ -79,7 +79,7 @@ Our identity element is the origin, because adding with that will result in the 
 The inverse of a point is simply the “mirror image” over the origin (with the $x$ and $y$ coordinates negated) because when you add a point to its inverse, they result in the origin.
 
 ### 5. $n \times n$ matrices of non-zero determinant under multiplication are a group
-By way of review, if a matrix has a non-zero determinant, then it is invertible. When a matrix of non-zero determinant is multiplied by another matrix of non-zero determinant, then the product also has a non-zero determinant. Actually, we can be more specific, if $A$, $B$, and $C$ are square matrices, and $AB = C$, then $\det(a) \times \det(b) = \det(c)$.
+By way of review, if a matrix has a non-zero determinant, then it is invertible. When a matrix of non-zero determinant is multiplied by another matrix of non-zero determinant, then the product also has a non-zero determinant. Actually, we can be more specific, if $A$, $B$, and $C$ are square matrices, and $AB = C$, then $\det(A) \times \det(B) = \det(C)$.
 
 Let’s work through the definitions
 
