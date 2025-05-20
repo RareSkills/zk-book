@@ -406,7 +406,7 @@ $$
 
 Substitute $A$ and $B$:
 $$
-=As\delta + Bs\delta - rs\delta
+=As\delta + Br\delta - rs\delta^2
 $$
 
 So our final equation is
