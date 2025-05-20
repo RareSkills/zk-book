@@ -623,7 +623,7 @@ Let’s plot $y = x² \pmod {17}$ as an example.
 
 The domain of $x$ are the elements of the finite field, and the output (range) must be a member of the finite field as well. That is, note how all the $x$ and $y$ values lie in the interval of $[0,16]$. A polynomial over a finite field can only have $x$ and $y$ values less than $p$.
 
-The equivalent of $y = -x²$ in finite field $p = 17$ is $y = 16x² \pmod 17$ since 16 is the additive inverse of 1 in that finite field. The polynomial $y = 16x² \pmod {17}$ is plotted below:
+The equivalent of $y = -x²$ in finite field $p = 17$ is $y = 16x² \pmod {17}$ since 16 is the additive inverse of 1 in that finite field. The polynomial $y = 16x² \pmod {17}$ is plotted below:
 
 ![plot of y = 16x^2 mod 17](https://static.wixstatic.com/media/706568_983e1638b445495ebf2d99ab0d4f7027~mv2.png/v1/fill/w_1440,h_864,al_c,q_90,enc_auto/706568_983e1638b445495ebf2d99ab0d4f7027~mv2.png)
 
