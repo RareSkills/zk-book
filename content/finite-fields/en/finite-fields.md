@@ -46,7 +46,7 @@ The notation $\pmod p$ means *all* arithmetic is done modulo $p$. For example,
 
 $$a + b = c + d \pmod p$$
 
-Is equivalent (in Python or C) to `a + b % p == c + d % p`.
+Is equivalent (in Python or C) to `(a + b) % p == (c + d) % p`.
 
 Multiplication works similarly by multiplying the numbers together, then taking the modulus: 
 
