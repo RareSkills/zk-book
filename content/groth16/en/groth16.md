@@ -339,7 +339,6 @@ And the verifier steps now include pairing by $[\gamma]_2$ and/or $[\delta]_2$ t
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
 
-
 ## Part 3: Enforcing true zero knowledge: r and s
 Our scheme is not yet truly zero knowledge. If an attacker is able to guess our witness vector (which is possible if there is only a small range of valid inputs, e.g. secret voting from privileged addresses), then they can verify their guess is correct by comparing their constructed proof to the original proof.
 
