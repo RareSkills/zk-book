@@ -46,7 +46,7 @@ The notation $\pmod p$ means *all* arithmetic is done modulo $p$. For example,
 
 $$a + b = c + d \pmod p$$
 
-Is equivalent (in Python or C) to `a + b % p == c + d % p`.
+Is equivalent (in Python or C) to `(a + b) % p == (c + d) % p`.
 
 Multiplication works similarly by multiplying the numbers together, then taking the modulus: 
 
@@ -623,7 +623,7 @@ Let’s plot $y = x² \pmod {17}$ as an example.
 
 The domain of $x$ are the elements of the finite field, and the output (range) must be a member of the finite field as well. That is, note how all the $x$ and $y$ values lie in the interval of $[0,16]$. A polynomial over a finite field can only have $x$ and $y$ values less than $p$.
 
-The equivalent of $y = -x²$ in finite field $p = 17$ is $y = 16x² \pmod 17$ since 16 is the additive inverse of 1 in that finite field. The polynomial $y = 16x² \pmod {17}$ is plotted below:
+The equivalent of $y = -x²$ in finite field $p = 17$ is $y = 16x² \pmod {17}$ since 16 is the additive inverse of 1 in that finite field. The polynomial $y = 16x² \pmod {17}$ is plotted below:
 
 ![plot of y = 16x^2 mod 17](https://static.wixstatic.com/media/706568_983e1638b445495ebf2d99ab0d4f7027~mv2.png/v1/fill/w_1440,h_864,al_c,q_90,enc_auto/706568_983e1638b445495ebf2d99ab0d4f7027~mv2.png)
 
@@ -678,7 +678,7 @@ The `galois` library is intelligent enough to interpret negative integers as add
 
 ```python
 import galois
-GF103 = galois.GF(103) # p = 13
+GF103 = galois.GF(103) # p = 103
 
 # We can input "-1" as a coefficient, and that will
 # automatically be calculated as `p - 1`

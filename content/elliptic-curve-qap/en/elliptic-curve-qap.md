@@ -52,10 +52,10 @@ and four polynomials from $\mathbf{O}$
 
 $$
 \begin{align*}
-v_1(x) = \mathcal{L}(\mathbf{O}_{(*,1)}) =v_{12}x^2 + v_{11}x+v_{10}\\
-v_2(x) = \mathcal{L}(\mathbf{O}_{(*,2)}) =v_{22}x^2 + v_{21}x+v_{20}\\
-v_3(x) = \mathcal{L}(\mathbf{O}_{(*,3)}) =v_{32}x^2 + v_{31}x+v_{30}\\
-v_4(x) = \mathcal{L}(\mathbf{O}_{(*,4)}) =v_{42}x^2 + v_{41}x+v_{40}\\
+w_1(x) = \mathcal{L}(\mathbf{O}_{(*,1)}) =w_{12}x^2 + w_{11}x+w_{10}\\
+w_2(x) = \mathcal{L}(\mathbf{O}_{(*,2)}) =w_{22}x^2 + w_{21}x+w_{20}\\
+w_3(x) = \mathcal{L}(\mathbf{O}_{(*,3)}) =w_{32}x^2 + w_{31}x+w_{30}\\
+w_4(x) = \mathcal{L}(\mathbf{O}_{(*,4)}) =w_{42}x^2 + w_{41}x+w_{40}\\
 \end{align*}
 $$
 

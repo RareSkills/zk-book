@@ -51,7 +51,7 @@ $$
 or for $\mathbb{G}_2$ srs:
 
 $$
-f(\tau) = \sum_{i=1}^d f_i\Theta_i=\langle[f_d, f_{d-1},...,f_1,f_0],[\Theta_d,\Theta_{d-1},...,G_1]\rangle
+f(\tau) = \sum_{i=1}^d f_i\Theta_i=\langle[f_d, f_{d-1},...,f_1,f_0],[\Theta_d,\Theta_{d-1},...,G_2]\rangle
 $$
 
 $f(\tau)$ is shorthand for the above expression, and produces an elliptic curve point. It does not mean the prover knows $\tau$.
@@ -167,7 +167,7 @@ $$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \box
 
 Now we can introduce an "expanded" QAP with the following definition:
 
-$$\left(\theta+\sum_{i=1}^m u_i(x)\right)\left(\eta +\sum_{i=1}^m v_i(x)\right) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
+$$\left(\theta+\sum_{i=1}^m a_iu_i(x)\right)\left(\eta +\sum_{i=1}^m a_iv_i(x)\right) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
 As a sneak peak to where we are going, if we replace $\theta$ with $[\alpha]_1$ and $\eta$ with $[\beta]_2$, we get updated verification formula from earlier:
 
@@ -411,26 +411,27 @@ $$
 
 So our final equation is
 
-$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2$$
 
 We now break it into the public and private portions:
 
-$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}_\text{private}$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}_\text{private}$$
 
 We want the public portion and the private portion to be separated by $\gamma$ and $\delta$ respectively:
 
-$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}{\delta}$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}{\delta}$$
 
 $\delta$ cancels for some of the terms:
 
-$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta$$
 
 We now separate this equation in to the verifier and prover portions. The boxed terms are the verifier portion, the underbrace terms are the terms that the prover provides:
 
-$$\underbrace{\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)}_{[A]_1}\underbrace{\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta}_{[C]_1}$$
+$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta}_{[C]_1}$$
+>>>>>>> prod
 
 ## Groth16 Proof Algorithm
-We are now ready to show the Groth16 algorithm end-to-end.
+We are now ready to show the Groth16 algorithm end-to-end. The trusted setup and the verification steps remain unchanged from the previous example where we incorporated $\gamma$ and $\delta$. Only the prover's calculation changes to incorporate $r$ and $s$.
 
 ### Trusted Setup
 
