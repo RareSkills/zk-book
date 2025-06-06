@@ -503,26 +503,26 @@ A [foundational result](https://en.wikipedia.org/wiki/Primitive_root_modulo_n) i
 
 #### Example 4.1.1: $\mathbb{Z}_5^* = \{1, 2, 3, 4\}$
 - **Element 2**:
-  \begin{align*}
+  $$\begin{align*}
   2^1 &= 2 \pmod{5}, \\
   2^2 &= 4 \pmod{5}, \\
   2^3 &= 8 \equiv 3 \pmod{5}, \\
   2^4 &= 16 \equiv 1 \pmod{5}
-  \end{align*}
+  \end{align*}$$
   $\langle 2 \rangle = \{1, 2, 3, 4\} = \mathbb{Z}_5^*$, so $2$ is a primitive element.
 
 - **Element 3**:
-  \begin{align*}
+  $$\begin{align*}
   3^1 &= 3 \pmod{5}, \\
   3^2 &= 9 \equiv 4 \pmod{5}, \\
   3^3 &= 27 \equiv 2 \pmod{5}, \\
   3^4 &= 81 \equiv 1 \pmod{5}
-  \end{align*}
+  \end{align*}$$
   $\langle 3 \rangle = \{1, 2, 3, 4\} = \mathbb{Z}_5^*$, so $3$ is a primitive element too.
 
 #### Example 4.1.2: $\mathbb{Z}_{11}^* = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$
 - **Element 2**:
-  \begin{align*}
+  $$\begin{align*}
   2^1 &= 2 \pmod{11}, \\
   2^2 &= 4 \pmod{11}, \\
   2^3 &= 8 \pmod{11}, \\
@@ -533,22 +533,22 @@ A [foundational result](https://en.wikipedia.org/wiki/Primitive_root_modulo_n) i
   2^8 &= 14 \equiv 3 \pmod{11}, \\
   2^9 &= 6 \pmod{11}, \\
   2^{10} &= 12 \equiv 1 \pmod{11}
-  \end{align*}
+  \end{align*}$$
   $\langle 2 \rangle = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\} = \mathbb{Z}_{11}^*$, so $2$ is a primitive element.
 
 - **Element 3**:
-  \begin{align*}
+  $$\begin{align*}
   3^1 &= 3 \pmod{11}, \\
   3^2 &= 9 \pmod{11}, \\
   3^3 &= 27 \equiv 5 \pmod{11}, \\
   3^4 &= 15 \equiv 4 \pmod{11}, \\
   3^5 &= 12 \equiv 1 \pmod{11}
-  \end{align*}
+  \end{align*}$$
   $\langle 3 \rangle = \{1, 3, 4, 5, 9\}$, a subgroup, not the full group.
 
 #### Example 4.1.3: $\mathbb{Z}_{17}^*$
 - **Element 3**:
-  \begin{align*}
+  $$\begin{align*}
   3^1 &= 3 \pmod{17}, \\
   3^2 &= 9 \pmod{17}, \\
   3^3 &= 27 \equiv 10 \pmod{17}, \\
@@ -565,7 +565,7 @@ A [foundational result](https://en.wikipedia.org/wiki/Primitive_root_modulo_n) i
   3^{14} &= 4782969 \equiv 2 \pmod{17}, \\
   3^{15} &= 14348907 \equiv 6 \pmod{17}, \\
   3^{16} &= 43046721 \equiv 1 \pmod{17}
-  \end{align*}
+  \end{align*}$$
   $\langle 3 \rangle = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16\} = \mathbb{Z}_{17}^*$, order $16$ (full group). So, $3$ is a primitive element of $\mathbb{Z}_{17}^*$.
 
 **Additional Note:** Although we mentioned earlier that $\mathbb{Z}_n^*$ is always a group, it is **not always cyclic** when $n$ is not prime. In contrast, when $n = p$ is prime, $\mathbb{Z}_p^*$ is **always cyclic**. This distinction matters in practice—especially in cryptography—where we prefer to work with **cyclic groups**, so we often choose prime moduli to ensure that $\mathbb{Z}_p^*$ has this cyclic structure.
