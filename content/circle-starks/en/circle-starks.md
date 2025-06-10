@@ -1072,22 +1072,28 @@ $$
 
 #### 8.2.2 Applying $\pi$ to $D$
 
-The subgroup $G_1$ has size 2, say $G_1 = \{(1,0), (30,0)\}$. By Lemma 3, 
-$$\pi(D) =
-\bigl(\pi(Q)\cdot G_1\bigr)
-\;\cup\;
-\bigl(\pi(Q)^{-1}\cdot G_1\bigr).
-$$
-- $\pi(Q)\cdot(1,0) = (27,27)$  
-- $\pi(Q)\cdot(30,0) = (4,4)$
-- $\pi(Q^{-1})\cdot(1,0) = (27,4)$
-- $\pi(Q^{-1})\cdot(30,0) = (4,27)$
+The subgroup $G_1$ has size 2, say $G_1 = \{(1,0), (30,0)\}$. By Lemma 3,
 
 $$
-\{(27,27),\, (4,4)\}
-\;\cup\;
-\{(27,4),\, (4,27)\}
+\pi(D) =
+\bigl(\pi(Q)\cdot G_1\bigr)
+\cup
+\bigl(\pi(Q)^{-1}\cdot G_1\bigr).
 $$
+
+$$
+\begin{align*}
+\pi(Q)\cdot(1,0) &= (27,27)\\
+\pi(Q)\cdot(30,0) &= (4,4)\\
+\pi(Q^{-1})\cdot(1,0) &= (27,4)\\
+\pi(Q^{-1})\cdot(30,0) &= (4,27)
+
+\end{align*}
+$$
+
+$${(27,27), (4,4)}
+\cup
+{(27,4), (4,27)}$$
 
 which is a twin-coset of size 4.
 
