@@ -315,7 +315,7 @@ $$\begin{align*}
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
 [\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
+[\Psi_\ell]_1 &= \frac{\alpha v_\ell(\tau) + \beta u_\ell(\tau) + w_\ell(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
 [\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\
@@ -445,7 +445,7 @@ $$\begin{align*}
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
 [\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
+[\Psi_\ell]_1 &= \frac{\alpha v_\ell(\tau) + \beta u_\ell(\tau) + w_\ell(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
 [\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\
