@@ -319,7 +319,7 @@ $$
 \begin{bmatrix}  
 3 \\
 12 \\
-\end{bmatrix}}_{q_1(x)}\cdot 2=
+\end{bmatrix}}_{q_1(x)}\cdot 2+
 \underbrace{
 \begin{bmatrix}  
 9 \\
