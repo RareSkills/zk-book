@@ -176,7 +176,7 @@ The reader can verify this by picking two points from the plots above, then plug
 
 ```python
 def double(x, y, a, p):
-    lambd = (((3 * x**2) % p ) *  pow(2 * y, -1, p)) % p
+    lambd = (((3 * x**2 + a) % p ) *  pow(2 * y, -1, p)) % p
     newx = (lambd**2 - 2 * x) % p
     newy = (-lambd * newx + lambd * x - y) % p
     return (newx, newy)
