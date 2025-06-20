@@ -58,7 +58,7 @@ component main = Example();
 
 Numbers in a [finite field](https://www.rareskills.io/post/finite-fields) (which is what Circom uses) cannot be compared to each other as “less than” or “greater” since the typical algebraic laws of inequalities do not hold.
 
-For example, if $x > y$, then if $c$ is positive, it should always be true that $x+c>y+c$. However, this is not true in a finite field. We could pick $c$ such that it is the additive inverse of $x$, i.e. $x + c=0\mod p$. We will then end up with a nonsensical statement that 0 is greater than a non-zero number. For example, if $p = 7$ and $x=2$ and $y=1$ we have that $x>y$. However, if we add $6$ to both $x$ and $y$, then we have $0>1$.
+For example, if $x > y$, then if $c$ is positive, it should always be true that $x+c>y+c$. However, this is not true in a finite field. We could pick $c$ such that it is the additive inverse of $x$, i.e. $x + c=0\mod p$. We will then end up with a nonsensical statement that 0 is greater than a non-zero number. For example, if $p = 7$ and $x=2$ and $y=1$ we have that $x>y$. However, if we add $5$ to both $x$ and $y$, then we have $0>1$.
 
 The 252 specifies the number of bits in the `LessThan` component to limit how large `x` and `y` can be, so that a meaningful comparison can be made (the section above used 4 bits as an example).
 
