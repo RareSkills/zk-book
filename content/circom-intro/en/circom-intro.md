@@ -19,9 +19,9 @@ We are going to assume the reader knows what an R1CS is and what it represents. 
 
 It is not necessary to fully understand the math behind ZK to use Circom, but there are some principles that must be fully grasped, or Circom will not make sense.
 
-Nonetheless, if the reader is serious about having a career in ZK, learning the foundations of ZK is essential. For that, we highly recommend reading through the first two sections of the [ZK book](rareskills.io/zk-book) and building the Groth16 proof system from scratch to enforce learning.
+Nonetheless, if the reader is serious about having a career in ZK, learning the foundations of ZK is essential. For that, we highly recommend reading through the first two sections of the [ZK book](https://www.rareskills.io/zk-book) and building the Groth16 proof system from scratch to enforce learning.
 
-However, if the reader’s objective is to quickly understand ZK applications, then we recommend reading the four chapters listed above and then using this resource.
+However, if the reader's objective is to quickly understand ZK applications, then we recommend reading the four chapters listed above and then using this resource.
 
 ## Why Circom Exists
 
@@ -73,7 +73,7 @@ We will explain the syntax further in later chapters, but the core idea is that 
 
 The witness in the context of ZK is an assignment to the variables that satisfies all the constraints in an arithmetic circuit.
 
-As we saw in the article on [arithmetic circuits](https://www.rareskills.io/post/arithmetic-circuit), proving one number is less than another number requires converting both of the numbers to binary, as “greater than” is not meaningful in a finite field since the numbers wrap around.
+As we saw in the article on [arithmetic circuits](https://www.rareskills.io/post/arithmetic-circuit), proving one number is less than another number requires converting both of the numbers to binary, as "greater than" is not meaningful in a finite field since the numbers wrap around.
 
 Expressing the number $x$ in binary, assuming it fits in four bits, requires $x$ to satisfy the following constraints:
 
@@ -128,7 +128,7 @@ One major convenience of Circom is that its code resembles mathematics in arithm
 
 The idea is instead of supplying $(x,b_0,b_1,b_2,b_3)$ to the circuit, we only supply $x$. Circom will compute the binary values for us and then fill out the constraints with the computed values.
 
-In addition to automating constraint generation, Circom improves the process of populating the witness through its  "assign and constrain" operator, `<==`.
+In addition to automating constraint generation, Circom improves the process of populating the witness through its "assign and constrain" operator, `<==`.
 
 ## The advantage of `<==` assign and constrain in Circom
 
@@ -147,11 +147,11 @@ z <== x * y
 
 With this, the variable `z` no longer needs to be provided as an input as Circom populates it for us, and its value will be locked into $x\cdot y$ for the rest of the circuit.
 
-Hence, Circom saves a user from the hassle of explicitly providing a value for every element in the witness, which is a major selling point for Circom’s convenience.
+Hence, Circom saves a user from the hassle of explicitly providing a value for every element in the witness, which is a major selling point for Circom's convenience.
 
 ## Circom is both a DSL and a programming language
 
-The biggest source of confusion when programming in Circom is that it is both a programming language (similar to Javascript) and a DSL that compiles to an R1CS. In that sense, it is a bit like Solidity. Solidity can affect the underlying blockchain state by transferring Ether, but it can also behave like a regular programming language. The “programming language” portion of Circom is to aid with automatic witness population as described earlier. However, to the newcomer, it is not always clear which parts of Circom affect the underlying R1CS.
+The biggest source of confusion when programming in Circom is that it is both a programming language (similar to Javascript) and a DSL that compiles to an R1CS. In that sense, it is a bit like Solidity. Solidity can affect the underlying blockchain state by transferring Ether, but it can also behave like a regular programming language. The "programming language" portion of Circom is to aid with automatic witness population as described earlier. However, to the newcomer, it is not always clear which parts of Circom affect the underlying R1CS.
 
 For example, the following is a valid Circom code that computes the power of a number:
 
@@ -215,9 +215,9 @@ component main = Fibonacci(5);
 
 In contrast, Circom has a relatively simple learning curve for beginners diving into ZK development.
 
-## Don’t Noir, Cairo, and Leo abstract away the need to learn constraint writing?
+## Don't Noir, Cairo, and Leo abstract away the need to learn constraint writing?
 
-You can write smart contracts on ZK blockchains or layer 2s using Rust-like languages, such as Noir, Cairo, and Leo, that are designed to “hide” the constraint generation from the programmer. If your goal is simply to write applications for these blockchains,  learning how ZK constraints work under the hood is not strictly necessary.
+You can write smart contracts on ZK blockchains or layer 2s using Rust-like languages, such as Noir, Cairo, and Leo, that are designed to "hide" the constraint generation from the programmer. If your goal is simply to write applications for these blockchains,  learning how ZK constraints work under the hood is not strictly necessary.
 
 However, consider that every serious Solidity programmer has a decent grasp of how the Ethereum Virtual Machine (EVM) works and can write basic assembly. Knowing what is happening behind the scenes will help you write more efficient code, and this resource accomplishes that goal.
 
@@ -239,7 +239,7 @@ We will also touch on security issues in ZK applications throughout the content.
 
 ## Learning comes not only with study but with practice
 
-Many of the chapters include explicit exercises or some unfinished code that is “left as an exercise for the reader”. **Your learning journey will be far more effective if you solve those problems**. We designed those problems to serve as a review of what you just read to enforce the learning. They do not require any special “insight” or “cleverness” to solve if you correctly understand the written resource. Our hope is that the exercises at the end will feel somewhat “obvious” after reading the material (if not, please raise an issue or open a pull request in the exercises’ repository!)
+Many of the chapters include explicit exercises or some unfinished code that is "left as an exercise for the reader". **Your learning journey will be far more effective if you solve those problems**. We designed those problems to serve as a review of what you just read to enforce the learning. They do not require any special "insight" or "cleverness" to solve if you correctly understand the written resource. Our hope is that the exercises at the end will feel somewhat "obvious" after reading the material (if not, please raise an issue or open a pull request in the exercises' repository!)
 
 ## Installing Circom
 
@@ -249,7 +249,7 @@ There is also an online IDE for Circom here: [https://zkrepl.dev/](https://zkrep
 
 ## Addendum: Plonk vs Groth16 for Circom
 
-For readers familiar with the Plonk proving system, it’s worth noting that we write the same circuit for both Plonk prover systems and the Groth16 prover system.
+For readers familiar with the Plonk proving system, it's worth noting that we write the same circuit for both Plonk prover systems and the Groth16 prover system.
 
 Groth16 allows an unlimited number of addition operations per constraint but only one non-constant multiplication (consider that a Rank 1 Constraint System has one multiplication per row). In contrast, Plonk only allows one multiplication or one addition per constraint, and not both. The one-multiplication-per-constraint limitation will become apparent as we explore Circom.
 
