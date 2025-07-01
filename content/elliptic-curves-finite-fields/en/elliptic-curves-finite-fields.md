@@ -320,7 +320,7 @@ print(multiply(G1, 2))
 #(1368015179489954701390400359078579693043519447331113978918064868415326638035, 9918110051302171585080402603319702774565515993150576347155970296011118125764)
 
 # 10G + 11G = 21G
-assert eq(add(multiply(G1, 10), multiply(G, 11)), multiply(G1, 21))
+assert eq(add(multiply(G1, 10), multiply(G1, 11)), multiply(G1, 21))
 ```
 
 Although the numbers are large and hard to read, we can see adding a point to itself results in the same value as "multiplying" a point by 2. The two points above are clearly the same point. The tuple is still an $(x, y)$ pair, just over a very large domain.
