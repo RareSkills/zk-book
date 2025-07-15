@@ -185,18 +185,18 @@ $$
 The question is: can we find values for $x₁, x₂, x₃, x₄$ such that $out$ is true? For the above formula, we can. Writing $T$ for true and $F$ for false, we can write our solution as:
 
 $$
-\begin{align*}
-x₁ = T \\
-x₂ = F \\
-x₃ = T \\
-x₄ = F
-\end{align*}
+\begin{aligned}
+x₁ &= T \\
+x₂ &= F \\
+x₃ &= T \\
+x₄ &= F
+\end{aligned}
 $$
 
 Plugging the solution into the formula yields:
 
 $$
-\begin{align*}
+\begin{aligned}
 x₁ &= T \\
 x₂ &= F \\
 x₃ &= T \\
@@ -205,11 +205,9 @@ out &= (x₁ ∨ ¬x₂ ∨ ¬ x₃) ∧ (¬x₂ ∨ x₃ ∨ x₄) ∧
       (x₁ ∨ x₃ ∨ ¬x₄)∧ (¬x₂ ∨ ¬x₃∨ ¬x₄) \\
 out &= (T ∨ ¬ F ∨ ¬ T) ∧ (¬ F ∨ T ∨ F) ∧
       (T ∨ T ∨ ¬ F) ∧ (¬ F ∨ ¬ T ∨ ¬ F) \\
-
-&= (T) ∧ (T) ∧ (T) ∧ (T) \\
-
-&= T \\
-\end{align*}
+    &= (T) ∧ (T) ∧ (T) ∧ (T) \\
+    &= T
+\end{aligned}
 $$
 
 That was easy to verify, but discovering the solution for a very large Boolean formula could require exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may require exponential resources to find the solution, but verifying it can be done in polynomial time.
@@ -247,10 +245,10 @@ The column $A = B$ can be modeled with the expression $(A ∧ B) ∨ ¬(A ∨ B)
 The expressions for one bit numbers:
 
 $$
-\begin{align*}
+\begin{aligned}
 A > B &\rightarrow A ∧ ¬B \\
 A = B &\rightarrow (A ∧ B) ∨ ¬(A ∨ B)
-\end{align*}
+\end{aligned}
 $$
 
 will come in handy shortly.
@@ -283,21 +281,21 @@ If $P ≥ Q$ then one of the following must be true:
 We can combine the bullet points into a single equation.
 
 $$
-\begin{align*}
+\begin{aligned}
 &((p₄ > q₄)) ∨ \\
 &((p₄ = q₄) ∧ (p₃ > q₃)) ∨ \\
 &((p₄ = q₄) ∧ (p₃ = q₃) ∧ (p₂ > q₂)) ∨ \\
 &((p₄ = q₄) ∧ (p₃ = q₃) ∧ (p₂ = q₂) ∧ ((p₁ > q₁) ∨ (p₁ = q₁)))
-\end{align*}
+\end{aligned}
 $$
 
 Recall our Boolean expressions that modeled one bit equality and comparison:
 
 $$
-\begin{align*}
+\begin{aligned}
 A > B &== A ∧ ¬B\\
 A = B &== (A ∧ B) ∨ ¬(A ∨ B)
-\end{align*}
+\end{aligned}
 $$
 
 We can substitute the expressions for $A > B$ and $A = B$ formula in to the equation above. To avoid a wall of math, we show the operations in video form below:
@@ -309,12 +307,13 @@ We can substitute the expressions for $A > B$ and $A = B$ formula in to the equa
 The final Boolean formula that expresses $P ≥ Q$, for 4 bits, is:
 
 $$
-\begin{align*}
+\begin{aligned}
 &(p₄ ∧ ¬q₄) ∨ \\
 &(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ (p₃ ∧ ¬q₃)) ∨ \\
 &(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ ((p₃ ∧ q₃) ∨ ¬(p₃ ∨ q₃)) ∧ (p₂ ∧ ¬q₂)) ∨ \\
-&(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ ((p₃ ∧ q₃) ∨ ¬(p₃ ∨ q₃)) ∧ ((p₂ ∧ q₂) ∨ ¬(p₂ ∨ q₂)) ∧ ((p₁ ∧ ¬q₁) ∨ ((p₁ ∧ q₁) ∨ ¬(p₁ ∨ q₁))))
-\end{align*}
+&(((p₄ ∧ q₄) ∨ ¬(p₄ ∨ q₄)) ∧ ((p₃ ∧ q₃) ∨ ¬(p₃ ∨ q₃)) ∧ \\
+&\quad ((p₂ ∧ q₂) ∨ ¬(p₂ ∨ q₂)) ∧ ((p₁ ∧ ¬q₁) ∨ ((p₁ ∧ q₁) ∨ ¬(p₁ ∨ q₁))))
+\end{aligned}
 $$
 
 Let’s call a Boolean expression that compares two binary numbers in the manner described above a 
