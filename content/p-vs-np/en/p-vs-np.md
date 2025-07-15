@@ -196,7 +196,7 @@ $$
 Plugging the solution into the formula yields:
 
 $$
-\begin{align*}
+\begin{aligned}
 x₁ &= T \\
 x₂ &= F \\
 x₃ &= T \\
@@ -207,7 +207,7 @@ out &= (T ∨ ¬ F ∨ ¬ T) ∧ (¬ F ∨ T ∨ F) ∧
       (T ∨ T ∨ ¬ F) ∧ (¬ F ∨ ¬ T ∨ ¬ F) \\
     &= (T) ∧ (T) ∧ (T) ∧ (T) \\
     &= T
-\end{align*}
+\end{aligned}
 $$
 
 That was easy to verify, but discovering the solution for a very large Boolean formula could require exponential time. Finding a solution to a Boolean formula is an NP problem itself — it may require exponential resources to find the solution, but verifying it can be done in polynomial time.
