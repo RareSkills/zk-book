@@ -185,12 +185,12 @@ $$
 The question is: can we find values for $x₁, x₂, x₃, x₄$ such that $out$ is true? For the above formula, we can. Writing $T$ for true and $F$ for false, we can write our solution as:
 
 $$
-\begin{align*}
-x₁ = T \\
-x₂ = F \\
-x₃ = T \\
-x₄ = F
-\end{align*}
+\begin{aligned}
+x₁ &= T \\
+x₂ &= F \\
+x₃ &= T \\
+x₄ &= F
+\end{aligned}
 $$
 
 Plugging the solution into the formula yields:
