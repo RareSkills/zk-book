@@ -104,7 +104,7 @@ For quick experiments, [zkRepl](https://zkrepl.dev) is fantastic and convenient 
 
 We can conveniently test the code above in zkRepl by supplying the inputs as a comment:
 
-![zkRepl showing the Circom compiler output](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/OneConstraint.png)
+![zkRepl showing the Circom compiler output](https://r2media.rareskills.io/HelloWorldCircom/OneConstraint.png)
 
 ***Note:** The input is supplied as a JSON object in a comment when using zkrepl. To test if the code compiles an the input satisfies the circuit, use shift-enter.*
 
@@ -206,7 +206,7 @@ Circom can only generate a proof for an input that actually satisfies the circui
 
 For 0, we have `0 * (0 - 1) === 0`, which is ok. However, for `2 * (2-1) === 2`, we have a constraint violation as indicated in the red box in the figure below.
 
-![zkRepl showing the Circom constraints are not satisfied](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/IsBinaryViolation.png)
+![zkRepl showing the Circom constraints are not satisfied](https://r2media.rareskills.io/HelloWorldCircom/IsBinaryViolation.png)
 
 # Circom in the command line
 
@@ -243,7 +243,7 @@ circom somecircuit.circom --r1cs --sym --wasm
 
 This is the expected output:
 
-![circom command line result](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/CircomSomeCircuitCMDLine.png)
+![circom command line result](https://r2media.rareskills.io/HelloWorldCircom/CircomSomeCircuitCMDLine.png)
 
 - Observe that non-linear constraints are listed as 1, indicative of `a * b === c`.
 - Wires is the number of columns in the R1CS. In this example, we have a constant column and three signals `a`, `b`, `c`.
@@ -339,13 +339,13 @@ If we had passed values that did not honor the constraint, `a*b === c`, e.g. `a=
 
 If you run `cat witness.wtns`, the output is gibberish.
 
-![witness file cat to terminal](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/BinaryFile.png)
+![witness file cat to terminal](https://r2media.rareskills.io/HelloWorldCircom/BinaryFile.png)
 
 This is because `witness.wtns` is a binary file in a format accepted by snarkjs.
 
 To get the human-readable form, we export it to JSON via: `snarkjs wtns export json witness.wtns`. We then view the JSON using `cat witness.json`:
 
-![witness json cat to terminal](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/Witness.png)
+![witness json cat to terminal](https://r2media.rareskills.io/HelloWorldCircom/Witness.png)
 
 - The first `1` is the constant portion of the witness, which is always `1`. We have that `a = 1`, `b = 2`, and `c = 2` since our input JSON was `{"a": "1","b": "2","c": "2"}`.
 - snarkjs ingests the `witness.wtns` file to output `witness.json`.
@@ -374,7 +374,7 @@ component main = IsBinary();
 - **`circom isbinary.circom --r1cs --sym --wasm`**
 - Sanity check on terminal output: `non-linear constraints: 2`
 
-![checking the number of r1cs constraints in the terminal](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/HelloWorldCircom/NonLinearConstraints.png)
+![checking the number of r1cs constraints in the terminal](https://r2media.rareskills.io/HelloWorldCircom/NonLinearConstraints.png)
 
 This makes sense, as our circuit contains two assertions, each involving a multiplication of signals.
 

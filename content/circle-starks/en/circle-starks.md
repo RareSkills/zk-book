@@ -67,7 +67,7 @@ In the Circle STARKs, we focus on primes $p$ with $p \equiv 3 \pmod{4}$ (e.g., $
 
 For example, if $p =7$ (which is $3 \pmod{4}$), then $C(\mathbb{F}_{7})$ is the set of all $(x,y) \in \mathbb{F}_{7}^2$ such that $x^2 + y^2 = 1.$
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/CircleStarks/circleF7.MP4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/CircleStarks/circleF7.MP4" type="video/mp4" autoplay loop muted controls></video>
 
 Here are a few pairs $(x,y)$ in $\mathbb{F}_{7}^2$ that satisfy $x^2 + y^2 \equiv 1 \pmod{7}$. For example:
 - $(1, 0)$ and $(0, 1)$ are obvious because $1^2 + 0^2=1$ and $0^2 + 1^2=1$.
@@ -294,7 +294,7 @@ Therefore, we now turn to a slightly larger prime, $p = 31$ (which satisfies $p 
 
 Given $p = 31$, which is congruent to $3 \pmod{4}$, the set of points $(x, y) \in \mathbb{F}_{31}^2$ satisfying the equation $x^2 + y^2 = 1$, denoted as $C(\mathbb{F}_{31})$, is illustrated in the following diagram:
 
-![Circle in F_31](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/CircleStarks/CircleF33.png)
+![Circle in F_31](https://r2media.rareskills.io/CircleStarks/CircleF33.png)
 
 
 Here are a few pair examples $(x,y)$ in $\mathbb{F}_{31}^2$ that satisfy $x^2 + y^2 \equiv 1 \pmod{31}$:
@@ -787,7 +787,7 @@ Combining these gives 8 distinct points. No element of $D$ is fixed by $J$, so $
   
 In the diagram below, 🔴 red points represent $Q \cdot G_2$ and 🔵 blue points represent $Q^{-1} \cdot G_2$. Together, they form the 8-point twin-coset $D$.
 
-![Twin coset](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/CircleStarks/twinCosetRedBlack.png)
+![Twin coset](https://r2media.rareskills.io/CircleStarks/twinCosetRedBlack.png)
 
 
 
@@ -829,7 +829,7 @@ $$
 In the diagram below, 🟢 green points represent the subgroup $G_3$, 🔴 red and 🔵 blue points represent the two disjoint cosets $Q \cdot G_2$ and $Q^{-1} \cdot G_2$, respectively. Their union forms the twin-coset $D$, and the entire 8-point set constitutes the standard position coset $Q \cdot G_3$.
 
 
-![standard position coset](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/CircleStarks/standardPositionCosetGreenRed.png)
+![standard position coset](https://r2media.rareskills.io/CircleStarks/standardPositionCosetGreenRed.png)
 
 
 Thus, whenever $Q$ has order $2^{n+1}$, we can build a standard position coset of size $2^n$. This structure is important in Circle STARK, as it provides a neat domain of $2^n$ points even if $p-1$ is not sufficiently two-adic. 
@@ -1106,7 +1106,7 @@ In the diagram below:
 
 This visual illustrates how $\pi$ maps the original domain of size $2^3 = 8$ into a new twin-coset of size $2^2 = 4$ via group endomorphism.
 
-![Twin coset size 8](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/CircleStarks/piTwinCoset.png)
+![Twin coset size 8](https://r2media.rareskills.io/CircleStarks/piTwinCoset.png)
 
 
 ## 9. What We Built in Part 1

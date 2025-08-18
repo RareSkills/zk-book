@@ -18,7 +18,7 @@ Selection Sort works by
 
 Selection Sort is illustrated in the animation below:
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/SortCircuit/SelectionSortC.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/SortCircuit/SelectionSortC.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 Since signals are immutable in ZK circuits, every time we swap, we need to create a new list. For example, if we sorted [5,2,3,4], the sequence of state transitions would be:
 

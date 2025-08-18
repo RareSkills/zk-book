@@ -31,7 +31,7 @@ There is no STOP or RETURN opcode (the substitute is explained shortly). The VM 
 
 The following animation gives a simple example of adding two numbers together in this architecture:
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKVM/zkvm.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/ZKVM/zkvm.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 In Circom, loops cannot be of variable-length, they must always be executed for a fixed number of iterations, as the underlying Rank 1 Constraint System (R1CS) itself must be of fixed size. Similarly, programs cannot be of variable size. However, they must have the same number of opcodes regardless of the program run.
 
