@@ -6,7 +6,22 @@ This chapter continues our study of group theory by exploring **subgroups** and 
 
 To build intuition, we begin with **additive groups**, which are straightforward and help clarify core concepts like subgroups and generators.
 
-We then shift to **multiplicative groups of integers modulo $n$**. The integers themselves, under multiplication, do not form a group—only $1$ and $-1$ have multiplicative inverses in $\mathbb{Z}$, so the group axioms fail. To address this, we consider multiplication modulo $n$, focusing on the integers less than $n$ that are **coprime** to it. These elements **do** have multiplicative inverses modulo $n$, and together they form a well-defined group. This construction plays a central role in number theory and is foundational to many cryptographic systems.
+We then shift to **multiplicative groups of integers modulo $n$**. The integers themselves, under multiplication, do not form a group—only $1$ and $-1$ have multiplicative inverses in $\mathbb{Z}$, so the group axioms fail. To address this, we consider multiplication modulo $n$, focusing on the integers less than $n$ that are **coprime** to it. These coprime integers **do** have multiplicative inverses modulo $n$, and together they form a well-defined group. This construction plays a central role in number theory and is foundational to many cryptographic systems.
+
+> **Coprime:** Two numbers are coprime if their Greatest Common Divisor (GCD) is 1.  
+>
+> Example 1: 8 and 15 are coprime because  
+> Factors of 8: 1, 2, 4, 8  
+> Factors of 15: 1, 3, 5, 15  
+> Common factor: 1  
+> The gcd is 1.  
+>
+> Example 2: 12 and 18 are NOT coprime because  
+> Factors of 12: 1, 2, 3, 4, 6, 12  
+> Factors of 18: 1, 2, 3, 6, 9, 18  
+> Common factor: 1, 2, 3, 6  
+> The gcd is 6.  
+
 
 Finally, we examine **generators**—elements that can produce an entire group or subgroup through repeated multiplication. Understanding generators reveals important subgroup structures, especially when $n$ is prime, and highlights their critical role in cryptographic applications.
 
@@ -296,7 +311,7 @@ Consider $\mathbb{Z}_7 = \{0, 1, 2, 3, 4, 5, 6\}$:
   - $6 \times6= 36 \equiv1\pmod{7}$
 
 
-Since, $0$ has no inverse, $(\mathbb{Z}_7, \times)$ is **not** a group. But if we remove $0$ and consider only the nonzero elements — that is, $\mathbb{Z}_7 \setminus \{0\} = \{1, 2, 3, 4, 5, 6\}$ — we do get a group under multiplication. This set is often denoted $\mathbb{Z}_7^*$ and is a group of order 6.
+Since $0$ has no inverse, $(\mathbb{Z}_7, \times)$ is **not** a group. But if we remove $0$ and consider only the nonzero elements — that is, $\mathbb{Z}_7 \setminus \{0\} = \{1, 2, 3, 4, 5, 6\}$ — we do get a group under multiplication. This set is often denoted $\mathbb{Z}_7^*$ and is a group of order 6.
 
 
 You can use this code to generate the multiplication table for any modulus $n$:
