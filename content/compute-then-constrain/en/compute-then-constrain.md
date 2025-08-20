@@ -365,7 +365,7 @@ Essentially, the code loops through each bit in the binary representation, start
 
 The way it computes the binary array is best shown with an animation, which we show here:
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ComputeThenConstrain/Num2Bits.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/ComputeThenConstrain/Num2Bits.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 Comparable to the earlier examples, computing the binary value is done outside the circuit, but then we constrain afterwards to ensure that the binary array is correct.
 

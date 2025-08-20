@@ -67,7 +67,7 @@ If we wish to pass multiple field elements to the hash and output a single field
 
 This can be visualized as follows:
 
-![multi mimc diagram](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKFriendlyHashFunction/multi-mimc.png)
+![multi mimc diagram](https://r2media.rareskills.io/ZKFriendlyHashFunction/multi-mimc.png)
 
 
 The MultiMiMC7 template accomplishes this for us:
@@ -128,22 +128,22 @@ To use more than one input signal, we change the template argument `n` for Posei
 
 For hashes that take a single input, the underlying R1CS of MiMC has 364 constraints:
 
-![mimc constraints](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKFriendlyHashFunction/mimc-constraints.png)
+![mimc constraints](https://r2media.rareskills.io/ZKFriendlyHashFunction/mimc-constraints.png)
 
 while Poseidon has 213:
 
-![Poseidon constraints](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKFriendlyHashFunction/Poseidon-single.png)
+![Poseidon constraints](https://r2media.rareskills.io/ZKFriendlyHashFunction/Poseidon-single.png)
 
 
 Now, let’s compare the number of constraints generated when we have two inputs.
 
 For MiMC7, the number of constraints doubles with two inputs:
 
-![multi mimc constraints](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKFriendlyHashFunction/multi-mimc.png)
+![multi mimc constraints](https://r2media.rareskills.io/ZKFriendlyHashFunction/multi-mimc.png)
 
 But for Poseidon, the number of constraints barely increases:
 
-![multi poseidon constraints](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZKFriendlyHashFunction/multi-poseidon.png)
+![multi poseidon constraints](https://r2media.rareskills.io/ZKFriendlyHashFunction/multi-poseidon.png)
 
 The primary reason for this superior performance is that, unlike MiMC, Poseidon doesn’t redo the hash for each field element in the input. Instead, to hash a larger input, it uses a larger matrix to multiply the input vector with. Circomlib’s Poseidon doesn’t support inputs larger than 17 field elements. If we need to hash a large dataset, this can be problematic. However, if we are building a Merkle tree, we only need to hash two inputs.
 

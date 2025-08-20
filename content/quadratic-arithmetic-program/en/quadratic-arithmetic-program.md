@@ -546,7 +546,7 @@ If we multiply $u(x)$ and $v(x)$ together, we get $w(x) = 4x^4 - 18x^3 + 36x^2 -
 
 We can see in the plot below that the product polynomial interpolates the Hadamard product $[8, 8, 64]$ of the two vectors.
 
-![3 point intersection of u, v, and w](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/qap-3-point-cross.png)
+![3 point intersection of u, v, and w](https://r2media.rareskills.io/qap-3-point-cross.png)
 
 So how can we "make" $w(x)$ equal to $u(x)v(x)$ if they interpolate the same $y$ values over $(1,2,...,n)$?
 
@@ -557,7 +557,7 @@ Instead of interpolating $\mathbf{0}$ with Lagrange interpolation and getting $f
 
 For example, the black polynomial ($b(x)$) in the image below interpolates $[(1,0), (2,0), (3,0)]$:
 
-![zero polynomial plot](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/qap-zero-polynomial.png)
+![zero polynomial plot](https://r2media.rareskills.io/qap-zero-polynomial.png)
 
 Now, since $4x^4 -18x^3 + 8x^2 + 42x - 36$ is a valid interpolation of $[0,0,0]$, we can write our original
 

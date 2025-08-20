@@ -169,7 +169,7 @@ Note that each instruction always has a constant after it. For PUSH, this is the
 
 Now, let’s generate a “metaTable” which tells us which operation will happen at each row of the execution. If we add columns `is_push`, `is_pop`, or `is_nop` which indicate which instruction is active, then we get the following table.
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/ZkStack/stack.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/ZkStack/stack.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 The final result would look like the following, but we will reconstruct this table step-by-step in the upcoming section:
 
