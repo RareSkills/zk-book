@@ -36,7 +36,7 @@ Over the field of rational numbers, multiplication has the identity element of 1
 In a finite field, the inverse of an element is the number you multiply it with to get the finite field element 1. For example, in modulo 23, 6 is the inverse of 4 because when you multiply them together modulo 23, you get 1. When the order of the field is prime, every number except zero has an inverse.
 
 ### Cyclic Groups
-A cyclic [group](https://www.rareskills.io/group-theory) is a group such that every element can be computed by starting with a generator element and repeatedly applying the group’s binary operator.
+A cyclic [group](https://rareskills.io/post/group-theory) is a group such that every element can be computed by starting with a generator element and repeatedly applying the group’s binary operator.
 
 A very simple example is integers modulo 11 under addition. If your generator is 1, and you keep adding the generator to itself, you can generate every element in the group from 0 to 10.
 
@@ -114,7 +114,7 @@ print(list(sqrtmod_prime_power(5, 11, 1)))
 assert (4 ** 2) % 11 == 5
 assert (7 ** 2) % 11 == 5
 
-# we expect 4 and 7 to be inverses of each other, because in "regular" math, the two solutions to a square root are sqrt and -sqrt
+# we expect 4 and 7 to be additive inverses of each other, because in "regular" math, the two solutions to a square root are sqrt and -sqrt
 assert (4 + 7) % 11 == 0
 ```
 
@@ -214,7 +214,8 @@ Using the Python functions above, we can start with the point $(4, 10)$ and gene
 
 ```python
 # for our purposes, (4, 10) is the generator point G
-next_x, next_y = 4, 10print(1, 4, 10)
+next_x, next_y = 4, 10
+print(1, 4, 10)
 points = [(next_x, next_y)]
 for i in range(2, 12):
     # repeatedly add G to the next point to generate all the elements
@@ -276,7 +277,7 @@ In this example, the order of the group is 12 (total number of elliptic curve po
 
 ### If the number of points is prime, then the addition of points behaves like a finite field
 
-In the plot above, there are 12 points (including 0). Addition modulo 12 is not a finite field because 12 is not prime.
+In the plot above, there are 12 points (including O). Addition modulo 12 is not a finite field because 12 is not prime.
 
 However, if we pick our parameters for the curve carefully, we can create an elliptic curve where the points correspond to elements in a finite field. That is, the order of the curve equals the order of the finite field.
 
@@ -286,7 +287,7 @@ For example, $y^2 = x^3 + 7 \pmod {43}$ creates a curve with 31 points total as 
 
 When the order of the curve matches the order of the finite field **every operation you do in the finite field has a homomorphic equivalent in the elliptic curve**.
 
-To go from a finite field to an elliptic curve, we we pick one point (arbitrarily) to be the generator, then we multiply the element in the finite field by the generator.
+To go from a finite field to an elliptic curve, we pick one point (arbitrarily) to be the generator, then we multiply the element in the finite field by the generator.
 
 ## Multiplication is really repeated addition
 There is no such thing as elliptic curve point multiplication. When we say "scalar multiplication" we really mean repeated addition. You cannot take two elliptic curve points and multiply them together (well, you sort of can with [bilinear pairings](https://www.rareskills.io/post/bilinear-pairing), but that’s something we will get to later).
@@ -303,7 +304,7 @@ G, 2G, 4G, 8G, 16G, 32G, 64G, 128G
 When we say `5G + 6G = 11G`, we are essentially just adding G to itself 11 times. Using the shortcut illustrated above, we can compute 11G with a logarithmic number of computations, but at the end of the day, it's just repeated addition.
 
 ## Python bn128 library
-The library the EVM implementation pyEVM uses for the elliptic curve precompiles is `py_ecc`, and we will be relying on that library heavily. The code below shows what the generator points looks like, and also shows some addition and scalar multiplication.
+The library the EVM implementation pyEVM uses for the elliptic curve precompiles is `py_ecc`, and we will be relying on that library heavily. The code below shows what the generator point looks like, and also shows some addition and scalar multiplication.
 
 Here is what a G1 point looks like:
 
@@ -362,7 +363,7 @@ assert eq(multiply(G1, 5), add(multiply(G1, 2), multiply(G1, 3)));
 
 Addition in a finite field is homomorphic to addition among elliptic curve points (when their order is equal). Because of the discrete logarithm, another party can add elliptic curve points together without knowing which field elements generated those points.
 
-At this point, hopefully the reader has a good intuition for adding elliptic curve points together, both theoretically and practically, because modern zero knowledge algorithms rely *heavily* on this..
+At this point, hopefully the reader has a good intuition for adding elliptic curve points together, both theoretically and practically, because modern zero knowledge algorithms rely *heavily* on this.
 
 ### Implementation detail about the homomorphism between modular addition and elliptic curve addition
 We need to make a careful distinction between terminologies here:
@@ -457,13 +458,14 @@ The `py_ecc` library supplies us with the `neg` function which will provide the 
 from py_ecc.bn128 import G1, multiply, neg, is_inf, Z1
 
 # pick a field element
-x = 12345678# generate the point
+x = 12345678
+# generate the point
 p = multiply(G1, x)
 
 # invert
 p_inv = neg(p)
 
-# every element added to its inverse produces the identity elementassert is_inf(add(p, p_inv))
+# every element added to its inverse produces the identity element assert is_inf(add(p, p_inv))
 
 # Z1 is just None, which is the point at infinity
 assert Z1 is None
@@ -472,7 +474,7 @@ assert Z1 is None
 assert eq(neg(Z1), Z1)
 ```
 
-As is the case with elliptic curves over real numbers, the inverse of an elliptic curve point has the same x value, but the y value is the inverse.
+As in the case with elliptic curves over real numbers, the inverse of an elliptic curve point has the same x value, but the y value is the inverse.
 
 ```python
 from py_ecc.bn128 import G1, neg, multiply
@@ -545,7 +547,7 @@ As another hint: you (the prover) and the verifier need to agree on the formula 
 ### Security assumptions
 For the above scheme to be secure, we are assuming that if we publish a point such as `multiply(G1, x)`, an attacker cannot infer from the $(x, y)$ value created what the original value for $x$ was. This is the discrete logarithm assumption. This is why the prime number we compute the formula over needs to be large, so that the attacker cannot brute force guess.
 
-There are mores sophisticated algorithms, like the [baby step giant step](https://en.wikipedia.org/wiki/Baby-step_giant-step) algorithm that can outperform brute force.
+There are more sophisticated algorithms, like the [baby step giant step](https://en.wikipedia.org/wiki/Baby-step_giant-step) algorithm that can outperform brute force.
 
 Note: The BN128 comes from the assumption that it has 128 bits of security. The elliptic curve is computed in a finite field of 254 bits, but it is believed to have 128 bits of security since there are better algorithms than naive brute force to compute the discrete logarithm.
 
