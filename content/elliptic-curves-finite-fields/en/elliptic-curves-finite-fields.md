@@ -277,7 +277,7 @@ In this example, the order of the group is 12 (total number of elliptic curve po
 
 ### If the number of points is prime, then the addition of points behaves like a finite field
 
-In the plot above, there are 12 points (including O). Addition modulo 12 is not a finite field because 12 is not prime.
+In the plot above, there are 12 points (including $O$). Addition modulo 12 is not a finite field because 12 is not prime.
 
 However, if we pick our parameters for the curve carefully, we can create an elliptic curve where the points correspond to elements in a finite field. That is, the order of the curve equals the order of the finite field.
 
