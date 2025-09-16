@@ -255,7 +255,7 @@ $$
 \begin{align*}
 (a + b + c)P &= (a + b + c)P \\
 (aP + bP) + cP &= aP + (bP + cP) \\
-(a + b)P + cP& = aP (b + c)P
+(a + b)P + cP &= aP + (b + c)P
 \end{align*}
 $$
 
