@@ -281,7 +281,7 @@ template Bits2Num(n) {
   var e2 = 1;
   for (var i = 0; i<n; i++) {
     lc1 += in[i] * e2;
-    e2 += e2 + e2; // could also be e2 *= 2;
+    e2 = e2 + e2; // could also be e2 *= 2;
   }
 
   lc1 ==> out;

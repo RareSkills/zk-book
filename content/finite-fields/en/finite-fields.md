@@ -443,7 +443,7 @@ The function above returns one of the square roots of x modulo p. The other squa
 
 **The implication for this is that the arithmetic circuit `x * x === y` may have two solutions.** For example, in a finite field `p = 11`, it might seem that the arithmetic circuit `x * x === 4` only admits the value 2 because -2 is not a finite field element. However, that assumption is very wrong! The assignment `x = 9`, which is congruent to -2, also satisfies the circuit.
 
-**Exercise:** Use the code snippet above to compute the modular square root of 5 in the finite field of `p = 23`. The code will only give you one of the answers. How can you compute the other?
+**Exercise:** Use the code snippet above to compute the modular square root of 5 in the finite field of `p = 19`. The code will only give you one of the answers. How can you compute the other?
 
 ## Linear systems of equations in finite fields
 
