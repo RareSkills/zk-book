@@ -1273,7 +1273,7 @@ template Multiply4() {
     out <== v1 * v2;
 }
 
-template main = Multiply4();
+component main = Multiply4();
 ```
 
 With everything we’ve discussed so far, the Circom output and the annotations should be self-explanatory.
