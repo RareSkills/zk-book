@@ -278,7 +278,7 @@ However, if we have a binary representation of the field element, then we can ch
 
 Because it can be a bit tedious to keep writing `pow` and `% p` in Python, the reader may wish to use the [galois library](https://pypi.org/project/galois/) instead (finite fields are sometimes called Galois fields, pronounced “Gal-wah”). It can be installed with `python3 -m pip install galois`.
 
-Below, we translate the addition of fractions code from the above section $(1/2 + 1/3 = 1/6)$ to use the `galois` library instead. The library overwrites the math operators to work in a finite field:
+Below, we translate the addition of fractions code from the above section $(1/2 + 1/3 = 5/6)$ to use the `galois` library instead. The library overwrites the math operators to work in a finite field:
 
 ```python
 import galois
