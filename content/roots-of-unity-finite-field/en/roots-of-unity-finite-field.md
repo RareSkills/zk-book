@@ -12,11 +12,37 @@ In this article, we will show that all elements of this subgroup are what are ca
 
 The square roots of $1$ in a finite field are easy to compute: they are the numbers congruent to $1$ and negative $1$ (which are $1$ and $q - 1$ respectively. Remember that, in a field $\mathbb{F}_q$, the number $-x$ is congruent to $q-x$ ). In other words, $\sqrt{1} = \{1, q-1 \}$. This set is the set of solutions of the equation $a^2 \equiv 1$, where $a$ is an element of the finite field.
 
-But what if we want to compute the cube roots of $1$, or more generally, the $k$-th roots? By definition, $k$-th roots of unity are the elements that satisfy the equation $a^k \equiv 1$. But how can we find them?
+But what if we want to compute the cube roots of $1$, or more generally, the $k$-th roots of 1, i.e., $\sqrt[^k]{1}$? By definition, $k$-th roots of unity are the elements that satisfy the equation $a^k \equiv 1$. But how can we find them?
 
-We could try all elements one by one - a brute-force approach - but that would be infeasible when the field contains many elements. Fortunately, there is a simple way to find them all. **In the finite field $\mathbb{F}_q$, the $k$-th roots of unity are precisely the elements of the multiplicative subgroup of order $k$.** This definition assumes $k$ divides **$q-1.$**
+We could try all elements one by one — a brute-force approach — but that would be infeasible when the field contains many elements. Fortunately, there is a simple way to find them all. **In the finite field $\mathbb{F}_q$, the $k$-th roots of unity are precisely the elements of the multiplicative subgroup of order $k$.** This definition assumes $k$ divides **$q-1.$**
 
-In the article on the Fundamental Theory of Cyclic Groups, we learned how to find all the elements of a multiplicative subgroup of order $k$. First, we obtain a generator of this subgroup from the generator of the multiplicative group $\mathbb{F}_q^*$. Then, using this generator, we can find all the elements of the subgroup of order $k$.
+To state it in the strongest possible terms: **If an element $a$ in a finite field is part of a multiplicative subgroup of order $k$, then it is a $k$-th root of unity, and $a^k\equiv1$. And if an element $a$ is a $k$-th root of unity (meaning $a^k\equiv1)$, then it is part of a multiplicative subgroup of order k.**
+
+### Equivalence of terminology
+
+It may seem like we are just adding a new terminology for the same entity (an element in a multiplicative group) and pointing out that raising it to the $k$-th power equals 1.
+
+In a certain sense, yes, we are introducing a new term for the same entity: a $k$-th root of unity is an element in a multiplicative subgroup of order $k$ and vice-versa. Normally, giving the same entity two names leads to confusion, so we need to justify introducing the term “root of unity.”
+
+When we speak about cyclic groups of order $k$ in the most general sense, we do not have the guarantee that taking an element in that group and applying the binary operator to that element and itself $k$ times results in the identity element, i.e., $a^k\equiv1$ , or more generally for a binary operator $\star$:
+
+$$
+\underbrace{a\star a\star\dots\star a}_k=\text{identity}
+$$
+
+For cyclic groups in general, the above property is not guaranteed to hold, but for roots of unity in a finite field, it is guaranteed.
+
+Therefore, we can say that roots of unity have all the properties the Fundamental Theorem of Cyclic groups says they should have, *and* they have the property that $a^k\equiv1.$
+
+So, to put the reader’s mind at ease, you already know a good bit about roots of unity in a finite group simply because you understand the Fundamental Theorem of Cyclic Groups. Since roots of unity in a finite field are a cyclic subgroup, the Fundamental Theorem of Cyclic Groups applies to them.
+
+However, the added guarantee that $a^k\equiv1$ unlocks additional properties that efficient ZK algorithms directly leverage. These properties enable us to create efficient algorithms like the Number Theoretic Transform and other [Zero-Knowledge Proof](rareskills.io/zk-book) algorithms, such as PLONK and ZK-STARKs.
+
+We study these additional properties of roots of unity in later chapters. This chapter focuses on definitions and examples to build the understanding that an element $a$ in a finite field has the property $a^k\equiv1$ if and only if it is part of a multiplicative subgroup of order $k.$
+
+### Computing k-th roots of unity is the same as finding the multiplicative subgroup of order k
+
+In the article on the Fundamental Theorem of Cyclic Groups, we learned how to find all the elements of a multiplicative subgroup of order $k$. First, we obtain a generator of this subgroup from the generator of the multiplicative group $\mathbb{F}_q^*$. Then, using this generator, we can find all the elements of the subgroup of order $k$.
 
 **Thus, finding the $k$-th roots of unity of $\mathbb{F}_q$ is no different from finding the multiplicative subgroup of order $k$, if $k$ divides $q-1$, which we already know how to do.**  
 
@@ -27,7 +53,7 @@ To do this, we need to prove the following two statements:
 1. Every element $a$ within the multiplicative subgroup of order $k$ satisfies $a^k\equiv 1$.
 2. Suppose $k$ divides $q-1$. Then, every element $a$ in $\mathbb{F}_q^*$ that satisfies $a^k\equiv 1$ belongs to the unique subgroup of order $k$.
 
-We will explore these two statements through examples to illustrate that they hold true. Since the formal proofs can be somewhat mathematically demanding, we will defer some of them to the appendix for the interested reader.
+We will explore these two statements through examples to illustrate that they hold true. Since the formal proofs can be somewhat mathematically demanding, we will defer some of them to the appendix for the interested reader, though we have made the effort to make the proofs as widely understandable as possible.
 
 ## 1. Every element $a$ in the subgroup of order $k$ satisfies $a^k\equiv 1$
 
