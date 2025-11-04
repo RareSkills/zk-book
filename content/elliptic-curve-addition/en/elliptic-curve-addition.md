@@ -273,6 +273,6 @@ So in reality, we do everything with [modular arithmetic](https://www.rareskills
 But we lose none of the intuition we’ve gained above by doing this.
 
 ## Learn more with RareSkills
-This material is from our zero knowledge course, see there to learn more.
+This material is from our zero knowledge course, see there to learn more. This post is part of a series on [Zero Knowledge Proofs](rareskills.io/zk-book).
 
 *Originally Published September 1, 2023*
