@@ -219,7 +219,7 @@ So rather than doing 1000 operations, we can do it in 14 (9 to compute 512, cach
 
 This is actually an important property when we get to cryptography:
 
-*We can efficiently multiply an elliptic curve point by a large integer efficiently.*
+*We can efficiently multiply an elliptic curve point by a large integer.*
 
 ## Implementation details of addition
 It isn’t too hard to derive the formula for point addition using simple algebra. When we intersect two points, we know the slope and the points that it crossed through, so we can calculate the point of intersection.
@@ -270,7 +270,7 @@ If we were to do elliptic curves over real numbers for a real application, they 
 
 So in reality, we do everything with [modular arithmetic](https://www.rareskills.io/post/finite-fields).
 
-But we lose none of the intuition we’ve gained above by doing this.
+But we lose none of the intuition we’ve gained above by using real numbers as a visual example.
 
 ## Learn more with RareSkills
 This material is from our zero knowledge course, see there to learn more. This post is part of a series on [Zero Knowledge Proofs](rareskills.io/zk-book).
