@@ -34,7 +34,7 @@ $$
 
 and each element has an identity and inverse.
 
-This is not an interesting group, but it is the smallest valid you can create.
+This is not an interesting group, but it is the smallest valid group you can create.
 
 Note that a group cannot be empty because by definition it must contain an identity element.
 
@@ -66,7 +66,7 @@ If we define our operator for $n \times m$ matrices to be the Hadamard product (
 
 If we define our operator to be traditional matrix multiplication over square matrices, this may or may not be a group depending on the set definition, as we will see in section example 5.
 
-### 4. The set of 2D points on an euclidean plane under element-wiseaddition is a group
+### 4. The set of 2D points on a Euclidean plane under element-wise addition is a group
 
 This is actually a special case of the previous example, but let’s look at it through a different angle.
 
@@ -115,7 +115,7 @@ Zero doesn't have an inverse for this example.
 
 If we omit the number $0$, then we have a group. The identity element is 1, and the inverse of an element $a$ is its modular inverse $a^{-1}$.
 
-### 10. A fixed based raised to integer powers under multiplication is a group
+### 10. A fixed base raised to integer powers under multiplication is a group
 
 If two integer powers of $b$ are multiplied together, the result is the integer power of the product of the bases. For example, $2^3 \times 2^4 = 2^{3 + 4} = 2^7$. This works for arbitrary bases:
 
@@ -134,7 +134,7 @@ In zero knowledge proofs, we only use finite groups.
 The order of a group is the number of elements in it.
 
 ## Cyclic groups
-A cyclic group is a group that has an element such that every element in the group can be “generated” by applying the binary operator repeatedly to that element, or to it’s inverse.
+A cyclic group is a group that has an element such that every element in the group can be “generated” by applying the binary operator repeatedly to that element, or to its inverse.
 
 ### Examples of a cyclic groups
 #### Example 1: The group consisting of 0 under addition is a cyclic group
@@ -205,7 +205,7 @@ $$
 r = \underbrace{g + g + \dots + g}_\text{m times} + \underbrace{g + g + \dots + g}_\text{n times}
 $$
 
-Because of associativity, we can add parenthesis 
+Because of associativity, we can add parenthesis
 
 $$
 r = \underbrace{(g + g + \dots + g)}_\text{m times} + \underbrace{(g + g + \dots + g)}_\text{n times}
@@ -238,7 +238,7 @@ Let’s say we have an alternative identity element $e'$. This means the followi
 
 $$a \square a^{-1} = e \text{ and } a \square a^{-1} = e'$$
 
-If we say $e≠e'$, then it must also be true that 
+If we say $e≠e'$, then it must also be true that
 
 $$a \square a^{-1} \neq a \square a^{-1}$$
 
