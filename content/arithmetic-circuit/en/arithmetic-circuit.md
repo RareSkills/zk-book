@@ -247,7 +247,7 @@ For each neighboring territory `x` and `y`, we can use the following constraint 
 
 The above equation is satisfied if and only if the product `xy` is equal to 2, 3, or 6.
 
-The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neigboring territories as the video below illustrates:
+The boundary constraints are created by iterating through the borders and applying the boundary constraints between each pair of neighboring territories as the video below illustrates:
 
 <video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_71747f743e8e49c0955fa5de2f827ab4/1080p/mp4/file.mp4" type="video/mp4">
@@ -327,7 +327,7 @@ We write binary numbers with the subscript 2. For example, 11₂ is 3 and 101₂
 
 As we will show shortly, during conversion to decimal, the most significant bit is multiplied by the largest coefficient and the least significant bit is multiplied by the smallest coefficient. So if we write a four bit binary number as `b₃b₂b₁b₀`, `b₃` is the MSB and `b₀` is the LSB.
 
-The video below illustrate the conversion of 1101₂ to 13:
+The video below illustrates the conversion of 1101₂ to 13:
 
 <video autoplay loop muted controls>
 <source src="https://video.wixstatic.com/video/706568_e4cf36f8de2d401b94370b279f411b4b/720p/mp4/file.mp4" type="video/mp4">
@@ -603,7 +603,7 @@ z(z - 1) === 0
 out === (x(1 - y)) + z - (x(1 - y))z
 ```
 
-If desired, we could simpify the last equation:
+If desired, we could simplify the last equation:
 
 ```javascript
 out === (x(1 - y)) + z - ((x(1 - y))z)
