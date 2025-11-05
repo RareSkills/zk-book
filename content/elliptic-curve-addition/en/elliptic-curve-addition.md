@@ -105,7 +105,7 @@ When we pick two points, there is only one other third point. You can’t get fo
 ## Why elliptic curve addition flips over the x axis
 We glossed over a very important detail in the last section, because it really deserves a section on its own.
 
-In it’s current form, it has a bug if we add two points where the intersection happens in the middle.
+In its current form, it has a bug if we add two points where the intersection happens in the middle.
 
 ![3 point intersection through an elliptic curve](https://static.wixstatic.com/media/935a00_cffa7b60afd8486f8cc2f97de8b07f17~mv2.png/v1/fill/w_1480,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/935a00_cffa7b60afd8486f8cc2f97de8b07f17~mv2.png)
 
