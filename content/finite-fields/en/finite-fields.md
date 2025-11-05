@@ -48,7 +48,7 @@ $$a + b = c + d \pmod p$$
 
 Is equivalent (in Python or C) to `(a + b) % p == (c + d) % p`.
 
-Multiplication works similarly by multiplying the numbers together, then taking the modulus: 
+Multiplication works similarly by multiplying the numbers together, then taking the modulus:
 
 $$3 = 4 × 6 \pmod 7 = 24 \pmod 7 = 3$$
 
@@ -102,7 +102,7 @@ Just like with real numbers:
 - every element in a finite field has exactly one additive inverse
 - zero is its own additive inverse.
 
-The general pattern for additive inverses in a finite field is that the elements in the first half of the finite field are the additive inverses of the elements in the second half, as show in the figure below. Zero is the exception since it is its own additive inverse. The numbers connected by the green line are each other’s additive inverse in the field $p = 7$:
+The general pattern for additive inverses in a finite field is that the elements in the first half of the finite field are the additive inverses of the elements in the second half, as shown in the figure below. Zero is the exception since it is its own additive inverse. The numbers connected by the green line are each other’s additive inverse in the field $p = 7$:
 
 ![Image showing the additive inverse relationship](https://static.wixstatic.com/media/706568_b60115959b634536b3ddfc7b8461625b~mv2.jpg/v1/fill/w_956,h_718,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/706568_b60115959b634536b3ddfc7b8461625b~mv2.jpg)
 
@@ -178,7 +178,7 @@ Some examples:
 
 The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
 
-In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
+In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
 
 ## Computing the multiplicative inverse with Python
 
@@ -288,7 +288,7 @@ one_half = GF7(1) / GF7(2)
 one_third = GF7(1) / GF7(3)
 five_over_six = GF7(5) / GF7(6)
 
-assert one_half + one_third == five_over_six  
+assert one_half + one_third == five_over_six
 ```
 
 The operation `1 / GF(a)` computes the multiplicative inverse of `a`.
@@ -331,7 +331,7 @@ To understand this, consider the finite field $p = 7$. To multiply two numbers t
 We will refer to this fact frequently when we design arithmetic circuit. For example, if we know
 
 ```python
-x₁ * x₂ * ... * xₙ ≠ 0 
+x₁ * x₂ * ... * xₙ ≠ 0
 ```
 
 Then we can be certain all of variables `x₁, x₂, xₙ` are non-zero — even if we don’t know their values.
@@ -340,7 +340,7 @@ Here’s how we can use this trick for a realistic arithmetic circuit. Suppose w
 
 `(x₁ + a_inv(8))(x₂ + a_inv(8))(x₃ + a_inv(8)) === 0`
 
-This could be written as 
+This could be written as
 
 `(x₁ - 8)(x₂ - 8)(x₃ - 8) === 0`
 
@@ -461,7 +461,7 @@ Linear systems of equations with real numbers either have:
 
 ![Intersecting lines](https://static.wixstatic.com/media/706568_140802e7d9534b448073e17ea95ff821~mv2.gif)
 
-3) **Infinite solutions:** if the two equations represent the same line, then there are infinitely many points of intersection, and the linear system of equations has an infinite number of solutions. 
+3) **Infinite solutions:** if the two equations represent the same line, then there are infinitely many points of intersection, and the linear system of equations has an infinite number of solutions.
 
 ![Two lines that are the same](https://static.wixstatic.com/media/706568_a16e84f93c44406486a5a1ee540f281c~mv2.gif)
 
@@ -617,7 +617,7 @@ Nevertheless, polynomials in finite fields share a lot of properties with polyno
 - Adding polynomials in a finite field follows associative, commutative, and distributive laws.
 - If we multiply two polynomials $p_1$ and $p_2$, the roots of the product will be the union of the roots of $p_1$ and $p_2$.
 
-Let’s plot $y = x² \pmod {17}$ as an example. 
+Let’s plot $y = x² \pmod {17}$ as an example.
 
 ![plot of x^2 mod 17](https://static.wixstatic.com/media/706568_3917656775e4477598b9afad9dea92d7~mv2.png/v1/fill/w_1428,h_856,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/706568_3917656775e4477598b9afad9dea92d7~mv2.png)
 
