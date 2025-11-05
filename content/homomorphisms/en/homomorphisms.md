@@ -64,7 +64,7 @@ $$
 \end{align*}
 $$
 
-### All real numbers under addition to all $n\times m$ matrices of real number under addition
+### All real numbers under addition to all $n\times m$ matrices of real numbers under addition
 
 Some homomorphisms may seem rather trivial once you get the hang of them. This is an example of such a homomorphism. In this case, our function $\phi$ simply repeats the real number $n\times m$ times. For example, if $n=3$ and $m=2$, then $\phi(8.8)$ would be:
 
@@ -150,7 +150,7 @@ $$
 XY=Z\rightarrow\det(X)\det(Y)=\det(Z)
 $$
 
-where $X,Y,Z$ are $2\times2$ integer matrices. Why these are two algebraic data structures are Monoids and not groups are left as an exercise for the reader.
+where $X,Y,Z$ are $2\times2$ integer matrices. Why these two algebraic data structures are monoids and not groups are left as an exercise for the reader.
 
 ### The group of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to addition modulo $p$
 
@@ -158,7 +158,7 @@ This concept was already taught in our article on [finite fields](https://www.ra
 
 Let $A$ be the group of all rational numbers whose denominators are not a multiple of $p$, under addition. Let $B$ be the finite field modulo $p$.
 
-There exists a homomorphism from group $A$ to group $B$. $\phi$ is 
+There exists a homomorphism from group $A$ to group $B$. $\phi$ is
 
 $$
 \phi(x) = \mathsf{numerator}(x)\times\mathsf{modular\_inverse}(\mathsf{denominator}(x)) \pmod p
@@ -172,7 +172,7 @@ def phi(num, den):
     return num * pow(den, -1, p) % p
 ```
 
-For example: 
+For example:
 
 - $1/3 + 3/5 = 14/15$
 - $1/3$ is congruent to $6 \pmod {17}$
@@ -269,7 +269,7 @@ Imagine trying to discuss tree data structures without a word for "roots" or "le
 
 ## Summary
 
-A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns and element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **The existence of $\phi$ is sufficient for the homomorphism to exist.**
+A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns an element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **The existence of $\phi$ is sufficient for the homomorphism to exist.**
 
 Homomorphisms are not necessarily bidirectional. They are only required to work in one direction, from $A$ to $B$.
 
