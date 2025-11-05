@@ -46,7 +46,7 @@ That is,
 
 $5 + 7 \pmod p$ is homomorphic to $5G + 7G$
 
-Where G is the generator of the elliptic curve cyclic group. 
+Where G is the generator of the elliptic curve cyclic group.
 
 This is only true of elliptic curves over finite fields that have a prime number of points, which are the kinds of curves we use in practice. This is something we'll revisit later.
 
@@ -172,7 +172,7 @@ Even more interestingly, our “connect the dots and flip” operation to comput
 But given that we are doing this over a finite field, this should not be surprising. Our formulas over real numbers use the normal field operations of addition and multiplication. Although we use square roots to determine if a point is on the curve, and square roots are not a valid field operator, we do not use square roots to compute the addition and doubling of points.
 
 
-The reader can verify this by picking two points from the plots above, then plugging them into the code below to add points and seeing they always land on another point (or the point on infinity if the points are inverses of each other). These formulas are taken from the [Wikipedia page on elliptic curve point multiplication](https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication).
+The reader can verify this by picking two points from the plots above, then plugging them into the code below to add points and seeing they always land on another point (or the point at infinity if the points are inverses of each other). These formulas are taken from the [Wikipedia page on elliptic curve point multiplication](https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication).
 
 ```python
 def double(x, y, a, p):
@@ -186,15 +186,15 @@ def add_points(xq, yq, xp, yp, p, a=0):
         return xp, yp
     if xp == yp == None:
         return xq, yq
-    
+
     assert (xq**3 + 3) % p == (yq ** 2) % p, "q not on curve"
     assert (xp**3 + 3) % p == (yp ** 2) % p, "p not on curve"
-    
+
     if xq == xp and yq == yp:
         return double(xq, yq, a, p)
     elif xq == xp:
         return None, None
-    
+
     lambd = ((yq - yp) * pow((xq - xp), -1, p) ) % p
     xr = (lambd**2 - xp - xq) % p
     yr = (lambd*(xp - xr) - yp) % p
@@ -269,7 +269,7 @@ The red text can be thought of as starting with the identity element, and how ma
 ![plot of y^2 = x^3 + 3 (mod 11) with the points numbered](https://static.wixstatic.com/media/935a00_3e9b90d38e9c4c4a82b34d138fa9f49c~mv2.png/v1/fill/w_1063,h_565,al_c,q_90,enc_auto/935a00_3e9b90d38e9c4c4a82b34d138fa9f49c~mv2.png)
 
 ### Point inverses are still vertically symmetric
-Here is an interesting observation: note that points that share the same x-value add up to 12, which corresponds to the identity element $(12 \mod 12 = 0)$. If we add the point $(4, 1)$, which is point 11 in our plot to $(4, 10)$, we will get the point at in infinity, which would be the 12th element in the group.
+Here is an interesting observation: note that points that share the same x-value add up to 12, which corresponds to the identity element $(12 \mod 12 = 0)$. If we add the point $(4, 1)$, which is point 11 in our plot to $(4, 10)$, we will get the point at infinity, which would be the 12th element in the group.
 
 ### The order is not the modulus
 In this example, the order of the group is 12 (total number of elliptic curve points in our group), despite the formula for the elliptic curve being modulo 11. This will be stressed several times, but you should NOT assume that the modulus in the elliptic curve is the group order. However, you can estimate the curve’s order range from the field modulus itself using [Hasse's Theorem](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves).
@@ -483,10 +483,10 @@ for i in range(1, 4):
     print(point)
     print(neg(point))
     print('----')
-    
+
     # x values are the same
     assert int(point[0]) == int(neg(point)[0])
-    
+
     # y values are inverses of each other, we are adding y values
     # not ec points
     assert int(point[1]) + int(neg(point)[1]) == field_modulus
