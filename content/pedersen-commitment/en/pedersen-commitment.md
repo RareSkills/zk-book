@@ -1,4 +1,4 @@
-# What are Pedersen Commitments and How They Work
+# What are Pedersen commitments and How They Work
 Pedersen commitments allow us to encode arbitrarily large vectors with a single elliptic curve point, while optionally hiding any information about the vector.
 
 It allows us to make claims about a vector without revealing the vector itself.
@@ -20,7 +20,7 @@ Notation-wise, capital letters are elliptic curve points, lowercase letters are 
 We say $A$ is an elliptic curve (EC) point, $a$ is a [finite field](https://www.rareskills.io/post/finite-fields) element, and $aA$ is point multiplication between finite field element $a$ and EC point $A$. The expression $A + B$ denotes elliptic curve point addition.
 
 ## Traditional commitments
-When we design commit reveal functions in smart contracts, they are usually of the form
+When we design commit-reveal functions in smart contracts, they are usually of the form
 
 $$
 \text{commitment} = \mathsf{hash}(\text{value}, \text{salt})
@@ -41,12 +41,12 @@ A $(\text{value}, \text{salt})$ pair that results in the hash is called the *ope
 When discussing Pedersen commitments, there is a distinction between *knowing* the opening and *opening* the commitment. We usually want to prove we *know* the opening, but not necessarily *open* it.
 
 ## Terminology summary
-- A **hiding** commitment does not allow an adversary to know what value was selected by the commiter. This is usually accomplished by including a random term that the attacker cannot guess.
+- A **hiding** commitment does not allow an adversary to know what value was selected by the committer. This is usually accomplished by including a random term that the attacker cannot guess.
 - A **blinding** term is the random number that makes the commitment impossible to guess.
 - An **opening** is the values that will compute to the commitment.
 - A **binding** commitment does not allow the committer to compute a hash with different values. That is, they cannot find two (value, salt) pairs that hash to the same value.
 
-## Pedersen Commitments
+## Pedersen commitments
 Pedersen commitments behave very similar to the commit-reveal scheme described earlier, except that they use elliptic curve groups instead of cryptographic hash functions.
 
 Under the discrete logarithm assumption, given elliptic curve points $V$ and $U$, we cannot compute $x$ where $V$ = $xU$. That is to say, we do not know their *discrete log relationship*, i.e. how many times $U$ needs to be added to itself to get $V$.
@@ -70,7 +70,7 @@ We should emphasize that although the discrete logarithms are unknown, the point
 ### Why the committer must not know the discrete logarithm relationship between $B$ and $G$
 Suppose the committer knows $b$ such that $B = bG$.
 
-In that case, they can open the commitment 
+In that case, they can open the commitment
 
 $$
 \text{commitment} = vG + sB
@@ -80,7 +80,7 @@ to a different $(v', s')$ other than the value they originally committed.
 
 Here's how the committer could cheat if they know that $b$ is the discrete logarithm of $B$.
 $$
-B = bG 
+B = bG
 $$
 
 The committer can rewrite the commitment equation:
@@ -97,9 +97,9 @@ The committer picks a new value $v'$ and computes $s'$:
 $$
 \begin{align*}
 v' + s'b = v + sb \\
-s' = \frac{v + sb - v'}{b} 
+s' = \frac{v + sb - v'}{b}
 \end{align*}
-$$ 
+$$
 
 
 Then, the prover presents $(v', s')$ as the forged opening.
@@ -120,8 +120,8 @@ One way to accomplish this is to have a verifier supply the elliptic curve point
 
 For example, we could start with the generator point, hash the $x$ and $y$ values, then use that to seed a pseudorandom but deterministic search for the next point.
 
-## Why are Pedersen Commitments useful?
-It seems like Pedersen Commitments are just a normal commit-reveal with a different hash-function, so what’s the point?
+## Why are Pedersen commitments useful?
+It seems like Pedersen commitments are just a normal commit-reveal with a different hash-function, so what’s the point?
 
 This scheme has a couple advantages.
 
@@ -219,7 +219,7 @@ from libnum import has_sqrtmod_prime_power, sqrtmod_prime_power
 b = 3 # for bn128, y^2 = x^3 + 3
 seed = "RareSkills"
 
-x = int(sha256(seed.encode('ascii')).hexdigest(), 16) % field_mod 
+x = int(sha256(seed.encode('ascii')).hexdigest(), 16) % field_mod
 
 entropy = 0
 
@@ -237,7 +237,7 @@ assert is_on_curve(point, b), "sanity check"
 vector_basis.append(point)
 
 # new x value
-x = int(sha256(str(x).encode('ascii')).hexdigest(), 16) % field_mod 
+x = int(sha256(str(x).encode('ascii')).hexdigest(), 16) % field_mod
 print(vector_basis)
 ```
 
