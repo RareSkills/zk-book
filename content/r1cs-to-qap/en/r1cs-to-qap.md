@@ -15,7 +15,7 @@ v_3 &= -5yy \\
 -v_2 + z &= v_3 * v_1 && //-5y^2 * x^2\\
 \end{align*}$$
 
-We need to pick a characteristic of the [finite field](https://www.rareskills.io/post/finite-fields) we will do this over. When we later combine this with [elliptic curves](https://www.rareskills.io/post/elliptic-curves-finite-fields), the order of our prime field needs to equal the order of the elliptic curve. (Not matching the two a very common mistake).
+We need to pick a characteristic of the [finite field](https://www.rareskills.io/post/finite-fields) we will do this over. When we later combine this with [elliptic curves](https://www.rareskills.io/post/elliptic-curves-finite-fields), the order of our prime field needs to equal the order of the elliptic curve. (Not matching the two is a very common mistake).
 
 But for now, we will pick a small number to make this manageable. We will pick the prime number 79.
 
@@ -63,7 +63,7 @@ a = np.array([1, z, x, y, v1, v2, v3])
 assert all(np.equal(np.matmul(L, a) * np.matmul(R, a), np.matmul(O, a))), "not equal"
 ```
 ## Finite Field Arithmetic in Python
-The next step is to convert this to a field array. Doing modular arithmetic in Numpy will get very messy, but is straightforward with the galois library. This was introduced in our article on finite fields, but here is quick recap on how to use it:
+The next step is to convert this to a field array. Doing modular arithmetic in Numpy will get very messy, but is straightforward with the galois library. This was introduced in our article on finite fields, but here is a quick recap on how to use it:
 
 ```python
 import galois
@@ -77,7 +77,7 @@ print(a + b)
 # prints 1
 ```
 
-We cannot give it negative values such as GF(-1) or it will throw an exception. To convert negative numbers to their congruent representation in the field, we can add the curve order to them. To avoid "overflowing" positive values, we take the modulus with the curve order. 
+We cannot give it negative values such as GF(-1) or it will throw an exception. To convert negative numbers to their congruent representation in the field, we can add the curve order to them. To avoid "overflowing" positive values, we take the modulus with the curve order.
 
 ```python
 L = (L + 79) % 79
