@@ -1,6 +1,6 @@
 # The Schwartz-Zippel Lemma and its application to Zero Knowledge Proofs
 
-Nearly all ZK-Proof algorithms rely on the Schwartz-Zippel Lemma to achieve succintness.
+Nearly all ZK-Proof algorithms rely on the Schwartz-Zippel Lemma to achieve succinctness.
 
 The Schwartz-Zippel Lemma states that if we are given two polynomials $p(x)$ and $q(x)$ with degrees $d_p$ and $d_q$ respectively, and if $p(x) \neq q(x)$, then the number of points where $p(x)$ and $q(x)$ intersect is less than or equal to $\mathsf{max}(d_p, d_q)$.
 
