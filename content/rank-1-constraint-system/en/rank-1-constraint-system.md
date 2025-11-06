@@ -1,6 +1,6 @@
 # Converting Algebraic Circuits to R1CS (Rank One Constraint System)
 
-This article is explains how to turn a set of arithmetic constraints into Rank One Constraint System (R1CS).
+This article explains how to turn a set of arithmetic constraints into Rank One Constraint System (R1CS).
 
 The focus of this resource is implementation: we cover a lot more corner cases of doing this transformation than other materials, discuss optimizations, and explain how the Circom library accomplishes it.
 
@@ -39,7 +39,7 @@ $$[1, z, x, y, v₁]$$
 
 where each term has a value that satisfies the constraints above.
 
-For example, 
+For example,
 
 $$[1, 18, 3, 2, 9]$$
 
@@ -88,7 +88,7 @@ $$
 
 Where $O$, $L$, and $R$ are matrices of size $n$ x $m$ ($n$ rows and $m$ columns).
 
-Matrix $\mathbf{L}$ encodes the the variable on the left side of the multiplication and $\mathbf{R}$ encodes the variables on the right side of the multiplication. $\mathbf{O}$ encodes the result variables. The vector $\mathbf{a}$ is the witness vector.
+Matrix $\mathbf{L}$ encodes the variable on the left side of the multiplication and $\mathbf{R}$ encodes the variables on the right side of the multiplication. $\mathbf{O}$ encodes the result variables. The vector $\mathbf{a}$ is the witness vector.
 
 Specifically, $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ are matrices with the same number of columns as the witness vector $\mathbf{a}$, and each column represents the same variable the index is using.
 
@@ -168,7 +168,7 @@ a = np.array([1, 4223, 41, 103])
 
 # Multiplication `*` is element-wise, not matrix multiplication.
 # Result contains a bool indicating an element-wise indicator that the equality is true for that element.
-result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a) 
+result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a)
 
 # check that every element-wise equality is true
 assert result.all(), "result contains an inequality"
@@ -269,7 +269,7 @@ $$
 This informs us as to what $\mathbf{L}$’s columns represents:
 
 $$
-\mathbf{L} = 
+\mathbf{L} =
 \begin{bmatrix}
 l_{1, 1} & l_{1, r} & l_{1, x} & l_{1, y} & l_{1, z} & l_{1, u} & l_{1, v_1} & l_{1, v_2} \\
 l_{2, 1} & l_{2, r} & l_{2, x} & l_{2, y} & l_{2, z} & l_{2, u} & l_{2, v_1} & l_{2, v_2} \\
@@ -503,7 +503,7 @@ $$
 \begin{align*}
 v_1 &= (0\cdot 1 + 0\cdot r + \boxed{1\cdot x} + 0\cdot y + 0\cdot z + 0\cdot u + 0\cdot v_1 + 0\cdot v_2) \times y\\
 v_2 &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + \boxed{1\cdot z} + 0\cdot u + 0\cdot v_1 + 0\cdot v_2) \times u\\
-r &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + 0\cdot z + 0\cdot u + \boxed{1\cdot v_1} + 0\cdot v_2) \times v_2 \\ 
+r &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + 0\cdot z + 0\cdot u + \boxed{1\cdot v_1} + 0\cdot v_2) \times v_2 \\
 \end{align*}
 $$
 
@@ -515,7 +515,7 @@ $$
 \begin{align*}
 v_1 &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{1}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{0}\cdot v_1 + \boxed{0}\cdot v_2) \times y\\
 v_2 &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{1}\cdot z + \boxed{0}\cdot u + \boxed{0}\cdot v_1 + \boxed{0}\cdot v_2) \times u\\
-r &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{1}\cdot v_1 + \boxed{0}\cdot v_2) \times v_2 \\ 
+r &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{1}\cdot v_1 + \boxed{0}\cdot v_2) \times v_2 \\
 \end{align*}
 $$
 
@@ -758,11 +758,11 @@ import numpy as np
 L = np.matrix([[0,0,1,0,0,0,0,0],
               [0,0,0,0,1,0,0,0],
               [0,0,0,0,0,0,1,0]])
-              
+
 R = np.matrix([[0,0,0,1,0,0,0,0],
               [0,0,0,0,0,1,0,0],
               [0,0,0,0,0,0,0,1]])
-              
+
 O = np.matrix([[0,0,0,0,0,0,1,0],
               [0,0,0,0,0,0,0,1],
               [0,1,0,0,0,0,0,0]])
@@ -894,7 +894,7 @@ $$
 \end{align*}
 $$
 
-Symbolically multiplying the above by `[1, z, x, y]` in the r1cs form gives us our original equation back: 
+Symbolically multiplying the above by `[1, z, x, y]` in the r1cs form gives us our original equation back:
 
 $$
 \begin{bmatrix}
@@ -935,7 +935,7 @@ $$
 
 so we know we set up $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ correctly.
 
-Here we have one row (constraints) and one 
+Here we have one row (constraints) and one
 "true" multiplication. As a general rule:
 
 The number of constraints in a Rank One Constraint system should be equal the number of non-constant multiplications.
@@ -1162,13 +1162,13 @@ Circom's solution is
 $$
 \begin{align*}
 A &= \begin{bmatrix}
-0 & 0 & -1 & 0 
+0 & 0 & -1 & 0
 \end{bmatrix}\\
 B &= \begin{bmatrix}
-0 & 0 & 0 & 1 
+0 & 0 & 0 & 1
 \end{bmatrix}\\
 C &= \begin{bmatrix}
-0 & -1 & 0 & 0 
+0 & -1 & 0 & 0
 \end{bmatrix}
 \end{align*}
 $$
@@ -1261,15 +1261,15 @@ template Multiply4() {
     signal input y;
     signal input z;
     signal input u;
-    
+
     signal v1;
     signal v2;
-    
+
     signal out;
-    
+
     v1 <== x * y;
     v2 <== z * u;
-    
+
     out <== v1 * v2;
 }
 
@@ -1328,21 +1328,21 @@ Our witness vector is of the form $[1, z, x, y, v1]$ and $\mathbf{L}$, $\mathbf{
 $$
 \mathbf{L} = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 & 1 
+0 & 0 & 0 & 1 & 1
 \end{bmatrix}
 $$
 
 $$
 \mathbf{R} = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 \\
-1 & 0 & 0 & 0 & 0 
+1 & 0 & 0 & 0 & 0
 \end{bmatrix}
 $$
 
 $$
 \mathbf{O} = \begin{bmatrix}
 0 & 0 & 0 & 0 & 1 \\
-0 & 1 & 0 & 0 & 0 
+0 & 1 & 0 & 0 & 0
 \end{bmatrix}
 $$
 
@@ -1375,7 +1375,7 @@ $$
 \end{bmatrix} \\
 \mathbf{O} &= \begin{bmatrix}
 0 & 1 & 0 & 0 \\
-\end{bmatrix} 
+\end{bmatrix}
 \end{align*}
 $$
 
