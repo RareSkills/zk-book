@@ -54,7 +54,7 @@ By definition, sets do not contain duplicate items. For example, $\set{a, a, b}$
 
 **Exercise:** Assume you have a proper definition for integers. Create a well-defined set of rational numbers.
 
-## Superset and subsets
+## Supersets and subsets
 When we look at integers and rational numbers, there seems to be a relationship between some of them. Specifically, all integers are rational numbers, but not all rational numbers are integers. The relationship between them is that integers are a *subset* of rational numbers. On the flip side, rational numbers are a superset of integers.
 
 A subset does not need to be strictly smaller than the set it belongs to. For example, it is perfectly valid to say that the set of integers is a subset of itself.
@@ -82,7 +82,7 @@ Because “integers as a set” and “real numbers as a set” are used so freq
 
 - The symbol $\mathbb{N}$ is the set of natural numbers $(1,2,3,…)$. It definitely does not include negative numbers, but whether it includes zero depends on who you are talking to.
 - The symbol $\mathbb{Z}$ is the set of all integers (because “zahlen” is integer in German)
-- The symbol $\mathbb{Q}$ is the set of all rational numbers. Rational numbers are a number that can be expressed as the quotient or fraction ⁠$p$ for $q$ as $\frac{p}{q}$⁠ of two integers, a numerator $p$ and a non-zero denominator $q$). From this definition, it's easy to see where the symbol $\mathbb{Q}$ comes from.
+- The symbol $\mathbb{Q}$ is the set of all rational numbers. Rational numbers are numbers that can be expressed as the quotient or fraction ⁠$p$ for $q$ as $\frac{p}{q}$⁠ of two integers, a numerator $p$ and a non-zero denominator $q$). From this definition, it's easy to see where the symbol $\mathbb{Q}$ comes from.
 - The symbol $\mathbb{R}$ is the set of all real numbers, because R stands for real. Duh.
 - The symbol $\mathbb{C}$ is the set of all complex numbers for similarly obvious reasons.
 
@@ -100,7 +100,7 @@ How do we create order out of something that is inherently unordered?
 
 The key implementation detail is that we represent $(a, b)$ as a set form as $\set{a, \set{b}}$. We can do this because we can define our set as containing either letters or a set of cardinality one that contains a letter. This is why we can say $(a, b) \neq (b, a)$ because $\set{a, \set{b}} \neq \set{b, \set{a}}$. We will not concern ourselves with this implementation detail any further.
 
-Just like in other programming languages, our ordered pair can be arbitrarily long; for example, $(a,b,c,d)$ is valid. We can also encode and ordered pair holding an ordered pair as $((a, b), c)$, which will be useful later.
+Just like in other programming languages, our ordered pair can be arbitrarily long; for example, $(a,b,c,d)$ is valid. We can also encode an ordered pair holding an ordered pair as $((a, b), c)$, which will be useful later.
 
 ## Cartesian product
 Because sets are well-defined, we can define a set such that every element from one set is one part of an ordered pair with an element from another set. For example, if $A = {1,2,3}$ and $B = {x, y, z}$, then the Cartesian product $A \times B$ is the set $\{(1, x), (1, y), (1, z), (2, x), …, (3, z)\}$. This can also be represented as a table:
