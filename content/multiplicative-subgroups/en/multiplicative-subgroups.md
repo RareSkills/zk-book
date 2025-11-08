@@ -357,6 +357,7 @@ Elements $2$, $3$, and $4$ have no counterparts that yield $1$. This failure ari
 ### 3.3 Example: $(\mathbb{Z}_8\setminus\{0\}, \times)$
 
 As another example, let's now consider multiplication in $\mathbb{Z}_8\setminus\{0\} = \{1, 2, 3, 4, 5, 6, 7\}$:
+
 | $\times$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ |
 |----------|-----|-----|-----|-----|-----|-----|-----|
 | **$1$**  | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ |
@@ -561,6 +562,7 @@ A [foundational result](https://en.wikipedia.org/wiki/Primitive_root_modulo_n) i
   $\langle 3 \rangle = \{1, 3, 4, 5, 9\}$, a subgroup, not the full group.
 
 #### Example 4.1.3: $\mathbb{Z}_{17}^*$
+
 - **Element 3**:
   $$\begin{align*}
   3^1 &= 3 \pmod{17}, \\
@@ -580,6 +582,7 @@ A [foundational result](https://en.wikipedia.org/wiki/Primitive_root_modulo_n) i
   3^{15} &= 14348907 \equiv 6 \pmod{17}, \\
   3^{16} &= 43046721 \equiv 1 \pmod{17}
   \end{align*}$$
+  
   $\langle 3 \rangle = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16\} = \mathbb{Z}_{17}^*$, order $16$ (full group). So, $3$ is a primitive element of $\mathbb{Z}_{17}^*$.
 
 **Additional Note:** Although we mentioned earlier that $\mathbb{Z}_n^*$ is always a group, it is **not always cyclic** when $n$ is not prime. In contrast, when $n = p$ is prime, $\mathbb{Z}_p^*$ is **always cyclic**. This distinction matters in practice—especially in cryptography—where we prefer to work with **cyclic groups**, so we often choose prime moduli to ensure that $\mathbb{Z}_p^*$ has this cyclic structure.
