@@ -551,9 +551,9 @@ To see this from another angle, we could solve the equations for y and get:
 $$y = 1/2 - x/2$$
 $$y=2/3-7x/3$$
 
-We saw in the previous section that 6 is the multiplicative inverse of 2, so the first equation has a "slope" of 6 in the the finite field. In the second equation, we compute the slope by computing 7 times the multiplicative inverse of 3: `(7 * pow(3, -1, 11)) % 11 = 6` . We now show that their slopes are the same in a finite field.
+We saw in the previous section that `6` is the multiplicative inverse of `2`, so the first equation has a "slope" of `-1/2` which is `-6` or equivalently `5` in the finite field. In the second equation, we compute the slope by computing `-7` times the multiplicative inverse of `3`: `(-7 * pow(3, -1, 11)) % 11 = 5`. We now show that their slopes are the same in a finite field.
 
-The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of 5:
+The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of `5`:
 
 ```python
 import galois
