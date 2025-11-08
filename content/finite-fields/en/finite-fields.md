@@ -296,8 +296,8 @@ The operation `1 / GF(a)` computes the multiplicative inverse of `a`.
 The `galois` library can compute the additive inverse by adding a negative sign in front:
 
 ```python
-negative_two = -GF(2)
-assert negative_two + GF(2) == 0
+negative_two = -GF7(2)
+assert negative_two + GF7(2) == 0
 ```
 
 ## The multiplication of fractions is also consistent
