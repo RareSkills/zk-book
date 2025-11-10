@@ -279,7 +279,7 @@ The assumption in the equation above is that the prover is only using $\Psi_{\el
 
 For example, here is our current verification equation:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i[\Psi_i]_1\bullet G_2 +  [C]_1\bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (\sum_{i=1}^\ell a_i[\Psi_i]_1)\bullet G_2 +  [C]_1\bullet G_2$$
 
 If we expand the $[C]_1$ term under the hood, we get the following:
 
