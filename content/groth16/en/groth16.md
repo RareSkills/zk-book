@@ -266,7 +266,7 @@ $$\begin{align*}
 Note that only the computation of $[C]_1$ changed -- the prover only uses the $a_i$ and $\Psi_i$ terms $\ell + 1$ to $m$.
 
 The verifier computes the first $\ell$ terms of the sum:
-$$[X]_1=\sum_{i=1}^\ell a_i\Psi_i$$
+$$[X]_1=\sum_{i=1}^\ell a_i[\Psi_i]_1$$
 
 And the verification equation is:
 
@@ -279,21 +279,21 @@ The assumption in the equation above is that the prover is only using $\Psi_{\el
 
 For example, here is our current verification equation:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i\Psi_i +  [C]_1\bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i[\Psi_i]_1\bullet G_2 +  [C]_1\bullet G_2$$
 
 If we expand the $[C]_1$ term under the hood, we get the following:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (\sum_{i=1}^\ell a_i\Psi_i) \bullet G_2 + \underbrace{(\sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (\sum_{i=1}^\ell a_i[\Psi_i]_1) \bullet G_2 + \underbrace{(\sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
 
 Suppose for example and without loss of generality that $\mathbf{a} = [1,2,3,4,5]$ and $\ell=3$. In that case, the public part of the witness is $[1,2,3]$ and the private part is $[4,5]$.
 
 The final equation would be as follows:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1\Psi_1+2\Psi_2+3\Psi_3)\bullet G_2 + \underbrace{(4\Psi_4 + 5\Psi_5  + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1[\Psi_1]_1+2[\Psi_2]_1+3[\Psi_3]_1)\bullet G_2 + \underbrace{(4[\Psi_4]_1 + 5[\Psi_5]_1  + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
 
 However, nothing stops the prover from creating an valid portion of the public witness as [1,2,0] and moving the zeroed out public portion to the private part of the computation as follows:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1\Psi_1+2\Psi_2+\boxed{0\Psi_3})\bullet G_2 + \underbrace{(\boxed{3\Psi_3}+4\Psi_4 + 5\Psi_5  + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + (1[\Psi_1]_1+2[\Psi_2]_1+\boxed{0[\Psi_3]_1})\bullet G_2 + \underbrace{(\boxed{3[\Psi_3]_1}+4[\Psi_4]_1 + 5[\Psi_5]_1  + h(\tau)t(\tau))}_{[C]_1} \bullet G_2$$
 
 The equation above is valid, but the witness does not necessarily satisfy the original constraints.
 
@@ -477,7 +477,7 @@ The verifier checks
 
 $$
 \begin{align*}
-[X]_1&=\sum_{i=1}^\ell a_i\Psi_i\\
+[X]_1&=\sum_{i=1}^\ell a_i[\Psi_i]_1\\
 [A]_1\bullet[B]_2 &\stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2
 \end{align*}
 $$
