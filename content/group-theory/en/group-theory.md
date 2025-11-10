@@ -190,7 +190,7 @@ We can use the galois library to find primitive roots:
 ```python
 from galois import GF
 GF7 = GF(7)
-print(GF.primitive_elements)
+print(GF7.primitive_elements)
 # [3, 5]
 ```
 
