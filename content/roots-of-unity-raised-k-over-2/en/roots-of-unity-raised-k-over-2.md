@@ -1,131 +1,84 @@
-# The square of a k-th root of unity is a k/2-th root of unity
+# Roots of Unity raised to the k/2 power equals 1 or -1
 
-If we take the set of $k$-th roots of unity (with $k$ even) and square each element, the resulting set will be a set of half the size. The new set will be the $\frac{k}{2}$-th roots of unity.
+Any $k$-th root of unity with even $k$ raised to the $k/2$ power will result in 1 or -1.
 
-For example, suppose $k = 6$. The 6th roots of unity would be
+This should not be confused with the similar-looking concepts that $\omega^{k/2}\equiv-1$ or that roots of unity $\omega^{i}$ and $\omega^{i+k/2}$ are additive inverses of each other.
 
-$$
-\set{1,\omega,\omega^2,\omega^3,\omega^4,\omega^5}
-$$
+Let’s use the primitive 8-th roots of unity as an example with generator (primitive 8-th root of unity) $\omega$:
 
-If we square each element, we get the following set. Some elements have exponents greater than or equal to $k$, but we will handle that in the next step.
+- $(1)^{k/2}=1$
+- $(\omega)^{k/2}\equiv-1$
+- $(\omega^2)^{k/2}\equiv\omega^{2k/2}\equiv\omega^k\equiv1$
+- $(\omega^3)^{k/2}\equiv\omega^{3k/2}\equiv(\omega^{k/2})^{3}\equiv(-1)^3\equiv-1$
+- $(\omega^4)^{k/2}\equiv\omega^{4k/2}\equiv\omega^{2k}\equiv1$
+- $(\omega^5)^{k/2}\equiv\omega^{5k/2}\equiv(\omega^{k/2})^{5}\equiv(-1)^5\equiv-1$
+- $(\omega^6)^{k/2}\equiv\omega^{6k/2}\equiv\omega^{3k}\equiv1$
+- $(\omega^7)^{k/2}\equiv\omega^{7k/2}\equiv(\omega^{k/2})^{7}\equiv(-1)^7\equiv-1$
 
-$$
-\set{1^2,\omega^2,\omega^4,\omega^6,\omega^8,\omega^{10}}
-$$
+As an exercise for the reader, we recommend taking the 6-th roots of unity, raising each element to the 3rd power ($k/2$) and seeing that the results are $\set{1,-1}$.
 
-We can then factor the exponents as follows:
+Looking at the evaluations above, we see a pattern that the even powered roots of unity plugged into $f(x)=x^{k/2}$ evaluate to 1 and the odd-powered roots of unity plugged into $f(x)=x^{k/2}$ evaluate to -1. A proof of this is in the appendix. Meanwhile, let’s make the central claim of the chapter:
 
-$$
-\set{1^2,\omega^2,\omega^4,\omega^6,(\omega^6)\omega^2,(\omega^{6})\omega^4}
-$$
+**Any k-th root of unity raised to $k/2$ where $k$ is even results in 1 or -1. Specifically, let $\omega$ be the primitive $k$-th root of unity and let the root of unity in question be $\omega^s$. If $s$ is even, $(\omega^s)^{k/2}$ will evaluate to 1 and if $s$ is odd, then $(\omega^s)^{k/2}$ will evaluate to -1.**
 
-Since $\omega$ is a 6-th root of unity, $\omega^6\equiv1$ so we have:
+**A side-effect of this claim is that terms in a polynomial with the power $x^{k/2}$ can be evaluated almost for free if evaluated on a root of unity.**
 
-$$
-\set{1^2,\omega^2,\omega^4,1,(1)\omega^2,(1)(\omega^4)}
-$$
+Suppose for example that we have a polynomial $f(x)=x^4$ that we want to evaluate on 8 points. Now suppose we set the 8 points to be the 8-th roots of unity. Normally, we’d have to loop through $\set{1, \omega,...,\omega^7}$ and evaluate $f(x)$ on each point. However, we don’t need to actually exponentiate each point of evaluation — we just check if the power of the root of unity is even or odd!
 
-Removing multiplication by $1$, we get
-
-$$
-\set{1^2,\omega^2,\omega^4,1,\omega^2,\omega^4}
-$$
-
-Now replace all the duplicate terms with a single element:
+In fact, we can shortcut the process entirely. Let’s treat $\set{1, \omega,...,\omega^7}$ as an array with length 8. We can return 1 or -1 based on whether the array index is even or odd, and completely ignore the exponent. In other words, $f(x)=x^4$ will evaluate to
 
 $$
-\set{1,\omega^2,\omega^4}
+[1,-1,1,-1,1,-1,1,-1]
 $$
 
-The new set is half the size of the original, and each element is a 3-rd root of unity:
-
-- $1^3\equiv1$
-- $(\omega^2)^3=\omega^6\equiv1$
-- $(\omega^4)^3=\omega^{12}=\omega^6\omega^6\equiv1\cdot1=1$
-
-If we plot the 6-th roots of unity on a circle, we can see that squaring “removes” every other element. We started with $\set{1,\omega,\omega^2,\omega^3,\omega^4,\omega^5}$ and ended with $\set{1,\omega^2,\omega^4}$
-
-![Omega6.jpg](https://r2media.rareskills.io/RootsOfUnitySquared/image1.jpg)
-
-To reiterate, if we take the set of $k$-th roots of unity, and $k$ is even, then square each element, we get a set of half the size with each element being the $\frac{k}{2}$-th root of unity.
-
-Some more examples:
-
-- If $k = 10$ and we square each of the 10-th roots of unity, we get a set of size five which are the fifth roots of unity.
-- If $k = 8$ and we square each of the 8-th roots of unity, we get a set of size four which is the fourth roots of unity.
-- If $k = 4$ and we square each of the 4-th roots of unity, we get a set of size two which is the 2-nd roots of unity.
-- If $k = 2$ and we square each of the 2-nd roots of unity, we get a set of size 1 which is just the element 1.
-
-The last point is easily illustrated. The second roots of unity are square roots of 1, which are always $\set{1,-1}\equiv\set{1,\omega^{k/2}}$. Squaring 1 results in 1 and squaring -1 results in 1. Equivalently, $(\omega^{k/2})^2=\omega^k\equiv1$.
-
-## Example of squaring the 8-th roots of unity
-
-Consider the subgroup of 8th roots of unity $\langle 9\rangle = \{1, 9, 13, 15, 16, 8, 4, 2\}$ in the finite field $\mathbb{F}_{17}$. We square all elements of this subgroup as follows:
+If the polynomial has a coefficient other than one, for example $f(x)=ax^4$, the evaluation depends just on whether we are on an even or odd index:
 
 $$
-\begin{aligned}
-&1^2 = 1\pmod{17},\\
-&9^2 \equiv 13\pmod{17},\\
-&13^2 \equiv 16\pmod{17} ,\\
-&15^2 \equiv 4\pmod{17},\\
-&16^2 \equiv 1\pmod{17},\\
-&8^2 \equiv 13\pmod{17},\\
-&4^2 \equiv 16\pmod{17},\\
-&2^2 = 4\pmod{17}.
-\end{aligned}
+[a,-a,a,-a,a,-a,a,-a]
 $$
 
-The set obtained after squaring is $\{1,13,16,4\}$, which is precisely the subgroup of 4th roots of unity.
-
-Here is a visualization of the roots of unity before and after squaring. We started with the set $\set{1, 9, 13, 15, 16, 8, 4, 2}$ and ended with the set $\set{1,13,16,4}$
-
-![Omega8.jpg](https://r2media.rareskills.io/RootsOfUnitySquared/image2.jpg)
-
-## k must be even
-
-If $k$ is odd, then there is no such thing as “half of the group” as an odd-sized set cannot be divided into two. For the purposes of NTT, we only deal with even-sized $k$, so we aren’t interested in the case where $k$ is odd.
-
-## Proof of the claim that the new set is half the size
-
-Let $\omega$ be a primitive $k$-th root of unity with $k$ even. Let $\langle\omega\rangle$ be the subgroup generated by $\omega$ of order $k$. We claim that $|\set{\omega^2|\omega\in\langle\omega\rangle}|=k/2$.
-
-The proof is actually quite simple and intuitive.
-
-We established in an earlier chapter that $\omega^{i}$ and $\omega^{i+k/2}$ are additive inverses. Since $k$ is even, we can partition the group into two sets, the first one being $0...(k/2-1)$ and the second being $k/2...k-1$:
+But what about polynomials that aren’t of the form $f(x)=x^{k/2}$? Polynomials can be factored to introduce as many $x^{k/2}$ terms as possible. For example, consider the polynomial
 
 $$
-\set{\omega^0,\omega^1,\omega^2,...}\quad\set{\omega^{k/2},\omega^{k/2+1},\omega^{k/2+2},...}
+f(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+a_5x^5+a_6x^6+a_7x^7
 $$
 
-Those elements are congruent to the following representation:
+Only the term $a_4x^4$ is of the form $x^{k/2}$. However, suppose we factor the polynomial as follows:
 
 $$
-\set{\omega^0,\omega^1,\omega^2,...}\quad\set{-\omega^0,-\omega^1,-\omega^2,...}
+f(x)=(a_0+a_4x^4)+(a_1x+a_5x^5)+(a_2x^2+a_6x^6)+(a_3x^3+a_7x^7)
 $$
 
-If we apply $f(x)=x^2$ to both sets, we get two sets with identical content and size $k/2$
-
 $$
-\set{1,\omega^2,\omega^4,...}\quad\set{1,\omega^2,\omega^4,...}
+f(x)=(a_0+a_4x^4)+x(a_1+a_5x^4)+x^2(a_2+a_6x^4)+x^3(a_3+a_7x^4)
 $$
 
-Since the two sets are identical, the union of the two sets will be the same size, which is $k/2$.
+This polynomial is much easier to evaluate since we know in advance when the $x^4$ terms will evaluate to 1 or -1.
 
-## Proof that squaring a $k$-th root of unity produces a $k/2$-th root of unity
+However, we don’t yet have a nice trick to handle the lower powers of $x$. This will be the subject of upcoming chapters.
 
-Suppose $a$  is a $k$-th root of unity. We aim to show that $a^2$ is a $\frac{k}{2}$-th root of unity, that is:
+## Summary
+
+Raising a $k$-th root of unity $\omega^s$ to the $k/2$ power results in 1 if $s$ is even and -1 if $s$ is odd. If we evaluate a polynomial on the $k$-th roots of unity, the terms with power $k/2$ can be automatically computed simply by knowing if the root of unity we are evaluating on is an even power or odd power. Therefore, it is desirable to factor the polynomial so that we maximize the amount of $x^{k/2}$ terms.
+
+## Appendix — Proof that $(\omega^s)^{k/2}$ is 1 if $s$ is even and -1 if $s$  is odd for even $k$
+
+$\omega^s$ and $\omega^{s+k/2}$ are additive inverses of each other. Since $\omega^0=1$ and $\omega^{0+k/2}=\omega^{k/2}$, $\omega^{k/2}$ must be the additive inverse of $1$ and hence $\omega^{k/2}\equiv-1$.
+
+Now we take $\omega^{k/2}$ (which is -1) and raise it to $s$
 
 $$
-(a^2)^{\frac{k}{2}}\equiv 1
+\left(\omega^{k/2}\right)^s
 $$
 
-Let’s simplify $(a^2)^{\frac{k}{2}}$:
+Note that $(-1)^s$ can only be 1 or -1. Specifically, if $s$ is even, then $(-1)^s=1$ and if $s$ is odd, then $(-1)^s=-1$. Hence, if $s$ is even, the outcome of our expression is 1, and if $s$ is odd, then the outcome is -1.
+
+Our expression can be rewritten as:
 
 $$
-(a^2)^{\frac{k}{2}} = a^{k}
+\left(\omega^{k/2}\right)^s=\left(\omega^{(k/2)s}\right)=\left(\omega^{s(k/2)}\right)=\left(\omega^s\right)^{k/2}
 $$
 
-Since $a^k\equiv1$ (because $a$  is a $k$-th root of unity), it follows that $(a^2)^{\frac{k}{2}}\equiv 1$.
+Since the algebraic identity of the expression has not changed, we can still say if $s$ is even, then $(\omega^s)^{k/2}=1$ and if $s$ is odd, $(\omega^s)^{k/2}=-1$.
 
-Therefore, $a^2$ is indeed a $\frac{k}{2}$-th root of unity.
+Therefore, we have proved the original statement that $(\omega^s)^{k/2}=1$ when $s$ is even and $(\omega^s)^{k/2}=-1$ when $s$ is odd.
