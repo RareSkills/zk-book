@@ -10,7 +10,7 @@ A polynomial commitment is a mechanism by which a prover can convince a verifier
 This commitment scheme does not require a trusted setup. However, the communication overhead is $O(n)$ as the prover must send a commitment for each coefficient in their polynomial.
 
 ## Committing to the Polynomial
-The prover can commit to the polynomial by creating a [Pedersen Commitment](https://www.rareskills.io/post/pedersen-commitment) of each coefficient. For a Pedersen Committment, the prover and verifier need to agree on two elliptic curve points with unknown discrete logs. We will use $G$ and $B$.
+The prover can commit to the polynomial by creating a [Pedersen commitment](https://www.rareskills.io/post/pedersen-commitment) of each coefficient. For a Pedersen commitment, the prover and verifier need to agree on two elliptic curve points with unknown discrete logs. We will use $G$ and $B$.
 
 For example, if we have a polynomial
 
@@ -201,7 +201,7 @@ $$
 (c_0 + c_1u + c_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B=y'G + \boxed{\pi'}B
 $$
 
-Since $y' \neq c_0 + c_1u + c_2u^2$ the malicious prover must rebalance the equation by picking a term $\pi'$ that accounts for the mismatch in the $G$ terms. The prover can try to solve for $\pi'$ with 
+Since $y' \neq c_0 + c_1u + c_2u^2$ the malicious prover must rebalance the equation by picking a term $\pi'$ that accounts for the mismatch in the $G$ terms. The prover can try to solve for $\pi'$ with
 
 $$
 \pi'B = (c_0 + c_1u + c_2u^2)G+(\gamma_0 + \gamma_1u+\gamma_2u^2)B - y'G
@@ -219,7 +219,7 @@ and then replace $B$ with $b$ and $G$ with $g$, where $b$ and $g$ are the discre
 
 $$\pi' = \frac{(c_0 + c_1u + c_2u^2)g+(\gamma_0 + \gamma_1u+\gamma_2u^2)b - y'g}{b}$$
 
-But again, this is not possible because computing the discrete log of $B$ and $G$ is infeasible. 
+But again, this is not possible because computing the discrete log of $B$ and $G$ is infeasible.
 
 ## What the verifier learns
 The verifier learns that the commitments $C_0, C_1, C_2$ represent valid commitments to a polynomial that is at most degree 2, and that $y$ is the value of the polynomial evaluated at $u$.
