@@ -1,6 +1,6 @@
 # FFT Friendly Finite Fields
 
-In order to carry out the FFT algorithm in a finite field, there needs to be $k$-th roots of unity such that $k$ is a power of 2.
+In order to carry out the FFT algorithm in a finite field (the Number Theoretic Transform), there needs to be $k$-th roots of unity such that $k$ is a power of 2.
 
 Ideally, we want a large power of 2 so that we can multiply large polynomials. There are several commonly used finite fields (almost all of which have a catchy name associated with them). This article lists some of the more common ones.
 
