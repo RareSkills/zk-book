@@ -38,7 +38,7 @@ However, this is typically not how we express $R$ when using bilinear pairings. 
 
 $$f(P,Q) = f(R,G)$$
 
-$G$ is the generator point, and can be thought of as $1$. In this context. For example, $pG$ means we did $(G + G + … + G)$ $p$ times. $G$ just means we took $G$ and didn’t add anything. So in a sense, this is the same as saying $P 
+$G$ is the generator point and can be thought of as $1$ in this context. In this context. For example, $pG$ means we did $(G + G + … + G)$ $p$ times. $G$ just means we took $G$ and didn’t add anything. So in a sense, this is the same as saying $P
 \times Q = R \times 1$.
 
 So our bilinear pairing is a function that if you plug in two elliptic curve points you get an output that *corresponds* to the product of the discrete logs of those two points.
@@ -80,7 +80,7 @@ However, despite it being a black box, we still know a lot about the properties 
 
 Because the group is cyclic, we have a notion of $G_T$, $2G_T$, $3G_T$, and so forth. The binary operator of $G_T$ is roughly what we would call "multiplication" so $8G_T = 2G_T * 4G_T$.
 
-If you really want to know what $G_T$ "looks like", it's a 12-Dimensional object. The identity element isn't so scary looking however:
+If you really want to know what $G_T$ "looks like", it's a 12-dimensional object. The identity element isn't so scary looking however:
 
 $$(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)$$
 
@@ -89,7 +89,7 @@ The above notation implies that we are using the same generator and elliptic cur
 
 $$e(aG, bG) = e(abG, G)$$
 
-In practice however, it turns out to be easier to create bilinear pairings when a different group (but same order) is different for both of the arguments. 
+In practice however, it turns out to be easier to create bilinear pairings when the two arguments come from different groups of the same order.
 
 Specifically, we say
 
@@ -186,7 +186,7 @@ It should be obvious that you can only add elements from the same group.
 add(G1, G2) # TypeError
 ```
 
-By the way, this library overrides some arithmetic operators (you can do that in python), meaning you can do the following:
+By the way, this library overrides some arithmetic operators (you can do that in Python), meaning you can do the following:
 
 ```python
 print(G1 + G1 + G1 == G1*3)
@@ -333,7 +333,7 @@ and zero otherwise.
 This might be a bit of a head-scratcher at first! This seems to imply that the precompile is taking the discrete log of each of the points, which is accepted to be infeasible in general. Furthermore, why doesn’t it behave like pairing from the earlier Python examples? The earlier examples returned an element in $G_T$, but this precompile returns a boolean.
 
 #### Justification for EIP 197 design decision
-The first problem is that elements in $G_T$ are large, specifically, they 12-dimensional objects. 
+The first problem is that elements in $G_T$ are large, specifically, they 12-dimensional objects.
 
 This will take up a lot of space in memory leading to larger gas costs. Also, because of how most ZK verification algorithms work (this is outside the scope of this article), we generally don’t check the value of the output of a pairing, but only that it is equal to other pairings. Specifically, the final step in [Groth16](https://www.rareskills.io/post/groth16) (the zero knowledge algorithm used by tornado cash) looks like the following
 
@@ -443,7 +443,7 @@ We create a file Pairings.sol to [unit test in Foundry](https://www.rareskills.i
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 contract Pairings {
-    /** 
+    /**
      *  returns true if == 0,
      *  returns false if != 0,
      *  reverts with "Wrong pairing" if invalid pairing
