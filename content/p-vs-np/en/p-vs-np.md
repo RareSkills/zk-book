@@ -92,7 +92,7 @@ An example of such a problem is Checkers with a rule that pieces can never move 
 If we can quickly verify the solution to a problem, then the problem is in NP. However, finding the solution might require exponential resources.
 
 Any problem whose proposed solution (witness) can be quickly verified as correct is an NP problem. If the problem also has an algorithm for finding the solution in polynomial time, then it is a P problem. All P problems are NP problems, but it is extremely unlikely that all NP problems are also P problems.
-    
+
 Examples of problems in NP. These are explained in more detail below:
 - Computing the solution to a Sudoku puzzle — verifying the proposed solution to a Sudoku puzzle.
 - Computing the 3-coloring of a map (if it exists) — verifying a proposed 3-coloring of a map.
@@ -113,7 +113,7 @@ Given a Sudoku puzzle *solution*, we can quickly verify the solution is correct 
 However, *computing* the solution requires significantly more resources — there are an exponential number of combinations to search. For a $9\times 9$ grid, this is not difficult for a computer. However, if we allow the Sudoku puzzle to be arbitrarily large: each side has size $n$, where $n$ is a multiple of 9. In that case, the difficulty of finding the solution grows exponentially with $n$.
 
 ##### NP Example 2: Three-coloring a map
-Any 2D map of territories can be “colored” with just four colors (see the [four color theorem](https://en.wikipedia.org/wiki/Four_color_theorem)). That is, we can assign a unique color (one of four colors) to each territory such that no neighboring territories share the same color. For example, the following image (from [Wikipedia](https://en.wikipedia.org/wiki/U.S._state#/media/File:Map_of_USA_with_state_names_2.svg)) shows the United States colored with four colors: pink, green, yellow, and red. Take a moment to look at the verify that no two touching states have been given the same color:
+Any 2D map of territories can be “colored” with just four colors (see the [four color theorem](https://en.wikipedia.org/wiki/Four_color_theorem)). That is, we can assign a unique color (one of four colors) to each territory such that no neighboring territories share the same color. For example, the following image (from [Wikipedia](https://en.wikipedia.org/wiki/U.S._state#/media/File:Map_of_USA_with_state_names_2.svg)) shows the United States colored with four colors: pink, green, yellow, and red. Take a moment to look and verify that no two touching states have been given the same color:
 
 ![A map of the United States colored with four colors](https://static.wixstatic.com/media/935a00_80bcbb69d39348819f674827b8c25691~mv2.png/v1/fill/w_400,h_246,al_c,lg_1,q_85,enc_auto/935a00_80bcbb69d39348819f674827b8c25691~mv2.png)
 
@@ -201,7 +201,7 @@ x₁ &= T \\
 x₂ &= F \\
 x₃ &= T \\
 x₄ &= F \\
-out &= (x₁ ∨ ¬x₂ ∨ ¬ x₃) ∧ (¬x₂ ∨ x₃ ∨ x₄) ∧ 
+out &= (x₁ ∨ ¬x₂ ∨ ¬ x₃) ∧ (¬x₂ ∨ x₃ ∨ x₄) ∧
       (x₁ ∨ x₃ ∨ ¬x₄)∧ (¬x₂ ∨ ¬x₃∨ ¬x₄) \\
 out &= (T ∨ ¬ F ∨ ¬ T) ∧ (¬ F ∨ T ∨ F) ∧
       (T ∨ T ∨ ¬ F) ∧ (¬ F ∨ ¬ T ∨ ¬ F) \\
@@ -317,7 +317,7 @@ $$
 \end{align*}
 $$
 
-Let’s call a Boolean expression that compares two binary numbers in the manner described above a 
+Let’s call a Boolean expression that compares two binary numbers in the manner described above a
 "comparison expression."
 
 ##### Checking if a list is sorted
@@ -372,7 +372,7 @@ Next, we want to write a formula which expresses that WA has a different color t
 
 In other words:
 
-it is **NOT** the case that (West Australia is <span style="color:Green">green</span> AND South Australia is <span style="color:Green">green</span>) 
+it is **NOT** the case that (West Australia is <span style="color:Green">green</span> AND South Australia is <span style="color:Green">green</span>)
 
 **AND**
 
