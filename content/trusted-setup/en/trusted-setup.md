@@ -34,7 +34,7 @@ $$
 [\Omega_3, \Omega_2, \Omega_1, G_1]=[\tau^3G_1,\tau^2G_1,\tau G_1,G_1]
 $$
 
-Now anyone can take the *structure reference string* (SRS) $[\Omega_3, \Omega_2, \Omega_1, G_1]$ and evaluate a degree three polynomial (or less) on $\tau$.
+Now anyone can take the *structured reference string* (SRS) $[\Omega_3, \Omega_2, \Omega_1, G_1]$ and evaluate a degree three polynomial (or less) on $\tau$.
 
 For example, if we have a degree 2 polynomial $g(x)=4x^2+7x+8$, we can evaluate $g(\tau)$ by taking the inner product of the structured reference string with the polynomial:
 
@@ -79,9 +79,9 @@ $$
 e(\Theta, \Omega_i)\stackrel{?}=e(G_2,\Omega_{i+1})
 $$
 
-where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$ on the right side..
+where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$ on the right side.
 
-To validate that $\Theta$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$, we can check that
+To validate that $\Theta$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$), we can check that
 
 $$
 e(\Theta,G_1)\stackrel{?}=e(G_2,\Omega_1)
