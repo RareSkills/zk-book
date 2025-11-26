@@ -53,7 +53,7 @@ GF = galois.GF(p)
 xs = GF(np.array([1,2,3]))
 
 # two arbitrary vectors
-v1 =  GF(np.array([4,8,2])) 
+v1 =  GF(np.array([4,8,2]))
 v2 =  GF(np.array([1,6,12]))
 
 def L(v):
@@ -62,7 +62,7 @@ def L(v):
 assert L(v1 + v2) == L(v1) + L(v2)
 ```
 
-### Scalar multiplication 
+### Scalar multiplication
 Let $\lambda$ be a scalar (specifically, a field element in finite field). Then
 
 $$\mathcal{L}(\lambda \mathbf{v}) = \lambda \mathcal{L}(\mathbf{v})$$
@@ -158,25 +158,25 @@ $$
 \mathbf{A} = \begin{bmatrix}
 a_{11} \\
 a_{21} \\
-a_{31} 
+a_{31}
 \end{bmatrix}
 ,
 \begin{bmatrix}
 a_{12} \\
 a_{22} \\
-a_{32} 
+a_{32}
 \end{bmatrix}
 ,
 \begin{bmatrix}
 a_{13} \\
 a_{23} \\
-a_{33} 
+a_{33}
 \end{bmatrix}
 ,
 \begin{bmatrix}
 a_{14} \\
 a_{24} \\
-a_{34} 
+a_{34}
 \end{bmatrix}
 $$
 
@@ -186,33 +186,33 @@ $$
 \mathbf{A}\cdot \mathbf{v} = \begin{bmatrix}
 a_{11} \\
 a_{21} \\
-a_{31} 
+a_{31}
 \end{bmatrix}\cdot v_1
 +
 \begin{bmatrix}
 a_{12} \\
 a_{22} \\
-a_{32} 
+a_{32}
 \end{bmatrix}\cdot v_2
 +
 \begin{bmatrix}
 a_{13} \\
 a_{23} \\
-a_{33} 
+a_{33}
 \end{bmatrix}\cdot v_3
 +
 \begin{bmatrix}
 a_{14} \\
 a_{24} \\
-a_{34} 
+a_{34}
 \end{bmatrix}\cdot v_4
 $$
 
 We have expressed matrix multiplication between $\mathbf{A}$ and $\mathbf{v}$ purely in terms of vector addition and scalar multiplication.
 
-Because we established earlier that the group of vectors under addition in a finite field is homomorphic to the group of polynomials under addition in a finite field, can express the computation above in terms of polynomials that represent the vectors.
+Because we established earlier that the group of vectors under addition in a finite field is homomorphic to the group of polynomials under addition in a finite field, we can express the computation above in terms of polynomials that represent the vectors.
 
-## Succintly testing that $\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_2$
+## Succinctly testing that $\mathbf{A}\mathbf{v}_1 = \mathbf{B}\mathbf{v}_2$
 
 Suppose we have matrix $\mathbf{A}$ and $\mathbf{B}$ such that
 
@@ -258,21 +258,21 @@ First, we convert the matrix multiplication $\mathbf{A}\mathbf{v}_1$ and $\mathb
 
 $$
 \begin{align*}
-\mathbf{A} &= \begin{bmatrix}  
+\mathbf{A} &= \begin{bmatrix}
 6 \\
 4 \\
 \end{bmatrix}
 ,
-\begin{bmatrix}  
+\begin{bmatrix}
 3 \\
 7 \\
 \end{bmatrix}\\
-\mathbf{B} &= \begin{bmatrix}  
+\mathbf{B} &= \begin{bmatrix}
 3 \\
 12 \\
 \end{bmatrix}
 ,
-\begin{bmatrix}  
+\begin{bmatrix}
 9 \\
 6 \\
 \end{bmatrix}
@@ -282,19 +282,19 @@ $$
 We now want to find the homomorphic equivalent of
 
 $$
-\begin{bmatrix}  
+\begin{bmatrix}
 6 \\
 4 \\
 \end{bmatrix}\cdot 2+
-\begin{bmatrix}  
+\begin{bmatrix}
 3 \\
 7 \\
 \end{bmatrix}\cdot 4\stackrel{?}{=}
-\begin{bmatrix}  
+\begin{bmatrix}
 3 \\
 12 \\
 \end{bmatrix}\cdot 2+
-\begin{bmatrix}  
+\begin{bmatrix}
 9 \\
 6 \\
 \end{bmatrix}\cdot 2
@@ -306,28 +306,28 @@ Let's convert each of the vectors to polynomials over the $x$ values $[1,2]$:
 
 $$
 \underbrace{
-\begin{bmatrix}  
+\begin{bmatrix}
 6 \\
 4 \\
 \end{bmatrix}}_{p_1(x)}\cdot 2+
 \underbrace{
-\begin{bmatrix}  
+\begin{bmatrix}
 3 \\
 7 \\
 \end{bmatrix}}_{p_2(x)}\cdot 4\stackrel{?}{=}
 \underbrace{
-\begin{bmatrix}  
+\begin{bmatrix}
 3 \\
 12 \\
 \end{bmatrix}}_{q_1(x)}\cdot 2+
 \underbrace{
-\begin{bmatrix}  
+\begin{bmatrix}
 9 \\
 6 \\
 \end{bmatrix}}_{q_2(x)}\cdot 2
 $$
 
-We will invoke some Python to compute the Langrage interpolation:
+We will invoke some Python to compute the Lagrange interpolation:
 
 ```python
 import galois
@@ -424,7 +424,7 @@ $$
 
 Since multiplying a column vector by a scalar is homomorphic to multiplying a polynomial by a scalar, each the polynomials can be multiplied by the respective element in the witness.
 
-For example, 
+For example,
 
 $$
 \mathbf{L}\mathbf{a} = \begin{bmatrix}
@@ -521,7 +521,7 @@ However, the vector that $u(x)v(x)$ interpolates, i.e.
 
 $$((1, u(1)v(1)), (2, u(2)v(2)), ..., (n, u(n)v(n)))$$
 
-is the same as the vector that $w(x)$ interpolates, i.e. 
+is the same as the vector that $w(x)$ interpolates, i.e.
 
 $$((1, w(1)), \quad (2, w(2)), \quad ..., \quad (n, w(n)))$$
 
@@ -648,7 +648,7 @@ l_{11} \\l_{12} \\ l_{13} \\ l_{14} \\
 \end{bmatrix}}_{u_1(x)}
 \quad
 \underbrace{\begin{bmatrix}
-l_{21} \\ l_{22} \\ l_{23} \\ l_{24} 
+l_{21} \\ l_{22} \\ l_{23} \\ l_{24}
 \end{bmatrix}}_{u_2(x)}
 \quad
 \underbrace{\begin{bmatrix}
@@ -668,7 +668,7 @@ r_{11} \\r_{12} \\ r_{13} \\ r_{14} \\
 \end{bmatrix}}_{v_1(x)}
 \quad
 \underbrace{\begin{bmatrix}
-r_{21} \\ r_{22} \\ r_{23} \\ r_{24} 
+r_{21} \\ r_{22} \\ r_{23} \\ r_{24}
 \end{bmatrix}}_{v_2(x)}
 \quad
 \underbrace{\begin{bmatrix}
@@ -688,7 +688,7 @@ o_{11} \\o_{12} \\ o_{13} \\ o_{14} \\
 \end{bmatrix}}_{w_1(x)}
 \quad
 \underbrace{\begin{bmatrix}
-o_{21} \\ o_{22} \\ o_{23} \\ o_{24} 
+o_{21} \\ o_{22} \\ o_{23} \\ o_{24}
 \end{bmatrix}}_{w_2(x)}
 \quad
 \underbrace{\begin{bmatrix}
@@ -711,7 +711,7 @@ $$
 \end{align*}
 $$
 
-In our case, $t(x)$ will be 
+In our case, $t(x)$ will be
 
 $$t(x) = (x - 1)(x - 2)(x - 3)$$
 
