@@ -119,19 +119,19 @@ template Swap(n) {
     dxEqT[i].in[0] <== i;
     dxEqT[i].in[1] <== t;
 
-    / if IdxEqS[i].out + IdxEqT[i].out
-    / equals 0, then it is not i ≠ s and i ≠ t
+    // if IdxEqS[i].out + IdxEqT[i].out
+    // equals 0, then it is not i ≠ s and i ≠ t
     dxNorST[i] = IsZero();
     dxNorST[i].in <== IdxEqS[i].out + IdxEqT[i].out;
 
-    / if we are at index s, write in[t]
-    / if we are at index t, write in[s]
-    / else write in[i]
+    // if we are at index s, write in[t]
+    // if we are at index t, write in[s]
+    // else write in[i]
     ranchS[i] <== IdxEqS[i].out * qst.out;
     ranchT[i] <== IdxEqT[i].out * qss.out;
     ranchNorST[i] <== IdxNorST[i].out * in[i];
     
-    / multiply branchS by zero if s equals t
+    // multiply branchS by zero if s equals t
     ut[i] <==  (1-sEqT) * (branchS[i]) + branchT[i] + branchNorST[i];
   }
 }
