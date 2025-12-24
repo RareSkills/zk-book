@@ -16,7 +16,7 @@ template QuadraticViolation1() {
   signal input b;
   signal input c;
   signal input d;
-  
+
   // two multiplications per constraint
   // is not allowed
   a * b === c * d;
@@ -33,7 +33,7 @@ template QuadraticViolation2() {
   signal input b;
   signal input c;
   signal input d;
-  
+
   // two multiplications per constraint
   // is not allowed
   a * b * c === d;
@@ -47,7 +47,7 @@ Therefore, the following examples will compile, even though there is more than o
 ```jsx
 a * b === c;
 
-2*a * 3*b === 4*c; // integer coefficients allowed
+2 * a * 3 * b === 4 * c; // integer coefficients allowed
 
 a * b + c === d; // addition and one multiplication allowed
 
@@ -64,7 +64,7 @@ Recall that in [arithmetization](https://www.rareskills.io/post/arithmetic-circu
 
 ```python
 def someProblem(x, y, out):
-  res = y^2 + 4*(x^2)*y -2 
+  res = y^2 + 4*(x^2)*y -2
   assert out == res, "incorrect inputs";
 ```
 
@@ -72,7 +72,7 @@ def someProblem(x, y, out):
 
 ```jsx
 v1  === y * y
-v2  === x * x 
+v2  === x * x
 out === v1 + (4v2 * y) - 2
 ```
 
@@ -84,7 +84,7 @@ out === v1 + (4v2 * y) - 2
 ```jsx
 //     Cw = Aw * Bw
        v1  = y * y
-       v2  = x * x 
+       v2  = x * x
 out -v1 +2 = (4v2 * y)
 ```
 
@@ -105,7 +105,7 @@ template KMustEqual5(n) {
 
   signal input in[n];
   signal input k;
-  
+
   // not allowed
   in[k] === 5;
 }
@@ -121,10 +121,10 @@ The following constraints will create a “Non quadratic constraints are not all
 template Example() {
   signal input a;
   signal input b;
-  
+
   // not allowed
   a === b % 5;
-  
+
   // not allowed
   a === b << 2;
 }
@@ -138,7 +138,7 @@ Somewhat subtly, Circom will allow “division” by a constant, because it can 
 template Example() {
   signal input a;
   signal input b;
-  
+
   a === b / 2;
 }
 
@@ -152,7 +152,7 @@ template Example() {
   signal input a;
   signal input b;
   signal input c;
-  
+
   // not allowed
   a === b / c;
 }
@@ -166,10 +166,10 @@ In contrast, subtraction of signals is allowed because it directly translates to
 template Example() {
   signal input a;
   signal input b;
-  
+
   // allowed
   a === b - a;
-  
+
   // equivalent
   a === b + -1*a
 }
@@ -183,7 +183,7 @@ Integer division, as opposed to multiplication by the modular inverse is represe
 template Example() {
   signal input a;
   signal input b;
-  
+
   // can only use \ with variables
   // not signals
   a === b \ 2;

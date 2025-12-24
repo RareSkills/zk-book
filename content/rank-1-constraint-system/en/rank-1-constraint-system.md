@@ -5,15 +5,18 @@ This article is explains how to turn a set of arithmetic constraints into Rank O
 The focus of this resource is implementation: we cover a lot more corner cases of doing this transformation than other materials, discuss optimizations, and explain how the Circom library accomplishes it.
 
 ## Prerequisites
+
 - We assume the reader understands how to use [arithmetic circuits (zk circuits)](https://www.rareskills.io/post/arithmetic-circuit) to represent the validity of a computation.
 - The reader is familiar with [modular arithmetic](https://www.rareskills.io/post/finite-fields). All operations here happen in a finite field, so $-5$ really means the additive inverse of $5$ modulo $p$ and $2/3$ means the multiplicative inverse of $3$ modulo $p$ times $2$.
 
-## Rank 1 Constraint System overview
+## Rank 1 Constraint System overviewConverting Algebraic Circuits to R1CS (Rank One Constraint System)
+
 A Rank 1 Constraint System (R1CS) is an arithmetic circuit with the requirement that each equality constraint has one multiplication (and no restriction on the number of additions).
 
 This makes the representation of the arithmetic circuit compatible with the use of bilinear pairings. The output of a pairing $G_1 \bullet G_2 \rightarrow G_T$ cannot be paired again, as an element in $G_T$ cannot be used as part of the input of another pairing. Hence, we only allow one multiplication per constraint.
 
 ## The witness vector
+
 In an arithmetic circuit, the witness is an assignment to all the signals that satisfies the constraints of the equation.
 
 In a Rank 1 Constraint System the witness vector is a $1 \times n$ vector that contains the value of all the input variables, the output variable, and the intermediate values. It shows you have executed the circuit from start to finish, knowing both the input, output, and all the intermediate values.
@@ -39,7 +42,7 @@ $$[1, z, x, y, v₁]$$
 
 where each term has a value that satisfies the constraints above.
 
-For example, 
+For example,
 
 $$[1, 18, 3, 2, 9]$$
 
@@ -70,6 +73,7 @@ result = left_hand_side × right_hand_side
 ```
 
 Luckily for us, it already is
+
 $$
 \underbrace{z}_\text{result} = \underbrace{x}_\text{left hand side} \times \underbrace{y}_\text{right hand side}
 $$
@@ -99,6 +103,7 @@ The number of rows will correspond to the number of constraints in the circuit. 
 Let’s jump to the answer and explain how we obtained it.
 
 $$\mathbf{O}\mathbf{a} = \mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}$$
+
 $$
 \underbrace{\begin{bmatrix}
 0 & 1 & 0 & 0 \\
@@ -168,7 +173,7 @@ a = np.array([1, 4223, 41, 103])
 
 # Multiplication `*` is element-wise, not matrix multiplication.
 # Result contains a bool indicating an element-wise indicator that the equality is true for that element.
-result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a) 
+result = np.matmul(O, a) == np.matmul(L, a) * np.matmul(R, a)
 
 # check that every element-wise equality is true
 assert result.all(), "result contains an inequality"
@@ -182,7 +187,8 @@ An R1CS can be quite verbose, but they map nicely to [Quadratic Arithmetic Progr
 
 But this is an important point of R1CS. A R1CS communicates exactly the same information as the original arithmetic constraints, but with only one multiplication per equality constraint. In this example, we have only one constraint, but we’ll add more in the next example.
 
-## Example 2: Transforming r = x * y * z * u
+## Example 2: Transforming r = x _ y _ z \* u
+
 In this slightly more complicated example, we need to deal with intermediate variables now. Each row of our computation can only have one multiplication, so we must break up our equation as follows:
 
 $$
@@ -206,11 +212,13 @@ $$
 We will use the first transformation for this example.
 
 ### Size of $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$
+
 Because we are dealing with 7 variables $(r, x, y, z, u, v_1, v_2)$, our witness vector will have eight elements (the first being the constant 1) and our matrices will have eight columns.
 
 Because we have three constraints, the matrices will have three rows.
 
 ### Left hand terms and right hand terms
+
 This example will strongly enforce the idea of a "left hand term" and a "right hand term." Specifically, $x$, $z$, and $v_1$ are left hand terms, and $y$, $u$, and $v_2$ are right hand terms.
 
 $$
@@ -248,6 +256,7 @@ $$
 $$
 
 ### Constructing matrix $\mathbf{L}$ from left hand terms
+
 Let’s construct the matrix A. We know it will have three rows (since there are three constraints) and eight columns (since there are eight variables).
 
 $$
@@ -269,7 +278,7 @@ $$
 This informs us as to what $\mathbf{L}$’s columns represents:
 
 $$
-\mathbf{L} = 
+\mathbf{L} =
 \begin{bmatrix}
 l_{1, 1} & l_{1, r} & l_{1, x} & l_{1, y} & l_{1, z} & l_{1, u} & l_{1, v_1} & l_{1, v_2} \\
 l_{2, 1} & l_{2, r} & l_{2, x} & l_{2, y} & l_{2, z} & l_{2, u} & l_{2, v_1} & l_{2, v_2} \\
@@ -277,8 +286,8 @@ l_{3, 1} & l_{3, r} & l_{3, x} & l_{3, y} & l_{3, z} & l_{3, u} & l_{3, v_1} & l
 \end{bmatrix}
 $$
 
+#### First row of $\mathbf{L}$
 
-#### First row of  $\mathbf{L}$
 In the first row, for the first left variable, we have $v₁ = xy$:
 
 $$
@@ -332,6 +341,7 @@ $$
 and we see that the $1$ is in the $x$ column.
 
 #### Second row of $\mathbf{L}$
+
 Working our way down, we see that only $z$ is present for the left-hand side of our systems of equations.
 
 $$
@@ -375,6 +385,7 @@ l_{3, 1} & l_{3, r} & l_{3, x} & l_{3, y} & l_{3, z} & l_{3, u} & l_{3, v_1} & l
 $$
 
 #### Third row of $\mathbf{L}$
+
 Finally, we have $v₁$ as the only present variable in the left hand operators in the third row
 
 $$
@@ -465,6 +476,7 @@ $$
 $$
 
 #### Alternative transformation of $\mathbf{L}$
+
 We could accomplish this same exercises by expanding the left hand values of
 
 $$
@@ -503,7 +515,7 @@ $$
 \begin{align*}
 v_1 &= (0\cdot 1 + 0\cdot r + \boxed{1\cdot x} + 0\cdot y + 0\cdot z + 0\cdot u + 0\cdot v_1 + 0\cdot v_2) \times y\\
 v_2 &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + \boxed{1\cdot z} + 0\cdot u + 0\cdot v_1 + 0\cdot v_2) \times u\\
-r &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + 0\cdot z + 0\cdot u + \boxed{1\cdot v_1} + 0\cdot v_2) \times v_2 \\ 
+r &= (0\cdot 1 + 0\cdot r + 0\cdot x + 0\cdot y + 0\cdot z + 0\cdot u + \boxed{1\cdot v_1} + 0\cdot v_2) \times v_2 \\
 \end{align*}
 $$
 
@@ -515,7 +527,7 @@ $$
 \begin{align*}
 v_1 &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{1}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{0}\cdot v_1 + \boxed{0}\cdot v_2) \times y\\
 v_2 &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{1}\cdot z + \boxed{0}\cdot u + \boxed{0}\cdot v_1 + \boxed{0}\cdot v_2) \times u\\
-r &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{1}\cdot v_1 + \boxed{0}\cdot v_2) \times v_2 \\ 
+r &= (\boxed{0}\cdot 1 + \boxed{0}\cdot r + \boxed{0}\cdot x + \boxed{0}\cdot y + \boxed{0}\cdot z + \boxed{0}\cdot u + \boxed{1}\cdot v_1 + \boxed{0}\cdot v_2) \times v_2 \\
 \end{align*}
 $$
 
@@ -529,8 +541,8 @@ $$
 \end{bmatrix}
 $$
 
-
 ### Constructing matrix $\mathbf{R}$ from right hand terms
+
 $$
 R = \begin{bmatrix}
 r_{1,1} & r_{1,r} & r_{1,x} & r_{1,y} & r_{1,z} & r_{1,u} & r_{1,v_1} & r_{1,v_2} \\
@@ -645,13 +657,11 @@ $$
 =\\
 =
 \end{matrix}
-
-    \begin{matrix}
-        x \\
-        z \\
-        v_1 \\
-    \end{matrix}
-
+\begin{matrix}
+    x \\
+    z \\
+    v_1 \\
+\end{matrix}
 \begin{matrix}
 \times\\
 \times\\
@@ -676,13 +686,14 @@ $$
 \begin{bmatrix}
 0 & 0 & 0 & \color{red}{1} & 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 & 0 & \color{green}{1} & 0 & 0  \\
-0 & 0 & 0 & 0 & 0 & 0 & 0 &\color{violet}{1}  \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & \color{violet}{1}  \\
 \end{bmatrix}
 \end{array}
 \end{array}
 $$
 
 ### Constructing matrix $\mathbf{O}$
+
 It is an exercise for the reader to determine that matrix $\mathbf{O}$ is
 
 $$
@@ -695,39 +706,35 @@ $$
 
 using the column labels consistent with earlier matrices.
 
-By way of reminder, $\mathbf{C}$ is derived from the result of the multiplication
+By way of reminder, $\mathbf{O}$ is derived from the result of the multiplication
 
 $$
-\underset{\mathbf{C}}{
+\underset{\mathbf{O}}{
     \boxed{\begin{matrix}
         v_1 \\
         v_2 \\
         r \\
     \end{matrix}}}
-
 \begin{matrix}
 =\\
 =\\
 =
 \end{matrix}
-
-    \begin{matrix}
-        x \\
-        z \\
-        v_1 \\
-    \end{matrix}
-
+\begin{matrix}
+    x \\
+    z \\
+    v_1 \\
+\end{matrix}
 \begin{matrix}
 \times\\
 \times\\
 \times
 \end{matrix}
-
-    \begin{matrix}
-        y \\
-        u \\
-        v_2 \\
-    \end{matrix}
+\begin{matrix}
+    y \\
+    u \\
+    v_2 \\
+\end{matrix}
 $$
 
 And the column labels are as follows
@@ -758,11 +765,11 @@ import numpy as np
 L = np.matrix([[0,0,1,0,0,0,0,0],
               [0,0,0,0,1,0,0,0],
               [0,0,0,0,0,0,1,0]])
-              
+
 R = np.matrix([[0,0,0,1,0,0,0,0],
               [0,0,0,0,0,1,0,0],
               [0,0,0,0,0,0,0,1]])
-              
+
 O = np.matrix([[0,0,0,0,0,0,1,0],
               [0,0,0,0,0,0,0,1],
               [0,1,0,0,0,0,0,0]])
@@ -789,6 +796,7 @@ assert result.all(), "system contains an inequality"
 ```
 
 ## Example 3: Addition with a constant
+
 What if we want to build a rank one constraint system for the following?
 
 $$z = x * y + 2$$
@@ -796,14 +804,17 @@ $$z = x * y + 2$$
 This is where that 1 column comes in handy.
 
 ### Addition is free
+
 You’ve probably heard the statement “addition is free” in the context of ZK-SNARKs. What that means is we don’t have to create an additional constraint when we have an addition operation.
 
 We could write the above formula as
 
-$$\begin{align*}
+$$
+\begin{align*}
 v_1 = xy \\
 z = v_1 + 2 \\
-\end{align*}$$
+\end{align*}
+$$
 
 but that would make our R1CS larger than it needs to be.
 
@@ -818,17 +829,20 @@ Our witness vector has the form `[1, z, x, y]`, so our matrix $\mathbf{L}$, $\ma
 $$
 \mathbf{L} = \begin{bmatrix}
 0 & 0 & 1 & 0 \\
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 $$
 \mathbf{R} = \begin{bmatrix}
 0 & 0 & 0 & 1 \\
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 $$
 \mathbf{O} = \begin{bmatrix}
 -2 & 1 & 0 & 0 \\
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 Whenever there are additive constants, we simply place them in the $1$ column, which by convention is the first column.
 
@@ -855,6 +869,7 @@ assert result.all(), "result contains an inequality"
 ```
 
 ## Example 4: Multiplication with a constant
+
 In all of the examples above, we never multiplied variables by constants. That’s why the entries in the R1CS was always 1. As you may have guessed from the above example, the entry in the matrices is the same value of the constant the variable is multiplied by as the following example will show.
 
 Let’s work out the solution for
@@ -894,7 +909,7 @@ $$
 \end{align*}
 $$
 
-Symbolically multiplying the above by `[1, z, x, y]` in the r1cs form gives us our original equation back: 
+Symbolically multiplying the above by `[1, z, x, y]` in the r1cs form gives us our original equation back:
 
 $$
 \begin{bmatrix}
@@ -926,21 +941,24 @@ x \\
 y \\
 \end{bmatrix}
 $$
+
 $$
 z - y = 2xx
 $$
+
 $$
 z = 2x^2 + y
 $$
 
 so we know we set up $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ correctly.
 
-Here we have one row (constraints) and one 
+Here we have one row (constraints) and one
 "true" multiplication. As a general rule:
 
 The number of constraints in a Rank One Constraint system should be equal the number of non-constant multiplications.
 
 ## Example 5: A large constraint
+
 Let’s do something less trivial that incorporates everything learned above
 
 Suppose we have the following constraint:
@@ -983,30 +1001,29 @@ $$
 \end{align*}
 $$
 
-We've marked the output $\mathbf{O}$ in <span style="color:red">red</span>, the left hand side $\mathbf{L}$ in <span style="color:green">green</span>, and the right hand side $\mathbf{R}$ in <span style="color:violet">violet</span>.  This produces the following matrices:
+We've marked the output $\mathbf{O}$ in <span style="color:red">red</span>, the left hand side $\mathbf{L}$ in <span style="color:green">green</span>, and the right hand side $\mathbf{R}$ in <span style="color:violet">violet</span>. This produces the following matrices:
 
 $$
 L = \begin{bmatrix}
-0 & 0 & \textcolor{green}{3} & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & \textcolor{green}{1} & 0 \\
-0 & 0 & \textcolor{green}{5} & 0 & 0 & 0 \\
+0 & 0 & \color{green}{3} & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & \color{green}{1} & 0 \\
+0 & 0 & \color{green}{5} & 0 & 0 & 0 \\
 \end{bmatrix}
 $$
 
 $$
 R = \begin{bmatrix}
-0 & 0 & \textcolor{violet}{1} & 0 & 0 & 0 \\
-0 & 0 & 0 & \textcolor{violet}{1} & 0 & 0 \\
-0 & 0 & 0 & \textcolor{violet}{1} & 0 & 0 \\
+0 & 0 & \color{violet}{1} & 0 & 0 & 0 \\
+0 & 0 & 0 & \color{violet}{1} & 0 & 0 \\
+0 & 0 & 0 & \color{violet}{1} & 0 & 0 \\
 \end{bmatrix}
 $$
 
 $$
 O = \begin{bmatrix}
-
-0 & 0 & 0 & 0 & \textcolor{red}{1} & 0 \\
-0 & 0 & 0 & 0 & 0 & \textcolor{red}{1} \\
-\textcolor{red}{-3} & \textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{2} & 0 & \textcolor{red}{-1} \\
+0 & 0 & 0 & 0 & \color{red}{1} & 0 \\
+0 & 0 & 0 & 0 & 0 & \color{red}{1} \\
+\color{red}{-3} & \color{red}{1} & \color{red}{1} & \color{red}{2} & 0 & \color{red}{-1} \\
 \end{bmatrix}
 $$
 
@@ -1048,6 +1065,7 @@ assert result.all(), "result contains an inequality"
 ```
 
 ## Rank 1 Constraint Systems do not require starting with a single polynomial
+
 To keep things simple, we've been using examples of the form $z = xy + ...$ but most realistic arithmetic constraints are going to be a set of arithmetic constraints, not a single one.
 
 For example, suppose we are proving that an array $[x₁, x₂, x₃, x₄]$ is binary and $v$ is less than 16. The set of constraints will be
@@ -1101,6 +1119,7 @@ $$
 Doing the substitution is not strictly necessary, but it saves a row in the R1CS. In a later section, we will show a valid R1CS where we do not do the substitution.
 
 ## Everything is done modulo prime in r1cs
+
 In the above examples, we used traditional arithmetic for the sake of simplicity, but real world implementations use modular arithmetic instead.
 
 The reason is simple: encoding numbers like 2/3 leads to ill-behaved floats which are computationally intensive and error prone.
@@ -1108,6 +1127,7 @@ The reason is simple: encoding numbers like 2/3 leads to ill-behaved floats whic
 If we do all our math modulo a prime number, let’s say 23, then encoding $2/3$ is straightforward. It’s the same as $2 \cdot 3^{-1}$, and multiplying by two and raising to the power of negative 1 are straightforward in modular arithmetic
 
 ## Circom implementation.
+
 In Circom, a language for constructing Rank 1 Constraint Systems, the finite field uses the prime number $21888242871839275222246405745257275088548364400416034343698204186575808495617$ (this is equal to the order of the BN128 curve we discussed in [Elliptic Curves over Finite Fields](https://www.rareskills.io/post/elliptic-curves-finite-fields)).
 
 This means $-1$ in that representation is
@@ -1121,7 +1141,8 @@ p = 2188824287183927522224640574525727508854836440041603434369820418657580849561
 # 21888242871839275222246405745257275088548364400416034343698204186575808495616
 ```
 
-### Circom for out = x * y
+### Circom for out = x \* y
+
 If we write `out = x * y` in Circom, it would look like the following:
 
 ```javascript
@@ -1152,6 +1173,7 @@ We get the following output:
 This looks quite a bit different from our R1CS solution, but it is actually encoding the same information.
 
 Here are the differences in Circom’s implementation:
+
 - Columns with zero value are not printed
 - Circom writes $\mathbf{O}\mathbf{a} = \mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}$ as $\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a}  - \mathbf{O}\mathbf{a} = \mathbf{0}$
 
@@ -1162,13 +1184,13 @@ Circom's solution is
 $$
 \begin{align*}
 A &= \begin{bmatrix}
-0 & 0 & -1 & 0 
+0 & 0 & -1 & 0
 \end{bmatrix}\\
 B &= \begin{bmatrix}
-0 & 0 & 0 & 1 
+0 & 0 & 0 & 1
 \end{bmatrix}\\
 C &= \begin{bmatrix}
-0 & -1 & 0 & 0 
+0 & -1 & 0 & 0
 \end{bmatrix}
 \end{align*}
 $$
@@ -1239,6 +1261,7 @@ $\mathbf{L}$ has one coefficient of $-1$ for $x$, $\mathbf{R}$ has one coefficie
 ![terminal output of the R1CS](https://static.wixstatic.com/media/935a00_36651c70d5aa49d89059cbae553be7e9~mv2.png/v1/fill/w_1480,h_114,al_c,lg_1,q_85,enc_auto/935a00_36651c70d5aa49d89059cbae553be7e9~mv2.png)
 
 ### Checking the rest of our work
+
 By way of review, the formulas we explored were
 
 $$
@@ -1253,6 +1276,7 @@ $$
 We just did (1) in the section above, for this section we will illustrate the principle that the number of non-constant multiplications is the number of constraints.
 
 The circuit for (2) is:
+
 ```javascript
 pragma circom 2.0.8;
 
@@ -1261,15 +1285,15 @@ template Multiply4() {
     signal input y;
     signal input z;
     signal input u;
-    
+
     signal v1;
     signal v2;
-    
+
     signal out;
-    
+
     v1 <== x * y;
     v2 <== z * u;
-    
+
     out <== v1 * v2;
 }
 
@@ -1294,11 +1318,13 @@ $$
 It is an exercise for the reader to write the Circom circuits and verify the above.
 
 ### You do not need a witness to calculate the R1CS
+
 Note that in the Circom code we never supplied the witness before calculating the R1CS. We supplied the witness earlier to make the example less abstract and to make it easy to check our work, but it isn’t necessary. This is important, because if a verifier needed a witness to construct an R1CS, then the prover would have to give the hidden solution away!
 
 When we say "witness" we mean a vector with populated values. The verifier knows the "structure" of the witness, i.e. the variable to column assignments, but doesn’t know the values.
 
 ## An R1CS is valid even if it is not optimized
+
 A valid transformation from a polynomial to an R1CS is not unique. You can encode the same problem with more constraints, which is less efficient. Here is an example.
 
 In some R1CS tutorials, the constraints for a formula like
@@ -1328,21 +1354,21 @@ Our witness vector is of the form $[1, z, x, y, v1]$ and $\mathbf{L}$, $\mathbf{
 $$
 \mathbf{L} = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 & 1 
+0 & 0 & 0 & 1 & 1
 \end{bmatrix}
 $$
 
 $$
 \mathbf{R} = \begin{bmatrix}
 0 & 0 & 1 & 0 & 0 \\
-1 & 0 & 0 & 0 & 0 
+1 & 0 & 0 & 0 & 0
 \end{bmatrix}
 $$
 
 $$
 \mathbf{O} = \begin{bmatrix}
 0 & 0 & 0 & 0 & 1 \\
-0 & 1 & 0 & 0 & 0 
+0 & 1 & 0 & 0 & 0
 \end{bmatrix}
 $$
 
@@ -1351,6 +1377,7 @@ The second row of $\mathbf{L}$ accomplishes the addition, and the multiply by on
 This is perfectly valid, but the solution has one more row and and one more column than it needs.
 
 ## What if there are no multiplications?
+
 What if we want to encode the following circuit?
 
 $$
@@ -1375,19 +1402,22 @@ $$
 \end{bmatrix} \\
 \mathbf{O} &= \begin{bmatrix}
 0 & 1 & 0 & 0 \\
-\end{bmatrix} 
+\end{bmatrix}
 \end{align*}
 $$
 
 ## Rank One Constraint Systems are for convenience
+
 The original [paper for Groth16](https://eprint.iacr.org/2016/260.pdf) don’t have any reference to the term Rank One Constraint System. A R1CS is handy from an implementation perspective, but from a pure math perspective, it is simply explicitly labeling and grouping the coefficients of different variables. So when you read academic papers on the subject, it is usually missing because it is an implementation detail of a more abstract concept.
 
 ## Handy Resources
+
 - This [web tool calculates R1CS](https://asecuritysite.com/zero/go_r1cs) for a set of constraints (but it only works with one input and output variable).
 
-- [Vitalik’s famous example of x**3 + x + 5 == 35](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649)
+- [Vitalik’s famous example of x\*\*3 + x + 5 == 35](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649)
 
 - [Zero knowledge blog’s R1CS tutorial](https://www.zeroknowledgeblog.com/index.php/the-pinocchio-protocol/r1cs)
 
 ## Learn more with RareSkills
+
 This blog post is taken from learning materials in our [zero knowledge course](https://www.rareskills.io/zk-bootcamp).
