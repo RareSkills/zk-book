@@ -141,7 +141,7 @@ The following Python code checks if $\omega^\frac{k}{2} \equiv - 1$ for a field 
 import galois
 
 def check_omega_half_is_minus_one(q, omega, k):
-	GF = [galois.GF](http://galois.gf/)(q)
+	GF = galois.GF(q)
 	if k % 2 != 0:
 		raise ValueError("k must be even")
 
