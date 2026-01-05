@@ -607,7 +607,7 @@ Suppose we have an R1CS with matrices $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O
 
 $$\mathbf{L}\mathbf{a}\circ\mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$$
 
-The matrices have $n$ columns and $m$ rows where $n = 3$ and $m = 4$.
+The matrices have $n$ columns and $m$ rows where $n = 4$ and $m = 3$.
 
 That is, $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ are as follows:
 
