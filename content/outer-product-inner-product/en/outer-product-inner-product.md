@@ -413,7 +413,7 @@ $P$ is a commitment to the original vector $\mathbf{a}$ with respect to the basi
 The sum $Lu^2 + P + Ru^{-2}$ is itself a vector commitment of the vector $\mathsf{fold}(\mathbf{a},u)$ to the basis $\mathsf{fold}(\mathbf{G}, u^{-1})$, which has size $n/2$.
 
 We show the relationship graphically below:
-![a graphic showing the relationship between a vector commitment and a folded vector commitment]([https://hackmd.io/_uploads/HJPpWqLlye.png](https://r2media.rareskills.io/bulletproofs-06/folded-commitment.png)
+![a graphic showing the relationship between a vector commitment and a folded vector commitment](https://r2media.rareskills.io/bulletproofs-06/folded-commitment.png)
 
 To prove we know the opening to a commitment of size $n/2$, we can simply send the vector of size $n/2$, which in this case is $\mathsf{fold}(\mathbf{a},u)$.
 
