@@ -643,7 +643,7 @@ Consider the polynomial $y = x² − 5$. We can see it has roots at $\sqrt{5}$ a
 
 ![Plot of y = x^2 + 5 (mod 17)](https://static.wixstatic.com/media/706568_a87f571b1af9454db2b27d4a9fd3d8f6~mv2.png/v1/fill/w_1399,h_864,al_c,q_90,enc_auto/706568_a87f571b1af9454db2b27d4a9fd3d8f6~mv2.png)
 
-There are no roots is because $\sqrt{5}$ cannot be represented in a finite field modulo 17. However, in the finite field $p = 11$, then there would be two roots because 5 has a modular square roots in the finite field of $p = 11$.
+There are no roots because $\sqrt{5}$ cannot be represented in a finite field modulo 17. However, in the finite field $p = 11$, then there would be two roots because 5 has a modular square roots in the finite field of $p = 11$.
 
 ### Limitations in arithmetic circuits for ZK Proofs
 
