@@ -137,6 +137,7 @@ b^{a_i +a_j}=\underbrace{b\cdot b\cdot\dots\cdot b\cdot b\cdot b\dots\cdot b}_{{
 $$
 
 ### Integers under addition to integer powers of $b$ under multiplication modulo a prime number
+This is very similar to the example above, with the addition of a modulus. We leave it as an exercise to the reader to identify the function $\phi$ that defines the homomorphism.
 
 ### $n\times m$ matrices under addition to integers under addition
 
