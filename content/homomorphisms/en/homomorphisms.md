@@ -219,7 +219,7 @@ Note that homomorphic encryption implies that the verifier knows the function $\
 ### Zero Knowledge Addition, example 2
 A prover makes the claim, "I have two numbers $a$ and $b$, and $b$ is five times $a$." The prover sends $\phi(a)$ and $\phi(b)$ to the verifier, and the verifier checks that
 
-$$\phi(a) + \phi(a) + \phi(a) + \phi(a) + \phi(a) = \phi(b)$$
+$$\phi(a) \blacksquare \phi(a) \blacksquare \phi(a) \blacksquare \phi(a) \blacksquare \phi(a) = \phi(b)$$
 
 Remember, "multiplication" here is not the binary operator, it's simply shorthand for repeated addition.
 

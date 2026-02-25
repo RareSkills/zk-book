@@ -66,7 +66,7 @@ If we define our operator for $n \times m$ matrices to be the Hadamard product (
 
 If we define our operator to be traditional matrix multiplication over square matrices, this may or may not be a group depending on the set definition, as we will see in section example 5.
 
-### 4. The set of 2D points on an euclidean plane under element-wiseaddition is a group
+### 4. The set of 2D points on an euclidean plane under element-wise addition is a group
 
 This is actually a special case of the previous example, but let’s look at it through a different angle.
 
@@ -190,7 +190,7 @@ We can use the galois library to find primitive roots:
 ```python
 from galois import GF
 GF7 = GF(7)
-print(GF.primitive_elements)
+print(GF7.primitive_elements)
 # [3, 5]
 ```
 
