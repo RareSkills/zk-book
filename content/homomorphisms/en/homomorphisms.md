@@ -151,7 +151,7 @@ $$
 XY=Z\rightarrow\det(X)\det(Y)=\det(Z)
 $$
 
-where $X,Y,Z$ are $2\times2$ integer matrices. Why these are two algebraic data structures are Monoids and not groups are left as an exercise for the reader.
+where $X,Y,Z$ are $2\times2$ integer matrices. Why these two algebraic data structures are Monoids and not groups are left as an exercise for the reader.
 
 ### The group of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to addition modulo $p$
 
@@ -247,7 +247,7 @@ You probably don’t know what elliptic curve points are or what adding them mea
 
 Even though you don’t know what elliptic curve points are, you already know nine things about them!
 
-So whatever these bizarre objects "elliptic curve points" are, you know it behaves like, and has the same properties as the groups we discussed above.
+So whatever these bizarre objects "elliptic curve points" are, you know what it behaves like, and has the same properties as the groups we discussed above.
 
 Believe it or not, you are already 90% of the way to comprehending elliptic curves. It’s far easier to make sense of elliptic curves by understanding their similarity to other familiar structures than to try to understand their funky math from the ground up.
 
