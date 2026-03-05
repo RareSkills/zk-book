@@ -85,25 +85,25 @@ template CalculateTotal(n) {
 
 template QuinSelector(choices) {
   signal input in[choices];
-  signal input index;
+  signal input idx;
   signal output out;
   
-  // Ensure that index < choices
+  // Ensure that idx < choices
   component lessThan = LessThan(252);
-  lessThan.in[0] <== index;
+  lessThan.in[0] <== idx;
   lessThan.in[1] <== choices;
   lessThan.out === 1;
 
   component calcTotal = CalculateTotal(choices);
   component eqs[choices];
 
-  // For each item, check whether its index equals the input index.
+  // For each item, check whether its index equals the input idx.
   for (var i = 0; i < choices; i ++) {
     eqs[i] = IsEqual();
     eqs[i].in[0] <== i;
-    eqs[i].in[1] <== index;
+    eqs[i].in[1] <== idx;
 
-    // eqs[i].out is 1 if the index matches. As such, at most one input to
+    // eqs[i].out is 1 if the idx matches. As such, at most one input to
     // calcTotal is not 0.
     calcTotal.in[i] <== eqs[i].out * in[i];
   }
@@ -113,11 +113,11 @@ template QuinSelector(choices) {
 }
 ```
 
-As an optimization, then step `component lessThan = LessThan(252);` doesn’t need 252 bits to ensure the `index` is less than `choices`. Depending on our application, we could use a much smaller number of bits to make the comparison and save on the number of constraints generated under the hood.
+As an optimization, then step `component lessThan = LessThan(252);` doesn’t need 252 bits to ensure the `idx` is less than `choices`. Depending on our application, we could use a much smaller number of bits to make the comparison and save on the number of constraints generated under the hood.
 
 ## Circomlib Implementation of Quin Selector
 
-The [multiplexer](https://github.com/iden3/circomlib/blob/master/circuits/multiplexer.circom) in the Circomlib library accomplishes the same thing as Quin Selector. However, it indexes a 2-dimensional array and returns a 1-dimensional array. For example, given the array `in = [[5,5],[6,6],[7,7]]` and `index = 1`, it would return `[6, 6]`.
+The [multiplexer](https://github.com/iden3/circomlib/blob/master/circuits/multiplexer.circom) in the Circomlib library accomplishes the same thing as Quin Selector. However, it indexes a 2-dimensional array and returns a 1-dimensional array. For example, given the array `in = [[5,5],[6,6],[7,7]]` and `idx = 1`, it would return `[6, 6]`.
 
 The component has the following inputs and outputs:
 
