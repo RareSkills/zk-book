@@ -157,7 +157,7 @@ $$\sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x) = \sum_{i=1}^m a_iw_i(x) + h(x)t(
 
 Now consider what happens if we introduce terms $\theta$ and $\eta$ to the left hand side of the equation:
 
-$$(\boxed{\theta}+\sum_{i=1}^m a_iu_i(x))(\boxed{\eta} +\sum_{i=1}^m a_iv_i(x)) =$$
+$$\left(\boxed{\theta}+\sum_{i=1}^m a_iu_i(x)\right)\left(\boxed{\eta} +\sum_{i=1}^m a_iv_i(x)\right) =$$
 $$=\boxed{\theta\eta} + \boxed{\theta}\sum_{i=1}^m a_iv_i(x) + \boxed{\eta}\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iu_i(x)\sum_{i=1}^m a_iv_i(x)$$
 
 We can substitute the rightmost terms using the original QAP definition:
@@ -167,7 +167,7 @@ $$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \box
 
 Now we can introduce an "expanded" QAP with the following definition:
 
-$$(\theta+\sum_{i=1}^m a_iu_i(x))(\eta +\sum_{i=1}^m a_iv_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
+$$\left(\theta+\sum_{i=1}^m a_iu_i(x)\right)\left(\eta +\sum_{i=1}^m a_iv_i(x)\right) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
 As a sneak peak to where we are going, if we replace $\theta$ with $[\alpha]_1$ and $\eta$ with $[\beta]_2$, we get updated verification formula from earlier:
 
@@ -175,7 +175,7 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [C]_1\bullet G_
 
 where
 
-$$\underbrace{([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau))}_{[A]_1}\underbrace{([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau))}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + (\underbrace{\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)}_{[C]_1}) \bullet G_2$$
+$$\underbrace{\left([\alpha]_1+\sum_{i=1}^m a_iu_i(\tau)\right)}_{[A]_1}\underbrace{\left([\beta]_2 +\sum_{i=1}^m a_iv_i(\tau)\right)}_{[B]_2} =[\alpha]_1\bullet[\beta]_2 + \underbrace{\left(\alpha\sum_{i=1}^m a_iv_i(\tau) + \beta\sum_{i=1}^m a_iu_i(\tau) + \sum_{i=1}^m a_iw_i(\tau) + h(\tau)t(\tau)\right)}_{[C]_1} \bullet G_2$$
 
 The prover can compute $[A]_1$ and $[B]_2$ without knowing $\tau$, $\alpha$, or $\beta$. Given the structured reference string (powers of $\tau$) and the elliptic curve points $([α]_1,[β]_2)$, the prover computes $[A]_1$ and $[B]_2$ as
 
@@ -220,7 +220,7 @@ $$\begin{align*}
 
 The trusted setup publishes
 
-$$([\alpha]_1,[\beta]_2,\text{srs}_{G_1},\text{srs}_{G_2}[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 #### Prover steps
 The prover computes
@@ -283,7 +283,7 @@ $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell
 
 If we expand the C term under the hood, we get the following:
 
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i\Psi_i + \underbrace{(\sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau))}_C \bullet G_2$$
+$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + \sum_{i=1}^\ell a_i\Psi_i + \underbrace{\left(\sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\right)}_C \bullet G_2$$
 
 Suppose for example and without loss of generality that $\mathbf{a} = [1,2,3,4,5]$ and $\ell=3$. In that case, the public part of the witness is $[1,2,3]$ and the private part is $[4,5]$.
 
@@ -308,8 +308,8 @@ $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
-[\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
-\frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
+\left[\frac{\tau^{n-2}t(\tau)}{\delta}G_1,\frac{\tau^{n-3}t(\tau)}{\delta}G_1,\dots,\frac{\tau t(\tau)}{\delta}G_1,
+\frac{t(\tau)}{\delta}G_1\right] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
@@ -325,7 +325,7 @@ $$\begin{align*}
 \end{align*}$$
 
 The trusted setup publishes
-$$([\alpha]_1,[\beta]_2,[\gamma]_2,[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_2,[\gamma]_2,[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 The prover steps are the same as before:
 
@@ -338,10 +338,6 @@ $$\begin{align*}
 And the verifier steps now include pairing by $[\gamma]_2$ and/or $[\delta]_2$ to cancel out the denominators:
 
 $$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [\gamma]_2 + [C]_1\bullet [\delta]_2$$
-
-or
-
-$$[A]_1\bullet[B]_2 \stackrel{?}= [\alpha]_1 \bullet [\beta]_2 + [X]_1\bullet [G]_2 + [C]_1\bullet [\delta]_2$$
 
 ## Part 3: Enforcing true zero knowledge: r and s
 Our scheme is not yet truly zero knowledge. If an attacker is able to guess our witness vector (which is possible if there is only a small range of valid inputs, e.g. secret voting from privileged addresses), then they can verify their guess is correct by comparing their constructed proof to the original proof.
@@ -372,7 +368,7 @@ $$
 
 To derive the final verification formula, let's temporarily ignore that we don't know the discrete logs of the Greek letter terms and compute the left-hand-side of the verification equation $AB$:
 
-$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_A \underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_B$$
+$$\underbrace{\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)}_A \underbrace{\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)}_B$$
 
 Expanding the terms we get:
 
@@ -400,12 +396,12 @@ $$
 
 Group the $s$ and $r$ terms together:
 $$
-=(\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2) + (r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2) - rs\delta^2
+=\left(\alpha s\delta + \sum_{i=1}^m a_iu_i(x) s\delta + rs\delta^2\right) + \left(r\delta\beta + r\delta\sum_{i=1}^m a_iv_i(x) + rs\delta^2\right) - rs\delta^2
 $$
 
 Factor out $s\delta$ and $r\delta$:
 $$
-=\underbrace{(\alpha+ \sum_{i=1}^m a_iu_i(x) + r\delta)s\delta}_{As\delta} + \underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)r\delta}_{Br\delta} - rs\delta^2
+=\underbrace{\left(\alpha+ \sum_{i=1}^m a_iu_i(x) + r\delta\right)s\delta}_{As\delta} + \underbrace{\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)r\delta}_{Br\delta} - rs\delta^2
 $$
 
 Substitute $A$ and $B$:
@@ -415,23 +411,23 @@ $$
 
 So our final equation is
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2$$
+$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\sum_{i=1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2$$
 
 We now break it into the public and private portions:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}_\text{private}$$
+$$\left(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta\right)\left(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta\right)=\alpha\beta+\underbrace{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}_\text{public} + \underbrace{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}_\text{private}$$
 
 We want the public portion and the private portion to be separated by $\gamma$ and $\delta$ respectively:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x) + As\delta + Br\delta - rs\delta^2}{\delta}$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As\delta + Br\delta - rs\delta^2$$
 
 $\delta$ cancels for some of the terms:
 
-$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta$$
+$$(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)=\alpha\beta+\gamma\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma} + \delta\left(\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta\right)$$
 
 We now separate this equation in to the verifier and prover portions. The boxed terms are the verifier portion, the underbrace terms are the terms that the prover provides:
 
-$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta}_{[C]_1}$$
+$$\underbrace{(\alpha + \sum_{i=1}^m a_iu_i(x) + r\delta)}_{[A]_1}\underbrace{(\beta + \sum_{i=1}^m a_iv_i(x) + s\delta)}_{[B]_2}=\boxed{\alpha\beta}+\boxed{\gamma}\boxed{\frac{\sum_{i=1}^\ell a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x))}{\gamma}} + \boxed{\delta}\underbrace{\left(\frac{\sum_{i=\ell+1}^m a_i(\alpha v_i(x) + \beta u_i(x)+w_i(x)) + h(x)t(x)}{\delta} + As + Br - rs\delta\right)}_{[C]_1}$$
 
 ## Groth16 Proof Algorithm
 We are now ready to show the Groth16 algorithm end-to-end. The trusted setup and the verification steps remain unchanged from the previous example where we incorporated $\gamma$ and $\delta$. Only the prover's calculation changes to incorporate $r$ and $s$.
@@ -442,8 +438,8 @@ $$\begin{align*}
 \alpha,\beta,\tau,\gamma,\delta &\leftarrow \text{random scalars}\\
 [\tau^{n-1}G_1,\tau^{n-2}G_1,\dots,\tau G_1,G_1] &\leftarrow \text{srs for } \mathbb{G}_1\\
 [\tau^{n-1}G_2,\tau^{n-2}G_2,\dots,\tau G_2,G_2] &\leftarrow \text{srs for } \mathbb{G}_2\\
-[\frac{\tau^{n-2}t(\tau)}{\delta},\frac{\tau^{n-3}t(\tau)}{\delta},\dots,\frac{\tau t(\tau)}{\delta},
-\frac{t(\tau)}{\delta}] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
+\left[\frac{\tau^{n-2}t(\tau)}{\delta}G_1,\frac{\tau^{n-3}t(\tau)}{\delta}G_1,\dots,\frac{\tau t(\tau)}{\delta}G_1,
+\frac{t(\tau)}{\delta}G_1\right] &\leftarrow \text{srs for }h(\tau)t(\tau)\\
 \\
 &\text{public portion of the witness}\\
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
@@ -459,7 +455,7 @@ $$\begin{align*}
 \end{align*}$$
 
 The trusted setup publishes
-$$([\alpha]_1,[\beta]_1[\beta]_2,[\gamma]_2,[\delta]_1[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
+$$([\alpha]_1,[\beta]_1[\beta]_2,[\gamma]_2,[\delta]_1[\delta]_2,\text{srs}_{G_1},\text{srs}_{G_2},\text{srs for }h(\tau)t(\tau),[\Psi_1]_1,[\Psi_2]_1,\dots,[\Psi_m]_1)$$
 
 ### Prover Steps
 Prover has a witness $\mathbf{a}$ and generates random scalars $r$ and $s$.
