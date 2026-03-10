@@ -287,7 +287,7 @@ For example, $y^2 = x^3 + 7 \pmod {43}$ creates a curve with 31 points total as 
 
 When the order of the curve matches the order of the finite field **every operation you do in the finite field has a homomorphic equivalent in the elliptic curve**.
 
-To go from a finite field to an elliptic curve, we we pick one point (arbitrarily) to be the generator, then we multiply the element in the finite field by the generator.
+To go from a finite field to an elliptic curve, we pick one point (arbitrarily) to be the generator, then we multiply the element in the finite field by the generator.
 
 ## Multiplication is really repeated addition
 There is no such thing as elliptic curve point multiplication. When we say "scalar multiplication" we really mean repeated addition. You cannot take two elliptic curve points and multiply them together (well, you sort of can with [bilinear pairings](https://www.rareskills.io/post/bilinear-pairing), but that’s something we will get to later).
