@@ -241,7 +241,7 @@ In my opinion, if you try to understand elliptic curves math in isolation from f
 That makes for a smoother learning experience.
 
 ### Algebraic manipulation is really just associative addition.
-Let $P$ be an elliptic curve point. What happens we do something like this?
+Let $P$ be an elliptic curve point. What happens if we do something like this?
 
 $$(a + b)P + cP = aP + (b + c)P$$
 
