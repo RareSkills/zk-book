@@ -4,13 +4,13 @@ In a previous chapter, we showed that multiplying the sums of elements of the ve
 
 To "extract" the inner product $\langle\mathbf{a},\mathbf{G}\rangle$, one must subtract from the outer product all terms that are not part of the inner product, i.e. the purple shaded region below: 
 
-![off product shade](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-07/off-diagonal-shade.png)
+![off product shade](https://r2media.rareskills.io/bulletproofs-07/off-diagonal-shade.png)
 
 There are $\mathcal{O}(n^2)$ such terms, so doing this directly is not efficient.
 
 However, observe that we can "fill up the outer product" in the manner shown in the animation below:
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-07/MatrixFoldingAnimation.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/bulletproofs-07/MatrixFoldingAnimation.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 In the animation above, after the prover sends the off-diagonal terms, the prover folds both $\mathbf{G}$ and $\mathbf{a}$, reducing their length by half.
 
@@ -33,7 +33,7 @@ But rather than proving we know the opening to $P'$ by sending $\mathbf{a}'$, we
 
 The animation below provides an intuition of what is happening. The next section describes the animation in detail.
 
-![iterative commitment animation](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-07/iterative-folding.gif)
+![iterative commitment animation](https://r2media.rareskills.io/bulletproofs-07/iterative-folding.gif)
 
 For this algorithm to work, the length of the vectors must be a power of two. However, if the length is not a power of two, we can pad the vectors with zeros until the length is a power of two.
 
@@ -135,7 +135,7 @@ In practice, we don't *actually* concatenate the vectors because the total lengt
 
 We show the algorithm in the animation below:
 
-<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-07/ThreeWayInnerProduct.mp4" type="video/mp4" autoplay loop muted controls></video>
+<video src="https://r2media.rareskills.io/bulletproofs-07/ThreeWayInnerProduct.mp4" type="video/mp4" autoplay loop muted controls></video>
 
 ## The algorithm
 Given $v = \langle\mathbf{a},\mathbf{b}\rangle$ and commitment $P = vQ+\langle\mathbf{a},\mathbf{G}\rangle + \langle\mathbf{b},\mathbf{H}\rangle$ we wish to prove that $P$ is committed as claimed. That is, $v$, $\mathbf{a}$, and $\mathbf{b}$ are committed to $P$ and $\langle\mathbf{a},\mathbf{b}\rangle=v$.

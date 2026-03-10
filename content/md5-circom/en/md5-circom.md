@@ -828,7 +828,7 @@ component main = MD5(10);
 
 The [R1CS](https://www.rareskills.io/post/rank-1-constraint-system) produced by the code above is over fifty-two thousand rows long, as highlighted in the figure below. There are a lot of opportunities to reduce the size of the circuit, especially by not converting the field elements to 32-bit arrays every time we use them.
 
-![Screenshot showing how many constraints are created](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/Md5-circom/md5-constraints.png)
+![Screenshot showing how many constraints are created](https://r2media.rareskills.io/Md5-circom/md5-constraints.png)
 
 However, each word in an MD5 (and other modern hashes) is 32 bits, so it will take 32 times as many signals to represent compared to regular code.
 

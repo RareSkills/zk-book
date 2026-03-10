@@ -97,7 +97,7 @@ Instead, we can do the following:
 
 This can be visualized as follows:
 
-![circuit diagram showing 32 bit addition](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/Bit32Emulation/circuit-diagram.png)
+![circuit diagram showing 32 bit addition](https://r2media.rareskills.io/Bit32Emulation/circuit-diagram.png)
 
 The most that `x + y` can overflow to is a 33-bit number. Consider that the maximum value `x` and `y` can hold is $2^{32}-1$. If we add that value to itself, we get
 

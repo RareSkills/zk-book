@@ -114,7 +114,7 @@ The identity also holds if one of the vectors is a vector of elliptic curve poin
 
 For cases where $n > 2$, proving knowledge of an inner product means the prover needs to convince the verifier they know the "area" of the purple-shaded region below.
 
-![a square matrix with every entry shaded except the main diagonal](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-06/off-product-shade.png)
+![a square matrix with every entry shaded except the main diagonal](https://r2media.rareskills.io/bulletproofs-06/off-product-shade.png)
 
 Conveying this information succinctly when $n > 2$ is trickier, so we will revisit this later.
 
@@ -320,7 +320,7 @@ Similarly, we can pair-wise partition $\mathbf{G}$.
 $$\mathbf{G} = [G_1, G_2, G_3, G_4, G_5, G_6, G_7, G_8]=[G_1, G_2] [G_3, G_4] [G_5, G_6] [G_7, G_8]$$
 
 Each of the sub-pairs can then be treated as instances of computing the inner product using the $n=2$ case from earlier:
-![outer product of pairwise partitions](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-06/pairwise-outer-product.png)
+![outer product of pairwise partitions](https://r2media.rareskills.io/bulletproofs-06/pairwise-outer-product.png)
 
 We could then prove we know the four $n=2$ commitments $a_1G_1 + a_2G_2$, $a_3G_3 + a_4G_4$, $a_5G_5 + a_6G_6$, and $a_7G_7 + a_8G_8$ and this would be equivalent to proving we know the opening to the original commitment.
 
@@ -376,7 +376,7 @@ R &= R_1 + R_2 + R_3 + R_4\\
 The operation described is shown in the animation below:
 
 <video autoplay loop muted controls>
-    <source src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-06/outerproduct-anim.mp4" type="video/mp4">
+    <source src="https://r2media.rareskills.io/bulletproofs-06/outerproduct-anim.mp4" type="video/mp4">
 </video>
 
 ### Security of adding all the commitments and off-diagonals together
@@ -413,7 +413,7 @@ $P$ is a commitment to the original vector $\mathbf{a}$ with respect to the basi
 The sum $Lu^2 + P + Ru^{-2}$ is itself a vector commitment of the vector $\mathsf{fold}(\mathbf{a},u)$ to the basis $\mathsf{fold}(\mathbf{G}, u^{-1})$, which has size $n/2$.
 
 We show the relationship graphically below:
-![a graphic showing the relationship between a vector commitment and a folded vector commitment]([https://hackmd.io/_uploads/HJPpWqLlye.png](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/bulletproofs-06/folded-commitment.png)
+![a graphic showing the relationship between a vector commitment and a folded vector commitment](https://r2media.rareskills.io/bulletproofs-06/folded-commitment.png)
 
 To prove we know the opening to a commitment of size $n/2$, we can simply send the vector of size $n/2$, which in this case is $\mathsf{fold}(\mathbf{a},u)$.
 

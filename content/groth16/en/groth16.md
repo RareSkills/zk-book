@@ -6,7 +6,7 @@ The Groth16 algorithm enables a quadratic arithmetic program to be computed by a
 This article is a chapter in the [RareSkills Book of Zero Knowledge Proofs](https://www.rareskills.io/zk-book). It assumes you are familiar with the prior chapters.
 
 ## Notation
-We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ elliptic curve group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ elliptic curve group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arthmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
+We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ elliptic curve group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ elliptic curve group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arithmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
 
 Given an [Arithmetic Circuit (ZK Circuit)](https://www.rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$. Then, we can convert the R1CS to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
 
@@ -228,14 +228,14 @@ The prover computes
 $$\begin{align*}
 [A]_1 &= [\alpha]_1 + \sum_{i=1}^m a_iu_i(\tau)\\
 [B]_2 &= [\beta]_2 + \sum_{i=1}^m a_iv_i(\tau)\\
-[C]_1 &= \sum_{i=1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
+[C]_1 &= \sum_{i=1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\
 \end{align*}$$
 
 Note that we replaced the "problematic" polynomial
 
 $$=\sum_{i=1}^m a_i\boxed{(\alpha v_i(\tau)+\beta u_i(\tau) + w_i(\tau))}$$
 
-(the one that contained $\alpha$ and $\beta$) with 
+(the one that contained $\alpha$ and $\beta$) with
 
 $$\sum_{i=1}^m a_i[\Psi_i]_1$$
 
@@ -260,7 +260,7 @@ Specifically, the prover computes:
 $$\begin{align*}
 [A]_1 &= [\alpha]_1 + \sum_{i=1}^m a_iu_i(\tau)\\
 [B]_2 &= [\beta]_2 + \sum_{i=1}^m a_iv_i(\tau)\\
-[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
+[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\
 \end{align*}$$
 
 Note that only the computation of $[C]_1$ changed -- the prover only uses the $a_i$ and $\Psi_i$ terms $\ell + 1$ to $m$.
@@ -315,7 +315,7 @@ $$\begin{align*}
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
 [\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
+[\Psi_\ell]_1 &= \frac{\alpha v_\ell(\tau) + \beta u_\ell(\tau) + w_\ell(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
 [\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\
@@ -332,7 +332,7 @@ The prover steps are the same as before:
 $$\begin{align*}
 [A]_1 &= [\alpha]_1 + \sum_{i=1}^m a_iu_i(\tau)\\
 [B]_2 &= [\beta]_2 + \sum_{i=1}^m a_iv_i(\tau)\\
-[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\    
+[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)\\
 \end{align*}$$
 
 And the verifier steps now include pairing by $[\gamma]_2$ and/or $[\delta]_2$ to cancel out the denominators:
@@ -445,7 +445,7 @@ $$\begin{align*}
 [\Psi_1]_1 &= \frac{\alpha v_1(\tau) + \beta u_1(\tau) + w_1(\tau)}{\gamma}G_1\\
 [\Psi_2]_1 &= \frac{\alpha v_2(\tau) + \beta u_2(\tau) + w_2(\tau)}{\gamma}G_1\\
 &\vdots\\
-[\Psi_\ell]_1 &= \frac{\alpha v_m(\tau) + \beta u_m(\tau) + w_m(\tau)}{\gamma}G_1\\
+[\Psi_\ell]_1 &= \frac{\alpha v_\ell(\tau) + \beta u_\ell(\tau) + w_\ell(\tau)}{\gamma}G_1\\
 \\
 &\text{private portion of the witness}\\
 [\Psi_{\ell+1}]_1 &= \frac{\alpha v_{\ell+1}(\tau) + \beta u_{\ell+1}(\tau) + w_{\ell+1}(\tau)}{\delta}G_1\\

@@ -278,7 +278,7 @@ However, if we have a binary representation of the field element, then we can ch
 
 Because it can be a bit tedious to keep writing `pow` and `% p` in Python, the reader may wish to use the [galois library](https://pypi.org/project/galois/) instead (finite fields are sometimes called Galois fields, pronounced “Gal-wah”). It can be installed with `python3 -m pip install galois`.
 
-Below, we translate the addition of fractions code from the above section $(1/2 + 1/3 = 1/6)$ to use the `galois` library instead. The library overwrites the math operators to work in a finite field:
+Below, we translate the addition of fractions code from the above section $(1/2 + 1/3 = 5/6)$ to use the `galois` library instead. The library overwrites the math operators to work in a finite field:
 
 ```python
 import galois
@@ -296,8 +296,8 @@ The operation `1 / GF(a)` computes the multiplicative inverse of `a`.
 The `galois` library can compute the additive inverse by adding a negative sign in front:
 
 ```python
-negative_two = -GF(2)
-assert negative_two + GF(2) == 0
+negative_two = -GF7(2)
+assert negative_two + GF7(2) == 0
 ```
 
 ## The multiplication of fractions is also consistent
@@ -443,7 +443,7 @@ The function above returns one of the square roots of x modulo p. The other squa
 
 **The implication for this is that the arithmetic circuit `x * x === y` may have two solutions.** For example, in a finite field `p = 11`, it might seem that the arithmetic circuit `x * x === 4` only admits the value 2 because -2 is not a finite field element. However, that assumption is very wrong! The assignment `x = 9`, which is congruent to -2, also satisfies the circuit.
 
-**Exercise:** Use the code snippet above to compute the modular square root of 5 in the finite field of `p = 23`. The code will only give you one of the answers. How can you compute the other?
+**Exercise:** Use the code snippet above to compute the modular square root of 5 in the finite field of `p = 19`. The code will only give you one of the answers. How can you compute the other?
 
 ## Linear systems of equations in finite fields
 
@@ -551,9 +551,9 @@ To see this from another angle, we could solve the equations for y and get:
 $$y = 1/2 - x/2$$
 $$y=2/3-7x/3$$
 
-We saw in the previous section that 6 is the multiplicative inverse of 2, so the first equation has a "slope" of 6 in the the finite field. In the second equation, we compute the slope by computing 7 times the multiplicative inverse of 3: `(7 * pow(3, -1, 11)) % 11 = 6` . We now show that their slopes are the same in a finite field.
+We saw in the previous section that `6` is the multiplicative inverse of `2`, so the first equation has a "slope" of `-1/2` which is `-6` or equivalently `5` in the finite field. In the second equation, we compute the slope by computing `-7` times the multiplicative inverse of `3`: `(-7 * pow(3, -1, 11)) % 11 = 5`. We now show that their slopes are the same in a finite field.
 
-The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of 5:
+The slope is the coefficient of `x` in the form `y = c + bx`. For the two equations above, the first slope is `-1/2` and the second slope is `-7/3`. If we convert both of these fractions to an element in the finite field of `p = 11`, we get the same value of `5`:
 
 ```python
 import galois
@@ -643,7 +643,7 @@ Consider the polynomial $y = x² − 5$. We can see it has roots at $\sqrt{5}$ a
 
 ![Plot of y = x^2 + 5 (mod 17)](https://static.wixstatic.com/media/706568_a87f571b1af9454db2b27d4a9fd3d8f6~mv2.png/v1/fill/w_1399,h_864,al_c,q_90,enc_auto/706568_a87f571b1af9454db2b27d4a9fd3d8f6~mv2.png)
 
-There are no roots is because $\sqrt{5}$ cannot be represented in a finite field modulo 17. However, in the finite field $p = 11$, then there would be two roots because 5 has a modular square roots in the finite field of $p = 11$.
+There are no roots because $\sqrt{5}$ cannot be represented in a finite field modulo 17. However, in the finite field $p = 11$, then there would be two roots because 5 has a modular square roots in the finite field of $p = 11$.
 
 ### Limitations in arithmetic circuits for ZK Proofs
 

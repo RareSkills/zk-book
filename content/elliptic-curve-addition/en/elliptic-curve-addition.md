@@ -47,7 +47,7 @@ I’m using $⊕$, because we know this binary operator is not addition in any n
 
 We also know that there has to be an identity element somewhere. That is, any $(x, y)$ point that falls on the curve is combined with the identity element, the output is the same $(x, y)$ point unchanged.
 
-And because this is a group and not a monoid, every point needs to have an inverse such that $P ⊕ P⁻¹ = I$, where $I$ is the identity element.
+And because this is a group and not just a monoid, every point needs to have an inverse such that $P ⊕ P⁻¹ = I$, where $I$ is the identity element.
 
 ### The identity element
 Intuitively, we might think of $(0, 0)$ or $(1, 1)$ being the identity element, since something like that often is in other groups, but you can see in the plots above that those points generally do not land on the curve. Since they don’t belong to the set of points on $y² = x³ + ax + b$, they are not part of the group.
@@ -67,7 +67,7 @@ Without loss of generality, let’s take the elliptic curve
 
 $$ y² = x³ + 10 $$
 
-To illustrate how lines intersect on elliptic curves, then let’s draw a nearly vertical line $y = 10x$
+To illustrate how lines intersect on elliptic curves, let’s draw a nearly vertical line $y = 10x$
 
 (It could be 1000x to make it more vertical, but we would get numerical instability as you will see later)
 
@@ -131,7 +131,7 @@ $$
 
 This says $B$ is equal to it’s inverse. But $B$ is not the identity element (which is the only element that can be the inverse of itself), so we have a contradiction.
 
-Thankfully, there is a way to rescue this. Just define point addition to be the third point *flipped over the y axis*. Again, we are *allowed to do this* because binary operators can be defined however we like, we just care that our definitions satisfy the group laws.
+Thankfully, there is a way to rescue this. Just define point addition to be the third point *flipped over the x axis*. Again, we are *allowed to do this* because binary operators can be defined however we like, we just care that our definitions satisfy the group laws.
 
 So the correct way to add elliptic curve points is represented graphically below
 
@@ -153,7 +153,7 @@ $$
 \begin{align*}
 \lambda &= \frac{y₂ - y₁}{x₂ - x₁} \\
 x₃ &= \lambda² - x₁ - x₂ \\
-y₃ &= \lambda(x₃ - x₁) - y₁
+y₃ &= \lambda(x₁-x₃) - y₁
 \end{align*}
 $$
 
@@ -213,13 +213,13 @@ Because of associativity, we can write $1000A$ as
 
 $$1000A = 512A ⊕ 256A ⊕ 128A ⊕ 64A ⊕ 32A ⊕ 8A$$
 
-$512A$ (and the other terms) can be computed quickly because 512 is just $A$ doubled 9 times.
+$512A$ (and the other terms) can be computed quickly because 512A is just $A$ doubled 9 times.
 
-So rather than doing 1000 operations, we can do it in 14 (9 to compute 512, caching the intermediate results, then 5 additions).
+So rather than doing 1000 operations, we can do it in 14 (9 to compute 512A, caching the intermediate results, then 5 additions).
 
 This is actually an important property when we get to cryptography:
 
-*We can efficiently multiply an elliptic curve point by a large integer efficiently.*
+*We can efficiently multiply an elliptic curve point by a large integer.*
 
 ## Implementation details of addition
 It isn’t too hard to derive the formula for point addition using simple algebra. When we intersect two points, we know the slope and the points that it crossed through, so we can calculate the point of intersection.
@@ -241,7 +241,7 @@ In my opinion, if you try to understand elliptic curves math in isolation from f
 That makes for a smoother learning experience.
 
 ### Algebraic manipulation is really just associative addition.
-Let $P$ be an elliptic curve point. What happens we do something like this?
+Let $P$ be an elliptic curve point. What happens if we do something like this?
 
 $$(a + b)P + cP = aP + (b + c)P$$
 
@@ -255,7 +255,7 @@ $$
 \begin{align*}
 (a + b + c)P &= (a + b + c)P \\
 (aP + bP) + cP &= aP + (bP + cP) \\
-(a + b)P + cP& = aP (b + c)P
+(a + b)P + cP &= aP + (b + c)P
 \end{align*}
 $$
 
@@ -270,9 +270,9 @@ If we were to do elliptic curves over real numbers for a real application, they 
 
 So in reality, we do everything with [modular arithmetic](https://www.rareskills.io/post/finite-fields).
 
-But we lose none of the intuition we’ve gained above by doing this.
+But we lose none of the intuition we’ve gained above by using real numbers as a visual example.
 
 ## Learn more with RareSkills
-This material is from our zero knowledge course, see there to learn more.
+This material is from our zero knowledge course, see there to learn more. This post is part of a series on [Zero Knowledge Proofs](rareskills.io/zk-book).
 
 *Originally Published September 1, 2023*

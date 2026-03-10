@@ -10,7 +10,7 @@ Let's consider a few examples.
 ### A straight line crossing a parabola
 
 Consider the polynomial $p(x) = x$ and $q(x) = x^2$. They intersect at $x = 0$ and $x = 1$.
-![Plot of y = x and y = x^2](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/schwartz-zippel-x-x2-example.png)
+![Plot of y = x and y = x^2](https://r2media.rareskills.io/schwartz-zippel-x-x2-example.png)
 
 They intersect at two points, which is the maximum degree between the polynomials $y = x$ and $y = x^2$.
 
@@ -18,7 +18,7 @@ They intersect at two points, which is the maximum degree between the polynomial
 
 Consider the polynomials $p(x) = x^3$ and $q(x) = x$. The polynomials intersect at $x = -1$, $x = 0$, and $x = 1$ and nowhere else. The number of intersections is bounded by the maximum degree of the polynomials, which in this case is 3.
 
-![Plot of y = x^3 and y = x](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/schwartz-zippel-x-x3-example.png)
+![Plot of y = x^3 and y = x](https://r2media.rareskills.io/schwartz-zippel-x-x3-example.png)
 
 
 ## Polynomials in finite fields and the Schwartz-Zippel Lemma
