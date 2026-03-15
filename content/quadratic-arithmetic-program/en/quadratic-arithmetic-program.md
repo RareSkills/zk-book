@@ -458,7 +458,7 @@ a_4
 \end{align*}
 $$
 
-Observe that the final result is a single polynomial with degree at most $n - 1$ (since there are $n$ rows in $\mathbf{L}$, $u_1(x), ..., u_n(x)$ have degree at most $n - 1$).
+Observe that the final result is a single polynomial with degree at most $n - 1$ (since there are $n$ rows in $\mathbf{L}$, $u_1(x), ..., u_n(x)$ have degree at most $n - 1$, you could also understand it as the number of points in a polynomial, since we converted the matrix into polynomials for each column).
 
 In the general case, $\mathbf{L}\mathbf{a}$ can be written as
 
