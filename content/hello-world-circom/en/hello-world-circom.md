@@ -331,7 +331,7 @@ The output is the computed witness as a `witness.wtns` file.
 <aside>
 💡
 
-If we had passed values that did not honor the constraint, `a*b === c`, e.g. `a=1`, `b=2`, `c=3`, `witness_calculator.js` would throw an error. 
+If we had passed values that did not honor the constraint, `a*b === c`, e.g. `a=1`, `b=2`, `c=2`, `witness_calculator.js` would throw an error. 
 
 </aside>
 
