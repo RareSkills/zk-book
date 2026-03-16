@@ -134,7 +134,7 @@ template Max(n) {
   signal allZero;
   allZero <== IsEqual()([0, acc]);
   allZero === 0;
-  out <== max;
+  out <== maxSignal;
 }
 
 component main = Max(8);
