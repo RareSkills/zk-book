@@ -37,7 +37,7 @@ If a third party creates a structured reference string (srs) via a powers of tau
 $$
 \begin{align*}
 [\Omega_{n-1}, \Omega_{n-2},\dots,\Omega_2,\Omega_1,G_1] &= [\tau^nG_1,\tau^{n-1}G_1,\dots,\tau G_1,G_1] && \text{srs for } G_1 \\
-[\Theta_{n-1}, \Theta_{n-2},\dots,\Theta_2,\Theta_2,G_2] &= [\tau^nG_2,\tau^{n-1}G_2,\dots,\tau G_2,G_2] && \text{srs for } G_2\\
+[\Theta_{n-1}, \Theta_{n-2},\dots,\Theta_2,\Theta_1,G_2] &= [\tau^nG_2,\tau^{n-1}G_2,\dots,\tau G_2,G_2] && \text{srs for } G_2\\
 [\Upsilon_{n-2},\Upsilon_{n-3},\dots,\Upsilon_1,\Upsilon_0]&=[\tau^{n-2}t(\tau)G_1,\tau^{n-3}t(\tau)G_1,\dots,\tau t(\tau)G_1,t(\tau)G_1] && \text{srs for }h(\tau)t(\tau)\\
 \end{align*}
 $$
