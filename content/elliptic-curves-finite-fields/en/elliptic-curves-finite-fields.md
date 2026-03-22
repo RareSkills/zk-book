@@ -217,7 +217,7 @@ Using the Python functions above, we can start with the point $(4, 10)$ and gene
 next_x, next_y = 4, 10
 print(0, 4, 10)
 points = [(next_x, next_y)]
-for i in range(1, 12):
+for i in range(1, 13):
     # repeatedly add G to the next point to generate all the elements
     next_x, next_y = add_points(next_x, next_y, 4, 10, 11)
     print(i, next_x, next_y)
