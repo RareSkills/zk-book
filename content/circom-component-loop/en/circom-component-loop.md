@@ -98,8 +98,7 @@ template Max(n) {
     max = in[i] > max ? in[i] : max;   
   }    
   
-  signal maxSignal;    
-  maxSignal <-- max;
+  out <-- max;
   
   // for each element in the array, assert that
   // max ≥ that element
@@ -108,16 +107,16 @@ template Max(n) {
   var acc;
   for (var i = 0; i < n; i++) {
   	GTE[i] = GreaterEqThan(252);
-  	GTE[i].in[0] <== maxSignal;
+  	GTE[i].in[0] <== out;
   	GTE[i].in[1] <== in[i];
   	GTE[i].out === 1;
   	
   	// this is used in the
   	// next code block to ensure
-  	// that maxSignal equals at
+  	// that out equals at
   	// least one of the inputs
   	EQ[i] = IsEqual();
-  	EQ[i].in[0] <== maxSignal;
+  	EQ[i].in[0] <== out;
   	EQ[i].in[1] <== in[i];
   	
   	// acc is greater than zero
@@ -126,15 +125,14 @@ template Max(n) {
   	acc += EQ[i].out;
   }
   
-  // assert that maxSignal is 
+  // assert that out is 
   // equal to at least one of the
   // inputs. if acc = 0 then
   // none of the inputs equals
-  // maxSignal
+  // out
   signal allZero;
   allZero <== IsEqual()([0, acc]);
   allZero === 0;
-  out <== max;
 }
 
 component main = Max(8);
