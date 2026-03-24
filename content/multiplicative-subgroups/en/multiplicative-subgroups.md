@@ -345,14 +345,7 @@ Let's now test the set $\{1, 2, 3, 4, 5\}$ under multiplication mod 6.
 | **4**      | $4$ | $8\equiv 2$| $12 \equiv  0$ | $16 \equiv  4$ | $20 \equiv  2$ |
 | **5**      | $5$ | $10\equiv 4$  | $15 \equiv 3$ | $20 \equiv  2$ | $25 \equiv1$  |
 
-- **Closure**: Holds.
-- **Identity**:$1$ still works.
-- **Inverses**:  Inverses fail. Only $1$ and $5$ are invertible:
-  - $1 \times1= 1$
-  - $5 \times5= 25 \equiv1\mod 6$
-
-
-Elements $2$, $3$, and $4$ have no counterparts that yield $1$. This failure arises because $6$ is not prime: it factors as $6 =2\times 3$. The factorization introduces zero divisors—nonzero elements that, when multiplied by other nonzero elements, yield zero modulo $n$. For example, $4 \times3= 12 \equiv 0 \pmod{6}$, even though both $3$ and $4$ are nonzero in $\mathbb{Z}_6$. Since $2$, $3$, and $4$ share common factors with $6$ (namely $2$, $3$, and $2$, respectively), they fail to have multiplicative inverses.
+Now we have a more fundamental problem: some multiplications result in 0 which is not part of the set. Hence, this set and binary operator is not closed so it is not a group.
 
 ### 3.3 Example: $(\mathbb{Z}_8\setminus\{0\}, \times)$
 
