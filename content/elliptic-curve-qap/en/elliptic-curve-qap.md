@@ -75,7 +75,7 @@ $$
 ### The degrees of the polynomials in the QAP with respect to the size of the R1CS
 A couple observations about the degrees of the polynomials in the general case:
 - The degree of $u(x)$ and $v(x)$ could be as high as $n - 1$ because they interpolate $n$ points, where $n$ is the number of rows in the R1CS.
-- The degree of $w(x)$ could be as low as 0 if the sum of the polynomials $\sum_{i=0}^m a_iw_i(x)$ adds up to the zero polynomial, that is, the coefficients additively cancel each other out.
+- The degree of $w(x)$ could be as low as 0 if the sum of the polynomials $\sum_{i=1}^m a_iw_i(x)$ adds up to the zero polynomial, that is, the coefficients additively cancel each other out.
 - $t(x)$ is degree $n$ by definition.
 - Multiplying polynomials adds their degrees together, and dividing polynomials subtracts their degrees.
 
