@@ -138,7 +138,7 @@ $$
 \begin{align*}
 [A]_1 &=\sum_{i=1}^4 a_iu_i(\tau) = \langle[u_{2a}, u_{1a}, u_{0a}],[\Omega_2, \Omega_1, G_1]\rangle\\
 [B]_2 &=\sum_{i=1}^4 a_iv_i(\tau) = \langle[v_{2a}, v_{1a}, v_{0a}],[\Theta_2, \Theta_1, G_2]\rangle\\
-[C]_1 &=\sum_{i=1}^4 a_iw_i(\tau) = \langle[v_{2a}, v_{1a}, v_{0a}],[\Omega_2, \Omega_1, G_1]\rangle \\
+[C]_1 &=\sum_{i=1}^4 a_iw_i(\tau) = \langle[w_{2a}, w_{1a}, w_{0a}],[\Omega_2, \Omega_1, G_1]\rangle \\
 \end{align*}
 $$
 
