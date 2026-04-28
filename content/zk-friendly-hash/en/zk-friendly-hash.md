@@ -110,7 +110,7 @@ template Example(n) {
   component hash = Poseidon(n);
 
   for (var i = 0; i < n; i++) {
-    hash.inputs[0] <== in[i];
+    hash.inputs[i] <== in[i];
   }
   out <== hash.out;
 }
