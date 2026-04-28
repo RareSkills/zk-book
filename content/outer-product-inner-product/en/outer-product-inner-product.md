@@ -199,7 +199,7 @@ $$
 
 Under the hood this is:
 $$
-\underbrace{a_1G_2}_L + \underbrace{u(a_1G_1 + a_2G_2)}_{uA} + \underbrace{a_2u G_1}_{u^2R} = \underbrace{(a_1 + u a_2)}_{a'}(u G_1 + G_2)
+\underbrace{a_1G_2}_L + \underbrace{u(a_1G_1 + a_2G_2)}_{uA} + \underbrace{a_2u^2 G_1}_{u^2R} = \underbrace{(a_1 + u a_2)}_{a'}(u G_1 + G_2)
 $$
 
 which is identically correct if the prover correctly computed $a'$, $L$, and $R$.
