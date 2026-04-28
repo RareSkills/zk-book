@@ -204,7 +204,7 @@ $$
 
 which is identically correct if the prover correctly computed $a'$, $L$, and $R$.
 
-Note that the verifier applied $u$ to $G_2$ whereas the prover applied $u$ to $a_1$. This causes the terms of the original inner product to be the linear coefficients of the resulting polynomial.
+Note that the verifier applied $u$ to $G_1$ whereas the prover applied $u$ to $a_2$. This causes the terms of the original inner product to be the linear coefficients of the resulting polynomial.
 
 The fact that $L$ and $R$ are separated by $u^2$, which the verifier controls, prevents a malicious prover from doing the attack described earlier. That is, the prover cannot shift value from $R$ to $L$ because the value they shift must be scaled by $u^2$, but the prover must send $L$ and $R$ before they receive $u$.
 
