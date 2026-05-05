@@ -154,7 +154,7 @@ $$
 
 and evaluate $\tilde{f}(x)$ at $\sqrt{\sqrt{1}}$. At each evaluation of an innermost square root, the expression branches into two, one for each value of the square root. This continues until no square roots remain, at which point the procedure ends.
 
-![image -2.png](INTT%20Algorithm%20by%20Hand/image_-2.png)
+![INTT by hand](https://r2media.rareskills.io/INTTByHand/intt-by-hand.png)
 
 We obtain
 
