@@ -243,7 +243,7 @@ Thus, we really want subcircuits to *indicate* that a certain condition holds (i
 
 ```jsx
 // at least one of the two signals is not zero
-x_eq_42 * x_lt_16 === 1;
+(1 - x_eq_42) * (1 - x_lt_16) === 0
 ```
 
 To create an *indicator* that `x` equals 42, we want to know if the value `x - 42` is precisely zero or not.
