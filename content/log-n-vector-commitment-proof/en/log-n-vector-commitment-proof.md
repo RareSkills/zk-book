@@ -46,7 +46,7 @@ The prover and verifier then engage in the following algorithm below. The argume
 
 In the algorithm description below $n$ is the length of the vectors in the input, which are all of the same length.
 
-#### $\texttt{prove_commitments_log}(P, \mathbf{G}, | \mathbf{a})$
+#### $\texttt{prove\_commitments\_log}(P, \mathbf{G}, \mid \mathbf{a})$
 ##### Case 1: $n = 1$
 
 1. The prover sends $a$ and the verifier checks that $aG \stackrel{?}= P$ and the algorithm ends.
@@ -68,7 +68,7 @@ P' &= Lu^2+P+Ru^{-2}
 $$
 4. The prover computes
 $$\mathbf{a}'=\mathsf{fold}(\mathbf{a},u)$$
-5. $\texttt{prove_commitments_log}(P', \mathbf{G}', \mathbf{a}')$
+5. $\texttt{prove\_commitments\_log}(P', \mathbf{G}', \mathbf{a}')$
 
 ### Commentary on the algorithm
 The prover is recursively proving that, given values $P$ and $\mathbf{G}$, they know the $\mathbf{a}$ such that $P=\langle\mathbf{a},\mathbf{G}\rangle$. Both parties recursively fold $\mathbf{G}$ until it is a single point, and the prover recursively folds $\mathbf{a}$ until it is a single point.
@@ -140,7 +140,7 @@ We show the algorithm in the animation below:
 ## The algorithm
 Given $v = \langle\mathbf{a},\mathbf{b}\rangle$ and commitment $P = vQ+\langle\mathbf{a},\mathbf{G}\rangle + \langle\mathbf{b},\mathbf{H}\rangle$ we wish to prove that $P$ is committed as claimed. That is, $v$, $\mathbf{a}$, and $\mathbf{b}$ are committed to $P$ and $\langle\mathbf{a},\mathbf{b}\rangle=v$.
 
-#### $\texttt{prove_commitments_log}(P, \mathbf{G}, \mathbf{H},Q, |\mathbf{a}, \mathbf{b})$
+#### $\texttt{prove\_commitments\_log}(P, \mathbf{G}, \mathbf{H}, Q, \mid \mathbf{a}, \mathbf{b})$
 ##### Case 1: $n = 1$
 
 1. The prover sends $(a,b)$ and the verifier checks that $P \stackrel{?}= aG + bH + abQ$. The algorithm ends.
@@ -168,7 +168,7 @@ $$
 \mathbf{b}'&=\mathsf{fold}(\mathbf{b},u^{-1})
 \end{align*}
 $$
-5. $\texttt{prove_commitments_log}(P', G', H', \mathbf{a}', \mathbf{b}')$
+5. $\texttt{prove\_commitments\_log}(P', G', H', \mathbf{a}', \mathbf{b}')$
 
 The following exercises can be found in our [ZK Bulletproofs GitHub Repo](https://github.com/RareSkills/ZK-bulletproofs/tree/main):
 

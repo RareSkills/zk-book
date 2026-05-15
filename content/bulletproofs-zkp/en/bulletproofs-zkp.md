@@ -98,7 +98,9 @@ For this proof, we do not need secrecy because $\mathbf{l}_u$ and $\mathbf{r}_u$
 
 Now that the verifier has all the necessary data, the prover engages in an interactive proof to prove that $C$ holds the commitments to $\mathbf{l}_u$ and $\mathbf{r}_u$ and that their inner product is $t_u$:
 
-$$\texttt{prove_commitments_log}(C + t_uQ, \mathbf{G}, \mathbf{H}, Q, \mathbf{l}_u, \mathbf{r}_u)$$
+$$
+\texttt{prove\_commitments\_log}(C + t_uQ, \mathbf{G}, \mathbf{H}, Q, \mathbf{l}_u, \mathbf{r}_u)
+$$
 
 That subroutine will prove that $t_u\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle$ and $C\stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle$ without having to send $\mathbf{l}_u$ and $\mathbf{r}_u$. It also only sends logarithmic-sized data. Note that the recursive algorithm from the previous chapter uses a commitment $P = \langle \mathbf{a}, \mathbf{G} \rangle + \langle \mathbf{b}, \mathbf{H} \rangle + \langle\mathbf{a},\mathbf{b}\rangle Q$, so the verifier needs to add in the "$Q$ portion" themselves. Now the verifier can be assured that
 
