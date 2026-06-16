@@ -1,4 +1,4 @@
-# Using Convolution Theorem to Prove Equivalence Between Multiplication in Coefficient Form and Point Form
+# Using the Convolution Theorem to Prove Equivalence Between Multiplication in Coefficient Form and Point Form
 
 At the beginning of this series, we argued that the [multiplication of two polynomials](https://app.notion.com/p/Using-Convolution-Theorem-to-Prove-Equivalence-Between-Multiplication-in-Coefficient-Form-and-Point--2c709cb3e9628091b6cac7c0d9737423?pvs=21) of degree at most $n$ can be performed in $\mathcal{O}(n)$ complexity time if both polynomials are in point-value form.
 
