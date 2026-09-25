@@ -383,7 +383,7 @@ assert eq(multiply(G1, x), multiply(G1, x + curve_order))
 assert eq(multiply(G1, x), multiply(G1, x + field_modulus))
 ```
 
-The implication of this is that `(x + y) mod curve_order == xG + yG`.
+The implication of this is that `((x + y) mod curve_order)G == xG + yG`.
 
 ```python
 x = 2 ** 300 + 21

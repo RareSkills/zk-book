@@ -195,7 +195,7 @@ assert (5 * 7) % p == 1
 
 **Exercise:** Find the multiplicative inverse of 3 modulo 5. There are only 5 possibilities, so try all of them and see which ones work.
 
-**Exercise:** What is the multiplicative inverse of 50 in the finite field $p = 51$? You do not need Python to compute this, see the principles described in “General rules of multiplicative inverses.”
+**Exercise:** What is the multiplicative inverse of 50 in the finite field $p = 53$? You do not need Python to compute this, see the principles described in “General rules of multiplicative inverses.”
 
 **Exercise:** Use Python to compute the multiplicative inverse of 288 in the finite field of `p = 311`. You can check your work by validating that `(288 * answer) % 311 == 1`.
 
@@ -647,7 +647,7 @@ There are no roots because $\sqrt{5}$ cannot be represented in a finite field mo
 
 ### Limitations in arithmetic circuits for ZK Proofs
 
-If we wish to write an arithmetic circuit to show "I know the root of the polynomial $y = x² − 5$" using an arithmetic circuit over a finite field, then we may run into the issue of not being able to encode $\sqrt{5}$. That is, over real numbers, $y = x² − 5$ has a root of $\sqrt{5}$, but this cannot be expressed in some finite fields. Depending on $p$, the arithmetic circuit `x² === 5` may have no no satisfying witness.
+If we wish to write an arithmetic circuit to show "I know the root of the polynomial $y = x² − 5$" using an arithmetic circuit over a finite field, then we may run into the issue of not being able to encode $\sqrt{5}$. That is, over real numbers, $y = x² − 5$ has a root of $\sqrt{5}$, but this cannot be expressed in some finite fields. Depending on $p$, the arithmetic circuit `x² === 5` may have no satisfying witness.
 
 ### Polynomials in finite fields with Python
 
