@@ -152,7 +152,7 @@ $$
 
 ## Computing $h(x)t(x)$
 
-Recall that the degree of $t(x)$ is 3 (generally $n$) and the degree of $h(x)$ is 1 (generally $n - 2$). If we multiply these together, we could get up to a degree 3 polynomial, which is more than the powers of tau ceremony provides. Instead, the powers of tau ceremony must be adjusted to provide a structured reference string for $h(x)t(x)$.
+Recall that the degree of $t(x)$ is 3 (generally $n$) and the degree of $h(x)$ is 1 (generally $n - 2$). If we multiply these together, we could get up to a degree 4 polynomial, which is more than the powers of tau ceremony provides. Instead, the powers of tau ceremony must be adjusted to provide a structured reference string for $h(x)t(x)$.
 
 The person doing the trusted setup knows $t(x)$, it is simply $(x - 1)(x - 2)...(x - n)$. However, $h(x)$ is a polynomial computed by the prover and changed based on the values of $\mathbf{a}$, so it cannot be known during the trusted setup.
 
