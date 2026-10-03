@@ -420,7 +420,7 @@ For example, we cannot do the following using regular integers.
 
 ```python
 # this throws an exception
-eq(add(multiply(G1, 5 / 2), multiply(G1, 1 / 2), multiply(G1, 3)
+eq(multiply(G1, 5 / 2), add(multiply(G1, 1 / 2), multiply(G1, 2)))
 ```
 However, in a finite field, 1/2 can be meaningfully computed as the multiplicative inverse of 2. Therefore, 5 / 2 can be encoded as $5 \cdot \mathsf{inv}(2)$.
 
