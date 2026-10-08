@@ -129,7 +129,7 @@ $$P=\langle\mathbf{a},\mathbf{G}\rangle+\langle\mathbf{a},\mathbf{b}\circ\mathbf
 
 where $\oplus$ means vector concatenation.
 
-Effectively, we are proving we committed vector $\mathbf{a}\oplus\mathbf{a}\oplus\mathbf{b}$ to elliptic curve vector basis $\mathbf{G}\oplus\mathbf{Q}^n\oplus\mathbf{H}$.
+Effectively, we are proving we committed vector $\mathbf{a}\oplus\mathbf{a}\oplus\mathbf{b}$ to elliptic curve vector basis $\mathbf{G}\oplus\ b\circ\mathbf{Q}^n\oplus\mathbf{H}$.
 
 In practice, we don't *actually* concatenate the vectors because the total length would generally not be a power of two. Rather, we compute the $\mathbf{G}$, $\mathbf{H}$, and $\mathbf{b}\circ\mathbf{Q}^n$ components separately, but compute $L$ and $R$ as if they were concatenated.
 
