@@ -118,6 +118,7 @@ The circuit below takes two lists and checks if they are permutations of each ot
 Thus, the final entry `prodA[n - 1]` holds the evaluation of the polynomial at `r`. Here, `r` is `hash.out`, which is the Poseidon hash of all the entries of arrays `a` and `b`.
 
 ```jsx
+pragma circom 2.1.6;
 
 include "circomlib/poseidon.circom";
 
@@ -148,7 +149,7 @@ template IsPermutation(n) {
   prodA[n - 1] === prodB[n - 1];
 }
 
-component main = IsPermutation(3);
+component main = IsPermutation(6);
 
 /* INPUT = {
   "a": [1,2,3,4,5,6],
