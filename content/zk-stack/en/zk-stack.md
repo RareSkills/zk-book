@@ -429,6 +429,8 @@ template CopyStack(m) {
 The following code is the final implementation of our stack, which combines all the components together. Since we have already shown the components for `ShouldCopy` and `CopyStack`, the reader can jump down to the final component `StackBuilder`. The previous components are from the earlier sections. We put it into a single file so the reader can conveniently copy and paste this into [zkrepl](https://zkrepl.dev) to test it:
 
 ```jsx
+pragma circom 2.1.6;
+
 include "circomlib/comparators.circom";
 include "circomlib/gates.circom";
 
@@ -591,6 +593,7 @@ template StackBuilder(n) {
   component EqPush[n];
   component EqNop[n];
   component EqPop[n];
+  component PopGuard[n];
 
   component eqSP[n][n];
   signal eqSPAndIsPush[n][n];
@@ -620,6 +623,11 @@ template StackBuilder(n) {
     EqPop[i].in[0] <== instr[2 * i];
     EqPop[i].in[1] <== POP;
     metaTable[i][IS_POP] <== EqPop[i].out;
+
+    // prevent POP when stack is empty
+    PopGuard[i] = IsZero();
+    PopGuard[i].in <== sp[i];
+    metaTable[i][IS_POP] * PopGuard[i].out === 0;
 
     // get the instruction argument
     metaTable[i][ARG] <== instr[2 * i + 1];
