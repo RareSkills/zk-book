@@ -1,4 +1,7 @@
-# Vandermonde Matrices
+---
+description: "A Vandermonde matrix turns a polynomial's coefficients into its values at a set of points. See the definition, worked examples, and the roots of unity case."
+---
+# What Is a Vandermonde Matrix? Definition and Examples
 
 A **Vandermonde matrix** is a matrix that converts a polynomial from its coefficient representation into its value representation at a set of points.
 

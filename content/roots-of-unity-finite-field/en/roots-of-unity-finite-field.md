@@ -1,4 +1,7 @@
-# Roots of Unity in Finite Fields
+---
+description: "In a finite field, the k-th roots of unity are the elements of the subgroup of order k. Learn how to find them and what makes a root of unity primitive."
+---
+# Roots of Unity in Finite Fields, Explained with Examples
 
 This article explains what Roots of Unity in a Finite Field are and how they are intertwined with multiplicative subgroups. The reader is expected to be familiar with the prior chapter about the [Fundamental Theorem of Cyclic Groups](https://rareskills.io/post/fundamental-theorem-cyclic-groups). 
 

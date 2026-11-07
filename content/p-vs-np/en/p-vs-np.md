@@ -1,4 +1,7 @@
-# P vs NP and its application to zero knowledge proofs
+---
+description: "P vs NP asks if every problem that is quick to verify is also quick to solve. A plain explanation with Boolean formulas, and what it means for ZK proofs."
+---
+# P vs NP Explained Simply, and Why It Matters for ZK Proofs
 
 The P = NP problem asks: "If we can quickly verify a solution to a problem is correct, can we also quickly compute the solution?" Most researchers believe the answer is no, i.e., P ≠ NP.
 

@@ -1,4 +1,7 @@
-# Elliptic Curves over Finite Fields
+---
+description: "See what elliptic curves look like over a finite field, why their points form a cyclic group, and how point addition and multiplication work, in Python."
+---
+# Elliptic Curves over Finite Fields: A Visual Guide
 
 What do elliptic curves in finite fields look like?
 
