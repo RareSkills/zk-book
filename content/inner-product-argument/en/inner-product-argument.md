@@ -319,4 +319,4 @@ assert eq(add(A, commit(S, u)), add_points(vector_commit(G, l_u), vector_commit(
 assert eq(add(multiply(G, t_u), multiply(B, pi_t)), add_points(V, multiply(T1, u), multiply(T2, u**2 % p))), "t_u not evaluated correctly"
 ```
 
-This tutorial is part of a series on [ZK Bulletproofs](rareskills.io/post/bulletproofs-zk).
+This tutorial is part of a series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).

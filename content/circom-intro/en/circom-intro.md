@@ -19,7 +19,7 @@ We are going to assume the reader knows what an R1CS is and what it represents. 
 
 It is not necessary to fully understand the math behind ZK to use Circom, but there are some principles that must be fully grasped, or Circom will not make sense.
 
-Nonetheless, if the reader is serious about having a career in ZK, learning the foundations of ZK is essential. For that, we highly recommend reading through the first two sections of the [ZK book](rareskills.io/zk-book) and building the Groth16 proof system from scratch to enforce learning.
+Nonetheless, if the reader is serious about having a career in ZK, learning the foundations of ZK is essential. For that, we highly recommend reading through the first two sections of the [ZK book](https://rareskills.io/zk-book) and building the Groth16 proof system from scratch to enforce learning.
 
 However, if the reader’s objective is to quickly understand ZK applications, then we recommend reading the four chapters listed above and then using this resource.
 

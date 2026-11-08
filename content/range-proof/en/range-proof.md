@@ -8,7 +8,7 @@ The advantage of using Bulletproofs for range proofs is that the range proof can
 
 [Monero uses Bulletproof Range Proofs](https://github.com/monero-project/monero/blob/master/src/ringct/bulletproofs.cc) (the algorithm presented here) to ensure that the sum of transactions is not negative (in a [finite field](https://www.rareskills.io/post/finite-fields), the negative numbers are the elements greater than $p/2$ as they are additive inverses of the elements less than or equal $p/2$ where $p$ is the field order).
 
-*This article is part of a series on [ZK Bulletproofs](rareskills.io/post/bulletproofs-zk).*
+*This article is part of a series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).*
 
 ## Notation
 $\mathbf{0}^n$ is an $n$ dimensional vector of all zeros.
