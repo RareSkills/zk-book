@@ -16,7 +16,7 @@ To optimize for this goal, I have deliberately omitted any aspect of Set Theory 
 ## Motivation of Set Theory for Zero Knowledge Proofs
 The purpose of this tutorial is to give you a firm grasp of what a **binary operator** is in the context of Set Theory.
 
-The concept of a binary operator lies at the core of [Group Theory](rareskills.io/post/group-theory-and-coding), and Group Theory is used *everywhere* in Zero Knowledge Proofs.
+The concept of a binary operator lies at the core of [Group Theory](https://rareskills.io/post/group-theory), and Group Theory is used *everywhere* in Zero Knowledge Proofs.
 
 ## Our treatment is not rigorous
 Some mathematicians might be horrified that I don’t discuss the axioms of set theory here. This is a feature, not a bug. If you want a proof for something, ask Google or a chatbot (or better yet, work it out on your own). The concepts discussed here have been rigorously proven to death for over a century.

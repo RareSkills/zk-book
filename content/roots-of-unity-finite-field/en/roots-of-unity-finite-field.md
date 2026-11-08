@@ -39,7 +39,7 @@ Therefore, we can say that roots of unity have all the properties the Fundamenta
 
 So, to put the reader’s mind at ease, you already know a good bit about roots of unity in a finite group simply because you understand the Fundamental Theorem of Cyclic Groups. Since roots of unity in a finite field are a cyclic subgroup, the Fundamental Theorem of Cyclic Groups applies to them.
 
-However, the added guarantee that $a^k\equiv1$ unlocks additional properties that efficient ZK algorithms directly leverage. These properties enable us to create efficient algorithms like the Number Theoretic Transform and other [Zero-Knowledge Proof](rareskills.io/zk-book) algorithms, such as PLONK and ZK-STARKs.
+However, the added guarantee that $a^k\equiv1$ unlocks additional properties that efficient ZK algorithms directly leverage. These properties enable us to create efficient algorithms like the Number Theoretic Transform and other [Zero-Knowledge Proof](https://rareskills.io/zk-book) algorithms, such as PLONK and ZK-STARKs.
 
 We study these additional properties of roots of unity in later chapters. This chapter focuses on definitions and examples to build the understanding that an element $a$ in a finite field has the property $a^k\equiv1$ if and only if it is part of a multiplicative subgroup of order $k.$
 

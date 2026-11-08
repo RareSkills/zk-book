@@ -109,4 +109,4 @@ $z\cdot\langle\mathbf{a},\mathbf{b}\rangle = \langle z\cdot\mathbf{a},\mathbf{b}
 
 The proof for this statement is left as an exercise for the reader. As a hint, constant terms can be brought in and out of a summation.
 
-This tutorial is part of our series on [ZK Bulletproofs](rareskills.io/post/bulletproofs-zk).
+This tutorial is part of our series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).

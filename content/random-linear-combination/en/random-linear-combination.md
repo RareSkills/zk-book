@@ -115,4 +115,4 @@ $$
 
 We only need to create an inner product proof for a single inner product instead of two. It is crucial that the prover receives $z$ after they have sent the relevant commitments, but we leave the exact details for the next chapter when we see an example of an algorithm using this technique: range proofs.
 
-*This tutorial is part of a series on [ZK Bulletproofs](rareskills.io/post/bulletproofs-zk).*
+*This tutorial is part of a series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).*
