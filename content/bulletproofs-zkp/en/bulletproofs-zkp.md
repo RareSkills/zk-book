@@ -96,13 +96,19 @@ Observe that if we set $P = A + Su -\pi_{lr}B$, then this is the same problem st
 
 For this proof, we do not need secrecy because $\mathbf{l}_u$ and $\mathbf{r}_u$ were made public anyway in the previous algorithm.
 
+To prepare for the logarithmic-size proof, the verifier sends a random value $w$ to the prover, so that the prover has to replace $Q$ with $wQ$ throughout the logarithmic-size proof. The reason for this will be explained below.
+
 Now that the verifier has all the necessary data, the prover engages in an interactive proof to prove that $C$ holds the commitments to $\mathbf{l}_u$ and $\mathbf{r}_u$ and that their inner product is $t_u$:
 
 $$
-\texttt{prove\_commitments\_log}(C + t_uQ, \mathbf{G}, \mathbf{H}, Q, \mathbf{l}_u, \mathbf{r}_u)
+\texttt{prove\_commitments\_log}(C + t_u wQ, \mathbf{G}, \mathbf{H}, wQ, \mathbf{l}_u, \mathbf{r}_u)
 $$
 
-That subroutine will prove that $t_u\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle$ and $C\stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle$ without having to send $\mathbf{l}_u$ and $\mathbf{r}_u$. It also only sends logarithmic-sized data. Note that the recursive algorithm from the previous chapter uses a commitment $P = \langle \mathbf{a}, \mathbf{G} \rangle + \langle \mathbf{b}, \mathbf{H} \rangle + \langle\mathbf{a},\mathbf{b}\rangle Q$, so the verifier needs to add in the "$Q$ portion" themselves. Now the verifier can be assured that
+That subroutine will prove that $t_u\stackrel{?}=\langle\mathbf{l}_u,\mathbf{r}_u\rangle$ and $C\stackrel{?}{=} \langle \mathbf{l}_u, \mathbf{G} \rangle + \langle \mathbf{r}_u, \mathbf{H} \rangle$ without having to send $\mathbf{l}_u$ and $\mathbf{r}_u$. It also only sends logarithmic-sized data. Note that the recursive algorithm from the previous chapter uses a commitment $P = \langle \mathbf{a}, \mathbf{G} \rangle + \langle \mathbf{b}, \mathbf{H} \rangle + \langle\mathbf{a},\mathbf{b}\rangle Q$, so the verifier needs to add in the "$Q$ portion" themselves.
+
+Note also that the subroutine replaces $Q$ with $wQ$, to prevent forged proofs from being accepted. The necessity of such precaution stems from the fact that $\texttt{prove\_commitments\_log}$ only proves that $C + t_u Q =\langle a , G \rangle + \langle b , H \rangle + \langle a , b \rangle Q$, and neither $C$ need be $C =\langle a , G \rangle + \langle b , H \rangle$ nor $t_u =\langle a , b \rangle$. In fact, an attacker can freely shift values between $C$ and $t_u$ , since $Q$ is known to the prover before the commitment $C$ is sent to the verifier. To guard against such an attack, the verifier needs to make $Q$ unpredictable by multiplying it with an unguessable value $w$ *after* she receives $C$ from the prover.
+
+Now the verifier can be assured that
 
 $$
 \begin{align*}
