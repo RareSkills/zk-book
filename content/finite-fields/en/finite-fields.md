@@ -40,7 +40,7 @@ Or more generally,
 
 $$c = a + b \pmod p$$
 
-where $a$ and $b$ are numbers in the finite field, $c$ is the remainder that maps any number $≥ p$ and $< 0 $ back in the set $\set{0, 1, …, p - 1}$.
+where $a$ and $b$ are numbers in the finite field, $c$ is the remainder that maps any number $≥ p$ and $< 0$ back in the set $\set{0, 1, …, p - 1}$.
 
 The notation $\pmod p$ means *all* arithmetic is done modulo $p$. For example,
 
@@ -176,7 +176,7 @@ Some examples:
 - The multiplicative inverse of $3$ in the finite field $p = 7$ is $5$. $3⁷⁻² = 5 \pmod 7$
 - The multiplicative inverse of 8 in the finite field $p = 11$ is $7$. $8¹¹⁻² = 7 \pmod {11}$
 
-The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
+The advantage of this approach is we can use the `modexp` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
 
 In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
 
