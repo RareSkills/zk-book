@@ -10,7 +10,7 @@ A polynomial commitment is a mechanism by which a prover can convince a verifier
 This commitment scheme does not require a trusted setup. However, the communication overhead is $O(n)$ as the prover must send a commitment for each coefficient in their polynomial.
 
 ## Committing to the Polynomial
-The prover can commit to the polynomial by creating a [Pedersen Commitment](https://www.rareskills.io/post/pedersen-commitment) of each coefficient. For a Pedersen Committment, the prover and verifier need to agree on two elliptic curve points with unknown discrete logs. We will use $G$ and $B$.
+The prover can commit to the polynomial by creating a [Pedersen Commitment](https://rareskills.io/post/pedersen-commitment) of each coefficient. For a Pedersen Committment, the prover and verifier need to agree on two elliptic curve points with unknown discrete logs. We will use $G$ and $B$.
 
 For example, if we have a polynomial
 
@@ -109,7 +109,7 @@ yG+\pi B&\stackrel{?}=&C_0&+C_1\color{red}{u}&+C_2\color{red}{u^2}
 \end{matrix}
 $$
 
-**It is <u>very important</u> that you firmly grasp how this technique of proving correct evaluation of a polynomial, given blinding commitments to the coefficients, works because [Bulletproofs](https://www.rareskills.io/post/bulletproofs-zk) use this technique <u>everywhere</u>.**
+**It is <u>very important</u> that you firmly grasp how this technique of proving correct evaluation of a polynomial, given blinding commitments to the coefficients, works because [Bulletproofs](https://rareskills.io/post/bulletproofs-zk) use this technique <u>everywhere</u>.**
 
 **Exercise:** Write out the steps for how a prover would convince a verifier they correctly evaluated a degree 1 polynomial, without revealing the polynomial to the verifier.
 

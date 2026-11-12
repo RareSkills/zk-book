@@ -4,9 +4,9 @@ A range proof in the context of inner product arguments is a proof that the scal
 
 This article shows how the Bulletproofs paper constructs such a proof. The high level idea is that if we can prove that a vector $\mathbf{a}_L$ consists only of ones and zeros and that $\mathbf{a}_L$ is the binary representation of $v$, then $v$ must be less than $2^n$. This is analogous to saying that a number that fits in an 8 bit unsigned integer must be less than 256.
 
-The advantage of using Bulletproofs for range proofs is that the range proof can be directly constructed without the need of an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit).
+The advantage of using Bulletproofs for range proofs is that the range proof can be directly constructed without the need of an [arithmetic circuit](https://rareskills.io/post/arithmetic-circuit).
 
-[Monero uses Bulletproof Range Proofs](https://github.com/monero-project/monero/blob/master/src/ringct/bulletproofs.cc) (the algorithm presented here) to ensure that the sum of transactions is not negative (in a [finite field](https://www.rareskills.io/post/finite-fields), the negative numbers are the elements greater than $p/2$ as they are additive inverses of the elements less than or equal $p/2$ where $p$ is the field order).
+[Monero uses Bulletproof Range Proofs](https://github.com/monero-project/monero/blob/master/src/ringct/bulletproofs.cc) (the algorithm presented here) to ensure that the sum of transactions is not negative (in a [finite field](https://rareskills.io/post/finite-fields), the negative numbers are the elements greater than $p/2$ as they are additive inverses of the elements less than or equal $p/2$ where $p$ is the field order).
 
 *This article is part of a series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).*
 
@@ -470,7 +470,7 @@ with respect to the basis vectors $\mathbf{G}$ and $\mathbf{H}_{\mathbf{y}^{-1}}
 
 The [subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem) asks, "given a set of numbers, does a subset (possibly including the entire set) sum up to $k$? For example if $k = 16$ and the set is $\set{3,5,7,11}$ the answer is yes because $5 + 11 = 16$. However if $k=13$, then the answer is no.
 
-The subset sum problem is NP-Complete, meaning that, similar to a Boolean circuit or arithmetic circuit, it can represent any problem in [NP](https://www.rareskills.io/post/p-vs-np). That is, any problem in NP can be rewritten (the technical word is "[reduced](https://www.cs.cmu.edu/~ckingsf/bioinfo-lectures/npcomplete.pdf)") to a subset sum instance.
+The subset sum problem is NP-Complete, meaning that, similar to a Boolean circuit or arithmetic circuit, it can represent any problem in [NP](https://rareskills.io/post/p-vs-np). That is, any problem in NP can be rewritten (the technical word is "[reduced](https://www.cs.cmu.edu/~ckingsf/bioinfo-lectures/npcomplete.pdf)") to a subset sum instance.
 
 By replacing $\mathbf{2}^n$ with $[3,5,7,11]$, we can prove we know a solution to a subset sum without revealing the answer. Specifically, the prover would know that $\mathbf{a}_L= [0,1,0,1]$ if $k=16$. In general, a one entry in $\mathbf{a}_L$ means we include that element in the subset and a zero means it is not included in the subset.
 

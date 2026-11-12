@@ -155,7 +155,7 @@ where $X,Y,Z$ are $2\times2$ integer matrices. Why these two algebraic data stru
 
 ### The group of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to addition modulo $p$
 
-This concept was already taught in our article on [finite fields](https://www.rareskills.io/post/finite-fields), but we didn’t use the term “homomorphism” to describe it.
+This concept was already taught in our article on [finite fields](https://rareskills.io/post/finite-fields), but we didn’t use the term “homomorphism” to describe it.
 
 Let $A$ be the group of all rational numbers whose denominators are not a multiple of $p$, under addition. Let $B$ be the finite field modulo $p$.
 
@@ -264,7 +264,7 @@ Again, groups don’t need to be mysterious moon math. You’ve worked with grou
 
 It’s far more efficient to say "group" than it is to say "this is a set with a way to combine elements associatively and the elements all have blah blah blah."
 
-I know this may seem like a huge tangent, but trust me, understanding "homomorphism" enables us to succinctly describe a concept that we will regularly see. It will also come in handy again when we discuss [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program). Homomorphisms appear frequently in the ZK world.
+I know this may seem like a huge tangent, but trust me, understanding "homomorphism" enables us to succinctly describe a concept that we will regularly see. It will also come in handy again when we discuss [Quadratic Arithmetic Programs](https://rareskills.io/post/quadratic-arithmetic-program). Homomorphisms appear frequently in the ZK world.
 
 Imagine trying to discuss tree data structures without a word for "roots" or "leaves." That would be immensely frustrating.
 
@@ -276,4 +276,4 @@ Homomorphisms are not necessarily bidirectional. They are only required to work 
 
 If $\phi: A \rightarrow B$ is computationally difficult to invert, then $\phi$ homomorphically encrypts the elements of $A$. That means we can validate claims about computations in $A$ using elements in $B$.
 
-The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](https://www.rareskills.io/post/elliptic-curve-addition).
+The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](https://rareskills.io/post/elliptic-curve-addition).

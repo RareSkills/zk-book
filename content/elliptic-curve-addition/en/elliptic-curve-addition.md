@@ -5,9 +5,9 @@ This article describes how elliptic curve addition works over real numbers.
 Cryptography uses elliptic curves over finite fields, but elliptic curves are easier to conceptualize in a real Cartesian plane. This article is aimed at programmers and tries to strike a balance between getting too math heavy and too hand-wavy.
 
 ## Set theoretic definition of elliptic curves
-The [set](https://www.rareskills.io/post/set-theory) of points on an elliptic curve form a group under elliptic curve point addition.
+The [set](https://rareskills.io/post/set-theory) of points on an elliptic curve form a group under elliptic curve point addition.
 
-Hopefully, if you’ve been following our [group theory introduction](https://www.rareskills.io/post/group-theory), then you actually understood most of this, aside from what “point addition” is. But that’s the beauty of abstract algebra right? You don’t need to know what that is, and you still understand the above sentence.
+Hopefully, if you’ve been following our [group theory introduction](https://rareskills.io/post/group-theory), then you actually understood most of this, aside from what “point addition” is. But that’s the beauty of abstract algebra right? You don’t need to know what that is, and you still understand the above sentence.
 
 Elliptic curves are a family of curves which have the formula
 
@@ -268,7 +268,7 @@ So when you see manipulation like that, our group didn’t suddenly gain a multi
 ## Elliptic curves in finite fields
 If we were to do elliptic curves over real numbers for a real application, they would be very numerically unstable because the intersection point could require a lot of decimal places to compute.
 
-So in reality, we do everything with [modular arithmetic](https://www.rareskills.io/post/finite-fields).
+So in reality, we do everything with [modular arithmetic](https://rareskills.io/post/finite-fields).
 
 But we lose none of the intuition we’ve gained above by using real numbers as a visual example.
 

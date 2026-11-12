@@ -67,7 +67,7 @@ In the $k=4$ example, we have that
 - $\omega^0+\omega^2\equiv1+(-1)=0$
 - $\omega^1+\omega^3\equiv\omega+(-\omega)=0$
 
-Note that we are now *adding* the roots of unity together, not multiplying them, so the addition of exponents rule does not apply! Don’t confuse $\omega^0+\omega^2$ with $\omega^0\cdot\omega^2$! Roots of unity are [finite field](https://rareskills.io/post/finite-field) elements, and fields have 2 operations: addition and multiplication.
+Note that we are now *adding* the roots of unity together, not multiplying them, so the addition of exponents rule does not apply! Don’t confuse $\omega^0+\omega^2$ with $\omega^0\cdot\omega^2$! Roots of unity are [finite field](https://rareskills.io/post/finite-fields) elements, and fields have 2 operations: addition and multiplication.
 
 ## Examples with other values of k
 

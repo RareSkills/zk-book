@@ -5,10 +5,10 @@ Sometimes also called bilinear mappings, bilinear pairings allow us to take thre
 We will explain bilinear pairings at a high level and provide some examples in Python.
 
 ## Prerequisites
-- The reader should know what [point addition](https://www.rareskills.io/post/elliptic-curve-addition) and scalar multiplication are in the context of elliptic curves.
+- The reader should know what [point addition](https://rareskills.io/post/elliptic-curve-addition) and scalar multiplication are in the context of elliptic curves.
 - The reader should also know the discrete logarithm problem in this context: a scalar multiplied by a point will result in another point, and it is infeasible in general to calculate the scalar given the elliptic curve point.
-- The reader should know what a [finite field](https://www.rareskills.io/post/finite-fields) and cyclic group are, and what a generator is in the context of elliptic curves. We will refer to generators with the variable G.
-- The reader should know about [Ethereum Precompiles](https://www.rareskills.io/post/solidity-precompiles).
+- The reader should know what a [finite field](https://rareskills.io/post/finite-fields) and cyclic group are, and what a generator is in the context of elliptic curves. We will refer to generators with the variable G.
+- The reader should know about [Ethereum Precompiles](https://rareskills.io/post/solidity-precompiles).
 We will use capital letters to denote EC (elliptic curve) points and lower case letters to denote elements of finite fields ("scalars"). When we say element, this could be an integer in a finite field or it could be a point on an elliptic curve. The context will make it clear.
 
 It is possible to read this tutorial without fully understanding all of the above, but it will be harder to build a good intuition about this subject.
@@ -335,7 +335,7 @@ This might be a bit of a head-scratcher at first! This seems to imply that the p
 #### Justification for EIP 197 design decision
 The first problem is that elements in $G_T$ are large, specifically, they 12-dimensional objects. 
 
-This will take up a lot of space in memory leading to larger gas costs. Also, because of how most ZK verification algorithms work (this is outside the scope of this article), we generally don’t check the value of the output of a pairing, but only that it is equal to other pairings. Specifically, the final step in [Groth16](https://www.rareskills.io/post/groth16) (the zero knowledge algorithm used by tornado cash) looks like the following
+This will take up a lot of space in memory leading to larger gas costs. Also, because of how most ZK verification algorithms work (this is outside the scope of this article), we generally don’t check the value of the output of a pairing, but only that it is equal to other pairings. Specifically, the final step in [Groth16](https://rareskills.io/post/groth16) (the zero knowledge algorithm used by tornado cash) looks like the following
 
 $$
 e(A₁, B₂) = e(α₁, β₂) + e(L₁, γ₂) + e(C₁, δ₂)
@@ -353,7 +353,7 @@ And now it matches the precompile specification perfectly!
 
 It’s not just Groth16, most zk algorithm have verification formula that looks like that, which is why the precompile was designed to work with sums of pairings rather than return the value of a single pairing.
 
-If we look at the verification code of [Tornado Cash](https://www.rareskills.io/post/how-does-tornado-cash-work), we can see it is exactly implementing this (even the Greek letters match, but don’t worry if you don’t understand it yet). The $\beta_2$ simply means it is a $\mathbb{G}_2$ point, $\alpha_1$ means $\mathbb{G}_1$ point, etc.
+If we look at the verification code of [Tornado Cash](https://rareskills.io/post/how-does-tornado-cash-work), we can see it is exactly implementing this (even the Greek letters match, but don’t worry if you don’t understand it yet). The $\beta_2$ simply means it is a $\mathbb{G}_2$ point, $\alpha_1$ means $\mathbb{G}_1$ point, etc.
 
 ![annotation of the verification code in Tornado Cash](https://static.wixstatic.com/media/935a00_63f7afa2360e49a09139ed2de90189fc~mv2.png/v1/fill/w_1480,h_246,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/935a00_63f7afa2360e49a09139ed2de90189fc~mv2.png)
 
@@ -437,7 +437,7 @@ dG2_y2 = 11474861747383700316476719153975578001603231366361248090558603872215261
 
 Now we have the values encrypted into points in the $\mathbb{G}_1$ and $\mathbb{G}_2$ groups, someone else or a program can confirm that we computed $e(A_1,B_2)+e(C_1,D_2)=0$ correctly without knowing the individual values of `a`, `b`, `c`, or `d`. Here’s a Solidity contract that uses the ecPairing precompile to confirm that we computed the equations with valid values.
 
-We create a file Pairings.sol to [unit test in Foundry](https://www.rareskills.io/post/foundry-testing-solidity) (we will supply the test file next)
+We create a file Pairings.sol to [unit test in Foundry](https://rareskills.io/post/foundry-testing-solidity) (we will supply the test file next)
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -572,7 +572,7 @@ This will pass and return true just like the initial implementation because it s
 The only difference is that in the first implementation, the test file sends an array of points to the pairing contract which uses inline-assembly to slice off the first 32 bytes (array length) and sends the rest to the precompile. And in the second implementation, the test file sends the abi encoded points to the pairing contract which forwards it as it is to the precompile.
 
 ## Learn More from RareSkills
-This material is taken from our [Zero Knowledge Course](https://www.rareskills.io/zk-bootcamp). Please see the program to learn more.
+This material is taken from our [Zero Knowledge Course](https://rareskills.io/courses/zk-bootcamp). Please see the program to learn more.
 
 ---
 ## I really want to understand the math behind bilinear pairings

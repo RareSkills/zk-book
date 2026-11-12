@@ -1,6 +1,6 @@
 # Succinct proofs of a vector commitment
 
-If we have a [Pedersen vector commitment](https://www.rareskills.io/post/pedersen-commitment) $A$ which contains a commitment to a vector $\mathbf{a}$ as $A = a_1G_1 + a_2G_2+\dots + a_nG_n$ we can prove we know the opening by sending $\mathbf{a}$ to the verifier who would check that $A \stackrel{?}= a_1G_1 + \dots + a_nG_n$. This requires sending $n$ elements to the verifier (assuming $\mathbf{a}$ is of length $n$).
+If we have a [Pedersen vector commitment](https://rareskills.io/post/pedersen-commitment) $A$ which contains a commitment to a vector $\mathbf{a}$ as $A = a_1G_1 + a_2G_2+\dots + a_nG_n$ we can prove we know the opening by sending $\mathbf{a}$ to the verifier who would check that $A \stackrel{?}= a_1G_1 + \dots + a_nG_n$. This requires sending $n$ elements to the verifier (assuming $\mathbf{a}$ is of length $n$).
 
 In the previous chapter, we showed how to do this with zero knowledge. In this chapter, we show how to prove knowledge of an opening while sending less than $n$ elements, but without the zero knowledge property.
 
@@ -248,7 +248,7 @@ where
 However, the prover does not know the discrete logs $g_1$ and $g_2$, so they cannot compute $a'$.
 
 ### The variable $a'$ has only two valid solutions
-There are only two values valid for $a'$ that satisfy $L + uA + u^2R = a'(uG_1 + G_2)$. Note that the equation $L + uA + u^2R$ forms a quadratic polynomial with respect to variable $u$ and $a'(uG_1+G_2)$ forms a linear polynomial. By the [Schwartz-Zippel Lemma](https://www.rareskills.io/post/schwartz-zippel-lemma), the equation has at most two solutions. As long as the order of the field is $\gg 2$, then the probability of the prover finding $a'$ such that it results in an intersection point of $L + uA + u^2R = a'(uG_1 + G_2)$ is negligible.
+There are only two values valid for $a'$ that satisfy $L + uA + u^2R = a'(uG_1 + G_2)$. Note that the equation $L + uA + u^2R$ forms a quadratic polynomial with respect to variable $u$ and $a'(uG_1+G_2)$ forms a linear polynomial. By the [Schwartz-Zippel Lemma](https://rareskills.io/post/schwartz-zippel-lemma), the equation has at most two solutions. As long as the order of the field is $\gg 2$, then the probability of the prover finding $a'$ such that it results in an intersection point of $L + uA + u^2R = a'(uG_1 + G_2)$ is negligible.
 
 ## Bulletproofs paper approach to injecting randomness
 Instead of combining $a_1$ and $a_2$ together as $a_1 + a_2u$, the prover combines them as $a' = a_1u + a_2u^{-1}$ and the verifier does $G' = u^{-1}G_1 + u G_2$. Note that the powers of the two vectors are applied in the opposite order. When we compute the outer product, the inner product terms will have the $uu^{-1}$ cancel:

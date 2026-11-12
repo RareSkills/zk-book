@@ -1,6 +1,6 @@
 # Quadratic Arithmetic Programs
 
-A quadratic arithmetic program is an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit), specifically a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system) (R1CS) represented as a set of polynomials. It is derived using Lagrange interpolation on a Rank 1 Constraint System. Unlike an R1CS, a Quadratic Arithmetic Program (QAP) can be tested for equality in $\mathcal{O}(1)$ time via the Schwartz-Zippel Lemma.
+A quadratic arithmetic program is an [arithmetic circuit](https://rareskills.io/post/arithmetic-circuit), specifically a [Rank 1 Constraint System](https://rareskills.io/post/rank-1-constraint-system) (R1CS) represented as a set of polynomials. It is derived using Lagrange interpolation on a Rank 1 Constraint System. Unlike an R1CS, a Quadratic Arithmetic Program (QAP) can be tested for equality in $\mathcal{O}(1)$ time via the Schwartz-Zippel Lemma.
 
 ## Key ideas
 In the chapter on the Schwartz-Zippel Lemma, we saw that we can test if two vectors are equal in $\mathcal{O}(1)$ time by converting them to polynomials, then running the Schwartz-Zippel Lemma test on the polynomials. (To clarify, the *test* is $\mathcal{O}(1)$ time, converting the vectors to polynomials creates overhead).
@@ -13,7 +13,7 @@ holds in $\mathcal{O}(1)$ time instead of $\mathcal{O}(n)$ time (where $n$ is th
 
 But before we do that, we need to understand some key properties of the relationship between vectors and polynomials that represent them.
 
-For all math here, we assume we are working in a [finite field](https://www.rareskills.io/post/finite-fields), but we skip the $\mod p$ notation for succinctness.
+For all math here, we assume we are working in a [finite field](https://rareskills.io/post/finite-fields), but we skip the $\mod p$ notation for succinctness.
 
 ## Homomorphisms between vector addition and polynomial addition
 ### Vector addition is homomorphic to polynomial addition
@@ -109,7 +109,7 @@ assert L(lambda_ * v) == lambda_ * L(v)
 ### Scalar multiplication is really vector addition
 When we say "multiply a vector by 3" we are really saying "add the vector to itself three times". Since we are only working in finite fields, we don't concern ourselves with the interpretation of scalars such as "0.5"
 
-We can think of both vectors under element-wise addition (in a finite field) and polynomials under addition (also in a finite field) as [groups](https://www.rareskills.io/post/group-theory).
+We can think of both vectors under element-wise addition (in a finite field) and polynomials under addition (also in a finite field) as [groups](https://rareskills.io/post/group-theory).
 
 The most important takeaway from this chapter is
 
@@ -750,7 +750,7 @@ The verifier could check that $AB = C$ and accept that the prover has a valid wi
 
 However, this would require the verifier to trust that the prover is evaluating the polynomials correctly, and we don't have a mechanism to force the prover to do so.
 
-In the next chapter, we will show Python code to [convert an R1CS to a QAP](https://www.rareskills.io/post/r1cs-to-qap) based on our discussion in this chapter.
+In the next chapter, we will show Python code to [convert an R1CS to a QAP](https://rareskills.io/post/r1cs-to-qap) based on our discussion in this chapter.
 
 Then we will discuss trusted setups to begin to tackle the problem of how to get the prover to evaluate the polynomials honestly.
 

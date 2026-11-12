@@ -6,7 +6,7 @@ In the previous chapters, we showed how to prove knowledge of an inner product w
 
 In this chapter, we combine the algorithms together to demonstrate the Bulletproof ZK algorithm.
 
-(This work if part of a series on [ZK Bulletproofs](https://www.rareskills.io/post/bulletproofs-zk).)
+(This work if part of a series on [ZK Bulletproofs](https://rareskills.io/post/bulletproofs-zk).)
 
 ## Problem Statement
 The prover and verifier agree on two elliptic curve basis vectors $\mathbf{G}$ and $\mathbf{H}$ of length $n$ and elliptic curve points $Q$ and $B$. The discrete log relationships between all these points are unknown.
@@ -136,6 +136,6 @@ $$L\mathbf{a}\circ R\mathbf{a} = O\mathbf{a}$$
 
 is really $3n$ inner products (e.g. multiplying $\mathbf{a}$ by the $n$ rows of $L$ and so on for $R$ and $O$) and a single Hadamard product. Therefore, it will be handy to know some mathematical tricks for combining multiple inner products into a single one so that we don't have to send $3n$ Bulletproofs. We will learn how to accomplish this in our upcoming chapter on random linear combinations.
 
-Furthermore, some useful problems can be directly encoded as an inner product, notably the range proof or the subset sum problem. In those situations, we can skip encoding the problem as an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit) and directly encode it as an inner product. To increase the flexibility of our inner product representation, as well as to lay the ground work for understanding random linear combinations, we will learn some inner product algebra in the next chapter.
+Furthermore, some useful problems can be directly encoded as an inner product, notably the range proof or the subset sum problem. In those situations, we can skip encoding the problem as an [arithmetic circuit](https://rareskills.io/post/arithmetic-circuit) and directly encode it as an inner product. To increase the flexibility of our inner product representation, as well as to lay the ground work for understanding random linear combinations, we will learn some inner product algebra in the next chapter.
 
 **Exercise:** Combine the previous exercises to prove that $A =\langle\mathbf{a},\mathbf{G}\rangle + \langle\mathbf{b},\mathbf{H}\rangle + \alpha B$ where $\mathbf{a}$ and $\mathbf{b}$ are vectors of length 4. Your proof should be both succinct and zero knowledge. Create an interactive proof for the sake of simplicity. Refer to [this repository](https://github.com/RareSkills/ZK-bulletproofs) for the exercises.

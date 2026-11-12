@@ -5,7 +5,7 @@ Random linear combinations are a common trick in zero knowledge proof algorithms
 ## Equality of Pedersen Commitments
 First, let's consider how we might prove the equality of multiple Pedersen commitments.
 
-If we have elliptic curve points $G$ and $B$ with unknown discrete logs, and blinding terms $\alpha$ and $\beta$ we can construct [Pedersen committments](https://www.rareskills.io/post/pedersen-commitment) $L$ and $R$ where
+If we have elliptic curve points $G$ and $B$ with unknown discrete logs, and blinding terms $\alpha$ and $\beta$ we can construct [Pedersen committments](https://rareskills.io/post/pedersen-commitment) $L$ and $R$ where
 
 $L = aG + \alpha B$
 $R = bG + \beta B$
@@ -87,7 +87,7 @@ However, this requires the verifier to send $m$ elements, leading to a linear co
 $L_1 + L_2z + L_3z^2 + ... L_mz^{m-1} \stackrel{?}{=}R_1+R_2z+R_3z^2\dots+R_mz^{m-1} + \pi B$
 
 ### Security analysis
-The left-hand-side and right-hand-side are both polynomials of degree $m-1$. If they are unequal to each other, then they intersect in at most $m-1$ points by the [Schwartz Zippel Lemma](https://www.rareskills.io/post/schwartz-zippel-lemma). If $m\ll p$ where $p$ is the order of the finite field, then again the probability of $z$ being an intersection point is negligible.
+The left-hand-side and right-hand-side are both polynomials of degree $m-1$. If they are unequal to each other, then they intersect in at most $m-1$ points by the [Schwartz Zippel Lemma](https://rareskills.io/post/schwartz-zippel-lemma). If $m\ll p$ where $p$ is the order of the finite field, then again the probability of $z$ being an intersection point is negligible.
 
 ## Random linear combinations of inner products
 

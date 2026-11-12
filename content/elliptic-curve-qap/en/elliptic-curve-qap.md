@@ -1,6 +1,6 @@
 # Evaluating a Quadratic Arithmetic Program on a Trusted Setup
 
-Evaluating a [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) on a trusted setup enables a prover to demonstrate that a QAP is satisfied without revealing the witness while using a constant sized proof.
+Evaluating a [Quadratic Arithmetic Program (QAP)](https://rareskills.io/post/quadratic-arithmetic-program) on a trusted setup enables a prover to demonstrate that a QAP is satisfied without revealing the witness while using a constant sized proof.
 
 Specifically, the QAP polynomials are evaluated at an unknown point $\tau$. The QAP equation
 
@@ -11,7 +11,7 @@ will be balanced if the vector $\mathbf{a}$ satisfies the equation, and unbalanc
 The scheme shown here is not a secure ZK Proof, but it is a stepping stone towards showing how Groth16 works.
 
 ## A Concrete Example
-To make this a little less abstract, let’s say that matrices of the [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have 3 rows and 4 columns.
+To make this a little less abstract, let’s say that matrices of the [Rank 1 Constraint System (R1CS)](https://rareskills.io/post/rank-1-constraint-system) $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have 3 rows and 4 columns.
 
 $$\mathbf{L}\mathbf{a} \circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$$
 
@@ -22,7 +22,7 @@ Our QAP will be
 $$\sum_{i=1}^4a_iu_i(x)\sum_{i=1}^4a_iv_i(x) = \sum_{i=1}^4a_iw_i(x) + h(x)t(x)$$
 
 ## Notation and Preliminaries
-We refer to the generators elliptic curve points in the groups $\mathbb{G}_1$ and $\mathbb{G}_2$ as $G_1$ and $G_2$ respectively. An element in $\mathbb{G}_1$ is denoted as $[X]_1$. An element in $\mathbb{G}_2$ is denoted as $[X]_2$. Where there might be ambiguity with the subscripts referring to indices in a list, we say $X \in \mathbb{G}_1$ or $X \in \mathbb{G}_2$. An [elliptic curve pairing](https://www.rareskills.io/post/bilinear-pairing) between two points is denoted as $[X]_1 \bullet [Y]_2$.
+We refer to the generators elliptic curve points in the groups $\mathbb{G}_1$ and $\mathbb{G}_2$ as $G_1$ and $G_2$ respectively. An element in $\mathbb{G}_1$ is denoted as $[X]_1$. An element in $\mathbb{G}_2$ is denoted as $[X]_2$. Where there might be ambiguity with the subscripts referring to indices in a list, we say $X \in \mathbb{G}_1$ or $X \in \mathbb{G}_2$. An [elliptic curve pairing](https://rareskills.io/post/bilinear-pairing) between two points is denoted as $[X]_1 \bullet [Y]_2$.
 
 Let $\mathbf{L}_{(*,j)}$ be the $j$-th column of $\mathbf{L}$. In our example, the rows will be $(1,2,3)$ and the columns $(1,2,3,4)$. Let $\mathcal{L}(\mathbf{L}_{(*,j)})$ be the polynomial obtained from running Lagrange interpolation on the $j$-th column of $\mathbf{L}$ using the $x$ values $(1,2,3)$ and the $y$ values being the values of the $j$-th column.
 
@@ -236,7 +236,7 @@ Observe that the proof only consists of three elliptic curve points. If a $\math
 
 The larger the R1CS, the more work the prover has, but the verifier's work remains constant.
 
-The solution to this problem is described in the next chapter on the [Groth16 protocol](https://www.rareskills.io/post/groth16).
+The solution to this problem is described in the next chapter on the [Groth16 protocol](https://rareskills.io/post/groth16).
 
 The proof still remains of constant size in Groth16 as can be seen in the Tornado Cash source code on the [struct](https://github.com/tornadocash/tornado-core/blob/master/contracts/Verifier.sol#L167-L171)
  called `Proof`.

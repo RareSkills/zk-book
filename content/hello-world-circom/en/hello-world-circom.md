@@ -4,7 +4,7 @@
 
 This chapter shows the relationship between Circom code and the Rank 1 Constraint System (R1CS) it compiles to.
 
-Understanding R1CSs is **critical** to understanding Circom, so be sure to brush up on [Rank 1 Constraint Systems](https://www.rareskills.io/post/rank-1-constraint-system) if you haven’t already.
+Understanding R1CSs is **critical** to understanding Circom, so be sure to brush up on [Rank 1 Constraint Systems](https://rareskills.io/post/rank-1-constraint-system) if you haven’t already.
 
 To explain the workings of Circom, we will start with a few examples.
 
@@ -30,7 +30,7 @@ Consequently, our R1CS would have just one constraint, namely the following:
 assert c == a * b
 ```
 
-R1CS expresses such constraints in a structured matrix format. According to what we saw in the [chapter on R1CS](https://www.rareskills.io/post/rank-1-constraint-system), the witness vector $\mathbf{w}$ should be written as `[1, a, b, c]`, and the corresponding R1CS can be written as:
+R1CS expresses such constraints in a structured matrix format. According to what we saw in the [chapter on R1CS](https://rareskills.io/post/rank-1-constraint-system), the witness vector $\mathbf{w}$ should be written as `[1, a, b, c]`, and the corresponding R1CS can be written as:
 
 $$
 \begin{bmatrix}
@@ -135,14 +135,14 @@ component main = SomeCircuit();
 
 ## The Finite Field of Circom
 
-Circom performs arithmetic in a [finite field](https://www.rareskills.io/post/finite-fields) with an order of `21888242871839275222246405745257275088548364400416034343698204186575808495617`, which we will simply call $p$. It is a **254-bit number**, corresponding to the curve order of the bn128 elliptic curve. This curve is widely used, in particular it's the one made available via precompiles in the EVM. Since Circom was intended to be used for developing ZK-SNARK applications on Ethereum, it makes sense to make the field size match the curve order of the bn128 curve.
+Circom performs arithmetic in a [finite field](https://rareskills.io/post/finite-fields) with an order of `21888242871839275222246405745257275088548364400416034343698204186575808495617`, which we will simply call $p$. It is a **254-bit number**, corresponding to the curve order of the bn128 elliptic curve. This curve is widely used, in particular it's the one made available via precompiles in the EVM. Since Circom was intended to be used for developing ZK-SNARK applications on Ethereum, it makes sense to make the field size match the curve order of the bn128 curve.
 
 Circom allows the default order to be changed via command-line argument.
 
 The following should be obvious to the reader:
 
 - `p` under `mod p` is congruent to `0`;
-- `p-1` is the largest integer in the [finite field](https://www.rareskills.io/post/finite-field) `mod p.`
+- `p-1` is the largest integer in the [finite field](https://rareskills.io/post/finite-fields) `mod p.`
 - Passing values that are larger than `p-1` will result in overflow.
 
 ## Example 2: BinaryXY

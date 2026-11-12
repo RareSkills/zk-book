@@ -58,7 +58,7 @@ a * b + c === d + e + f; // no restrictions on number of additions
 
 ## Quadratic Form and R1CS
 
-Recall that in [arithmetization](https://www.rareskills.io/post/arithmetic-circuit), we flatten our verification program into a series of intermediate steps, where each intermediate step only contains a single multiplication between unknown variables.
+Recall that in [arithmetization](https://rareskills.io/post/arithmetic-circuit), we flatten our verification program into a series of intermediate steps, where each intermediate step only contains a single multiplication between unknown variables.
 
 **Consider the following verification example:**
 

@@ -2,11 +2,11 @@
 
 To make the transformation from R1CS to QAP less abstract, let’s use a real example.
 
-Let’s say we are encoding the [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit)
+Let’s say we are encoding the [arithmetic circuit](https://rareskills.io/post/arithmetic-circuit)
 
 $$z = x⁴ - 5y²x²$$
 
-Converted to a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system), this becomes
+Converted to a [Rank 1 Constraint System](https://rareskills.io/post/rank-1-constraint-system), this becomes
 
 $$\begin{align*}
 v_1 &= xx \\
@@ -15,7 +15,7 @@ v_3 &= -5yy \\
 -v_2 + z &= v_3 * v_1 && //-5y^2 * x^2\\
 \end{align*}$$
 
-We need to pick a characteristic of the [finite field](https://www.rareskills.io/post/finite-fields) we will do this over. When we later combine this with [elliptic curves](https://www.rareskills.io/post/elliptic-curves-finite-fields), the order of our prime field needs to equal the order of the elliptic curve. (Not matching the two a very common mistake).
+We need to pick a characteristic of the [finite field](https://rareskills.io/post/finite-fields) we will do this over. When we later combine this with [elliptic curves](https://rareskills.io/post/elliptic-curves-finite-fields), the order of our prime field needs to equal the order of the elliptic curve. (Not matching the two a very common mistake).
 
 But for now, we will pick a small number to make this manageable. We will pick the prime number 79.
 
@@ -209,4 +209,4 @@ The scheme above will not work when we evaluate the polynomials on a hidden poin
 In this article, we present the Python code for converting a R1CS to a QAP.
 
 ## Learn more with RareSkills
-This material is from our [Zero Knowledge Course](https://www.rareskills.io/zk-bootcamp).
+This material is from our [Zero Knowledge Course](https://rareskills.io/courses/zk-bootcamp).

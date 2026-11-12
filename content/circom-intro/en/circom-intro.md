@@ -2,7 +2,7 @@
 
 Circom is a programming language for creating Rank 1 Constraint Systems (R1CS) and populating the witness vector of the R1CS.
 
-The R1CS format is of interest because of the utility of that format for constructing SNARKs, particularly [Groth16](https://www.rareskills.io/post/groth16). With SNARKs, we enable verifiable computation, allowing us to prove the correctness of a computation. When verifying, the interested party expends less computational effort to confirm the correctness than they would need to perform the computation themselves. It is also possible to generate the proof without revealing the underlying data, and in this case, we refer to it as zkSNARKs.
+The R1CS format is of interest because of the utility of that format for constructing SNARKs, particularly [Groth16](https://rareskills.io/post/groth16). With SNARKs, we enable verifiable computation, allowing us to prove the correctness of a computation. When verifying, the interested party expends less computational effort to confirm the correctness than they would need to perform the computation themselves. It is also possible to generate the proof without revealing the underlying data, and in this case, we refer to it as zkSNARKs.
 
 The first part of our ZK book focused on proving a witness's validity for a given R1CS. This resource focuses on how to programmatically generate an R1CS and how to design them to model realistic algorithms such as a virtual machine or cryptographic hash functions.
 
@@ -73,7 +73,7 @@ We will explain the syntax further in later chapters, but the core idea is that 
 
 The witness in the context of ZK is an assignment to the variables that satisfies all the constraints in an arithmetic circuit.
 
-As we saw in the article on [arithmetic circuits](https://www.rareskills.io/post/arithmetic-circuit), proving one number is less than another number requires converting both of the numbers to binary, as “greater than” is not meaningful in a finite field since the numbers wrap around.
+As we saw in the article on [arithmetic circuits](https://rareskills.io/post/arithmetic-circuit), proving one number is less than another number requires converting both of the numbers to binary, as “greater than” is not meaningful in a finite field since the numbers wrap around.
 
 Expressing the number $x$ in binary, assuming it fits in four bits, requires $x$ to satisfy the following constraints:
 

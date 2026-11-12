@@ -83,7 +83,7 @@ $$
 
 In other words, permuting the multiplication of the [*linear factors*](https://www.notion.so/The-Permutation-Argument-14709cb3e96280489504de20d5f93804?pvs=21) of the polynomial does not change the value of the polynomial. (A linear factor is a term of the form $(x - a)$).
 
-We do not check if the polynomials are equivalent by algebraically multiplying the terms. Rather, we can use a much more efficient polynomial equality test called the [Schwartz-Zippel lemma](https://www.rareskills.io/post/schwartz-zippel-lemma).
+We do not check if the polynomials are equivalent by algebraically multiplying the terms. Rather, we can use a much more efficient polynomial equality test called the [Schwartz-Zippel lemma](https://rareskills.io/post/schwartz-zippel-lemma).
 
 This test samples a random point for $x$ and plugs it into the two polynomials. If they have the same evaluation, then with extremely high probability, they are the same polynomial (to understand why this test is secure, please see the linked article above).
 

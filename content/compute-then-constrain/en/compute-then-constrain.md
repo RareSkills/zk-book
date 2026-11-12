@@ -54,7 +54,7 @@ The `<--` operator is very convenient because it allows us to compute values wit
 
 **Circom does not enforce that developers create the appropriate constraints after using `<--` and this has been a common source of critical and high vulnerabilities in Circom. Even if the developer adds no constraints, thus creating very dangerous code, the compiler will not even give a warning or a notice. Unconstrained signals can take any value, thus allowing the circuit to produce ZK proofs for nonsensical statements.**
 
-We will teach in a later tutorial, [exploiting underconstrained circuits](https://www.rareskills.io/post/underconstrained-circom), how to exploit Circom code that misuses the `<--` operator. For now, think of it as an operation that saves us the trouble of supplying a certain signal value ourselves while still requiring us to constrain that signal later.
+We will teach in a later tutorial, [exploiting underconstrained circuits](https://rareskills.io/post/underconstrained-circom), how to exploit Circom code that misuses the `<--` operator. For now, think of it as an operation that saves us the trouble of supplying a certain signal value ourselves while still requiring us to constrain that signal later.
 
 Computing and the constraining is best understood by examples, which the rest of this chapter provides.
 
@@ -359,7 +359,7 @@ template Num2Bits(n) {
 }
 ```
 
-*Please note that for `n` in the code above, if $2^n$ is larger than the finite field, we may have an [alias bug](https://www.rareskills.io/post/circom-aliascheck). This is explained further in that chapter.*
+*Please note that for `n` in the code above, if $2^n$ is larger than the finite field, we may have an [alias bug](https://rareskills.io/post/circom-aliascheck). This is explained further in that chapter.*
 
 Essentially, the code loops through each bit in the binary representation, starting from the least significant bit. On each iteration of the loop, we store the value `[1,2,4,8,…,2^i]` in a variable `e2`, which is the value that bit represents. If that bit is 1 (`out[i] <-- (in >> i) & 1;`),  we add that value to the accumulator `lc1`. At each iteration in the loop, we constrain that the bit read is actually 0 or 1 (with `out[i] * (out[i] -1 ) === 0;`). In the end, we constrain that the computed binary value matches the original value (`lc1 === in;`).
 
@@ -373,7 +373,7 @@ The `Num2Bits` template is a core component in the template `LessThan` and other
 
 Field elements (numbers in a finite field) cannot be directly compared to each other — they need to be converted to binary numbers first.
 
-To understand how to efficiently compare the size of binary numbers in a circuit, please review the relevant section in our chapter on [Arithmetic Circuits](https://www.rareskills.io/post/arithmetic-circuit#:~:text=%F0%9D%91%A0-,Compute%20%E2%89%A5%20in%20binary,-If%20we%20are) then compare the discussion there to the [LessThan template in Circomlib](https://github.com/iden3/circomlib/blob/master/circuits/comparators.circom#L89).
+To understand how to efficiently compare the size of binary numbers in a circuit, please review the relevant section in our chapter on [Arithmetic Circuits](https://rareskills.io/post/arithmetic-circuit#:~:text=%F0%9D%91%A0-,Compute%20%E2%89%A5%20in%20binary,-If%20we%20are) then compare the discussion there to the [LessThan template in Circomlib](https://github.com/iden3/circomlib/blob/master/circuits/comparators.circom#L89).
 
 ## Example 7: IsMax
 

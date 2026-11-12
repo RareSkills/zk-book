@@ -11,7 +11,7 @@ Our focus is on how each of these building blocks leads into a full-fledged FFT-
 
 If you're interested in running the examples yourself, the full Python code is available [here](https://github.com/yugocabrio/circle_fft), and we will reference it in later sections such as Section 4 and 6, where we walk through the group and domain construction in code.
 
-*This article was written by [Yugo](https://x.com/cabrio_yugo) in collaboration with [RareSkills](https://www.rareskills.io). This article was funded by a [Soulforge Grant](https://soulforge.zkbankai.com/). We are grateful for their support.*
+*This article was written by [Yugo](https://x.com/cabrio_yugo) in collaboration with [RareSkills](https://rareskills.io). This article was funded by a [Soulforge Grant](https://soulforge.zkbankai.com/). We are grateful for their support.*
 
 ## 0. From STARK‑Friendly Primes to Mersenne 31
 
