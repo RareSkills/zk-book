@@ -2,7 +2,7 @@
 
 In the context of zero-knowledge proofs, an arithmetic circuit is a system of equations that models a problem in NP.
 
-A key point from our article on [P vs NP](https://www.rareskills.io/post/p-vs-np) is that any solution to a problem in P or NP can be verified by modeling the problem as a Boolean circuit.
+A key point from our article on [P vs NP](https://rareskills.io/post/p-vs-np) is that any solution to a problem in P or NP can be verified by modeling the problem as a Boolean circuit.
 
 Then, we convert our solution for the original problem to a set of values for the Boolean variables (called the witness) that results in the Boolean circuit returning true.
 
@@ -173,7 +173,7 @@ To demonstrate arithmetic circuits and Boolean circuits are equivalent, we will 
 
 ### All P problems are a subset of NP problems
 
-As discussed in the previous [chapter on P vs NP](https://www.rareskills.io/post/p-vs-np), **all P problems are a subset of NP problems** in terms of the computation requirements for validating a witness, so we will only refer to NP problems going forward, with the understanding that this includes P.
+As discussed in the previous [chapter on P vs NP](https://rareskills.io/post/p-vs-np), **all P problems are a subset of NP problems** in terms of the computation requirements for validating a witness, so we will only refer to NP problems going forward, with the understanding that this includes P.
 
 Our conclusion is that if any solution to a problem in NP can be modeled with a Boolean circuit, then any solution to a problem in NP (or P) can be modeled with an arithmetic circuit.
 
@@ -637,13 +637,13 @@ We have glossed over two very important details in this article. Some other chal
 - We didn’t discuss what datatype we used to store signals for the arithmetic circuit and how we handle overflow during addition or multiplication.
 - We have no way of expressing the value 2/3 without losing precision. Any fixed point or floating point representation we choose will have rounding issues
 
-To handle these problems, arithmetic circuits are calculated over *[finite fields](https://www.rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
+To handle these problems, arithmetic circuits are calculated over *[finite fields](https://rareskills.io/post/finite-fields):* a branch of mathematics where all addition and multiplication is done modulo a prime number.
 
 Finite field arithmetic has some surprising differences from regular arithmetic introduced by the modulo operator, so the next chapter will explore them in detail.
 
 ## Learn more with RareSkills
 
-Learn more about [Zero Knowledge Proofs](https://www.rareskills.io/zk-book) in our free ZK Book. This tutorial is a chapter in that book.
+Learn more about [Zero Knowledge Proofs](https://rareskills.io/zk-book) in our free ZK Book. This tutorial is a chapter in that book.
 
 ## Practice Problems
 

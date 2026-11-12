@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This chapter continues our study of group theory by exploring **subgroups** and **generators**. The concept of a **primitive element** will be introduced at the end. We assume you are already familiar with the definition of a group. If you need a refresher, check out [this article](https://www.rareskills.io/post/group-theory).
+This chapter continues our study of group theory by exploring **subgroups** and **generators**. The concept of a **primitive element** will be introduced at the end. We assume you are already familiar with the definition of a group. If you need a refresher, check out [this article](https://rareskills.io/post/group-theory).
 
 To build intuition, we begin with **additive groups**, which are straightforward and help clarify core concepts like subgroups and generators.
 

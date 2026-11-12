@@ -22,7 +22,7 @@ Consider the polynomials $p(x) = x^3$ and $q(x) = x$. The polynomials intersect 
 
 
 ## Polynomials in finite fields and the Schwartz-Zippel Lemma
-The Schwartz-Zippel Lemma holds for polynomials in [finite fields](https://www.rareskills.io/post/finite-fields) (i.e., all computations are done modulo a prime $p$).
+The Schwartz-Zippel Lemma holds for polynomials in [finite fields](https://rareskills.io/post/finite-fields) (i.e., all computations are done modulo a prime $p$).
 
 ## Polynomial equality testing
 We can test that two polynomials are equal by checking if all their coefficients are equal, but this takes $\mathcal{O}(d)$ time, where $d$ is the degree of the polynomial.
@@ -36,7 +36,7 @@ That is, in a finite field $\mathbb{F}_{p}$, we pick a random value $u$ from $[0
 
 If $d \ll p$, then situation 2 is unlikely to the point of being negligible.
 
-For example, if the field $\mathbb{F}_{p}$ has $p \approx 2^{254}$ (a little smaller than a [uint256](https://www.rareskills.io/post/uint-max-value-solidity)), and if the polynomials are not more than one million degree large, then the probability of picking a point where they intersect is
+For example, if the field $\mathbb{F}_{p}$ has $p \approx 2^{254}$ (a little smaller than a [uint256](https://rareskills.io/post/uint-max-value-solidity)), and if the polynomials are not more than one million degree large, then the probability of picking a point where they intersect is
 
 $$
 \frac{1\times 10^6}{2^{254}} \approx \frac{2^{20}}{2^{254}} \approx \frac{1}{2^{234}} \approx \frac{1}{10^{70}}
@@ -98,4 +98,4 @@ Most of the time, a ZK proof is essentially a polynomial evaluated at a random p
 
 The difficulty we have to solve is that we don't know if the polynomial is evaluated *honestly* -- somehow we have to trust the prover isn't lying when they evaluate $f(u)$.
 
-But before we get to that, we need to learn how to represent an entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program).
+But before we get to that, we need to learn how to represent an entire arithmetic circuit as a small set of polynomials evaluated at a random point, which is the motivation for [Quadratic Arithmetic Programs](https://rareskills.io/post/quadratic-arithmetic-program).

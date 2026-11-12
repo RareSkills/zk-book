@@ -1,6 +1,6 @@
 # Finite Fields and Modular Arithmetic for ZK Proofs
 
-*This article is the third in a series. We present finite fields in the context of circuits for zero-knowledge proofs. The previous chapters are [P vs NP and its Application to Zero Knowledge Proofs](https://www.rareskills.io/post/p-vs-np) and [Arithmetic Circuits](https://www.rareskills.io/post/arithmetic-circuit).*
+*This article is the third in a series. We present finite fields in the context of circuits for zero-knowledge proofs. The previous chapters are [P vs NP and its Application to Zero Knowledge Proofs](https://rareskills.io/post/p-vs-np) and [Arithmetic Circuits](https://rareskills.io/post/arithmetic-circuit).*
 
 In the previous chapter on arithmetic circuits, we pointed out a limitation that we cannot encode the number $2/3$ because it cannot be represented precisely using binary. We also pointed out that we didn’t explicitly have a way to handle overflow.
 
@@ -176,7 +176,7 @@ Some examples:
 - The multiplicative inverse of $3$ in the finite field $p = 7$ is $5$. $3⁷⁻² = 5 \pmod 7$
 - The multiplicative inverse of 8 in the finite field $p = 11$ is $7$. $8¹¹⁻² = 7 \pmod {11}$
 
-The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://www.rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
+The advantage of this approach is we can use the `expmod` [precompile in Ethereum](https://rareskills.io/post/solidity-precompiles) to compute the modular inverse in a smart contract.
 
 In practice, this is not an ideal way to compute multiplicative inverses because raising a number to a large power is computationally expensive. Libraries that compute the multiplicative inverse use more efficient algorithms under the hood. However, when such a library is not a available, and you want a quick and simple solution, and computing a large exponent is not excessively costly, Fermat's Little Theorem can be used.
 
@@ -734,7 +734,7 @@ galois.Poly([103], GF103)
 
 ## Learn more with RareSkills
 
-See our [ZK Book](https://www.rareskills.io/zk-book) to learn more about Zero Knowledge Proofs
+See our [ZK Book](https://rareskills.io/zk-book) to learn more about Zero Knowledge Proofs
 
 ## Practice problems
 

@@ -24,7 +24,7 @@ Here are ways we look to make the text even more clear
 
 Feel free to directly open a pull request with ways to suggest improvements to clarity, or open an issue if you aren't sure.
 
-For more ideas on how to improve the text, please see our [technical writing checklist](https://www.rareskills.io/post/technical-writing-checklist).
+For more ideas on how to improve the text, please see our [technical writing checklist](https://rareskills.io/post/technical-writing-checklist).
 
 **Do not use issues to ask questions about explanations you don't understand please ask in our [Discord](https://discord.gg/274YDS6FMq) instead**
 

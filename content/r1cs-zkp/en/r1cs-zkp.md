@@ -1,8 +1,8 @@
 # Building a Zero Knowledge Proof from an R1CS
 
-Given an [arithmetic circuit](https://www.rareskills.io/post/arithmetic-circuit) encoded as a [Rank 1 Constraint System](https://www.rareskills.io/post/rank-1-constraint-system), it is possible to create a ZK-proof of having a witness, albeit not a succinct one. This article describes how to accomplish that.
+Given an [arithmetic circuit](https://rareskills.io/post/arithmetic-circuit) encoded as a [Rank 1 Constraint System](https://rareskills.io/post/rank-1-constraint-system), it is possible to create a ZK-proof of having a witness, albeit not a succinct one. This article describes how to accomplish that.
 
-A zero knowledge proof for an R1CS is accomplished by converting the witness vector into [finite field elliptic curve points](https://www.rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing) for each row.
+A zero knowledge proof for an R1CS is accomplished by converting the witness vector into [finite field elliptic curve points](https://rareskills.io/post/elliptic-curves-finite-fields) and replacing the Hadamard product with a [bilinear pairing](https://rareskills.io/post/bilinear-pairing) for each row.
 
 Given a Rank 1 Constraint System where each matrix has $n$ rows and $m$ columns, we write it as
 
@@ -345,13 +345,13 @@ However, it is nice to see that at this stage, zero knowledge proofs are possibl
 ### Making this technique truly zero knowledge
 As it is right now, our witness vector cannot be decrypted, however it can be guessed. If an attacker (someone trying to discover the unencrypted witness) uses some auxiliary information to make an educated guess at the witness, they can check their work by multiplying their guessed witness vector by the elliptic curve point generators and seeing if the result is the same as the prover’s witness vectors.
 
-We will learn how to defend against witness guessing in our coverage of [Groth16](https://www.rareskills.io/post/groth16).
+We will learn how to defend against witness guessing in our coverage of [Groth16](https://rareskills.io/post/groth16).
 
 Also, keep in mind nobody does the described algorithm in the real world, as it is too inefficient. However, if you implement it, it will help you practice implementing meaningful elliptic curve arithmetic and build a functional end-to-end (almost) zero knowledge proof.
 
 You can see an example implementation of algorithm described here by Obront in [this repo](https://github.com/zobront/homerolled-zk).
 
 ## Learn more with RareSkills
-This material is from our [Zero Knowledge Course](https://www.rareskills.io/zk-bootcamp).
+This material is from our [Zero Knowledge Course](https://rareskills.io/courses/zk-bootcamp).
 
 *Originally Published August 26, 2023*

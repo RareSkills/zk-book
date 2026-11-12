@@ -204,8 +204,8 @@ What makes it cool is there are a plethora of theorems about Groups that let us 
 In the next chapter, you will learn how groups can be "related" to each other through homomorphisms.
 
 ## Learn more with RareSkills
-See our [Zero Knowledge Course](https://www.rareskills.io/zk-bootcamp) to learn with our community.
+See our [Zero Knowledge Course](https://rareskills.io/courses/zk-bootcamp) to learn with our community.
 
-Our [ZK Book](https://www.rareskills.io/zk-book) contains the rest of the ZK tutorials in this series.
+Our [ZK Book](https://rareskills.io/zk-book) contains the rest of the ZK tutorials in this series.
 
 *Originally Published July 25, 2023*

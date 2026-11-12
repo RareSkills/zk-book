@@ -194,4 +194,4 @@ In other words, there is no integer $r$ smaller than $q-1$ such that $g^{r} \equ
 - If $\omega$ is a primitive $k$-th root of unity in a finite field $\mathbb{F}_q$, then $\omega^{\frac{k}{2}} \equiv -1$ for even $k$.
 - Using this property, we have that $- \omega^i = \omega^{\frac{k}{2}+i}$  or stated equivalently, $\omega^i$ is the additive inverse of $\omega^{k/2+i}$.
 
-The [following chapter](https://rareskills.io/posts/roots-of-unity-unit-circle) will introduce a visualization that makes these points easier to remember.
+The [following chapter](https://rareskills.io/post/roots-of-unity-unit-circle) will introduce a visualization that makes these points easier to remember.

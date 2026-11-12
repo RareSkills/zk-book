@@ -5,8 +5,8 @@ This article is explains how to turn a set of arithmetic constraints into Rank O
 The focus of this resource is implementation: we cover a lot more corner cases of doing this transformation than other materials, discuss optimizations, and explain how the Circom library accomplishes it.
 
 ## Prerequisites
-- We assume the reader understands how to use [arithmetic circuits (zk circuits)](https://www.rareskills.io/post/arithmetic-circuit) to represent the validity of a computation.
-- The reader is familiar with [modular arithmetic](https://www.rareskills.io/post/finite-fields). All operations here happen in a finite field, so $-5$ really means the additive inverse of $5$ modulo $p$ and $2/3$ means the multiplicative inverse of $3$ modulo $p$ times $2$.
+- We assume the reader understands how to use [arithmetic circuits (zk circuits)](https://rareskills.io/post/arithmetic-circuit) to represent the validity of a computation.
+- The reader is familiar with [modular arithmetic](https://rareskills.io/post/finite-fields). All operations here happen in a finite field, so $-5$ really means the additive inverse of $5$ modulo $p$ and $2/3$ means the multiplicative inverse of $3$ modulo $p$ times $2$.
 
 ## Rank 1 Constraint System overview
 A Rank 1 Constraint System (R1CS) is an arithmetic circuit with the requirement that each equality constraint has one multiplication (and no restriction on the number of additions).
@@ -178,7 +178,7 @@ You may be wondering what the point of this is, aren’t we just saying that $41
 
 You would be correct.
 
-An R1CS can be quite verbose, but they map nicely to [Quadratic Arithmetic Programs (QAPs)](https://www.rareskills.io/post/quadratic-arithmetic-program), which can be made succinct. But we will not concern ourselves with QAPs here.
+An R1CS can be quite verbose, but they map nicely to [Quadratic Arithmetic Programs (QAPs)](https://rareskills.io/post/quadratic-arithmetic-program), which can be made succinct. But we will not concern ourselves with QAPs here.
 
 But this is an important point of R1CS. A R1CS communicates exactly the same information as the original arithmetic constraints, but with only one multiplication per equality constraint. In this example, we have only one constraint, but we’ll add more in the next example.
 
@@ -1108,7 +1108,7 @@ The reason is simple: encoding numbers like 2/3 leads to ill-behaved floats whic
 If we do all our math modulo a prime number, let’s say 23, then encoding $2/3$ is straightforward. It’s the same as $2 \cdot 3^{-1}$, and multiplying by two and raising to the power of negative 1 are straightforward in modular arithmetic
 
 ## Circom implementation.
-In Circom, a language for constructing Rank 1 Constraint Systems, the finite field uses the prime number $21888242871839275222246405745257275088548364400416034343698204186575808495617$ (this is equal to the order of the BN128 curve we discussed in [Elliptic Curves over Finite Fields](https://www.rareskills.io/post/elliptic-curves-finite-fields)).
+In Circom, a language for constructing Rank 1 Constraint Systems, the finite field uses the prime number $21888242871839275222246405745257275088548364400416034343698204186575808495617$ (this is equal to the order of the BN128 curve we discussed in [Elliptic Curves over Finite Fields](https://rareskills.io/post/elliptic-curves-finite-fields)).
 
 This means $-1$ in that representation is
 
@@ -1390,4 +1390,4 @@ The original [paper for Groth16](https://eprint.iacr.org/2016/260.pdf) don’t h
 - [Zero knowledge blog’s R1CS tutorial](https://www.zeroknowledgeblog.com/index.php/the-pinocchio-protocol/r1cs)
 
 ## Learn more with RareSkills
-This blog post is taken from learning materials in our [zero knowledge course](https://www.rareskills.io/zk-bootcamp).
+This blog post is taken from learning materials in our [zero knowledge course](https://rareskills.io/courses/zk-bootcamp).

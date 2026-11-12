@@ -250,6 +250,6 @@ Understanding group theory for the purpose of zero knowledge proofs is more of a
 Additionally, groups help us reason about very complex mathematical objects without understanding how they work. We've used familiar examples in this article, but later on we will deal with very unfamiliar objects such as *elliptic curves over field extensions*. Even though you don't know what exactly that is, if we tell you it is a group, you already know a lot about what it is.
 
 ## Learn more with RareSkills
-This article is part of a series on ZK proofs. See our [ZK Book](https://www.rareskills.io/zk-book) for the full series.
+This article is part of a series on ZK proofs. See our [ZK Book](https://rareskills.io/zk-book) for the full series.
 
 *Originally Published August 1, 2023*

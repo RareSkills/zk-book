@@ -3,12 +3,12 @@
 The Groth16 algorithm enables a quadratic arithmetic program to be computed by a prover over elliptic curve points derived in a trusted setup, and quickly checked by a verifier. It uses auxiliary elliptic curve points from the trusted setup to prevent forged proofs.
 
 ## Prerequisites
-This article is a chapter in the [RareSkills Book of Zero Knowledge Proofs](https://www.rareskills.io/zk-book). It assumes you are familiar with the prior chapters.
+This article is a chapter in the [RareSkills Book of Zero Knowledge Proofs](https://rareskills.io/zk-book). It assumes you are familiar with the prior chapters.
 
 ## Notation
-We refer to an [elliptic curve point](https://www.rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ elliptic curve group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ elliptic curve group as $[x]_2$. A [pairing](https://www.rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arithmetic operations happen in a [finite field](https://www.rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
+We refer to an [elliptic curve point](https://rareskills.io/post/elliptic-curves-finite-fields) belonging to the $\mathbb{G}_1$ elliptic curve group as $[x]_1$ and an elliptic curve point belonging to the $\mathbb{G}_2$ elliptic curve group as $[x]_2$. A [pairing](https://rareskills.io/post/bilinear-pairing) between $[x]_1$ and $[x]_2$ is denoted as $[x]_1\bullet[x]_2$ and produces an element in $\mathbb{G}_{12}$. Variables in bold such as $\mathbf{a}$ are vectors, upper case bold letters such as $\mathbf{L}$ are matrices, and field elements (sometimes informally referred to as "scalars") are lower case letters such as $d$. All arithmetic operations happen in a [finite field](https://rareskills.io/post/finite-fields) with a characteristic that equals the order of the elliptic curve group.
 
-Given an [Arithmetic Circuit (ZK Circuit)](https://www.rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://www.rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$. Then, we can convert the R1CS to [Quadratic Arithmetic Program (QAP)](https://www.rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
+Given an [Arithmetic Circuit (ZK Circuit)](https://rareskills.io/post/arithmetic-circuit), we convert it to a [Rank 1 Constraint System (R1CS)](https://rareskills.io/post/rank-1-constraint-system) $\mathbf{L}\mathbf{a}\circ \mathbf{R}\mathbf{a} = \mathbf{O}\mathbf{a}$ with matrices of dimension $n$ rows and $m$ columns with a witness vector $\mathbf{a}$. Then, we can convert the R1CS to [Quadratic Arithmetic Program (QAP)](https://rareskills.io/post/quadratic-arithmetic-program) by interpolating the columns of the matrices as $y$ values over the $x$ values $[1,2,...,n]$. Since $\mathbf{L}$, $\mathbf{R}$, and $\mathbf{O}$ have $m$ columns, we will end up with three sets of $m$ polynomials:
 
 $$
 \begin{array}{}
@@ -66,7 +66,7 @@ $$
 \end{align*}
 $$
 
-The details of this computation are discussed in our tutorial [Quadratic Arithmetic Programs over Elliptic Curves](https://www.rareskills.io/post/elliptic-curve-qap).
+The details of this computation are discussed in our tutorial [Quadratic Arithmetic Programs over Elliptic Curves](https://rareskills.io/post/elliptic-curve-qap).
 
 If the QAP is balanced, then the following equation holds:
 
@@ -523,6 +523,6 @@ You can see a proof of concept of this attack in this [article](https://medium.c
 This isn't a "security issue" per se -- it is necessary to achieve Zero Knowledge. However, the application needs a mechanism to track which facts have already been proven and cannot rely on the uniqueness of the proof to achieve that.
 
 ## Learn more with RareSkills
-Our ability to publish material like this free of charge depends on the continued support of our students. Consider signing up for our [Zero Knowledge Bootcamp](https://www.rareskills.io/zk-bootcamp), [Web3 Bootcamps](https://www.rareskills.io/web3-blockchain-bootcamps), or getting a job on [RareTalent](https://www.raretalent.xyz).
+Our ability to publish material like this free of charge depends on the continued support of our students. Consider signing up for our [Zero Knowledge Bootcamp](https://rareskills.io/courses/zk-bootcamp), [Web3 Bootcamps](https://rareskills.io/web3-blockchain-bootcamps), or getting a job on [RareTalent](https://www.raretalent.xyz).
 
 *Originally Published August 31, 2023*

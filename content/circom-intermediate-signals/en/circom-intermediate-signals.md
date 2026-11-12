@@ -345,7 +345,7 @@ component main = Example();
 
 ## Output signals should not be ignored
 
-An output signal must be part of constraints in the component that instantiated it. If an output signal is left “floating” then in some circumstances, a malicious prover can assign any value to it. More on this will be covered in [hacking underconstrained circuits](https://www.rareskills.io/post/underconstrained-circom).
+An output signal must be part of constraints in the component that instantiated it. If an output signal is left “floating” then in some circumstances, a malicious prover can assign any value to it. More on this will be covered in [hacking underconstrained circuits](https://rareskills.io/post/underconstrained-circom).
 
 ## Summary
 

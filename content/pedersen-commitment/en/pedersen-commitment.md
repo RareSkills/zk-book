@@ -13,11 +13,11 @@ This is where Pedersen commitments enter the picture.
 In an inner product argument, the prover provides two *commitments* to two vectors, then provides a proof that the committed vectors have a certain inner product.
 
 ## Prerequisites
-We assume the reader is already familiar with [elliptic curve point addition](https://www.rareskills.io/post/elliptic-curve-addition) and scalar multiplication and what it means for a point to be "on the curve."
+We assume the reader is already familiar with [elliptic curve point addition](https://rareskills.io/post/elliptic-curve-addition) and scalar multiplication and what it means for a point to be "on the curve."
 
 Notation-wise, capital letters are elliptic curve points, lowercase letters are finite field elements.
 
-We say $A$ is an elliptic curve (EC) point, $a$ is a [finite field](https://www.rareskills.io/post/finite-fields) element, and $aA$ is point multiplication between finite field element $a$ and EC point $A$. The expression $A + B$ denotes elliptic curve point addition.
+We say $A$ is an elliptic curve (EC) point, $a$ is a [finite field](https://rareskills.io/post/finite-fields) element, and $aA$ is point multiplication between finite field element $a$ and EC point $A$. The expression $A + B$ denotes elliptic curve point addition.
 
 ## Traditional commitments
 When we design commit reveal functions in smart contracts, they are usually of the form
@@ -248,4 +248,4 @@ It is okay to start with the generator (which has a known discrete logarithm of 
 **Exercise for the reader:** Suppose we commit a vector of values to the point points $G_1$ and $G_2$. The discrete logarithm for $G_1$ is known, but the discrete logarithm for $G_2$ is not known. We will ignore the blinding term for now. Can the committer open to two different vectors? Why or why not?
 
 Learn More with RareSkills
-Check out our ZK bootcamp if you are looking to [learn zero knowledge proofs](https://www.rareskills.io/zk-bootcamp).
+Check out our ZK bootcamp if you are looking to [learn zero knowledge proofs](https://rareskills.io/courses/zk-bootcamp).

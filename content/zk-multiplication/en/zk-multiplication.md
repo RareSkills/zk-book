@@ -14,7 +14,7 @@ For example, suppose that the first polynomial is $l(x)=2x$ and the second is $r
 
 The verifier would then check that $3 \times 4 = 12$ and accept the prover's claim.
 
-The [Schwartz-Zippel lemma](https://www.rareskills.io/post/schwartz-zippel-lemma) states that if $f(x) \neq g(x)$ then the probability that $f(u) = g(u)$ for some random value $u$ is less than $d/p$ where $d$ is the maximum degree of the two polynomials and $p$ is the order of the [finite field](https://www.rareskills.io/post/finite-fields). If $d \ll p$ ($d$ much much less than $p$), then the probability of $u$ being an intersection point of two non-equal polynomials is negligible.
+The [Schwartz-Zippel lemma](https://rareskills.io/post/schwartz-zippel-lemma) states that if $f(x) \neq g(x)$ then the probability that $f(u) = g(u)$ for some random value $u$ is less than $d/p$ where $d$ is the maximum degree of the two polynomials and $p$ is the order of the [finite field](https://rareskills.io/post/finite-fields). If $d \ll p$ ($d$ much much less than $p$), then the probability of $u$ being an intersection point of two non-equal polynomials is negligible.
 
 Specifically, suppose the prover is lying and $l(x)r(x) \neq t(x)$. In that case, for a random $u$, $l(u)r(u) \neq t(u)$ with extremely high probability. If $l(x)r(x) \neq t(x)$, then $l(x)r(x)$ and $t(x)$ only intersect in at most $d$ points (the maximum degree of either $l(x)r(x)$ or $t(x)$), and it is extremely unlikely that the verifier would randomly pick a $u$ that is one of the $d$ intersection points.
 
@@ -281,4 +281,4 @@ assert eq(add(multiply(G, t_u), multiply(B, pi_t)), addd(V, multiply(T1, u), mul
 ```
 
 ## Learn more
-This article is part of a series on [Bulletproof ZKPs](https://www.rareskills.io/post/bulletproofs-zk).
+This article is part of a series on [Bulletproof ZKPs](https://rareskills.io/post/bulletproofs-zk).

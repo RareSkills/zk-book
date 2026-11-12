@@ -337,12 +337,12 @@ Let’s use a slightly more relatable example. If you multiply two square matric
 
 Having the language to describe a binary operator as “closed” allows you to operate at a higher level and understand the bigger picture of transformations and not get bogged down in the implementation details.
 
-You can reason about operations without understanding how they work! This is *extremely helpful* when it comes to dealing with very esoteric math such as [Elliptic curve bilinear pairings](https://www.rareskills.io/post/bilinear-pairing).
+You can reason about operations without understanding how they work! This is *extremely helpful* when it comes to dealing with very esoteric math such as [Elliptic curve bilinear pairings](https://rareskills.io/post/bilinear-pairing).
 
 ### Constructing valid binary operations
 When it comes to binary operators, we are not allowed to take a subset of $A \times A$ before mapping that to $A$. Binary operators must accept *all* members of set $A$ as its inputs. We of course must take a subset of the ordered pairs between $A \times A$ and $A$ because each pair from $A \times A$ must map to exactly one $A$. The result of a binary operation must have one unambiguous answer.
 
 ## Learn more with RareSkills
-The usefulness of the vocabulary from abstract algebra is why our [zero knowledge course](https://www.rareskills.io/zk-bootcamp) does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
+The usefulness of the vocabulary from abstract algebra is why our [zero knowledge course](https://rareskills.io/courses/zk-bootcamp) does not dodge math. We just make sure we have our essential vocabulary down before we start using it.
 
 *Originally Published July 25, 2023*

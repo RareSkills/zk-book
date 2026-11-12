@@ -516,7 +516,7 @@ The ability to efficiently verify a solution to a problem is a prerequisite for 
 In conclusion, zero knowledge proofs are feasible only for problems within P and NP, where efficient solution verification is possible. Without efficient verification, creating a zero knowledge proof for a problem becomes infeasible.
 
 ## Learn more
-Please see the [RareSkills ZK Book](https://www.rareskills.io/zk-book) for more topics in zero knowledge proofs.
+Please see the [RareSkills ZK Book](https://rareskills.io/zk-book) for more topics in zero knowledge proofs.
 
 ## Technicalities
 Some concepts have been simplified in this article to make them as understandable as possible to someone seeing them for the first time. The information presented here is sufficient to explain what ZK proofs can and cannot do. For those interested in pursuing the subject further, here are some clarifications:

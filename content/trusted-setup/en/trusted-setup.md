@@ -79,7 +79,7 @@ $$
 e(\Theta, \Omega_i)\stackrel{?}=e(G_2,\Omega_{i+1})
 $$
 
-where $e$ is a [bilinear pairing](https://www.rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$ on the right side..
+where $e$ is a [bilinear pairing](https://rareskills.io/post/bilinear-pairing). Intuitively, we are computing $\tau\cdot\tau^i$ on the left side and $1\cdot\tau^{i+1}$ on the right side..
 
 To validate that $\Theta$ and $\Omega_1$ have the same discrete logarithms ($\Omega_1$ is supposed to be $\tau G_1$, we can check that
 

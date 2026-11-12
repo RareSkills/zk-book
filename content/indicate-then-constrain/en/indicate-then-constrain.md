@@ -12,7 +12,7 @@ The solution is to create *indicator* signals of the different conditions (e.g.,
 
 ## Circomlib Comparator Library
 
-The [Circomlib comparator library](https://github.com/iden3/circomlib/blob/master/circuits/comparators.circom) contains a component `LessThan` that returns 0 or 1 to indicate if `in[0]` is less than `in[1]`. How this component works is described in the [Arithmetic Circuit](https://www.rareskills.io/post/arithmetic-circuit) chapter. But as a summary, suppose `x` and `y` are at most 3 bits large. If we compute `z = 2^3 + (x - y)`, then if `x` is less than `y`,  `z` will be less than 2^3 and vice versa (2^3 = 8). Since `z` is a 4-bit number, we can efficiently check if `z` is less than 2^3 by looking only at the most significant bit. 2^3 in binary is `1000₂`. Every 4-bit number greater than or equal to 2^3 has the most significant bit equal to 1, and every 4-bit number less than 2^3 has the most significant bit equal to 0.
+The [Circomlib comparator library](https://github.com/iden3/circomlib/blob/master/circuits/comparators.circom) contains a component `LessThan` that returns 0 or 1 to indicate if `in[0]` is less than `in[1]`. How this component works is described in the [Arithmetic Circuit](https://rareskills.io/post/arithmetic-circuit) chapter. But as a summary, suppose `x` and `y` are at most 3 bits large. If we compute `z = 2^3 + (x - y)`, then if `x` is less than `y`,  `z` will be less than 2^3 and vice versa (2^3 = 8). Since `z` is a 4-bit number, we can efficiently check if `z` is less than 2^3 by looking only at the most significant bit. 2^3 in binary is `1000₂`. Every 4-bit number greater than or equal to 2^3 has the most significant bit equal to 1, and every 4-bit number less than 2^3 has the most significant bit equal to 0.
 
 | Number | Binary Representation | Is greater or equal to 2^3 |
 | --- | --- | --- |
@@ -56,13 +56,13 @@ component main = Example();
 
 ## Where 252 comes from
 
-Numbers in a [finite field](https://www.rareskills.io/post/finite-fields) (which is what Circom uses) cannot be compared to each other as “less than” or “greater” since the typical algebraic laws of inequalities do not hold.
+Numbers in a [finite field](https://rareskills.io/post/finite-fields) (which is what Circom uses) cannot be compared to each other as “less than” or “greater” since the typical algebraic laws of inequalities do not hold.
 
 For example, if $x > y$, then if $c$ is positive, it should always be true that $x+c>y+c$. However, this is not true in a finite field. We could pick $c$ such that it is the additive inverse of $x$, i.e. $x + c=0\mod p$. We will then end up with a nonsensical statement that 0 is greater than a non-zero number. For example, if $p = 7$ and $x=2$ and $y=1$ we have that $x>y$. However, if we add $5$ to both $x$ and $y$, then we have $0>1$.
 
 The 252 specifies the number of bits in the `LessThan` component to limit how large `x` and `y` can be, so that a meaningful comparison can be made (the section above used 4 bits as an example).
 
-Circom can hold numbers up to 253 bits large in the finite field. For security reasons discussed in the [Alias Check](https://www.rareskills.io/post/circom-aliascheck) chapter, we should not convert a field element to a binary representation that can encode numbers larger than the field. Therefore, Circom does not allow comparison templates to be instantiated with more than 252 bits ([source code](https://github.com/iden3/circomlib/blob/252f8130105a66c8ae8b4a23c7f5662e17458f3f/circuits/comparators.circom#L90)).
+Circom can hold numbers up to 253 bits large in the finite field. For security reasons discussed in the [Alias Check](https://rareskills.io/post/circom-aliascheck) chapter, we should not convert a field element to a binary representation that can encode numbers larger than the field. Therefore, Circom does not allow comparison templates to be instantiated with more than 252 bits ([source code](https://github.com/iden3/circomlib/blob/252f8130105a66c8ae8b4a23c7f5662e17458f3f/circuits/comparators.circom#L90)).
 
 However, recall that for `LessThan(n)` we need to compute `z = 2^n + (x - y)`, and `2^n` needs to be one bit larger than `x` or `y`. Therefore, `x` and `y` need to be at most $2^{n-1}$ bits large. Since Circom supports numbers up to 253 bits large, `x` and `y` must be at most 252 bits large.
 
