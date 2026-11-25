@@ -326,7 +326,7 @@ assert one_third * one_half == one_sixth
 
 No two elements can be multiplied together to obtain zero in a finite field unless one of the elements is zero itself. This is also true of regular numbers.
 
-To understand this, consider the finite field $p = 7$. To multiply two numbers together and get $0$ as a result, then one of the terms $a$ needs to be a multiple of 7, so that $a \pmod 7$ is zero. However, none of $\set{0, 1, 2, 3, 5, 6}$ are a multiple of 7, so this cannot happen.
+To understand this, consider the finite field $p = 7$. To multiply two numbers together and get $0$ as a result, then one of the terms $a$ needs to be a multiple of 7, so that $a \pmod 7$ is zero. However, none of $\set{1, 2, 3, 5, 6}$ are a multiple of 7, so this cannot happen.
 
 We will refer to this fact frequently when we design arithmetic circuit. For example, if we know
 
@@ -415,7 +415,7 @@ print("numbers_with_roots:", numbers_with_roots)
 # numbers_with_roots: {0, 1, 3, 4, 5, 9}
 ```
 
-Note that 3 is not a perfect square, but it does have a square root in this finite field.
+Note that 3 is not a perfect square in the real numbers, but it does have a square root in this finite field.
 
 ### Computing the modular square root
 
