@@ -86,15 +86,15 @@ template factorial(n) {
 
   // ensure that in < n
   signal inLTn;
-  inLTn <== LessThan(252)([in, n]);
+  inLTn <== LessThan(252)([in, n+1]);
   inLTn === 1;
   
   // select the factorial of interest
-  component mux = Multiplexer(1, n);
+  component mux = Multiplexer(1, n+1);
   mux.sel <== in;
 
   // assign factorials into the multiplexer
-  for (var i = 0; i < n; i++) {
+  for (var i = 0; i <= n; i++) {
     mux.inp[i][0] <== factorials[i];
   }
 
@@ -160,27 +160,27 @@ template Fibonacci(n) {
   // 0 to n
   signal fib[n + 1];
 
-  // compute the factorials
-  fib[0] <== 1;
+  // compute the fibonacci sequence until the n-th element
+  fib[0] <== 0;
   fib[1] <== 1;
   
-  for (var i = 2; i < n; i++) {
+  for (var i = 2; i <= n; i++) {
     fib[i] <== fib[i - 1] + fib[i - 2];
   }
 
   // ensure that in < n
   signal inLTn;
-  inLTn <== LessThan(252)([in, n]);
+  inLTn <== LessThan(252)([in, n+1]);
   inLTn === 1;
 
   // select the fibonacci number 
   // of interest
-  component mux = Multiplexer(1, n);
+  component mux = Multiplexer(1, n+1);
   mux.sel <== in;
 
   // assign Fibonacci into
   // the Quin Selector
-  for (var i = 0; i < n; i++) {
+  for (var i = 0; i <= n; i++) {
     mux.inp[i][0] <== fib[i];
   }
 
